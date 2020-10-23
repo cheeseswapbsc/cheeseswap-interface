@@ -5,19 +5,19 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-      <StyledAbsoluteLink href="https://cheesemaker.farm/farms">
-        <TranslatedText translationId={2}>Farm</TranslatedText>
+      <StyledAbsoluteLink href="https://cheese.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={2}>CheeseSawp Farm</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://swap.cheesemaker.farm/" className="active">
-        <TranslatedText translationId={8}>Exchange</TranslatedText>
+      <StyledAbsoluteLink href="https://cake.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={8}>Pancake Farm</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://stake.cheesemaker.farm">
+      <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Stake</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://voting.cheesemaker.farm">
+      <StyledAbsoluteLink href="https://voting.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={12}>Voting</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://info.cheesemaker.farm">
+      <StyledAbsoluteLink href="https://info.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Analytics</TranslatedText>
       </StyledAbsoluteLink>
     </StyledNav>
