@@ -27,7 +27,7 @@ export default {
     md: 12,
     lg: 24
   },
-  gradient: '#0B0628',
+  gradient: '#b5449b',
   mediaWidth: mediaWidthTemplates,
   // css snippets
   flexColumnNoWrap: css`

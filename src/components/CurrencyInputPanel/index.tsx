@@ -81,7 +81,7 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
 
 const Container = styled.div<{ hideInput: boolean }>`
   border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  border: 1px solid ${({ theme }) => theme.colors.bg0};
+  border: 2px solid ${({ theme }) => theme.colors.bg0};
   background-color: ${({ theme }) => theme.colors.bg0};
 `
 
@@ -94,7 +94,7 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
 const StyledBalanceMax = styled.button`
   height: 28px;
   background-color: ${({ theme }) => theme.colors.primary5};
-  border: 1px solid ${({ theme }) => theme.colors.primary5};
+  border: 2px solid ${({ theme }) => theme.colors.primary5};
   border-radius: 0.5rem;
   font-size: 0.875rem;
 
@@ -103,10 +103,10 @@ const StyledBalanceMax = styled.button`
   margin-right: 0.5rem;
   color: ${({ theme }) => theme.colors.primaryText1};
   :hover {
-    border: 1px solid ${({ theme }) => theme.colors.primary1};
+    border: 2px solid ${({ theme }) => theme.colors.primary1};
   }
   :focus {
-    border: 1px solid ${({ theme }) => theme.colors.primary1};
+    border: 2px solid ${({ theme }) => theme.colors.primary1};
     outline: none;
   }
 

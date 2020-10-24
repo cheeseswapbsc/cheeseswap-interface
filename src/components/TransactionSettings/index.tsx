@@ -27,14 +27,14 @@ const FancyButton = styled.button`
   font-size: 12px;
   width: auto;
   min-width: 3rem;
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  border: 2px solid ${({ theme }) => theme.colors.bg3};
   outline: none;
   background: ${({ theme }) => theme.colors.bg1};
   :hover {
-    border: 1px solid ${({ theme }) => theme.colors.bg4};
+    border: 2px solid ${({ theme }) => theme.colors.bg4};
   }
   :focus {
-    border: 1px solid ${({ theme }) => theme.colors.primary1};
+    border: 2px solid ${({ theme }) => theme.colors.primary1};
   }
 `
 
@@ -83,7 +83,7 @@ const OptionCustom = styled(FancyButton)<{ active?: boolean; warning?: boolean }
 const SlippageEmojiContainer = styled.span`
   color: #f3841e;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    display: none;  
+    display: none;
   `}
 `
 

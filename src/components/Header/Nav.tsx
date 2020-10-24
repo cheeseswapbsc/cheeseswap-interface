@@ -9,7 +9,7 @@ const Nav: React.FC = () => {
         <TranslatedText translationId={2}>Pool</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>CheeseSwap Farm</TranslatedText>
+        <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cake.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={8}>Pancake Farm</TranslatedText>
@@ -20,7 +20,7 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://voting.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={12}>Voting</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://info.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
+      <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Analytics</TranslatedText>
       </StyledAbsoluteLink>
     </StyledNav>
@@ -30,7 +30,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 45px;
   font-weight: 500;
   @media (max-width: 600px) {
@@ -39,15 +39,15 @@ const StyledNav = styled.nav`
 `
 
 const StyledAbsoluteLink = styled.a`
-  color: #e5af17;
+  color: #919091;
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: none;
   &:hover {
-    color: #c18e00;
+    color: #b5449b;
   }
   &.active {
-    color: #c18e00;
+    color: #b5449b;
   }
   @media (max-width: 400px) {
     padding-left: 10px;

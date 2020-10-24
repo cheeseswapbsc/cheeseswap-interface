@@ -14,7 +14,7 @@ const PopoverContainer = styled.div<{ show: boolean }>`
   transition: visibility 150ms linear, opacity 150ms linear;
 
   background: ${({ theme }) => theme.colors.bg2};
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  border: 2px solid ${({ theme }) => theme.colors.bg3};
   box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.9, theme.colors.shadow1)};
   color: ${({ theme }) => theme.colors.text2};
   border-radius: 8px;
@@ -36,7 +36,7 @@ const Arrow = styled.div`
     z-index: 9998;
 
     content: '';
-    border: 1px solid ${({ theme }) => theme.colors.bg3};
+    border: 2px solid ${({ theme }) => theme.colors.bg3};
     transform: rotate(45deg);
     background: ${({ theme }) => theme.colors.bg2};
   }

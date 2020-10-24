@@ -27,11 +27,9 @@ const HeaderFrame = styled.div`
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.bg1}
   top: 0;
   padding-bottom: 15px;
   margin-bottom: 10px;
-  border-radius: 12px;
   position: absolute;
   z-index: 2;
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
@@ -78,7 +76,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   width: 100%;
 
   :focus {
-    border: 1px solid blue;
+    border: 2px solid blue;
   }
 `
 

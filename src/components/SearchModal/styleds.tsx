@@ -49,7 +49,7 @@ export const SearchInput = styled.input`
   border-radius: 20px;
   color: ${({ theme }) => theme.colors.text1};
   border-style: solid;
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  border: 2px solid ${({ theme }) => theme.colors.bg3};
   -webkit-appearance: none;
 
   font-size: 18px;
@@ -59,7 +59,7 @@ export const SearchInput = styled.input`
   }
   transition: border 100ms;
   :focus {
-    border: 1px solid ${({ theme }) => theme.colors.primary1};
+    border: 2px solid ${({ theme }) => theme.colors.primary1};
     outline: none;
   }
 `
