@@ -394,7 +394,7 @@ export default function RemoveLiquidity({
             </RowBetween>
             <RowBetween>
               <div />
-              <Text fontWeight={500} fontSize={16} color={theme.colors.text2}>
+              <Text fontWeight={500} fontSize={16} color={theme.colors.text1}>
                 1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
               </Text>
             </RowBetween>

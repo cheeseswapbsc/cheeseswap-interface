@@ -6,6 +6,9 @@ const Nav: React.FC = () => {
   return (
     <StyledNav>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={2}>Pool</TranslatedText>
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>CheeseSwap Farm</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cake.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
