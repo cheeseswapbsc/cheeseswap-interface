@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Info, Code, PieChart, MessageCircle } from 'react-feather'
+import { Code, PieChart, MessageCircle, Sunrise, DollarSign, Box, Archive } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -80,7 +80,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = '/'
+const CODE_LINK = 'https://github.com/cheesemakerfarm/'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
@@ -96,21 +96,33 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="/">
-            <Info size={14} />
-            About
+          <MenuItem id="link" href="https://cheesemaker.farm//">
+            <Sunrise size={14} />
+            Farm
           </MenuItem>
-          <MenuItem id="link" href={CODE_LINK}>
-            <Code size={14} />
-            Code
+          <MenuItem id="link" href="https://stake.cheesemaker.farm/">
+            <DollarSign size={14} />
+            Stake
+          </MenuItem>
+          <MenuItem id="link" href="/">
+            <Box size={14} />
+            Dice
+          </MenuItem>
+          <MenuItem id="link" href="https://vote.cheeseswap.app/">
+            <Archive size={14} />
+            Vote
+          </MenuItem>
+          <MenuItem id="link" href="https://info.cheeseswap.app/">
+            <PieChart size={14} />
+            Analytics
           </MenuItem>
           <MenuItem id="link" href="https://t.me/cheesemakerfarm">
             <MessageCircle size={14} />
             <TranslatedText translationId={34}>Telegram</TranslatedText>
           </MenuItem>
-          <MenuItem id="link" href="https://info.cheeseswap.app/">
-            <PieChart size={14} />
-            Analytics
+          <MenuItem id="link" href={CODE_LINK}>
+            <Code size={14} />
+            Code
           </MenuItem>
         </MenuFlyout>
       )}
