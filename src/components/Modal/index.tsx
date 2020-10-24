@@ -34,7 +34,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     margin: 0 0 2rem 0;
     border: 2px solid ${({ theme }) => theme.colors.bg1};
     background-color: ${({ theme }) => theme.colors.bg1};
-    box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.95, theme.colors.shadow1)};
+    box-shadow: -2 4px 8px -1 ${({ theme }) => transparentize(0.95, theme.colors.shadow1)};
     padding: 0px;
     width: 50vw;
     overflow: hidden;

@@ -35,6 +35,7 @@ const StyledNav = styled.nav`
   font-weight: 500;
   @media (max-width: 600px) {
     display: none;
+    
   }
 `
 

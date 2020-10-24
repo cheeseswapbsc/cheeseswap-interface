@@ -25,8 +25,10 @@ const HeaderFrame = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 12px;
   flex-direction: column;
   width: 100%;
+   background: ${({ theme }) => theme.colors.bg1};
   top: 0;
   padding-bottom: 15px;
   margin-bottom: 10px;
