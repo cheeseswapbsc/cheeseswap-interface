@@ -160,7 +160,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
       <Column style={{ flex: '1' }}>
         <Row>
           <Text
-            fontWeight={isSelected ? 500 : 400}
+            fontWeight={isSelected ? 700 : 600}
             fontSize={16}
             style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
@@ -327,7 +327,7 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
           <div>
             <ArrowLeft style={{ cursor: 'pointer' }} onClick={onBack} />
           </div>
-          <Text fontWeight={500} fontSize={20}>
+          <Text fontWeight={700} fontSize={20}>
             Manage Lists
           </Text>
           <CloseIcon onClick={onDismiss} />

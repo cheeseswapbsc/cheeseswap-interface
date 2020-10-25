@@ -65,7 +65,7 @@ const HeaderText = styled.div`
   color: ${props =>
     props.color === 'blue' ? ({ theme }) => theme.colors.primary1 : ({ theme }) => theme.colors.text1};
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 700;
 `
 
 const SubHeader = styled.div`

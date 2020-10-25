@@ -25,7 +25,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   align-items: center;
   height: 2.2rem;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
   background-color: ${({ selected, theme }) => (selected ? theme.colors.bg0 : theme.colors.primary1)};
   color: ${({ selected, theme }) => (selected ? theme.colors.text1 : theme.colors.white)};
   border-radius: 12px;
@@ -98,7 +98,7 @@ const StyledBalanceMax = styled.button`
   border-radius: 0.5rem;
   font-size: 0.875rem;
 
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   margin-right: 0.5rem;
   color: ${({ theme }) => theme.colors.primaryText1};
@@ -163,14 +163,14 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <TYPE.body color={theme.colors.text2} fontWeight={500} fontSize={14}>
+              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={14}>
                 {label}
               </TYPE.body>
               {account && (
                 <TYPE.body
                   onClick={onMax}
                   color={theme.colors.text2}
-                  fontWeight={500}
+                  fontWeight={700}
                   fontSize={14}
                   style={{ display: 'inline', cursor: 'pointer' }}
                 >

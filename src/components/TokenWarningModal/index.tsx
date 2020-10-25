@@ -73,7 +73,7 @@ function TokenWarningCard({ token }: TokenWarningCardProps) {
               : token.name || token.symbol}{' '}
           </TYPE.main>
           {chainId && (
-            <ExternalLink style={{ fontWeight: 400 }} href={getEtherscanLink(chainId, token.address, 'token')}>
+            <ExternalLink style={{ fontWeight: 600 }} href={getEtherscanLink(chainId, token.address, 'token')}>
               <TYPE.blue title={token.address}>{shortenAddress(token.address)} (View on BscScan)</TYPE.blue>
             </ExternalLink>
           )}

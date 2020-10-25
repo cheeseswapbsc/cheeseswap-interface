@@ -114,12 +114,12 @@ function CurrencyRow({
     >
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
-        <Text title={currency.name} fontWeight={500}>
+        <Text title={currency.name} fontWeight={700}>
           {currency.symbol}
         </Text>
         <FadedSpan>
           {!isOnSelectedList && customAdded && !(currency instanceof WrappedTokenInfo) ? (
-            <TYPE.main fontWeight={500}>
+            <TYPE.main fontWeight={700}>
               Added by user
               <LinkStyledButton
                 onClick={event => {
@@ -132,7 +132,7 @@ function CurrencyRow({
             </TYPE.main>
           ) : null}
           {!isOnSelectedList && !customAdded && !(currency instanceof WrappedTokenInfo) ? (
-            <TYPE.main fontWeight={500}>
+            <TYPE.main fontWeight={700}>
               Found by address
               <LinkStyledButton
                 onClick={event => {

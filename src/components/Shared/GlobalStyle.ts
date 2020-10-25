@@ -2,13 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 
 export const FixedGlobalStyle = createGlobalStyle`
     html, input, textarea, button {
-      font-family: Kanit, 'Inter',sans-serif;
+      font-family: Nunito, 'Inter',sans-serif;
       letter-spacing: -0.018em;
       font-display: fallback;
     }
     @supports (font-variation-settings: normal) {
       html, input, textarea, button {
-        font-family: Kanit, 'Inter',sans-serif;
+        font-family: Nunito, 'Inter',sans-serif;
       }
     }
 
@@ -27,7 +27,7 @@ export const FixedGlobalStyle = createGlobalStyle`
     }
 
     html {
-      font-family: Kanit,'Inter', sans-serif;
+      font-family: Nunito,'Inter', sans-serif;
       font-size: 16px;
       font-variant: none;
       -webkit-font-smoothing: antialiased;

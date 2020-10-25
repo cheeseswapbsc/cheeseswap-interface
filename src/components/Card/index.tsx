@@ -29,13 +29,13 @@ export const OutlineCard = styled(Card)`
 export const YellowCard = styled(Card)`
   background-color: rgba(243, 132, 30, 0.05);
   color: ${({ theme }) => theme.colors.yellow2};
-  font-weight: 500;
+  font-weight: 700;
 `
 
 export const PinkCard = styled(Card)`
   background-color: rgba(255, 0, 122, 0.03);
   color: ${({ theme }) => theme.colors.primary1};
-  font-weight: 500;
+  font-weight: 700;
 `
 
 const BlueCardStyled = styled(Card)`
@@ -48,7 +48,7 @@ const BlueCardStyled = styled(Card)`
 export const BlueCard = ({ children, ...rest }: CardProps) => {
   return (
     <BlueCardStyled {...rest}>
-      <Text fontWeight={500} color="#24c7d6">
+      <Text fontWeight={700} color="#24c7d6">
         {children}
       </Text>
     </BlueCardStyled>

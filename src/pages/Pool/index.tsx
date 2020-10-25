@@ -64,14 +64,14 @@ export default function Pool() {
         <SwapPoolTabs active={'pool'} />
         <AutoColumn gap="lg" justify="center">
           <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/ETH">
-            <Text fontWeight={500} fontSize={20}>
+            <Text fontWeight={700} fontSize={20}>
               <TranslatedText translationId={100}>Add Liquidity</TranslatedText>
             </Text>
           </ButtonPrimary>
 
           <AutoColumn gap="12px" style={{ width: '100%' }}>
             <RowBetween padding={'0 8px'}>
-              <Text color={theme.colors.text1} fontWeight={500}>
+              <Text color={theme.colors.text1} fontWeight={700}>
                 <TranslatedText translationId={102}>Your Liquidity</TranslatedText>
               </Text>
               <Question

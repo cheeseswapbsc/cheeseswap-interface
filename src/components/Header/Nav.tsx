@@ -5,9 +5,6 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-      <StyledAbsoluteLink href="https://cheese.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>Pool</TranslatedText>
-      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
       </StyledAbsoluteLink>
@@ -16,6 +13,9 @@ const Nav: React.FC = () => {
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Stake</TranslatedText>
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://dice4cheese.com" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={2}>Dice</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://voting.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={12}>Voting</TranslatedText>
@@ -32,10 +32,10 @@ const StyledNav = styled.nav`
   display: flex;
   font-size: 16px;
   line-height: 45px;
-  font-weight: 500;
+  font-weight: 700;
   @media (max-width: 600px) {
     display: none;
-    
+
   }
 `
 

@@ -95,7 +95,7 @@ function V1PairRemoval({
 
   return (
     <AutoColumn gap="20px">
-      <TYPE.body my={9} style={{ fontWeight: 400 }}>
+      <TYPE.body my={9} style={{ fontWeight: 600 }}>
         This tool will remove your V1 liquidity and send the underlying assets to your wallet.
       </TYPE.body>
 

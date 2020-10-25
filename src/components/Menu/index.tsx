@@ -104,7 +104,7 @@ export default function Menu() {
             <DollarSign size={14} />
             Stake
           </MenuItem>
-          <MenuItem id="link" href="/">
+          <MenuItem id="link" href="https://dice4cheese.com">
             <Box size={14} />
             Dice
           </MenuItem>

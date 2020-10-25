@@ -12,7 +12,7 @@ const VersionLabel = styled.span<{ enabled: boolean }>`
   background: ${({ theme, enabled }) => (enabled ? theme.colors.primary1 : 'none')};
   color: ${({ theme, enabled }) => (enabled ? theme.colors.white : theme.colors.text1)};
   font-size: 1rem;
-  font-weight: ${({ enabled }) => (enabled ? '500' : '400')};
+  font-weight: ${({ enabled }) => (enabled ? '700' : '600')};
   :hover {
     user-select: ${({ enabled }) => (enabled ? 'none' : 'initial')};
     background: ${({ theme, enabled }) => (enabled ? theme.colors.primary1 : 'none')};

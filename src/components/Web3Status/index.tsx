@@ -51,7 +51,7 @@ const Web3StatusError = styled(Web3StatusGeneric)`
   background-color: ${({ theme }) => theme.colors.red1};
   border: 2px solid ${({ theme }) => theme.colors.red1};
   color: ${({ theme }) => theme.colors.white};
-  font-weight: 500;
+  font-weight: 700;
   :hover,
   :focus {
     background-color: ${({ theme }) => darken(0.1, theme.colors.red1)};
@@ -62,7 +62,7 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
   background-color: ${({ theme }) => theme.colors.primary4};
   border: none;
   color: ${({ theme }) => theme.colors.primaryText1};
-  font-weight: 500;
+  font-weight: 700;
 
   :hover,
   :focus {
@@ -89,7 +89,7 @@ const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
   background-color: ${({ pending, theme }) => (pending ? theme.colors.primary1 : theme.colors.bg2)};
   border: 2px solid ${({ pending, theme }) => (pending ? theme.colors.primary1 : theme.colors.bg3)};
   color: ${({ pending, theme }) => (pending ? theme.colors.white : theme.colors.text1)};
-  font-weight: 500;
+  font-weight: 700;
   :hover,
   :focus {
     background-color: ${({ pending, theme }) =>
@@ -110,7 +110,7 @@ const Text = styled.p`
   margin: 0 0.5rem 0 0.25rem;
   font-size: 1rem;
   width: fit-content;
-  font-weight: 500;
+  font-weight: 700;
 `
 
 const NetworkIcon = styled(Activity)`

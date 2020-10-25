@@ -90,12 +90,12 @@ export default function PoolFinder() {
           {currency0 ? (
             <Row>
               <CurrencyLogo currency={currency0} />
-              <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
+              <Text fontWeight={700} fontSize={20} marginLeft={'12px'}>
                 {currency0.symbol}
               </Text>
             </Row>
           ) : (
-            <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
+            <Text fontWeight={700} fontSize={20} marginLeft={'12px'}>
               <TranslatedText translationId={82}>Select a Token</TranslatedText>
             </Text>
           )}
@@ -114,12 +114,12 @@ export default function PoolFinder() {
           {currency1 ? (
             <Row>
               <CurrencyLogo currency={currency1} />
-              <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
+              <Text fontWeight={700} fontSize={20} marginLeft={'12px'}>
                 {currency1.symbol}
               </Text>
             </Row>
           ) : (
-            <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
+            <Text fontWeight={700} fontSize={20} marginLeft={'12px'}>
               <TranslatedText translationId={82}>Select a Token</TranslatedText>
             </Text>
           )}
@@ -129,7 +129,7 @@ export default function PoolFinder() {
           <ColumnCenter
             style={{ justifyItems: 'center', backgroundColor: '', padding: '12px 0px', borderRadius: '12px' }}
           >
-            <Text textAlign="center" fontWeight={500}>
+            <Text textAlign="center" fontWeight={700}>
               Pool Found!
             </Text>
           </ColumnCenter>
@@ -163,7 +163,7 @@ export default function PoolFinder() {
           ) : pairState === PairState.INVALID ? (
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
-                <Text textAlign="center" fontWeight={500}>
+                <Text textAlign="center" fontWeight={700}>
                   <TranslatedText translationId={136}>Invalid pair.</TranslatedText>
                 </Text>
               </AutoColumn>

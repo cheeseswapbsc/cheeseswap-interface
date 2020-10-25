@@ -9,7 +9,7 @@ const ToggleElement = styled.span<{ isActive?: boolean; isOnSwitch?: boolean }>`
   color: ${({ theme, isActive, isOnSwitch }) =>
     isActive ? (isOnSwitch ? theme.colors.white : theme.colors.text2) : theme.colors.text3};
   font-size: 0.825rem;
-  font-weight: 400;
+  font-weight: 600;
 `
 
 const StyledToggle = styled.button<{ isActive?: boolean; activeElement?: boolean }>`

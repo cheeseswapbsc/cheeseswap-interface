@@ -25,7 +25,7 @@ import { ExternalLink, LinkStyledButton, TYPE } from '../Shared'
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   padding: 1rem 1rem;
-  font-weight: 500;
+  font-weight: 700;
   color: ${props => (props.color === 'blue' ? ({ theme }) => theme.colors.primary1 : 'inherit')};
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
@@ -39,7 +39,7 @@ const UpperSection = styled.div`
     margin: 0;
     margin-bottom: 0.5rem;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   h5:last-child {
@@ -48,7 +48,7 @@ const UpperSection = styled.div`
 
   h4 {
     margin-top: 0;
-    font-weight: 500;
+    font-weight: 700;
   }
 `
 
@@ -66,7 +66,7 @@ const AccountGroupingRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   justify-content: space-between;
   align-items: center;
-  font-weight: 400;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.text1};
 
   div {
@@ -84,12 +84,12 @@ const AccountSection = styled.div`
 const YourAccount = styled.div`
   h5 {
     margin: 0 0 1rem 0;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   h4 {
     margin: 0;
-    font-weight: 500;
+    font-weight: 700;
   }
 `
 
@@ -104,7 +104,7 @@ const LowerSection = styled.div`
 
   h5 {
     margin: 0;
-    font-weight: 400;
+    font-weight: 600;
     color: ${({ theme }) => theme.colors.text3};
   }
 `
@@ -115,7 +115,7 @@ const AccountControl = styled.div`
   min-width: 0;
   width: 100%;
 
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1.25rem;
 
   a:hover {
@@ -161,7 +161,7 @@ const CloseColor = styled(Close)`
 const WalletName = styled.div`
   width: initial;
   font-size: 0.825rem;
-  font-weight: 500;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.text3};
 `
 
@@ -186,7 +186,7 @@ const TransactionListWrapper = styled.div`
 
 const WalletAction = styled(ButtonSecondary)`
   width: fit-content;
-  font-weight: 400;
+  font-weight: 600;
   margin-left: 8px;
   font-size: 0.825rem;
   padding: 4px 6px;
@@ -304,7 +304,7 @@ export default function AccountDetails({
                 <div>
                   {connector !== injected && connector !== walletlink && connector !== bsc && (
                     <WalletAction
-                      style={{ fontSize: '.825rem', fontWeight: 400, marginRight: '8px' }}
+                      style={{ fontSize: '.825rem', fontWeight: 600, marginRight: '8px' }}
                       onClick={() => {
                         ;(connector as any).close()
                       }}
@@ -313,7 +313,7 @@ export default function AccountDetails({
                     </WalletAction>
                   )}
                   <WalletAction
-                    style={{ fontSize: '.825rem', fontWeight: 400 }}
+                    style={{ fontSize: '.825rem', fontWeight: 600 }}
                     onClick={() => {
                       openOptions()
                     }}

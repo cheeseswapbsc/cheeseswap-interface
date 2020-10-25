@@ -4,6 +4,6 @@ export { default as darkTheme } from './dark'
 
 WebFont.load({
   google: {
-    families: ['Kanit:400,500,900', 'sans-serif']
+    families: ['Nunito:400,500,600,700,800,900', 'sans-serif']
   }
 })

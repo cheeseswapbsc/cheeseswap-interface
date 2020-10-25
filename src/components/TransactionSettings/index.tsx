@@ -150,7 +150,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     <AutoColumn gap="md">
       <AutoColumn gap="sm">
         <RowFixed>
-          <TYPE.black fontWeight={400} fontSize={14} color={theme.colors.text2}>
+          <TYPE.black fontWeight={600} fontSize={14} color={theme.colors.text2}>
             <TranslatedText translationId={88}>Slippage tolerance</TranslatedText>
           </TYPE.black>
           <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
@@ -227,7 +227,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
 
       <AutoColumn gap="sm">
         <RowFixed>
-          <TYPE.black fontSize={14} fontWeight={400} color={theme.colors.text2}>
+          <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
             <TranslatedText translationId={90}>Transaction deadline</TranslatedText>
           </TYPE.black>
           <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
