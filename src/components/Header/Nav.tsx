@@ -23,7 +23,6 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Analytics</TranslatedText>
       </StyledAbsoluteLink>
-      </StyledAbsoluteLink>
      <StyledAbsoluteLink href="https://www.binance.org/en/panama" target="_blank" rel="noopener noreferrer">
      <TranslatedText translationId={10}>ERC20 Bridge</TranslatedText>
      </StyledAbsoluteLink>
