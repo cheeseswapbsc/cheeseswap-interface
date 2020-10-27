@@ -1,10 +1,10 @@
 {
-  "name": "KiwiSwap",
-  "timestamp": "2020-10-13T11:41:29.665Z",
+  "name": "CheeseSwap",
+  "timestamp": "2020-10-26T11:41:29.665Z",
   "version": {
     "major": 1,
     "minor": 1,
-    "patch": 2
+    "patch": 3
   },
   "tags": {},
   "logoURI": "/images/coins/wbnb.png",
@@ -103,6 +103,14 @@
       "chainId": 56,
       "decimals": 18,
       "logoURI": "/images/coins/USDT-icon.png"
+    },
+     {
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "/images/coins/USDC.png"
     },
     {
       "name": "XRP Token",
