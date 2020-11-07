@@ -4,8 +4,8 @@
   "homepage": ".",
   "private": true,
   "devDependencies": {
-    "@ethersproject/experimental": "^5.0.1",
     "@cheeseswap/cheeseswap-sdk": "2.1.3",
+    "@ethersproject/experimental": "^5.0.1",
     "@popperjs/core": "^2.4.4",
     "@reach/dialog": "^0.10.3",
     "@reach/portal": "^0.10.3",

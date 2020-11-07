@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React from 'react'
 import styled from 'styled-components'
 import TranslatedText from '../TranslatedText'
@@ -5,11 +7,11 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
+      <StyledAbsoluteLink href="https://app.bounce.finance/fixed-swap/2152" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={8}>KP3RB Sale </TranslatedText><span role='img'> 🔥</span>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://cake.cheesemaker.farm/farms" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={8}>Pancake Farm</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Stake</TranslatedText>
