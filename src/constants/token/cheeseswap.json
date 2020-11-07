@@ -58,6 +58,14 @@
       "logoURI": "/images/coins/ETH.png"
     },
     {
+      "name": "Valium",
+      "symbol": "VAL",
+      "address": "0xf82618f5b0c8dfaa7559b08ae30b99f1b907eda7",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "/images/coins/VAL.png"
+    },
+    {
       "name": "cheesemaker.farm",
       "symbol": "CHS",
       "address": "0xaDD8A06fd58761A5047426e160B2B88AD3B9D464",
