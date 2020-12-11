@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Code, PieChart, MessageCircle, Sunrise, DollarSign, Box, Archive } from 'react-feather'
+import { Lock, Code, PieChart, MessageCircle, Sunrise, DollarSign, Box, Archive } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -96,6 +96,10 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
+          <MenuItem id="link" href="https://keep3rb.network/">
+            <Lock size={14} />
+            K3RB
+          </MenuItem>
           <MenuItem id="link" href="https://cheesemaker.farm//">
             <Sunrise size={14} />
             Farm

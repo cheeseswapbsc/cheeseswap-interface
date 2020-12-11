@@ -7,8 +7,8 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-      <StyledAbsoluteLink href="https://app.bounce.finance/fixed-swap/2152" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={8}>KP3RB Sale </TranslatedText><span role='img'> 🔥</span>
+      <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
@@ -27,9 +27,6 @@ const Nav: React.FC = () => {
       </StyledAbsoluteLink>
      <StyledAbsoluteLink href="https://www.binance.org/en/panama" target="_blank" rel="noopener noreferrer">
      <TranslatedText translationId={10}>ERC20 Bridge</TranslatedText>
-     </StyledAbsoluteLink>
-     <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
-     <TranslatedText translationId={10}>KP3RB dApp</TranslatedText>
      </StyledAbsoluteLink>
     </StyledNav>
   )
