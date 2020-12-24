@@ -7,20 +7,17 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
+       <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={14}>Stake🔥</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>KP3RB</TranslatedText>
+        <TranslatedText translationId={10}>KP3RB🔥</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Stake</TranslatedText>
-      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://dice4cheese.com" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>Dice</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://voting.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={12}>Voting</TranslatedText>
+        <TranslatedText translationId={2}>Dice Alpha</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Analytics</TranslatedText>

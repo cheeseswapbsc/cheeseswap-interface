@@ -70,6 +70,13 @@
       "chainId": 56,
       "decimals": 18
     },
+     {
+      "name": "Cheese Stake",
+      "symbol": "XCHS",
+      "address": "0x9f51CAA2A1D1663fCa5bEFbFaf6C8acD8Ac9717a",
+      "chainId": 56,
+      "decimals": 0
+    },
     {
       "name": "Butter Token",
       "symbol": "BUTT",
