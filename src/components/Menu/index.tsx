@@ -98,23 +98,19 @@ export default function Menu() {
         <MenuFlyout>
           <MenuItem id="link" href="https://keep3rb.network/">
             <Lock size={14} />
-            K3RB
+            KP3RB
           </MenuItem>
-          <MenuItem id="link" href="https://cheesemaker.farm//">
+          <MenuItem id="link" href="https://cheesemaker.farm/">
             <Sunrise size={14} />
             Farm
           </MenuItem>
           <MenuItem id="link" href="https://stake.cheesemaker.farm/">
             <DollarSign size={14} />
-            Stake
+            Staking
           </MenuItem>
-          <MenuItem id="link" href="https://dice4cheese.com">
+          <MenuItem id="link" href="https://dice4cheese.com/">
             <Box size={14} />
-            Dice
-          </MenuItem>
-          <MenuItem id="link" href="https://vote.cheeseswap.app/">
-            <Archive size={14} />
-            Vote
+            Dice Alpha
           </MenuItem>
           <MenuItem id="link" href="https://info.cheeseswap.app/">
             <PieChart size={14} />
