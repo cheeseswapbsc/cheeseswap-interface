@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Lock, Code, PieChart, MessageCircle, Sunrise, DollarSign, Box, Archive } from 'react-feather'
+import { Lock, Code, PieChart, MessageCircle, Sunrise, DollarSign, Box } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
