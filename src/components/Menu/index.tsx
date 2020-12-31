@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Lock, Code, PieChart, MessageCircle, Sunrise, DollarSign, Box } from 'react-feather'
+import { Lock, Code, PieChart, MessageCircle, DollarSign, Box } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -20,7 +20,7 @@ const StyledMenuButton = styled.button`
   background-color: transparent;
   margin: 0;
   padding: 0;
-  height: 35px;
+  height: 44px;
   background-color: ${({ theme }) => theme.colors.bg3};
 
   padding: 0.15rem 0.5rem;
@@ -69,9 +69,9 @@ const MenuItem = styled(ExternalLink)`
   display: flex;
   align-items: center;
   padding: 0.5rem 0.5rem;
-  color: ${({ theme }) => theme.colors.text2};
+  color: ${({ theme }) => theme.colors.text1};
   :hover {
-    color: ${({ theme }) => theme.colors.text1};
+    color: ${({ theme }) => theme.colors.text2};
     cursor: pointer;
     text-decoration: none;
   }
@@ -100,11 +100,7 @@ export default function Menu() {
             <Lock size={14} />
             KP3RB
           </MenuItem>
-          <MenuItem id="link" href="https://cheesemaker.farm/">
-            <Sunrise size={14} />
-            Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://stake.cheesemaker.farm/">
+          <MenuItem id="link" href="https://stake.cheeseswap.app/">
             <DollarSign size={14} />
             Staking
           </MenuItem>
@@ -114,7 +110,7 @@ export default function Menu() {
           </MenuItem>
           <MenuItem id="link" href="https://info.cheeseswap.app/">
             <PieChart size={14} />
-            Analytics
+            Chart
           </MenuItem>
           <MenuItem id="link" href="https://t.me/cheesemakerfarm">
             <MessageCircle size={14} />

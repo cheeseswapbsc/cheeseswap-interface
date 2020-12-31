@@ -9,7 +9,7 @@ export const BodyWrapper = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.primary6};
   box-shadow: 0px 6px 10px rgba(0,0,0,0.05);
   border-radius: 20px;
-  padding: 1rem;
+  padding: 0.5rem;
 `
 
 /**

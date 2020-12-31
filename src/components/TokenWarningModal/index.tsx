@@ -23,8 +23,8 @@ const WarningContainer = styled.div`
   max-width: 420px;
   width: 100%;
   padding: 1rem;
-  background: rgba(242, 150, 2, 0.05);
-  border: 2px solid #f3841e;
+  background: rgba(255 217 245);
+  border: 2px solid #c9499a;
   border-radius: 20px;
   overflow: auto;
 `

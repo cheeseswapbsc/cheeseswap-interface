@@ -62,7 +62,7 @@ const StyledListUrlText = styled.div`
   max-width: 160px;
   opacity: 0.6;
   margin-right: 0.5rem;
-  font-size: 14px;
+  font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
 `
@@ -183,7 +183,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
             width: '2rem',
             padding: '.8rem .35rem',
             borderRadius: '12px',
-            fontSize: '14px',
+            fontSize: '16px',
             marginRight: '0.5rem'
           }}
           onClick={toggle}
@@ -210,7 +210,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
         <ButtonPrimary
           disabled={true}
           className="select-button"
-          style={{ width: '5rem', minWidth: '5rem', padding: '0.5rem .35rem', borderRadius: '12px', fontSize: '14px' }}
+          style={{ width: '5rem', minWidth: '5rem', padding: '0.5rem .35rem', borderRadius: '12px', fontSize: '16px' }}
         >
           Selected
         </ButtonPrimary>
@@ -223,7 +223,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
               minWidth: '4.5rem',
               padding: '0.5rem .35rem',
               borderRadius: '12px',
-              fontSize: '14px'
+              fontSize: '16px'
             }}
             onClick={selectThisList}
           >

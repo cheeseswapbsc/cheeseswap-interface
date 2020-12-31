@@ -14,7 +14,7 @@ export const ModalInfo = styled.div`
 
 export const FadedSpan = styled(RowFixed)`
   color: ${({ theme }) => theme.colors.primary1};
-  font-size: 14px;
+  font-size: 16px;
 `
 
 export const PaddedColumn = styled(AutoColumn)`
@@ -31,7 +31,7 @@ export const MenuItem = styled(RowBetween)`
   cursor: ${({ disabled }) => !disabled && 'pointer'};
   pointer-events: ${({ disabled }) => disabled && 'none'};
   :hover {
-    background-color: ${({ theme, disabled }) => !disabled && theme.colors.bg2};
+    background-color: ${({ theme, disabled }) => !disabled && theme.colors.bg4};
   }
   opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
 `
@@ -39,14 +39,14 @@ export const MenuItem = styled(RowBetween)`
 export const SearchInput = styled.input`
   position: relative;
   display: flex;
-  padding: 16px;
+  padding: 8px;
   align-items: center;
   width: 100%;
   white-space: nowrap;
   background: none;
   border: none;
   outline: none;
-  border-radius: 20px;
+  border-radius: 6px;
   color: ${({ theme }) => theme.colors.text1};
   border-style: solid;
   border: 2px solid ${({ theme }) => theme.colors.bg3};

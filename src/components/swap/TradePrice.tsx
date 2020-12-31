@@ -25,7 +25,7 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
   return (
     <Text
       fontWeight={700}
-      fontSize={14}
+      fontSize={16}
       color={theme.colors.text2}
       style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}
     >

@@ -129,7 +129,7 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <StyledText fontWeight={700} fontSize={14}>
+          <StyledText fontWeight={700} fontSize={16}>
             Language
           </StyledText>
           <MenuItemsWrapper>

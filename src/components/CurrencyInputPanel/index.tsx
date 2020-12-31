@@ -18,7 +18,7 @@ import { TranslateString } from '../../utils/translateTextHelpers'
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
-  padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
+  padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.25rem 0.25rem 0.25rem 0.5rem')};
 `
 
 const CurrencySelect = styled.button<{ selected: boolean }>`
@@ -81,8 +81,8 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
 
 const Container = styled.div<{ hideInput: boolean }>`
   border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  border: 2px solid ${({ theme }) => theme.colors.bg0};
-  background-color: ${({ theme }) => theme.colors.bg0};
+  border: 2px solid ${({ theme }) => theme.colors.bg1};
+  background-color: ${({ theme }) => theme.colors.bg1};
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
@@ -163,7 +163,7 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={14}>
+              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={16}>
                 {label}
               </TYPE.body>
               {account && (
@@ -171,7 +171,7 @@ export default function CurrencyInputPanel({
                   onClick={onMax}
                   color={theme.colors.text2}
                   fontWeight={700}
-                  fontSize={14}
+                  fontSize={16}
                   style={{ display: 'inline', cursor: 'pointer' }}
                 >
                   {!hideBalance && !!currency && selectedCurrencyBalance

@@ -26,7 +26,7 @@ export default function SortButton({
 }) {
   return (
     <FilterWrapper onClick={toggleSortOrder}>
-      <Text fontSize={14} fontWeight={700}>
+      <Text fontSize={16} fontWeight={700}>
         {ascending ? '↑' : '↓'}
       </Text>
     </FilterWrapper>

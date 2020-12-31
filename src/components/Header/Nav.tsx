@@ -7,24 +7,21 @@ import TranslatedText from '../TranslatedText'
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-       <StyledAbsoluteLink href="https://stake.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Stake🔥</TranslatedText>
+      <StyledAbsoluteLink href="/">
+        <TranslatedText translationId={2}>Exchange</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>KP3RB🔥</TranslatedText>
+        <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://cheese.cheesemaker.farm" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>Cheese Farm</TranslatedText>
-      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+       <TranslatedText translationId={14}>Stake</TranslatedText>
+     </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://dice4cheese.com" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={2}>Dice Alpha</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Analytics</TranslatedText>
+        <TranslatedText translationId={14}>Chart</TranslatedText>
       </StyledAbsoluteLink>
-     <StyledAbsoluteLink href="https://www.binance.org/en/panama" target="_blank" rel="noopener noreferrer">
-     <TranslatedText translationId={10}>ERC20 Bridge</TranslatedText>
-     </StyledAbsoluteLink>
     </StyledNav>
   )
 }
@@ -32,7 +29,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 45px;
   font-weight: 700;
   @media (max-width: 600px) {
@@ -42,7 +39,7 @@ const StyledNav = styled.nav`
 `
 
 const StyledAbsoluteLink = styled.a`
-  color: #919091;
+  color: ${({ theme }) => theme.colors.text1};
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: none;

@@ -98,11 +98,11 @@ export default function AddressInputPanel({
         <InputContainer>
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.black color={theme.colors.text2} fontWeight={700} fontSize={14}>
+              <TYPE.black color={theme.colors.text2} fontWeight={700} fontSize={16}>
                 Recipient
               </TYPE.black>
               {address && chainId && (
-                <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
+                <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '16px' }}>
                   (View on bscscan)
                 </ExternalLink>
               )}
