@@ -18,9 +18,9 @@ const InfoLink = styled(ExternalLink)`
   padding: 6px 6px;
   border-radius: 8px;
   text-align: center;
-  font-size: 14px;
-  background: ${({ theme }) => theme.colors.bg1};
-  color: ${({ theme }) => theme.colors.text1};
+  font-size: 18px;
+  background: ${({ theme }) => theme.colors.primary1};
+  color: ${({ theme }) => theme.colors.buttonText};
 `
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
@@ -107,7 +107,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
           )}
           <AutoColumn style={{ padding: '0 24px' }}>
             <InfoLink href={'https://info.cheeseswap.app/pair/' + trade.route.pairs[0].liquidityToken.address} target="_blank">
-              View pair analytics ↗
+              View Pair Analytics ↗
             </InfoLink>
           </AutoColumn>
         </>

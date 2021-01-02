@@ -28,7 +28,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   font-weight: 700;
   background-color: ${({ selected, theme }) => (selected ? theme.colors.bg0 : theme.colors.primary1)};
   color: ${({ selected, theme }) => (selected ? theme.colors.text1 : theme.colors.white)};
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: ${({ selected }) => (selected ? 'none' : '0px 6px 10px rgba(0, 0, 0, 0.075)')};
   outline: none;
   cursor: pointer;
@@ -48,7 +48,7 @@ const LabelRow = styled.div`
   color: ${({ theme }) => theme.colors.text1};
   font-size: 0.75rem;
   line-height: 1rem;
-  padding: 0.75rem 1rem 0 1rem;
+  padding: 0.5rem 1rem 0 1rem;
   span:hover {
     cursor: pointer;
     color: ${({ theme }) => darken(0.2, theme.colors.text2)};
@@ -86,13 +86,13 @@ const Container = styled.div<{ hideInput: boolean }>`
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
-  ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.75rem;' : '  margin: 0 0.25rem 0.2rem 0.25rem;')}
-  font-size:  ${({ active }) => (active ? '20px' : '16px')};
+  ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.5rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
+  font-size:  ${({ active }) => (active ? '20px' : '18px')};
 
 `
 
 const StyledBalanceMax = styled.button`
-  height: 28px;
+  height: 36px;
   background-color: ${({ theme }) => theme.colors.primary5};
   border: 2px solid ${({ theme }) => theme.colors.primary5};
   border-radius: 0.5rem;
@@ -222,7 +222,7 @@ export default function CurrencyInputPanel({
                     ? currency.symbol.slice(0, 4) +
                       '...' +
                       currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                    : currency?.symbol) || <TranslatedText translationId={82}>Select a currency</TranslatedText>}
+                    : currency?.symbol) || <TranslatedText translationId={82}>Select a Token</TranslatedText>}
                 </StyledTokenName>
               )}
               {!disableCurrencySelect && <StyledDropDown selected={!!currency} />}

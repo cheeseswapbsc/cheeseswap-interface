@@ -30,12 +30,12 @@ const HeaderFrame = styled.div`
   width: 100%;
    background: ${({ theme }) => theme.colors.bg1};
   top: 0;
-  padding-bottom: 15px;
+  padding: 1rem;
   margin-bottom: 10px;
   position: absolute;
   z-index: 2;
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 12px 0 0 0;
+    padding: 0.5rem;
     width: calc(100%);
     position: relative;
   `};
@@ -139,7 +139,7 @@ export default function Header() {
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   return (
     <HeaderFrame>
-      <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
+      <RowBetween style={{ alignItems: 'flex-start' }}>
         <HeaderElement>
           <Title href="/">
             <UniIcon>

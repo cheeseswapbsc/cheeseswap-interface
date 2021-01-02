@@ -75,7 +75,7 @@ const StyledArrowLeft = styled(ArrowLeft)`
 
 export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
   return (
-    <Tabs style={{ marginBottom: '20px' }}>
+    <Tabs style={{ marginBottom: '10px' }}>
       <StyledNavLink id={`swap-nav-link`} to={'/swap'} isActive={() => active === 'swap'}>
         <TranslatedText translationId={8}>Swap</TranslatedText>
       </StyledNavLink>

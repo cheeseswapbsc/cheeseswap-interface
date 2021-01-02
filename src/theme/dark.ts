@@ -21,7 +21,7 @@ export default {
 
     //specialty colors
     modalBG: 'rgba(0,0.6,0.1,.425)',
-    advancedBG: 'rgba(37 34 39,0.5)',
+    advancedBG: 'rgba(35,30,39,0.5)',
 
     //primary colors
     primary1: '#b5449a',
