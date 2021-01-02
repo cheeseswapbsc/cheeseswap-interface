@@ -1,6 +1,6 @@
 {
   "name": "cheeseswap",
-  "timestamp": "2020-10-26T11:41:29.665Z",
+  "timestamp": "2021-01-02T11:41:29.665Z",
   "version": {
     "major": 1,
     "minor": 1,
@@ -117,14 +117,6 @@
       "decimals": 18,
       "logoURI": "/images/coins/USDT-icon.png"
     },
-     {
-      "name": "USD Coin",
-      "symbol": "USDC",
-      "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "/images/coins/USDC.png"
-      },
     {
       "name": "XRP Token",
       "symbol": "XRP",
@@ -255,7 +247,13 @@
       "chainId": 56,
       "decimals": 18
     },
-
+    {
+      "name": "Trust Wallet",
+      "symbol": "TWT",
+      "address": "0x4b0f1812e5df2a09796481ff14017e6005508003",
+      "chainId": 56,
+      "decimals": 18
+    },
     {
       "name": "YFII.finance Token",
       "symbol": "YFII",
@@ -285,8 +283,8 @@
       "decimals": 18
     },
     {
-      "name": "JNTR/b",
-      "symbol": "JNTR/b",
+      "name": "JNTRb",
+      "symbol": "JNTRb",
       "address": "0x3c037c4c2296f280bb318d725d0b454b76c199b9",
       "chainId": 56,
       "decimals": 18
@@ -295,13 +293,6 @@
       "name": "SPARTAN PROTOCOL TOKEN",
       "symbol": "SPART",
       "address": "0xe4ae305ebe1abe663f261bc00534067c80ad677c",
-      "chainId": 56,
-      "decimals": 18
-    },
-    {
-      "name": "Trust Wallet",
-      "symbol": "TWT",
-      "address": "0x4b0f1812e5df2a09796481ff14017e6005508003",
       "chainId": 56,
       "decimals": 18
     },
@@ -400,7 +391,7 @@
     {
       "name": "Binance-Peg USD Coin",
       "symbol": "USDC",
-      "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+      "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       "chainId": 56,
       "decimals": 18
     },
