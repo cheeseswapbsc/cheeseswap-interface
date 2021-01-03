@@ -5,7 +5,6 @@ import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import useToggle from '../../hooks/useToggle'
 import { ExternalLink } from '../Shared'
-import TranslatedText from '../TranslatedText'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -80,7 +79,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/cheesemakerfarm/'
+const CODE_LINK = 'https://github.com/cheeseswapbsc/'
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
@@ -112,9 +111,9 @@ export default function Menu() {
             <PieChart size={14} />
             Chart
           </MenuItem>
-          <MenuItem id="link" href="https://t.me/cheesemakerfarm">
+          <MenuItem id="link" href="https://t.me/cheeseswapbsc">
             <MessageCircle size={14} />
-            <TranslatedText translationId={34}>Telegram</TranslatedText>
+            Telegram
           </MenuItem>
           <MenuItem id="link" href={CODE_LINK}>
             <Code size={14} />
