@@ -1,4 +1,4 @@
-import { ChainId } from '@cheeseswap/cheeseswap-sdk'
+import { ChainId } from '@pancakeswap-libs/sdk'
 import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortmatic-connector'
 
 export const OVERLAY_READY = 'OVERLAY_READY'
@@ -25,7 +25,7 @@ export class FortmaticConnector extends FortmaticConnectorCore {
 
     const provider = this.fortmatic.getProvider()
 
-    const pollForOverlayReady = new Promise(resolve => {
+    const pollForOverlayReady: Promise<void> = new Promise(resolve => {
       const interval = setInterval(() => {
         if (provider.overlayReady) {
           clearInterval(interval)
