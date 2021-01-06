@@ -111,7 +111,7 @@ export default function Menu() {
             <PieChart size={14} />
             Chart
           </MenuItem>
-          <MenuItem id="link" href="https://t.me/cheeseswapbsc">
+          <MenuItem id="link" href="https://t.me/cheesemakerfarm">
             <MessageCircle size={14} />
             Telegram
           </MenuItem>
