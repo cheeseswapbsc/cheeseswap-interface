@@ -40,6 +40,7 @@ export const ThemedGlobalStyle = createGlobalStyle`
     html {
       color: ${({ theme }) => theme.colors.text1};
       background-color:${({ theme }) => theme.colors.bg0};
+      background-image: radial-gradient(50% 50% at 50% 50%,rgba(214, 66, 179, 0.1) 0%,rgb(214, 66, 179, 0.0) 100%);
     }
 
     body {

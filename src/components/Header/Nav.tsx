@@ -44,10 +44,10 @@ const StyledAbsoluteLink = styled.a`
   padding-right: 10px;
   text-decoration: none;
   &:hover {
-    color: #b5449b;
+    color: ${({ theme }) => theme.colors.text2};
   }
   &.active {
-    color: #b5449b;
+    color: ${({ theme }) => theme.colors.text2};
   }
   @media (max-width: 400px) {
     padding-left: 10px;

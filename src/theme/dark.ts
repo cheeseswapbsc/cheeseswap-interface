@@ -6,16 +6,16 @@ export default {
     ...base.colors,
     shadow1: '#1B2637',
     text1: '#FFFFFF',
-    text2: '#b5449a',
+    text2: '#D646B4',
     text3: '#888D9B',
     text4: '#fff',
 
     // backgrounds / greys
-    bg0: '#160D1A',
-    bg1: '#1C161F',
-    bg2: '#1C161F',
-    bg3: '#312D33',
-    bg4: '#342532',
+    bg0: '#150C13',
+    bg1: '#231520',
+    bg2: '#231520',
+    bg3: '#382E35',
+    bg4: '#D646B4',
     bg5: '#1B2637',
     bg6: 'linear-gradient(193.68deg,#2a1926 0.68%,#1f121c 100.48%)',
 
@@ -24,9 +24,9 @@ export default {
     advancedBG: 'rgba(35,30,39,0.5)',
 
     //primary colors
-    primary1: '#b5449a',
+    primary1: '#D646B4',
     primary4: '#903079',
-    primary5: '#b5449a',
+    primary5: '#D646B4',
     primary6: '#261823',
 
     // color text

@@ -33,7 +33,7 @@ const StyledMenuButton = styled.button`
   }
 
   svg {
-    margin-top: 2px;
+    margin-top: 3px;
   }
 `
 
@@ -49,9 +49,10 @@ const StyledMenu = styled.div`
 
 const MenuFlyout = styled.span`
   min-width: 8.125rem;
-  background-color: ${({ theme }) => theme.colors.bg3};
+  background-color: ${({ theme }) => theme.colors.bg1};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
+  border: 2px solid ${({ theme }) => theme.colors.bg3};
   border-radius: 0.5rem;
   padding: 0.5rem;
   display: flex;

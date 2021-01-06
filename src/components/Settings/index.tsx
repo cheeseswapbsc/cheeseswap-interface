@@ -63,14 +63,14 @@ const StyledMenuButton = styled.button`
   }
 
   svg {
-    margin-top: 2px;
+    margin-top: 3px;
   }
 `
 const EmojiWrapper = styled.div`
   position: absolute;
   bottom: -6px;
   right: 0px;
-  font-size: 14px;
+  font-size: 18px;
 `
 
 const StyledMenu = styled.div`
@@ -193,7 +193,7 @@ export default function SettingsTab() {
       {open && (
         <MenuFlyout>
           <AutoColumn gap="md" style={{ padding: '1rem' }}>
-            <Text fontWeight={600} fontSize={14}>
+            <Text fontWeight={600} fontSize={18}>
               <TranslatedText translationId={86}>Transaction Settings</TranslatedText>
             </Text>
             <TransactionSettings
@@ -202,13 +202,13 @@ export default function SettingsTab() {
               deadline={deadline}
               setDeadline={setDeadline}
             />
-            <Text fontWeight={600} fontSize={14}>
+            <Text fontWeight={600} fontSize={18}>
               <TranslatedText translationId={94}>Interface Settings</TranslatedText>
             </Text>
 
             <RowBetween>
               <RowFixed>
-                <TYPE.black fontWeight={600} fontSize={14} color={theme.colors.text2}>
+                <TYPE.black fontWeight={600} fontSize={16} color={theme.colors.text2}>
                   <TranslatedText translationId={96}>Toggle Audio Mode</TranslatedText>
                 </TYPE.black>
               </RowFixed>
