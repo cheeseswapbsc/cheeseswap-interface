@@ -32,6 +32,20 @@
       "decimals": 18
     },
     {
+      "name": "KP3RB+CHS Bluechip",
+      "symbol": "KP3RB+CHS",
+      "address": "0xe05207A432f6B06Fe9f78B598c1f890b260Dec45",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "XCHS+CHS Bluechip",
+      "symbol": "XCHS+CHS",
+      "address": "0x2f03F417496c956E64fd0B3D9323f0619D26f788",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
       "name": "Kiwi Token",
       "symbol": "KIWI",
       "address": "0x28db020a1c976167cDe0d2B78221ED4659d9ec0a",
