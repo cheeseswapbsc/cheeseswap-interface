@@ -13,6 +13,9 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
+       <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>Farming</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank" rel="noopener noreferrer">
        <TranslatedText translationId={14}>Stake</TranslatedText>
      </StyledAbsoluteLink>
