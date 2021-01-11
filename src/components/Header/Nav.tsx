@@ -14,13 +14,13 @@ const Nav: React.FC = () => {
         <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
        <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>Farming</TranslatedText>
+        <TranslatedText translationId={10}>Farm</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank" rel="noopener noreferrer">
        <TranslatedText translationId={14}>Stake</TranslatedText>
      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://dice4cheese.com" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>Dice Alpha</TranslatedText>
+        <TranslatedText translationId={2}>Dice(test)</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart</TranslatedText>

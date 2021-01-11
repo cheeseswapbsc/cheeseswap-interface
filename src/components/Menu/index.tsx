@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Lock, Code, PieChart, MessageCircle, DollarSign, Box } from 'react-feather'
+import { Lock, Code, PieChart, MessageCircle, DollarSign, Box, Sunrise } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -100,13 +100,17 @@ export default function Menu() {
             <Lock size={14} />
             KP3RB
           </MenuItem>
+          <MenuItem id="link" href="https://farm.cheeseswap.app/">
+            <Sunrise size={14} />
+            Farm
+          </MenuItem>
           <MenuItem id="link" href="https://stake.cheeseswap.app/">
             <DollarSign size={14} />
-            Staking
+            Stake
           </MenuItem>
           <MenuItem id="link" href="https://dice4cheese.com/">
             <Box size={14} />
-            Dice Alpha
+            Dice(test)
           </MenuItem>
           <MenuItem id="link" href="https://info.cheeseswap.app/">
             <PieChart size={14} />
