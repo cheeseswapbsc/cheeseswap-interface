@@ -28,6 +28,9 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://coinmarketcap.com/currencies/cheeseswap/" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>CoinMarketCap</TranslatedText>
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={14}>CoinGecko</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>API</TranslatedText>
       </StyledAbsoluteLink>
