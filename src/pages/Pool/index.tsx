@@ -45,7 +45,7 @@ export default function Pool() {
   const liquidityTokensWithBalances = useMemo(
     () =>
       tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken.address]?.greaterThan('0')
+        v2PairsBalances[liquidityToken.address]?.greaterThan('-1')
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances]
   )
@@ -72,7 +72,7 @@ export default function Pool() {
           <AutoColumn gap="12px" style={{ width: '100%' }}>
             <RowBetween padding={'0 8px'}>
               <Text color={theme.colors.text1} fontWeight={700}>
-                <TranslatedText translationId={102}>Your Liquidity</TranslatedText>
+                <TranslatedText translationId={102}>Major Liquidity</TranslatedText>
               </Text>
               <Question
                 text={TranslateString(
@@ -94,23 +94,23 @@ export default function Pool() {
                   <Dots>Loading</Dots>
                 </TYPE.body>
               </LightCard>
-            ) : allV2PairsWithLiquidity?.length > 0 ? (
+            ) : allV2PairsWithLiquidity?.length > -1 ? (
               <>
                 {allV2PairsWithLiquidity.map(v2Pair => (
                   <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
-                ))}
-              </>
+                ))}  
+                </>
             ) : (
               <LightCard padding="40px">
                 <TYPE.body color={theme.colors.text3} textAlign="center">
-                  <TranslatedText translationId={104}>No liquidity found.</TranslatedText>
+                  <TranslatedText translationId={104}>We are sorry. No liquidity found.</TranslatedText>
                 </TYPE.body>
               </LightCard>
             )}
 
             <div>
               <Text textAlign="center" fontSize={16} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : TranslateString(106, "Don't see a pool you joined?")}{' '}
+                {hasV1Liquidity ? 'Cheeseswap V1 liquidity found!' : TranslateString(106, "Don't see a pool you joined?")}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
                   {hasV1Liquidity ? 'Migrate now.' : TranslateString(108, 'Import it.')}
                 </StyledInternalLink>

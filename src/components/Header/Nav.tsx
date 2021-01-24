@@ -3,6 +3,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import TranslatedText from '../TranslatedText'
+//import Pool from '../../pages/Pool'
+//import { Route } from 'react-router-dom'
 
 const Nav: React.FC = () => {
   return (
@@ -10,6 +12,10 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="/">
         <TranslatedText translationId={2}>Exchange</TranslatedText>
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="/pool#/pool">
+        <TranslatedText translationId={2}>Pool</TranslatedText>
+      </StyledAbsoluteLink>
+      
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
@@ -19,8 +25,8 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank" rel="noopener noreferrer">
        <TranslatedText translationId={14}>Stake</TranslatedText>
      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://dice4cheese.com" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>Dice(test)</TranslatedText>
+      <StyledAbsoluteLink href="/" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={2}>NFT(Very Soon)</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart</TranslatedText>
