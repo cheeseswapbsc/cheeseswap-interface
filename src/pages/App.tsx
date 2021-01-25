@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Credentials, StringTranslations } from '@crowdin/crowdin-api-client'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Popups from '../components/Popups'
 import Web3ReactManager from '../components/Web3ReactManager'
 import AddLiquidity from './AddLiquidity'
@@ -23,7 +24,6 @@ import { EN } from '../constants/localisation/languageCodes'
 import { LanguageContext } from '../hooks/LanguageContext'
 import { TranslationsContext } from '../hooks/TranslationsContext'
 import { allLanguages } from '../constants/localisation/languageCodes'
-import LogoH from '../assets/images/cheeseswap-logo.png'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -36,40 +36,6 @@ const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
   justify-content: space-between;
-`
-const Footer = styled.div`
-  background: ${({ theme }) => theme.colors.bg1};
-  box-sizing: border-box;
-  z-index: 1;
-  margin: 0px;
-  min-width: 0px;
-  width: 100vw;
-  display: flex;
-  padding: 1rem;
-  position: fixed;
-  bottom: 0px;
-  align-items: flex-start;
-  justify-content: center;
-`
-const FooterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-const StyledAbsoluteLink = styled.a`
-  color: ${({ theme }) => theme.colors.text1};
-  padding-left: 10px;
-  padding-right: 10px;
-  text-decoration: none;
-  &:hover {
-    color: ${({ theme }) => theme.colors.text2};
-  }
-  &.active {
-    color: ${({ theme }) => theme.colors.text2};
-  }
-  @media (max-width: 400px) {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 `
 const BodyWrapper = styled.div`
   display: flex;
@@ -92,12 +58,6 @@ const BodyWrapper = styled.div`
 const Marginer = styled.div`
   margin-top: 5rem;
 `
-
-const LogoTitle = styled.img`
-  width: 350px;
-  margin-top: 20px;
-`
-
 
 export default function App() {
   const [selectedLanguage, setSelectedLanguage] = useState<any>(undefined)
@@ -181,22 +141,9 @@ export default function App() {
                     <Route component={RedirectPathToSwapOnly} />
                   </Switch>
                 </Web3ReactManager>
-                <LogoTitle src={LogoH} alt="bg" />
                 <Marginer />
               </BodyWrapper>
-              <Footer>
-                <FooterWrapper>
-                  <StyledAbsoluteLink href="https://coinmarketcap.com/currencies/cheeseswap/" target="_blank" rel="noopener noreferrer">
-                    CoinMarketCap
-                  </StyledAbsoluteLink>
-                  <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
-                    CoinGecko
-                  </StyledAbsoluteLink>
-                  <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-                    API
-                  </StyledAbsoluteLink>
-                </FooterWrapper>
-              </Footer>
+              <Footer />
             </TranslationsContext.Provider>
           </LanguageContext.Provider>
         </AppWrapper>
