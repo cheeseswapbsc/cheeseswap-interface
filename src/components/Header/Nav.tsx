@@ -12,10 +12,9 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="/">
         <TranslatedText translationId={2}>Exchange</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="/pool#/pool">
+      <StyledAbsoluteLink href="/#/pool">
         <TranslatedText translationId={2}>Pool</TranslatedText>
       </StyledAbsoluteLink>
-      
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
@@ -30,15 +29,6 @@ const Nav: React.FC = () => {
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://coinmarketcap.com/currencies/cheeseswap/" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>CoinMarketCap</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>CoinGecko</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>API</TranslatedText>
       </StyledAbsoluteLink>
     </StyledNav>
   )

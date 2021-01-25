@@ -37,7 +37,40 @@ const HeaderWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
 `
-
+const Footer = styled.div`
+  background: ${({ theme }) => theme.colors.bg1};
+  box-sizing: border-box;
+  z-index: 1;
+  margin: 0px;
+  min-width: 0px;
+  width: 100vw;
+  display: flex;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0px;
+  align-items: flex-start;
+  justify-content: center;
+`
+const FooterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+const StyledAbsoluteLink = styled.a`
+  color: ${({ theme }) => theme.colors.text1};
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.text2};
+  }
+  &.active {
+    color: ${({ theme }) => theme.colors.text2};
+  }
+  @media (max-width: 400px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+`
 const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -151,6 +184,19 @@ export default function App() {
                 <LogoTitle src={LogoH} alt="bg" />
                 <Marginer />
               </BodyWrapper>
+              <Footer>
+                <FooterWrapper>
+                  <StyledAbsoluteLink href="https://coinmarketcap.com/currencies/cheeseswap/" target="_blank" rel="noopener noreferrer">
+                    CoinMarketCap
+                  </StyledAbsoluteLink>
+                  <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
+                    CoinGecko
+                  </StyledAbsoluteLink>
+                  <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+                    API
+                  </StyledAbsoluteLink>
+                </FooterWrapper>
+              </Footer>
             </TranslationsContext.Provider>
           </LanguageContext.Provider>
         </AppWrapper>
