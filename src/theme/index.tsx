@@ -4,6 +4,6 @@ export { default as darkTheme } from './dark'
 
 WebFont.load({
   google: {
-    families: ['Teko:400,500,600,700,800,900', 'sans-serif']
+    families: ['Ubuntu:400,500,600,700,800,900', 'sans-serif']
   }
 })

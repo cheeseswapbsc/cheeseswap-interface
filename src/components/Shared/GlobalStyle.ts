@@ -2,13 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 
 export const FixedGlobalStyle = createGlobalStyle`
     html, input, textarea, button {
-      font-family: Teko, 'Inter',sans-serif;
+      font-family: Ubuntu, 'Inter',sans-serif;
       letter-spacing: -0.018em;
       font-display: fallback;
     }
     @supports (font-variation-settings: normal) {
       html, input, textarea, button {
-        font-family: Teko, 'Inter',sans-serif;
+        font-family: Ubuntu, 'Inter',sans-serif;
       }
     }
 
@@ -27,8 +27,8 @@ export const FixedGlobalStyle = createGlobalStyle`
     }
 
     html {
-      font-family: Teko,'Inter', sans-serif;
-      font-size: 18px;
+      font-family: Ubuntu,'Inter', sans-serif;
+      font-size: 14px;
       font-variant: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
