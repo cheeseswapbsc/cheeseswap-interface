@@ -14,7 +14,7 @@ export const ModalInfo = styled.div`
 
 export const FadedSpan = styled(RowFixed)`
   color: ${({ theme }) => theme.colors.primary1};
-  font-size: 16px;
+  font-size: 14px;
 `
 
 export const PaddedColumn = styled(AutoColumn)`
@@ -52,7 +52,7 @@ export const SearchInput = styled.input`
   border: 2px solid ${({ theme }) => theme.colors.bg3};
   -webkit-appearance: none;
 
-  font-size: 18px;
+  font-size: 16px;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.text3};

@@ -37,7 +37,7 @@ const Input = styled.input<{ error?: boolean }>`
   outline: none;
   border: none;
   flex: 1 1 auto;
-  width: 0;
+  width: 0;14
   background-color: ${({ theme }) => theme.colors.bg1};
   transition: color 300ms ${({ error }) => (error ? 'step-end' : 'step-start')};
   color: ${({ error, theme }) => (error ? theme.colors.red1 : theme.colors.primary1)};
@@ -98,11 +98,11 @@ export default function AddressInputPanel({
         <InputContainer>
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.black color={theme.colors.text2} fontWeight={700} fontSize={16}>
+              <TYPE.black color={theme.colors.text2} fontWeight={700} fontSize={14}>
                 Recipient
               </TYPE.black>
               {address && chainId && (
-                <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '16px' }}>
+                <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
                   (View on bscscan)
                 </ExternalLink>
               )}

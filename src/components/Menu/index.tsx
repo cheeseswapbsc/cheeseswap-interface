@@ -19,7 +19,7 @@ const StyledMenuButton = styled.button`
   background-color: transparent;
   margin: 0;
   padding: 0;
-  height: 44px;
+  height: 36px;
   background-color: ${({ theme }) => theme.colors.bg3};
 
   padding: 0.15rem 0.5rem;

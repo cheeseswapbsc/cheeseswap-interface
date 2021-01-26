@@ -62,7 +62,7 @@ const StyledListUrlText = styled.div`
   max-width: 160px;
   opacity: 0.6;
   margin-right: 0.5rem;
-  font-size: 16px;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
 `
@@ -161,7 +161,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
         <Row>
           <Text
             fontWeight={isSelected ? 700 : 600}
-            fontSize={16}
+            fontSize={14}
             style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {list.name}
@@ -183,7 +183,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
             width: '2rem',
             padding: '.8rem .35rem',
             borderRadius: '12px',
-            fontSize: '16px',
+            fontSize: '14px',
             marginRight: '0.5rem'
           }}
           onClick={toggle}
@@ -210,7 +210,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
         <ButtonPrimary
           disabled={true}
           className="select-button"
-          style={{ width: '5rem', minWidth: '5rem', padding: '0.5rem .35rem', borderRadius: '12px', fontSize: '16px' }}
+          style={{ width: '5rem', minWidth: '5rem', padding: '0.5rem .35rem', borderRadius: '12px', fontSize: '14px' }}
         >
           Selected
         </ButtonPrimary>
@@ -223,7 +223,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
               minWidth: '4.5rem',
               padding: '0.5rem .35rem',
               borderRadius: '12px',
-              fontSize: '16px'
+              fontSize: '14px'
             }}
             onClick={selectThisList}
           >
@@ -327,7 +327,7 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
           <div>
             <ArrowLeft style={{ cursor: 'pointer' }} onClick={onBack} />
           </div>
-          <Text fontWeight={700} fontSize={20}>
+          <Text fontWeight={700} fontSize={18}>
             Manage Lists
           </Text>
           <CloseIcon onClick={onDismiss} />

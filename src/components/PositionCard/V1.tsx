@@ -27,7 +27,7 @@ function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
         <FixedHeightRow>
           <RowFixed>
             <DoubleCurrencyLogo currency0={token} margin={true} size={20} />
-            <Text fontWeight={700} fontSize={20} style={{ marginLeft: '' }}>
+            <Text fontWeight={700} fontSize={18} style={{ marginLeft: '' }}>
               {`${chainId && token.equals(WETH[chainId]) ? 'WETH' : token.symbol}/ETH`}
             </Text>
             <Text

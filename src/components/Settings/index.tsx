@@ -49,7 +49,7 @@ const StyledMenuButton = styled.button`
   background-color: transparent;
   margin: 0;
   padding: 0;
-  height: 44px;
+  height: 36px;
   background-color: ${({ theme }) => theme.colors.bg3};
 
   padding: 0.15rem 0.5rem;
@@ -70,7 +70,7 @@ const EmojiWrapper = styled.div`
   position: absolute;
   bottom: -6px;
   right: 0px;
-  font-size: 18px;
+  font-size: 16px;
 `
 
 const StyledMenu = styled.div`
@@ -148,18 +148,18 @@ export default function SettingsTab() {
           <AutoColumn gap="lg">
             <RowBetween style={{ padding: '0 2rem' }}>
               <div />
-              <Text fontWeight={700} fontSize={20}>
+              <Text fontWeight={700} fontSize={18}>
                 Are you sure?
               </Text>
               <StyledCloseIcon onClick={() => setShowConfirmation(false)} />
             </RowBetween>
             <Break />
             <AutoColumn gap="lg" style={{ padding: '0 2rem' }}>
-              <Text fontWeight={700} fontSize={20}>
+              <Text fontWeight={700} fontSize={18}>
                 Expert mode turns off the confirm transaction prompt and allows high slippage trades that often result
                 in bad rates and lost funds.
               </Text>
-              <Text fontWeight={600} fontSize={20}>
+              <Text fontWeight={600} fontSize={18}>
                 ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING.
               </Text>
               <ButtonError
@@ -172,7 +172,7 @@ export default function SettingsTab() {
                   }
                 }}
               >
-                <Text fontSize={20} fontWeight={700} id="confirm-expert-mode">
+                <Text fontSize={18} fontWeight={700} id="confirm-expert-mode">
                   Turn On Expert Mode
                 </Text>
               </ButtonError>
@@ -193,7 +193,7 @@ export default function SettingsTab() {
       {open && (
         <MenuFlyout>
           <AutoColumn gap="md" style={{ padding: '1rem' }}>
-            <Text fontWeight={600} fontSize={18}>
+            <Text fontWeight={600} fontSize={16}>
               <TranslatedText translationId={86}>Transaction Settings</TranslatedText>
             </Text>
             <TransactionSettings
@@ -202,13 +202,13 @@ export default function SettingsTab() {
               deadline={deadline}
               setDeadline={setDeadline}
             />
-            <Text fontWeight={600} fontSize={18}>
+            <Text fontWeight={600} fontSize={16}>
               <TranslatedText translationId={94}>Interface Settings</TranslatedText>
             </Text>
 
             <RowBetween>
               <RowFixed>
-                <TYPE.black fontWeight={600} fontSize={16} color={theme.colors.text2}>
+                <TYPE.black fontWeight={600} fontSize={14} color={theme.colors.text2}>
                   <TranslatedText translationId={96}>Toggle Audio Mode</TranslatedText>
                 </TYPE.black>
               </RowFixed>

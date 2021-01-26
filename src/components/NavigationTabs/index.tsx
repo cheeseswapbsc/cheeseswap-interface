@@ -27,7 +27,7 @@ const StyledAbsoluteLink = styled.a`
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text3};
-  font-size: 24px;
+  font-size: 20px;
   &.${activeClassName} {
     border-radius: 12px;
     font-weight: 500;
@@ -50,7 +50,7 @@ const StyledNavLink = styled(NavLink).attrs({
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text3};
-  font-size: 24px;
+  font-size: 20px;
 
   &.${activeClassName} {
     border-radius: 12px;
@@ -66,7 +66,7 @@ const StyledNavLink = styled(NavLink).attrs({
 
 const ActiveText = styled.div`
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
 `
 
 const StyledArrowLeft = styled(ArrowLeft)`

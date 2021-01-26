@@ -48,11 +48,11 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
           <CustomLightSpinner src={Circle} alt="loader" size={'90px'} />
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
-          <Text fontWeight={700} fontSize={20}>
+          <Text fontWeight={700} fontSize={18}>
             Waiting For Confirmation
           </Text>
           <AutoColumn gap="12px" justify={'center'}>
-            <Text fontWeight={600} fontSize={16} color="" textAlign="center">
+            <Text fontWeight={600} fontSize={14} color="" textAlign="center">
               {pendingText}
             </Text>
           </AutoColumn>
@@ -87,19 +87,19 @@ function TransactionSubmittedContent({
           <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.colors.primary1} />
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
-          <Text fontWeight={700} fontSize={20}>
+          <Text fontWeight={700} fontSize={18}>
             Transaction Submitted
           </Text>
 
           {chainId && hash && (
             <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
-              <Text fontWeight={700} fontSize={16} color={theme.colors.primary1}>
+              <Text fontWeight={700} fontSize={14} color={theme.colors.primary1}>
                 View on bscscan
               </Text>
             </ExternalLink>
           )}
           <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0' }}>
-            <Text fontWeight={700} fontSize={20}>
+            <Text fontWeight={700} fontSize={18}>
               Close
             </Text>
           </ButtonPrimary>
@@ -124,7 +124,7 @@ export function ConfirmationModalContent({
     <Wrapper>
       <Section>
         <RowBetween>
-          <Text fontWeight={700} fontSize={20}>
+          <Text fontWeight={700} fontSize={18}>
             {title}
           </Text>
           <CloseIcon onClick={onDismiss} />
@@ -142,14 +142,14 @@ export function TransactionErrorContent({ message, onDismiss }: { message: strin
     <Wrapper>
       <Section>
         <RowBetween>
-          <Text fontWeight={700} fontSize={20}>
+          <Text fontWeight={700} fontSize={18}>
             Error
           </Text>
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
         <AutoColumn style={{ marginTop: 20, padding: '2rem 0' }} gap="24px" justify="center">
           <AlertTriangle color={theme.colors.red1} style={{ strokeWidth: 1.5 }} size={64} />
-          <Text fontWeight={700} fontSize={16} color={theme.colors.red1} style={{ textAlign: 'center', width: '85%' }}>
+          <Text fontWeight={700} fontSize={14} color={theme.colors.red1} style={{ textAlign: 'center', width: '85%' }}>
             {message}
           </Text>
         </AutoColumn>

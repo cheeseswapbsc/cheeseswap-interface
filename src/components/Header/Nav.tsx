@@ -37,7 +37,7 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 45px;
   font-weight: 700;
   @media (max-width: 600px) {

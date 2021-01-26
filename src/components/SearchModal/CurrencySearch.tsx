@@ -154,7 +154,7 @@ export function CurrencySearch({
     <Column style={{ width: '100%', flex: '1 1' }}>
       <PaddedColumn gap="14px">
         <RowBetween>
-          <Text fontWeight={700} fontSize={16}>
+          <Text fontWeight={700} fontSize={14}>
             <TranslatedText translationId={82}>Select a token</TranslatedText>
             <QuestionHelper
               text={TranslateString(
@@ -178,7 +178,7 @@ export function CurrencySearch({
           <CommonBases chainId={chainId} onSelect={handleCurrencySelect} selectedCurrency={selectedCurrency} />
         )}
         <RowBetween>
-          <Text fontSize={16} fontWeight={700}>
+          <Text fontSize={14} fontWeight={700}>
             <TranslatedText translationId={126}>Token name</TranslatedText>
           </Text>
           <SortButton ascending={invertSearchOrder} toggleSortOrder={() => setInvertSearchOrder(iso => !iso)} />
@@ -221,7 +221,7 @@ export function CurrencySearch({
                 </Row>
               ) : null}
               <LinkStyledButton
-                style={{ fontWeight: 700, color: theme.colors.text2, fontSize: 16 }}
+                style={{ fontWeight: 700, color: theme.colors.text2, fontSize: 14 }}
                 onClick={onChangeList}
                 id="currency-search-change-list-button"
               >

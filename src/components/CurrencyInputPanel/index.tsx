@@ -24,7 +24,7 @@ const InputRow = styled.div<{ selected: boolean }>`
 const CurrencySelect = styled.button<{ selected: boolean }>`
   align-items: center;
   height: 2.2rem;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   background-color: ${({ selected, theme }) => (selected ? theme.colors.bg0 : theme.colors.primary1)};
   color: ${({ selected, theme }) => (selected ? theme.colors.text1 : theme.colors.white)};
@@ -87,7 +87,7 @@ const Container = styled.div<{ hideInput: boolean }>`
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.5rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
-  font-size:  ${({ active }) => (active ? '20px' : '18px')};
+  font-size:  ${({ active }) => (active ? '18px' : '16px')};
 
 `
 
@@ -163,7 +163,7 @@ export default function CurrencyInputPanel({
         {!hideInput && (
           <LabelRow>
             <RowBetween>
-              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={16}>
+              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={14}>
                 {label}
               </TYPE.body>
               {account && (
@@ -171,7 +171,7 @@ export default function CurrencyInputPanel({
                   onClick={onMax}
                   color={theme.colors.text2}
                   fontWeight={700}
-                  fontSize={16}
+                  fontSize={14}
                   style={{ display: 'inline', cursor: 'pointer' }}
                 >
                   {!hideBalance && !!currency && selectedCurrencyBalance
