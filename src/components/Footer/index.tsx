@@ -15,7 +15,8 @@ const FooterSection = styled.div`
   width: 100vw;
   display: flex;
   padding: 1rem;
-  bottom: 0px;
+  position: absolute;
+  bottom: -20px;
   align-items: flex-start;
   justify-content: space-evenly;
   @media (max-width: 480px) {
