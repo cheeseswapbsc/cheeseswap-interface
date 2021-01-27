@@ -18,16 +18,23 @@
       "decimals": 18
     },
     {
-      "name": "Keep3rb",
-      "symbol": "KP3RB-OLD",
-      "address": "0x1092E4F72a9D7a28418351D029e273906aF24797",
-      "chainId": 56,
-      "decimals": 18
-    },
-     {
       "name": "Keep3r BSC Network",
       "symbol": "KP3RB",
       "address": "0x5EA29eEe799aA7cC379FdE5cf370BC24f2Ea7c81",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "PizzaSwap",
+      "symbol": "PIZZA",
+      "address": "0x2cc26dd730F548dc4ac291ae7D84a0C96980d2cB",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "PastaBar",
+      "symbol": "PASTA",
+      "address": "0x4375eA687330A95D42383Ef18AD3ea8C4Db7224d",
       "chainId": 56,
       "decimals": 18
     },
