@@ -125,6 +125,9 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://keep3rb.network" target="_blank">
           Keep3r BSC
         </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
+          Pizza Finance
+        </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank">
           HOTS Token
         </StyledAbsoluteLink>
