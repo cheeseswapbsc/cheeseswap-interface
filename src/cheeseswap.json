@@ -39,6 +39,13 @@
       "decimals": 18
     },
     {
+      "name": "Binance Beacon ETH",
+      "symbol": "BETH",
+      "address": "0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
       "name": "KP3RB+CHS Bluechip",
       "symbol": "KP3RB+CHS",
       "address": "0xe05207A432f6B06Fe9f78B598c1f890b260Dec45",
