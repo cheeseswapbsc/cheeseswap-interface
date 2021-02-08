@@ -30,6 +30,10 @@ const Title = styled.div`
   margin: 0 0 0 10px;
   font-weight: 700;
 `
+const Title2 = styled.div`
+  margin: 0 0 0 10px;
+  font-weight: 400;
+`
 const StyledAbsoluteLink = styled.a`
   color: ${({ theme }) => theme.colors.text1};
   display: flex;
@@ -67,8 +71,14 @@ export default function Footer() {
       <FooterWrapper>
         <LogoTitle src={LogoH} alt="CheeseSwap Logo" />
         <Title>
-        Decentralize Finance & Entertainment Project
+          Decentralize Finance & Entertainment Project
         </Title>
+        <Title2>
+          © 2020 Ǒmega Protocol Ltd.
+        </Title2>
+        <Title2>
+          Registered No: 12855720
+        </Title2>
           <SocialSection>
             <IconLink href="https://twitter.com/cheeseswapbsc" target="_blank" rel="noopener noreferrer">
               <Icon src={Twitter} alt="Twitter" />
