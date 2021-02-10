@@ -38,6 +38,13 @@
       "chainId": 56,
       "decimals": 18
     },
+     {
+      "name": "Cake Pizza",
+      "symbol": "cPIZZA",
+      "address": "0xda3684575afa20309938434F3d40799B12868057",
+      "chainId": 56,
+      "decimals": 18
+    },
     {
       "name": "Binance Beacon ETH",
       "symbol": "BETH",
