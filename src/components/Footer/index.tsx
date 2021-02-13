@@ -107,9 +107,6 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank">
           Farm
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank">
-          Stake
-        </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
       <Title>
@@ -126,6 +123,9 @@ export default function Footer() {
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
           CheeseSwap API
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://docs.cheeseswap.app" target="_blank">
+          Documentation
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
