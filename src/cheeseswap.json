@@ -69,7 +69,7 @@
     {
       "name": "Kiwi Token",
       "symbol": "KIWI",
-      "address": "0x28db020a1c976167cDe0d2B78221ED4659d9ec0a",
+      "address": "0xCfDf8A80fECAeeCC144fa74c0Df8691BFd0e26e3",
       "chainId": 56,
       "decimals": 18,
       "logoURI": "/images/coins/KIWI.png"
