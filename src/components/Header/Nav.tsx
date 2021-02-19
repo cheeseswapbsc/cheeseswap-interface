@@ -15,17 +15,14 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>KP3RB</TranslatedText>
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://kiwiswap.finance" target="_blank" rel="noopener noreferrer">
+       <TranslatedText translationId={14}>Kiwi🥝</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Pizza🍕</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Farm</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://stake.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-       <TranslatedText translationId={14}>Stake</TranslatedText>
-     </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="/" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={2}>NFT (Soon)</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart</TranslatedText>

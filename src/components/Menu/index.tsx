@@ -100,6 +100,10 @@ export default function Menu() {
             <Lock size={14} />
             KP3RB
           </MenuItem>
+          <MenuItem id="link" href="https://kiwiswap.finance/">
+            <DollarSign size={14} />
+            Kiwi🥝
+          </MenuItem>
           <MenuItem id="link" href="https://pizzafinance.app/">
             <Star size={14} />
             Pizza🍕
@@ -107,10 +111,6 @@ export default function Menu() {
           <MenuItem id="link" href="https://farm.cheeseswap.app/">
             <Sunrise size={14} />
             Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://stake.cheeseswap.app/">
-            <DollarSign size={14} />
-            Stake
           </MenuItem>
           <MenuItem id="link" href="https://info.cheeseswap.app/">
             <PieChart size={14} />

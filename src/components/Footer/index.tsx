@@ -121,11 +121,19 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
           CoinGecko
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
-          CheeseSwap API
+      </FooterWrapper>
+      <FooterWrapper>
+      <Title>
+      Documentation
+      </Title>
+        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank">
+          Docs
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://docs.cheesemaker.farm/" target="_blank">
-          Documentation
+        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
+          API
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://data.cheeseswap.app/totalliquidity" target="_blank">
+          TVL
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
@@ -135,14 +143,14 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://keep3rb.network" target="_blank">
           Keep3r BSC
         </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://kiwiswap.finance" target="_blank" rel="noopener noreferrer">
+          Kiwi Finance
+        </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
           Pizza Finance
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank">
           HOTS Token
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="/" target="_blank" rel="noopener noreferrer">
-          Dice Game
         </StyledAbsoluteLink>
       </FooterWrapper>
     </FooterSection>
