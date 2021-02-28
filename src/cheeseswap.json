@@ -38,6 +38,34 @@
       "chainId": 56,
       "decimals": 18
     },
+    {
+      "name": "CheeseSwap Index",
+      "symbol": "CID",
+      "address": "0x93f44521A0b6dDE17E8C4BB8e85E8c215d2EEf0e",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "CheeseSwap Secondary Index",
+      "symbol": "CSI",
+      "address": "0x2061A33ffc1aBAA10204Ab97771809340d5fE942",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "Pancakeswap Index",
+      "symbol": "PID",
+      "address": "0xC8C7EcE03492cC1D99b1Cc2BB588254b15dE45A5",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "Pancakeswap Secondary Index",
+      "symbol": "PSI",
+      "address": "0x24835Eb32cE4B91916013A5399c5565F26a92546",
+      "chainId": 56,
+      "decimals": 18
+    },
      {
       "name": "Cake Pizza",
       "symbol": "cPIZZA",

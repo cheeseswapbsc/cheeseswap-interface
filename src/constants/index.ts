@@ -5,6 +5,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { injected, bsc, walletconnect } from '../connectors'
 // TODO
 export const ROUTER_ADDRESS = '0x3047799262d8D2EF41eD2a222205968bC9B0d895'
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 // a list of tokens by chain
 type ChainTokenList = {
