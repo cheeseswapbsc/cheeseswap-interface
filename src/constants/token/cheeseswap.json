@@ -54,15 +54,15 @@
     },
     {
       "name": "Pancakeswap Index",
-      "symbol": "PID",
-      "address": "0xC8C7EcE03492cC1D99b1Cc2BB588254b15dE45A5",
+      "symbol": "PKID",
+      "address": "0x0Db5591EA716d2495860E1dAa47114ca416F6055",
       "chainId": 56,
       "decimals": 18
     },
     {
       "name": "Pancakeswap Secondary Index",
-      "symbol": "PSI",
-      "address": "0x24835Eb32cE4B91916013A5399c5565F26a92546",
+      "symbol": "PKSI",
+      "address": "0xE8dC20d6C96d1942C266ec674fe330B0Ec261c9f",
       "chainId": 56,
       "decimals": 18
     },
