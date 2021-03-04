@@ -1,17 +1,18 @@
-import { ChainId } from '@cheeseswap/cheeseswap-sdk'
+import { ChainId, Currency } from '@cheeseswap/cheeseswap-sdk'
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import Modal from '../Modal'
 import { ExternalLink, CloseIcon, Spinner } from '../Shared'
 import { Text } from 'rebass'
-import { RowBetween } from '../Row'
-import { AlertTriangle, ArrowUpCircle } from 'react-feather'
-import { ButtonPrimary } from '../Button'
+import { RowBetween, RowFixed } from '../Row'
+import { AlertTriangle, ArrowUpCircle, CheckCircle } from 'react-feather'
+import { ButtonPrimary, ButtonLight } from '../Button'
 import { AutoColumn, ColumnCenter } from '../Column'
 import Circle from '../../assets/images/blue-loader.svg'
-
+import MetaMaskLogo from '../../assets/images/metamask.png'
 import { getEtherscanLink } from '../../utils'
 import { useActiveWeb3React } from '../../hooks'
+import useAddTokenToMetamask from '../../hooks/useAddTokenToMetamask'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,6 +26,11 @@ const BottomSection = styled(Section)`
   background-color: ${({ theme }) => theme.colors.bg2};
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+`
+const StyledLogo = styled.img`
+  height: 16px;
+  width: 16px;
+  margin-left: 6px;
 `
 
 const ConfirmedIcon = styled(ColumnCenter)`
@@ -68,14 +74,17 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
 function TransactionSubmittedContent({
   onDismiss,
   chainId,
-  hash
+  hash,
+  currencyToAdd
 }: {
   onDismiss: () => void
   hash: string | undefined
   chainId: ChainId
+  currencyToAdd?: Currency | undefined
 }) {
   const theme = useContext(ThemeContext)
-
+  const { library } = useActiveWeb3React()
+  const { addToken, success } = useAddTokenToMetamask(currencyToAdd)
   return (
     <Wrapper>
       <Section>
@@ -94,9 +103,23 @@ function TransactionSubmittedContent({
           {chainId && hash && (
             <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
               <Text fontWeight={700} fontSize={14} color={theme.colors.primary1}>
-                View on bscscan
+                View on bscscan.com
               </Text>
             </ExternalLink>
+          )}
+          {currencyToAdd && library?.provider?.isMetaMask && (
+            <ButtonLight mt="12px" padding="6px 12px" width="fit-content" onClick={addToken}>
+              {!success ? (
+                <RowFixed>
+                  Add {currencyToAdd.symbol} to Metamask <StyledLogo src={MetaMaskLogo} />
+                </RowFixed>
+              ) : (
+                <RowFixed>
+                  Added {currencyToAdd.symbol}{' '}
+                  <CheckCircle size={'16px'} stroke={theme.colors.primary1} style={{ marginLeft: '6px' }} />
+                </RowFixed>
+              )}
+            </ButtonLight>
           )}
           <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0' }}>
             <Text fontWeight={700} fontSize={18}>
@@ -168,6 +191,7 @@ interface ConfirmationModalProps {
   content: () => React.ReactNode
   attemptingTxn: boolean
   pendingText: string
+  currencyToAdd?: Currency | undefined
 }
 
 export default function TransactionConfirmationModal({
@@ -176,7 +200,8 @@ export default function TransactionConfirmationModal({
   attemptingTxn,
   hash,
   pendingText,
-  content
+  content,
+  currencyToAdd
 }: ConfirmationModalProps) {
   const { chainId } = useActiveWeb3React()
 
@@ -184,11 +209,22 @@ export default function TransactionConfirmationModal({
 
   // confirmation screen
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
+    <Modal
+    isOpen={isOpen}
+    onDismiss={onDismiss}
+    maxHeight={90}>
       {attemptingTxn ? (
-        <ConfirmationPendingContent onDismiss={onDismiss} pendingText={pendingText} />
+        <ConfirmationPendingContent
+        onDismiss={onDismiss}
+        pendingText={pendingText}
+        />
       ) : hash ? (
-        <TransactionSubmittedContent chainId={chainId} hash={hash} onDismiss={onDismiss} />
+        <TransactionSubmittedContent
+        chainId={chainId}
+        hash={hash}
+        onDismiss={onDismiss}
+        currencyToAdd={currencyToAdd}
+        />
       ) : (
         content()
       )}
