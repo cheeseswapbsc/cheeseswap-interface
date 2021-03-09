@@ -5,6 +5,11 @@ import Twitter from '../../assets/svg/twitter.svg'
 import Telegram from '../../assets/svg/telegram.svg'
 import Github from '../../assets/svg/github.svg'
 import Mail from '../../assets/svg/email.svg'
+import BuiltBSC from '../../assets/partners/built-on-bsc.svg'
+import Kp3rb from '../../assets/partners/KP3RB.png'
+import Pizza from '../../assets/partners/PIZZA.png'
+import Kiwi from '../../assets/partners/KIWI.png'
+import Bscid from '../../assets/partners/BSCID.png'
 
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
@@ -51,6 +56,21 @@ const StyledAbsoluteLink = styled.a`
     padding-right: 10px;
   }
 `
+const StyledAbsoluteImg = styled.a`
+  color: ${({ theme }) => theme.colors.text1};
+  margin: 6px;
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.text2};
+  }
+  &.active {
+    color: ${({ theme }) => theme.colors.text2};
+  }
+  @media (max-width: 400px) {
+    margin: 4px;
+  }
+`
+
 const LogoTitle = styled.img`
   height: 54px;
 `
@@ -104,8 +124,11 @@ export default function Footer() {
         <StyledAbsoluteLink href="#/pool" target="_blank">
           Pool
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank">
-          Farm
+        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank">
+          Keeper
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank">
+          IDO
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
@@ -126,6 +149,9 @@ export default function Footer() {
       <Title>
       Documentation
       </Title>
+        <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
+          Audit
+        </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank">
           Docs
         </StyledAbsoluteLink>
@@ -140,18 +166,28 @@ export default function Footer() {
       <Title>
       Partners
       </Title>
-        <StyledAbsoluteLink href="https://keep3rb.network" target="_blank">
-          Keep3r BSC
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://kiwiswap.finance" target="_blank" rel="noopener noreferrer">
-          Kiwi Finance
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
-          Pizza Finance
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://farm.cheeseswap.app" target="_blank">
-          HOTS Token
-        </StyledAbsoluteLink>
+      <FooterWrapper>
+        <StyledAbsoluteImg href="https://bscindex.com/" target="_blank" rel="noopener noreferrer">
+          <img src={Bscid} alt="BSC Index" height="32" />
+        </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://kiwiswap.finance" target="_blank" rel="noopener noreferrer">
+          <img src={Kiwi} alt="Kiwi Finance" height="32"/>
+        </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
+          <img src={Pizza} alt="Pizza Finance" height="32"/>
+        </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
+          <img src={Kp3rb} alt="Keep3r BSC Network" height="32"/>
+        </StyledAbsoluteImg>
+      </FooterWrapper>
+      <Title>
+      Built on
+      </Title>
+      <FooterWrapper>
+        <StyledAbsoluteImg href="https://bscindex.com/" target="_blank" rel="noopener noreferrer">
+          <img src={BuiltBSC} alt="Binance Smart Chain" height="64" />
+        </StyledAbsoluteImg>
+      </FooterWrapper>
       </FooterWrapper>
     </FooterSection>
 
