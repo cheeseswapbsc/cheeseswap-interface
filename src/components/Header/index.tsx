@@ -96,17 +96,17 @@ const NetworkCard = styled(YellowCard)`
   padding: 8px 12px;
 `
 
-const UniIcon = styled.div`
+const CheeseIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
   }
   img {
-    height: 2.5rem;
+    height: 3.5rem;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
     img {
-      height: 2rem;
+      height: 3rem;
     }
   `};
 `
@@ -142,13 +142,13 @@ export default function Header() {
       <RowBetween style={{ alignItems: 'flex-start' }}>
         <HeaderElement>
           <Title href="/">
-            <UniIcon>
+            <CheeseIcon>
               { !isDark?
                 <img src={Logob} alt="logo" />
                 :
                 <img src={Logow} alt="logo" />
               }
-            </UniIcon>
+            </CheeseIcon>
           </Title>
         </HeaderElement>
 
