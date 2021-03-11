@@ -93,7 +93,7 @@ function TransactionSubmittedContent({
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
         <ConfirmedIcon>
-          <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.colors.primary1} />
+          <ArrowUpCircle strokeWidth={0.5} size={90} color={theme.colors.text1} />
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
           <Text fontWeight={700} fontSize={18}>
@@ -102,7 +102,7 @@ function TransactionSubmittedContent({
 
           {chainId && hash && (
             <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
-              <Text fontWeight={700} fontSize={14} color={theme.colors.primary1}>
+              <Text fontWeight={700} fontSize={14} color={theme.colors.text2}>
                 View on bscscan.com
               </Text>
             </ExternalLink>
@@ -116,7 +116,7 @@ function TransactionSubmittedContent({
               ) : (
                 <RowFixed>
                   Added {currencyToAdd.symbol}{' '}
-                  <CheckCircle size={'16px'} stroke={theme.colors.primary1} style={{ marginLeft: '6px' }} />
+                  <CheckCircle size={'16px'} stroke={theme.colors.text2} style={{ marginLeft: '6px' }} />
                 </RowFixed>
               )}
             </ButtonLight>
