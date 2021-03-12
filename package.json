@@ -1,7 +1,7 @@
 {
   "name": "@cheeswap/interface",
   "description": "CheeseSwap Interface",
-  "homepage": "./",
+  "homepage": "https://cheeseswap.app",
   "private": true,
   "devDependencies": {
     "@cheeseswap/cheeseswap-sdk": "2.1.3",
