@@ -67,6 +67,13 @@
       "decimals": 18
     },
      {
+      "name": "Mango Farm",
+      "symbol": "MANGO",
+      "address": "0x3D29cdB00CB183a0aEcEEa4fB73F55E1450af3d4",
+      "chainId": 56,
+      "decimals": 18
+    },
+     {
       "name": "Cake Pizza",
       "symbol": "cPIZZA",
       "address": "0xda3684575afa20309938434F3d40799B12868057",
