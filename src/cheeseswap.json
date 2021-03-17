@@ -7,7 +7,7 @@
     "patch": 3
   },
   "tags": {},
-  "logoURI": "/images/coins/wbnb.png",
+  "logoURI": "/images/coins/CHS.png",
   "keywords": ["cheeseeswap", "default"],
   "tokens": [
      {
@@ -15,91 +15,104 @@
       "symbol": "WBNB",
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/WBNB.png"
     },
     {
       "name": "Keep3r BSC Network",
       "symbol": "KP3RB",
       "address": "0x5EA29eEe799aA7cC379FdE5cf370BC24f2Ea7c81",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/KP3RB.png"
     },
     {
       "name": "PizzaSwap",
       "symbol": "PIZZA",
       "address": "0x2cc26dd730F548dc4ac291ae7D84a0C96980d2cB",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/PIZZA.png"
     },
     {
       "name": "PastaBar",
       "symbol": "PASTA",
       "address": "0x4375eA687330A95D42383Ef18AD3ea8C4Db7224d",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/PASTA.png"
     },
     {
       "name": "CheeseSwap Index",
       "symbol": "CID",
       "address": "0x93f44521A0b6dDE17E8C4BB8e85E8c215d2EEf0e",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CID.png"
     },
     {
       "name": "CheeseSwap Secondary Index",
       "symbol": "CSI",
       "address": "0x2061A33ffc1aBAA10204Ab97771809340d5fE942",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CSI.png"
     },
     {
       "name": "Pancakeswap Index",
       "symbol": "PKID",
       "address": "0x0Db5591EA716d2495860E1dAa47114ca416F6055",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/PKID.png"
     },
     {
       "name": "Pancakeswap Secondary Index",
       "symbol": "PKSI",
       "address": "0xE8dC20d6C96d1942C266ec674fe330B0Ec261c9f",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/PKSI.png"
     },
      {
       "name": "Mango Farm",
       "symbol": "MANGO",
       "address": "0x3D29cdB00CB183a0aEcEEa4fB73F55E1450af3d4",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/MANGO.png"
     },
      {
       "name": "Cake Pizza",
       "symbol": "cPIZZA",
       "address": "0xda3684575afa20309938434F3d40799B12868057",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/cPIZZA.png"
     },
     {
       "name": "Binance Beacon ETH",
       "symbol": "BETH",
       "address": "0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/BETH.png"
     },
     {
       "name": "KP3RB+CHS Bluechip",
       "symbol": "KP3RB+CHS",
       "address": "0xe05207A432f6B06Fe9f78B598c1f890b260Dec45",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/KP3RB+CHS.png"
     },
     {
       "name": "XCHS+CHS Bluechip",
       "symbol": "XCHS+CHS",
       "address": "0x2f03F417496c956E64fd0B3D9323f0619D26f788",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/XCHS+CHS.png",
     },
     {
       "name": "Kiwi Token",
@@ -145,7 +158,8 @@
       "symbol": "XCHS",
       "address": "0x9f51CAA2A1D1663fCa5bEFbFaf6C8acD8Ac9717a",
       "chainId": 56,
-      "decimals": 0
+      "decimals": 0,
+      "logoURI": "/images/coins/XCHS.png"
     },
     {
       "name": "Butter Token",
@@ -161,7 +175,7 @@
       "address": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/BTC-icon.png"
+      "logoURI": "/images/coins/BTCB.png"
     },
     {
       "name": "BAND Protocol Token",
@@ -169,7 +183,7 @@
       "address": "0xAD6cAEb32CD2c308980a548bD0Bc5AA4306c6c18",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/band.png"
+      "logoURI": "/images/coins/BAND.png"
     },
     {
       "name": "EOS Token",
@@ -177,7 +191,7 @@
       "address": "0x56b6fB708fC5732DEC1Afc8D8556423A2EDcCbD6",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/eos.png"
+      "logoURI": "/images/coins/EOS.png"
     },
     {
       "name": "Tether USD",
@@ -185,7 +199,7 @@
       "address": "0x55d398326f99059fF775485246999027B3197955",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/USDT-icon.png"
+      "logoURI": "/images/coins/USDT.png"
     },
     {
       "name": "XRP Token",
@@ -193,7 +207,7 @@
       "address": "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/XRP-icon.png"
+      "logoURI": "/images/coins/XRP.png"
     },
     {
       "name": "Bitcoin Cash Token",
@@ -201,7 +215,7 @@
       "address": "0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/BCH-icon.png"
+      "logoURI": "/images/coins/BCH.png"
     },
     {
       "name": "Litecoin Token",
@@ -209,56 +223,64 @@
       "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/LTC-icon.png"
+      "logoURI": "/images/coins/LTC.png"
     },
     {
       "name": "Cardano Token",
       "symbol": "ADA",
       "address": "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ADA.png"
     },
     {
       "name": "Cosmos Token",
       "symbol": "ATOM",
       "address": "0x0Eb3a705fc54725037CC9e008bDede697f62F335",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ATOM.png"
     },
     {
       "name": "Hotdog.Cafe",
       "symbol": "HOTDOG",
       "address": "0x55f0799D60F5f1046971d494bCe376A09Dd4C668",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/HOTDOG.png"
+
     },
     {
       "name": "Hot Sausage",
       "symbol": "HOTS",
       "address": "0x793766efcA4CEF8c55EE950E759AD6FF73D49c09",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/HOTS.png"
     },
     {
       "name": "Tezos Token",
       "symbol": "XTZ",
       "address": "0x16939ef78684453bfDFb47825F8a5F714f12623a",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/XTZ.png"
     },
     {
       "name": "Ontology Token",
       "symbol": "ONT",
       "address": "0xFd7B3A77848f1C2D67E05E54d78d174a0C850335",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ONT.png"
     },
     {
       "name": "Zcash Token",
       "symbol": "ZEC",
       "address": "0x1Ba42e5193dfA8B03D15dd1B86a3113bbBEF8Eeb",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ZEC.png"
     },
     {
       "name": "Dai Token",
@@ -266,147 +288,167 @@
       "address": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/DAI-icon.png"
+      "logoURI": "/images/coins/DAI.png"
     },
     {
       "name": "Cream",
       "symbol": "CREAM",
       "address": "0xd4CB328A82bDf5f03eB737f37Fa6B370aef3e888",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CREAM.png"
     },
      {
       "name": "Polkadot Token",
       "symbol": "DOT",
       "address": "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/DOT.png"
     },
     {
       "name": "PancakeSwap Token",
       "symbol": "CAKE",
       "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CAKE.png"
     },
     {
       "name": "Streamity",
       "symbol": "STM",
       "address": "0x90df11a8cce420675e73922419e3f4f3fe13cccb",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/STM.png"
     },
     {
       "name": "Ankr",
       "symbol": "ANKR",
       "address": "0xf307910a4c7bbc79691fd374889b36d8531b08e3",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ANKR.png"
     },
     {
       "name": "ChainLink Token",
       "symbol": "LINK",
       "address": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/LINK.png"
     },
     {
       "name": "Burger Swap",
       "symbol": "BURGER",
       "address": "0xae9269f27437f0fcbc232d39ec814844a51d6b8f",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/BURGER.png"
     },
     {
       "name": "Trust Wallet",
       "symbol": "TWT",
       "address": "0x4b0f1812e5df2a09796481ff14017e6005508003",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/TWT.png"
     },
     {
       "name": "YFII.finance Token",
       "symbol": "YFII",
       "address": "0x7f70642d88cf1c4a3a7abb072b53b929b653eda5",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/YFII.png"
     },
     {
       "name": "Prometeus",
       "symbol": "PROM",
       "address": "0xaf53d56ff99f1322515e54fdde93ff8b3b7dafd5",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/PROM.png"
     },
     {
       "name": "CanYaCoin",
       "symbol": "CAN",
       "address": "0x007ea5c0ea75a8df45d288a4debdd5bb633f9e56",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CAN.png"
     },
     {
       "name": "Dice.finance Token",
       "symbol": "DICE",
       "address": "0x748ad98b14c814b28812eb42ad219c8672909879",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/DICE.png"
     },
     {
       "name": "JNTRb",
       "symbol": "JNTRb",
       "address": "0x3c037c4c2296f280bb318d725d0b454b76c199b9",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/JNTRb.png"
     },
     {
       "name": "SPARTAN PROTOCOL TOKEN",
       "symbol": "SPART",
       "address": "0xe4ae305ebe1abe663f261bc00534067c80ad677c",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/SPART.png"
     },
     {
       "name": "Venus",
       "symbol": "XVS",
       "address": "0xcf6bb5389c92bdda8a3747ddb454cb7a64626c63",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/XVS.png"
     },
     {
       "name": "AlphaToken",
       "symbol": "ALPHA",
       "address": "0xa1faa113cbe53436df28ff0aee54275c13b40975",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/ALPHA.png"
     },
     {
       "name": "Beefy.finance",
       "symbol": "BIFI",
       "address": "0xCa3F508B8e4Dd382eE878A314789373D80A5190A",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/BIFI.png"
     },
     {
       "name": "yearn.finance",
       "symbol": "YFI",
       "address": "0x88f1a5ae2a3bf98aeaf342d26b30a79438c9142e",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/YFI.png"
     },
     {
       "name": "Uniswap",
       "symbol": "UNI",
       "address": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/UNI.png"
     },
     {
       "name": "fry.world",
       "symbol": "FRIES",
       "address": "0x393B312C01048b3ed2720bF1B090084C09e408A1",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/FRIES.png"
     },
     {
       "name": "StableXSwap",
@@ -421,196 +463,224 @@
       "symbol": "FIL",
       "address": "0x0d8ce2a99bb6e3b7db580ed848240e4a0f9ae153",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/FIL.png"
     },
     {
       "name": "KAVA",
       "symbol": "KAVA",
       "address": "0x5F88AB06e8dfe89DF127B2430Bba4Af600866035",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/KAVA.png"
     },
     {
       "name": "USDX",
       "symbol": "USDX",
       "address": "0x1203355742e76875154c0d13eb81dcd7711dc7d9",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/USDX.png"
     },
     {
       "name": "Injective Protocol",
       "symbol": "INJ",
       "address": "0xa2B726B1145A4773F68593CF171187d8EBe4d495",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/INJ.png"
     },
     {
       "name": "Swipe",
       "symbol": "SXP",
       "address": "0x47bead2563dcbf3bf2c9407fea4dc236faba485a",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/SXP.png"
     },
     {
       "name": "Binance-Peg USD Coin",
       "symbol": "USDC",
       "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/USDC.png"
     },
     {
       "name": "CertiK Token",
       "symbol": "CTK",
       "address": "0xa8c2b8eec3d368c0253ad3dae65a5f2bbb89c929",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/CTK.png"
     },
     {
       "name": "NAR Token",
       "symbol": "NAR",
       "address": "0xa1303e6199b319a891b79685f0537d289af1fc83",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/NAR.png"
     },
     {
       "name": "Nyanswop Token",
       "symbol": "NYA",
       "address": "0xbfa0841f7a90c4ce6643f651756ee340991f99d5",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/NYA.png"
     },
     {
       "name": "DANGO",
       "symbol": "DANGO",
       "address": "0x0957c57c9eb7744850dcc95db5a06ed4a246236e",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/DANGO.png"
     },
     {
       "name": "HARD",
       "symbol": "HARD",
       "address": "0xf79037f6f6be66832de4e7516be52826bc3cbcc4",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/HARD.png"
     },
     {
       "name": "ROOBEE",
       "symbol": "bROOBEE",
       "address": "0xe64f5cb844946c1f102bd25bbd87a5ab4ae89fbe",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/bROOBEE.png"
     },
     {
       "name": "Unifi Token",
       "symbol": "UNFI",
       "address": "0x728C5baC3C3e370E372Fc4671f9ef6916b814d8B",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/UNFI.png"
     },
     {
       "name": "BLINk",
       "symbol": "BLK",
       "address": "0x63870A18B6e42b01Ef1Ad8A2302ef50B7132054F",
       "chainId": 56,
-      "decimals": 6
+      "decimals": 6,
+      "logoURI": "/images/coins/BLK.png"
     },
     {
       "name": "QUSD Stablecoin",
       "symbol": "QUSD",
       "address": "0xb8C540d00dd0Bf76ea12E4B4B95eFC90804f924E",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/QUSD.png"
     },
     {
       "name": "Qian Governance Token",
       "symbol": "KUN",
       "address": "0x1A2fb0Af670D0234c2857FaD35b789F8Cb725584",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/KUN.png"
     },
     {
       "name": "VAI Stablecoin",
       "symbol": "VAI",
       "address": "0x4bd17003473389a42daf6a0a729f6fdb328bbbd7",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/VAI.png"
     },
     {
       "name": "Juventus",
       "symbol": "JUV",
       "address": "0xc40c9a843e1c6d01b7578284a9028854f6683b1b",
       "chainId": 56,
-      "decimals": 2
+      "decimals": 2,
+      "logoURI": "/images/coins/JUV.png"
     },
     {
       "name": "Paris Saint-Germain",
       "symbol": "PSG",
       "address": "0xbc5609612b7c44bef426de600b5fd1379db2ecf1",
       "chainId": 56,
-      "decimals": 2
+      "decimals": 2,
+      "logoURI": "/images/coins/PSG.png"
     },
     {
       "name": "Ditto",
       "symbol": "DITTO",
       "address": "0x233d91A0713155003fc4DcE0AFa871b508B3B715",
       "chainId": 56,
-      "decimals": 9
+      "decimals": 9,
+      "logoURI": "/images/coins/DITTO.png"
     },
     {
       "name": "Math",
       "symbol": "MATH",
       "address": "0xf218184af829cf2b0019f8e6f0b2423498a36983",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/MATH.png"
     },
     {
       "name": "Fuel",
       "symbol": "FUEL",
       "address": "0x2090c8295769791ab7A3CF1CC6e0AA19F35e441A",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/FUEL.png"
     },
     {
       "name": "Nuls",
       "symbol": "NULS",
       "address": "0x8cd6e29d3686d24d3c2018cee54621ea0f89313b",
       "chainId": 56,
-      "decimals": 8
+      "decimals": 8,
+      "logoURI": "/images/coins/NULS.png"
     },
     {
       "name": "NerveNetwork",
       "symbol": "NVT",
       "address": "0xf0e406c49c63abf358030a299c0e00118c4c6ba5",
       "chainId": 56,
-      "decimals": 8
+      "decimals": 8,
+      "logoURI": "/images/coins/NVT.png"
     },
     {
       "name": "Reef",
       "symbol": "REEF",
       "address": "0xf21768ccbc73ea5b6fd3c687208a7c2def2d966e",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/REEF.png"
     },
     {
       "name": "OG",
       "symbol": "OG",
       "address": "0xf05e45ad22150677a017fbd94b84fbb63dc9b44c",
       "chainId": 56,
-      "decimals": 2
+      "decimals": 2,
+      "logoURI": "/images/coins/OG.png"
     },
     {
       "name": "Atletico de Madrid",
       "symbol": "ATM",
       "address": "0x25e9d05365c867e59c1904e7463af9f312296f9e",
       "chainId": 56,
-      "decimals": 2
+      "decimals": 2,
+      "logoURI": "/images/coins/ATM.png"
     },
     {
       "name": "AS Roma",
       "symbol": "ASR",
       "address": "0x80d5f92c2c8c682070c95495313ddb680b267320",
       "chainId": 56,
-      "decimals": 2
+      "decimals": 2,
+      "logoURI": "/images/coins/ASR.png"
     }
   ]
 }
