@@ -35,3 +35,7 @@ package-lock.json
 cypress/videos
 cypress/screenshots
 cypress/fixtures/example.json
+
+/cheese-03-14
+/cheese-03-18
+dnssec
