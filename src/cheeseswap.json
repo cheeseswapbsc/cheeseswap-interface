@@ -1,9 +1,9 @@
 {
   "name": "cheeseswap",
-  "timestamp": "2021-01-02T11:41:29.665Z",
+  "timestamp": "2021-03-19T01:41:29.665Z",
   "version": {
     "major": 1,
-    "minor": 1,
+    "minor": 2,
     "patch": 3
   },
   "tags": {},
@@ -117,6 +117,14 @@
       "name": "Kiwi Token",
       "symbol": "KIWI",
       "address": "0xCfDf8A80fECAeeCC144fa74c0Df8691BFd0e26e3",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "address": "0x111111111117dC0aa78b770fA6A738034120C302",
       "chainId": 56,
       "decimals": 18
 
