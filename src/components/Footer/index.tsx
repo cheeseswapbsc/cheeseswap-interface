@@ -153,7 +153,7 @@ export default function Footer() {
       </FooterWrapper>
       <FooterWrapper>
           <Title>
-          Martket Data
+          Market Data
           </Title>
             <SocialSection>
               <IconLink href="https://coinmarketcap.com/exchanges/cheeseswap/" target="_blank" rel="noopener noreferrer">
