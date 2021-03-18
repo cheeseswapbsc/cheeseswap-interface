@@ -112,7 +112,7 @@
       "address": "0x2f03F417496c956E64fd0B3D9323f0619D26f788",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "/images/coins/XCHS+CHS.png",
+      "logoURI": "/images/coins/XCHS+CHS.png"
     },
     {
       "name": "Kiwi Token",
@@ -151,7 +151,8 @@
       "symbol": "CHS",
       "address": "0xaDD8A06fd58761A5047426e160B2B88AD3B9D464",
       "chainId": 56,
-      "decimals": 18
+      "decimals": 18,
+      "logoURI": "/images/coins/CHS.png"
     },
      {
       "name": "Cheese Stake",
