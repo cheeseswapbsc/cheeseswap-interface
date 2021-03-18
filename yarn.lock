@@ -7524,9 +7524,9 @@ cyclist@^1.0.1:
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
 cypress@*:
-  version "6.7.1"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.7.1.tgz#6b8e1ba9badbded284ddc8575873b64211250ea6"
-  integrity sha512-MC9yt1GqpL4WVDQ0STI89K+PdLeC3T3NuAb2N61d6vYGR9pJy8w3Fqe0OWZwaRTJtg9eAyHXPGmFsyKeNQ3tmg==
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.8.0.tgz#8338f39212a8f71e91ff8c017a1b6e22d823d8c1"
+  integrity sha512-W2e9Oqi7DmF48QtOD0LfsOLVq6ef2hcXZvJXI/E3PgFNmZXEVwBefhAxVCW9yTPortjYA2XkM20KyC4HRkOm9w==
   dependencies:
     "@cypress/listr-verbose-renderer" "^0.4.1"
     "@cypress/request" "^2.88.5"
@@ -7897,9 +7897,9 @@ detect-newline@2.X, detect-newline@^2.1.0:
   integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
 
 detect-node-es@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/detect-node-es/-/detect-node-es-1.0.0.tgz#c0318b9e539a5256ca780dd9575c9345af05b8ed"
-  integrity sha512-S4AHriUkTX9FoFvL4G8hXDcx6t3gp2HpfCza3Q0v6S78gul2hKWifLQbeW+ZF89+hSm2ZIc/uF3J97ZgytgTRg==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/detect-node-es/-/detect-node-es-1.1.0.tgz#163acdf643330caa0b4cd7c21e7ee7755d6fa493"
+  integrity sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==
 
 detect-node@^2.0.4:
   version "2.0.5"
