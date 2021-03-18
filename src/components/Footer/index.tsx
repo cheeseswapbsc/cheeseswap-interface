@@ -5,11 +5,17 @@ import Twitter from '../../assets/svg/twitter.svg'
 import Telegram from '../../assets/svg/telegram.svg'
 import Github from '../../assets/svg/github.svg'
 import Mail from '../../assets/svg/email.svg'
-import BuiltBSC from '../../assets/partners/built-on-bsc.svg'
+import BuiltBSC from '../../assets/svg/built-on-bsc.svg'
+import AuditCertik from '../../assets/svg/certik.svg'
+import DeployIPFS from '../../assets/svg/ipfs.svg'
 import Kp3rb from '../../assets/partners/KP3RB.png'
 import Pizza from '../../assets/partners/PIZZA.png'
 import Kiwi from '../../assets/partners/KIWI.png'
 import Bscid from '../../assets/partners/BSCID.png'
+import Cmc from '../../assets/png/cmc.png'
+import Cg from '../../assets/png/cg.png'
+import DappRadar from '../../assets/png/dappradar.png'
+import Dapp from '../../assets/png/dapp.png'
 
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
@@ -30,6 +36,9 @@ const FooterSection = styled.div`
 `
 const FooterWrapper = styled.div`
   padding: 12px;
+`
+const FooterWrapper2 = styled.div`
+  padding: 4px;
 `
 const Title = styled.div`
   margin: 0 0 0 10px;
@@ -82,7 +91,7 @@ const IconLink = styled.a`
   margin-left: 8px;
 `
 const Icon = styled.img`
-  height: 18px;
+  height: 24px;
 `
 export default function Footer() {
 
@@ -99,6 +108,70 @@ export default function Footer() {
         <Title2>
           Registered No: 12855720
         </Title2>
+          <FooterWrapper>
+            <StyledAbsoluteImg href="https://ipfs.io/" target="_blank" rel="noopener noreferrer">
+              <img src={DeployIPFS} alt="IPFS" height="36" />
+            </StyledAbsoluteImg>
+            <StyledAbsoluteImg href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
+              <img src={AuditCertik} alt="Certik" height="36" />
+            </StyledAbsoluteImg>
+          </FooterWrapper>
+      </FooterWrapper>
+      <FooterWrapper>
+      <Title>
+      Products
+      </Title>
+        <StyledAbsoluteLink href="#/swap" target="_blank">
+          Swap
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="#/pool" target="_blank">
+          Pool
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank">
+          Keeper
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank">
+          Analytics
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank">
+          IDO
+        </StyledAbsoluteLink>
+      </FooterWrapper>
+      <FooterWrapper>
+      <Title>
+      Useful Links
+      </Title>
+        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank">
+          Docs
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
+          API
+        </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
+          Audit
+        </StyledAbsoluteLink>
+      </FooterWrapper>
+      <FooterWrapper>
+          <Title>
+          Martket Data
+          </Title>
+            <SocialSection>
+              <IconLink href="https://coinmarketcap.com/exchanges/cheeseswap/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Cmc} alt="CoinMarketCap" />
+              </IconLink>
+              <IconLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
+                <Icon src={Cg} alt="CoinGecko" />
+              </IconLink>
+              <IconLink href="https://dappradar.com/binance-smart-chain/exchanges/cheeseswap" target="_blank" rel="noopener noreferrer">
+                <Icon src={DappRadar} alt="DappRadar" />
+              </IconLink>
+              <IconLink href="https://www.dapp.com/app/cheeseswap" target="_blank" rel="noopener noreferrer">
+                <Icon src={Dapp} alt="Dapp" />
+              </IconLink>
+            </SocialSection>
+          <Title>
+          Social Media
+          </Title>
           <SocialSection>
             <IconLink href="https://twitter.com/cheeseswapbsc" target="_blank" rel="noopener noreferrer">
               <Icon src={Twitter} alt="Twitter" />
@@ -114,54 +187,7 @@ export default function Footer() {
             </IconLink>
           </SocialSection>
       </FooterWrapper>
-      <FooterWrapper>
-      <Title>
-      Products
-      </Title>
-        <StyledAbsoluteLink href="#/swap" target="_blank">
-          Swap
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="#/pool" target="_blank">
-          Pool
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank">
-          Keeper
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank">
-          IDO
-        </StyledAbsoluteLink>
-      </FooterWrapper>
-      <FooterWrapper>
-      <Title>
-      Useful Links
-      </Title>
-        <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank">
-          Analytics
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://coinmarketcap.com/currencies/cheeseswap/" target="_blank" rel="noopener noreferrer">
-          CoinMarketCap
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
-          CoinGecko
-        </StyledAbsoluteLink>
-      </FooterWrapper>
-      <FooterWrapper>
-      <Title>
-      Documentation
-      </Title>
-        <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
-          Audit
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank">
-          Docs
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
-          API
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://data.cheeseswap.app/totalliquidity" target="_blank">
-          TVL
-        </StyledAbsoluteLink>
-      </FooterWrapper>
+
       <FooterWrapper>
       <Title>
       Partners
@@ -183,11 +209,11 @@ export default function Footer() {
       <Title>
       Built on
       </Title>
-      <FooterWrapper>
-        <StyledAbsoluteImg href="https://bscindex.com/" target="_blank" rel="noopener noreferrer">
+      <FooterWrapper2>
+        <StyledAbsoluteImg href="https://www.binance.org/" target="_blank" rel="noopener noreferrer">
           <img src={BuiltBSC} alt="Binance Smart Chain" height="64" />
         </StyledAbsoluteImg>
-      </FooterWrapper>
+      </FooterWrapper2>
       </FooterWrapper>
     </FooterSection>
 
