@@ -1,6 +1,6 @@
 ![Cheeseswap](https://raw.githubusercontent.com/cheeseswapbsc/cheeseswap-interface/master/public/ft_banner.png)
 
-# [CheeseSwap](https://cheeseswap.app)Web interface wap/exchange
+# [CheeseSwap](https://cheeseswap.app) Web interface wap/exchange
 
 # How to list your project on [CheeseSwap?](https://cheeseswap.app)
 
@@ -20,5 +20,5 @@ Cheeseswap pair address link: https://bscscan.com/address/0x51A162dd678d75C269Ef
 
 ```
 
- Thank You
-### CheeseSwap Team
+Thank You
+CheeseSwap Team | 2020-2021
