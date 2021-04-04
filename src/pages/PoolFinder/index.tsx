@@ -154,7 +154,7 @@ export default function PoolFinder() {
           ) : validPairNoLiquidity ? (
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
-                <Text textAlign="center">No pool found.</Text>
+                <Text textAlign="center">Sorry No pool found.</Text>
                 <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                   Create pool.
                 </StyledInternalLink>

@@ -16,6 +16,10 @@ import Cmc from '../../assets/png/cmc.png'
 import Cg from '../../assets/png/cg.png'
 import DappRadar from '../../assets/png/dappradar.png'
 import Dapp from '../../assets/png/dapp.png'
+import Digifinex from '../../assets/partners/digifinex.png'
+import Lbank from '../../assets/partners/lbank.png'
+import Hotbit from '../../assets/partners/hotbit.png'
+import Oneinch from '../../assets/partners/KP3RB.png'
 
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
@@ -152,7 +156,24 @@ export default function Footer() {
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
-          <Title>
+      <Title>
+        Partner Exchanges
+        </Title>
+        <SocialSection>
+          <IconLink href="https://www.digifinex.com/en-ww/trade/USDT/CHS" target="_blank" rel="noopener noreferrer">
+            <Icon src={Digifinex} alt="Digifinex Bitcoin Exchange" />
+          </IconLink>
+          <IconLink href="https://www.lbank.info/exchange/chs/usdt" target="_blank" rel="noopener noreferrer">
+            <Icon src={Lbank} alt="Lbank Bitcoin Exchange" />
+          </IconLink>
+          <IconLink href="https://www.hotbit.io/exchange?symbol=CHS_USDT" target="_blank" rel="noopener noreferrer">
+            <Icon src={Hotbit} alt="Hotbit Crypto currency Exchange" />
+          </IconLink>
+          <IconLink href="https://1inch.exchange/#/BNB/CHS?network=56" target="_blank" rel="noopener noreferrer">
+            <Icon src={Oneinch} alt="1inch leading Swap platform" />
+          </IconLink>
+        </SocialSection>
+        <Title>
           Market Data
           </Title>
             <SocialSection>
@@ -186,8 +207,7 @@ export default function Footer() {
               <Icon src={Mail} alt="Mail" />
             </IconLink>
           </SocialSection>
-      </FooterWrapper>
-
+        </FooterWrapper>
       <FooterWrapper>
       <Title>
       Partners
