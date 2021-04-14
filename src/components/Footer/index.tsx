@@ -19,7 +19,7 @@ import Dapp from '../../assets/png/dapp.png'
 import Digifinex from '../../assets/partners/digifinex.png'
 import Lbank from '../../assets/partners/lbank.png'
 import Hotbit from '../../assets/partners/hotbit.png'
-import Oneinch from '../../assets/partners/KP3RB.png'
+import Oneinch from '../../assets/partners/oneinch.png'
 
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};

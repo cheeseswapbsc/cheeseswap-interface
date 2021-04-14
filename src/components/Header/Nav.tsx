@@ -25,20 +25,25 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>IDO</TranslatedText>
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="http://ogeeswap.com" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>HECO</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Chart</TranslatedText>
+        <TranslatedText translationId={14}>Chart&nbsp;📈</TranslatedText>
       </StyledAbsoluteLink>
     </StyledNav>
   )
 }
 
 const StyledNav = styled.nav`
-  align-items: center;
+  align-items: left;
   display: flex;
   font-size: 18px;
-  margin-left: 6%;
+  margin-right: 50%;
+  margin-left: 2%;
   line-height: 45px;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 16px;
   @media (max-width: 600px) {
     display: none;
 
@@ -46,6 +51,7 @@ const StyledNav = styled.nav`
 `
 
 const StyledAbsoluteLink = styled.a`
+  align-items: left;
   color: ${({ theme }) => theme.colors.text1};
   padding-left: 10px;
   padding-right: 10px;
