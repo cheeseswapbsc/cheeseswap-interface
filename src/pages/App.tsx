@@ -35,7 +35,8 @@ const AppWrapper = styled.div`
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
+  display: flex;
 `
 const BodyWrapper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const BodyWrapper = styled.div`
   padding-bottom: 60px;
   align-items: center;
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   z-index: 10;
 

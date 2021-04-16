@@ -36,22 +36,22 @@ const Nav: React.FC = () => {
 }
 
 const StyledNav = styled.nav`
-  align-items: left;
+  align-items: center;
   display: flex;
   font-size: 18px;
-  margin-right: 50%;
-  margin-left: 2%;
+  padding-right: 45%;
   line-height: 45px;
   font-weight: 800;
   font-size: 16px;
-  @media (max-width: 600px) {
-    display: none;
-
+  @media (max-width: 960px) {
+    display: flex;
+  padding-left: 10px;
+    padding-right: 10px;
   }
 `
 
 const StyledAbsoluteLink = styled.a`
-  align-items: left;
+  align-items: center;
   color: ${({ theme }) => theme.colors.text1};
   padding-left: 10px;
   padding-right: 10px;
@@ -62,7 +62,7 @@ const StyledAbsoluteLink = styled.a`
   &.active {
     color: ${({ theme }) => theme.colors.text2};
   }
-  @media (max-width: 400px) {
+  @media (max-width: 960px) {
     padding-left: 10px;
     padding-right: 10px;
   }
