@@ -44,10 +44,8 @@ const StyledNav = styled.nav`
   font-weight: 800;
   font-size: 16px;
   @media (max-width: 960px) {
-    display: flex;
-  padding-left: 10px;
-    padding-right: 10px;
-  }
+    display: none;
+   }
 `
 
 const StyledAbsoluteLink = styled.a`

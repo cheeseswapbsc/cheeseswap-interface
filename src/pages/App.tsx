@@ -29,7 +29,7 @@ const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-  overflow-x: hidden;
+  overflow-x: auto;
 `
 
 const HeaderWrapper = styled.div`
@@ -43,11 +43,11 @@ const BodyWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   padding-top: 160px;
-  padding-bottom: 60px;
+  padding-bottom: 70px;
   align-items: center;
   flex: 1;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
   z-index: 10;
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
