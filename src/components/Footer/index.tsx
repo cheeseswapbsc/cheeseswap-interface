@@ -19,7 +19,7 @@ import Dapp from '../../assets/png/dapp.png'
 import Digifinex from '../../assets/partners/digifinex.png'
 import Lbank from '../../assets/partners/lbank.png'
 import Hotbit from '../../assets/partners/hotbit.png'
-import Oneinch from '../../assets/partners/KP3RB.png'
+import Oneinch from '../../assets/partners/oneinch.png'
 
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
@@ -39,10 +39,10 @@ const FooterSection = styled.div`
   }
 `
 const FooterWrapper = styled.div`
-  padding: 12px;
+  padding: 18px;
 `
 const FooterWrapper2 = styled.div`
-  padding: 4px;
+  padding: 2px;
 `
 const Title = styled.div`
   margin: 0 0 0 10px;

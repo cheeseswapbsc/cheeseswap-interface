@@ -25,8 +25,11 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>IDO</TranslatedText>
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="http://ogeeswap.com" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>HECO</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Chart</TranslatedText>
+        <TranslatedText translationId={14}>Chart&nbsp;📈</TranslatedText>
       </StyledAbsoluteLink>
     </StyledNav>
   )
@@ -36,16 +39,17 @@ const StyledNav = styled.nav`
   align-items: center;
   display: flex;
   font-size: 18px;
-  margin-left: 6%;
+  padding-right: 45%;
   line-height: 45px;
-  font-weight: 700;
-  @media (max-width: 600px) {
+  font-weight: 800;
+  font-size: 16px;
+  @media (max-width: 960px) {
     display: none;
-
-  }
+   }
 `
 
 const StyledAbsoluteLink = styled.a`
+  align-items: center;
   color: ${({ theme }) => theme.colors.text1};
   padding-left: 10px;
   padding-right: 10px;
@@ -56,7 +60,7 @@ const StyledAbsoluteLink = styled.a`
   &.active {
     color: ${({ theme }) => theme.colors.text2};
   }
-  @media (max-width: 400px) {
+  @media (max-width: 960px) {
     padding-left: 10px;
     padding-right: 10px;
   }
