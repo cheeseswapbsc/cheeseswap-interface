@@ -116,7 +116,7 @@ export default function Menu() {
             <Sunrise size={14} />
             Farm
           </MenuItem>
-          <MenuItem id="link" href="https://pizzafinance.app/ido/">
+          <MenuItem id="link" href="https://pizzafinance.app/#/ido/">
             <DollarSign size={14} />
             IDO
           </MenuItem>

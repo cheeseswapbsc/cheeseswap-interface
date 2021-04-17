@@ -137,7 +137,7 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank">
           Analytics
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="http://pizzafinance.app/ido" target="_blank">
+        <StyledAbsoluteLink href="http://pizzafinance.app/#/ido" target="_blank">
           IDO
         </StyledAbsoluteLink>
       </FooterWrapper>
@@ -154,6 +154,25 @@ export default function Footer() {
         <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
           Audit
         </StyledAbsoluteLink>
+        <FooterWrapper2>
+          <Title>
+          Social Media
+          </Title>
+          <SocialSection>
+            <IconLink href="https://twitter.com/cheeseswapbsc" target="_blank" rel="noopener noreferrer">
+              <Icon src={Twitter} alt="Twitter" />
+            </IconLink>
+            <IconLink href="https://t.me/cheesemakerfarm" target="_blank" rel="noopener noreferrer">
+              <Icon src={Telegram} alt="Telegram" />
+            </IconLink>
+            <IconLink href="https://github.com/cheeseswapbsc/" target="_blank" rel="noopener noreferrer">
+              <Icon src={Github} alt="Github" />
+            </IconLink>
+            <IconLink href="mailto:info@cheeseswap.app" target="_blank" rel="noopener noreferrer">
+              <Icon src={Mail} alt="Mail" />
+            </IconLink>
+          </SocialSection>
+        </FooterWrapper2>
       </FooterWrapper>
       <FooterWrapper>
       <Title>
@@ -190,23 +209,6 @@ export default function Footer() {
                 <Icon src={Dapp} alt="Dapp" />
               </IconLink>
             </SocialSection>
-          <Title>
-          Social Media
-          </Title>
-          <SocialSection>
-            <IconLink href="https://twitter.com/cheeseswapbsc" target="_blank" rel="noopener noreferrer">
-              <Icon src={Twitter} alt="Twitter" />
-            </IconLink>
-            <IconLink href="https://t.me/cheesemakerfarm" target="_blank" rel="noopener noreferrer">
-              <Icon src={Telegram} alt="Telegram" />
-            </IconLink>
-            <IconLink href="https://github.com/cheeseswapbsc/" target="_blank" rel="noopener noreferrer">
-              <Icon src={Github} alt="Github" />
-            </IconLink>
-            <IconLink href="mailto:info@cheeseswap.app" target="_blank" rel="noopener noreferrer">
-              <Icon src={Mail} alt="Mail" />
-            </IconLink>
-          </SocialSection>
         </FooterWrapper>
       <FooterWrapper>
       <Title>
