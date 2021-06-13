@@ -276,7 +276,7 @@ export default function Swap() {
     inputCurrency => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
-      if (inputCurrency.symbol.toLowerCase() === 'syrup') {
+      if (inputCurrency.symbol.toLowerCase() === 'pasta') {
         checkForSyrup(inputCurrency.symbol.toLowerCase(), 'Selling')
       }
     },

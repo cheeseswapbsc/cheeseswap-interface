@@ -1,9 +1,9 @@
 {
   "name": "cheeseswap",
-  "timestamp": "2021-03-19T01:41:29.665Z",
+  "timestamp": "2021-06-12T01:41:29.665Z",
   "version": {
     "major": 1,
-    "minor": 2,
+    "minor": 3,
     "patch": 3
   },
   "tags": {},
@@ -22,6 +22,13 @@
       "name": "Keep3r BSC Network",
       "symbol": "KP3RB",
       "address": "0x5EA29eEe799aA7cC379FdE5cf370BC24f2Ea7c81",
+      "chainId": 56,
+      "decimals": 18
+    },
+    {
+      "name": "Kitty Token",
+      "symbol": "KITTY",
+      "address": "0x5b4963B964bAc5C2Db83e53ffFe46E0cb83a1346",
       "chainId": 56,
       "decimals": 18
     },

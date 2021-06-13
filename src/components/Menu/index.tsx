@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Lock, Code, PieChart, MessageCircle, DollarSign, Sunrise, RefreshCw, Shield } from 'react-feather'
+import { Code, PieChart, MessageCircle, Sunrise } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -96,37 +96,19 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://bscindex.com/#exchange">
-            <RefreshCw size={14} />
-            Exchange
+          <MenuItem id="link" href="https://ogee.exchange/#/swap">
+            HECO
           </MenuItem>
-          <MenuItem id="link" href="https://keep3rb.network/">
-            <Lock size={14} />
-            Keeper
-          </MenuItem>
-          <MenuItem id="link" href="https://kiwiswap.finance/">
-            <Sunrise size={14} />
-            Kiwi
-          </MenuItem>
-          <MenuItem id="link" href="https://pizzafinance.app/">
-            <Sunrise size={14} />
-            Pizza
-          </MenuItem>
+          <MenuItem id="link" href="https://qsr.cheeseswap.app">
+            Quasar
+           </MenuItem>
           <MenuItem id="link" href="https://farm.cheeseswap.app/">
             <Sunrise size={14} />
             Farm
           </MenuItem>
-          <MenuItem id="link" href="https://pizzafinance.app/#/ido/">
-            <DollarSign size={14} />
-            IDO
-          </MenuItem>
           <MenuItem id="link" href="https://info.cheeseswap.app/">
             <PieChart size={14} />
             Chart
-          </MenuItem>
-          <MenuItem id="link" href="https://certik.org/projects/cheeseswap/">
-            <Shield size={14} />
-            Audit
           </MenuItem>
           <MenuItem id="link" href="https://t.me/cheesemakerfarm">
             <MessageCircle size={14} />

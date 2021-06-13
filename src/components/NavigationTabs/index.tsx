@@ -82,8 +82,8 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
         <TranslatedText translationId={74}>Pool</TranslatedText>
       </StyledNavLink>
-      <StyledAbsoluteLink id={`pool-nav-link`} target="_blank" href={'https://www.binance.org/en/panama'}>
-          Bridge
+      <StyledAbsoluteLink id={`pool-nav-link`} target="_blank" href={'https://www.binance.org/en/bridge?utm_source=CheeseSwap'}>
+          ERC20 Bridge
       </StyledAbsoluteLink>
     </Tabs>
   )
