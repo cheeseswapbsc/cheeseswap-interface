@@ -4,29 +4,29 @@ export default {
   ...base,
   colors: {
     ...base.colors,
-    shadow1: '#1B2637',
+    shadow1: 'rgb(19, 10, 12)',  // 'rgba(12, 9, 12, 0.70)',
     text1: '#FFFFFF',
-    text2: '#D646B4',
-    text3: '#888D9B',
+    text2: '#cceeff',  // '#D646B4',
+    text3: '#888D9B',  // '#888D9B',
     text4: '#fff',
 
     // backgrounds / greys
-    bg0: '#150C13',
-    bg1: '#231520',
-    bg2: '#231520',
-    bg3: '#382E35',
-    bg4: '#D646B4',
-    bg5: '#1B2637',
-    bg6: 'linear-gradient(193.68deg,#2a1926 0.68%,#1f121c 100.48%)',
+    bg0: '#181820',  // '#141114',
+    bg1: 'rgb(19, 10, 12)', // 'rgba(12, 9, 12, 0.70)', // '#0D090D',
+    bg2: '#fff',
+    bg3: '#2a2228',   // '#382E35',
+    bg4: '#998566',  // '#D646B4',
+    bg5: 'rgb(19, 10, 12)',  // 'rgba(12, 9, 12, 0.70)',
+    bg6: 'linear-gradient(to bottom, #0c090c 36%, #000066 100%)',    // 'linear-gradient(193.68deg,#2a1926 0.68%,#1f121c 100.48%)',
 
     //specialty colors
-    modalBG: 'rgba(0,0.6,0.1,.425)',
-    advancedBG: 'rgba(35,30,39,0.5)',
+    modalBG: 'hsla(288, 7%, 4%, 0.94)',
+    advancedBG: 'rgba(31, 7, 26, 0.90)',
 
     //primary colors
-    primary1: '#D646B4',
+    primary1: '#998566',
     primary4: '#903079',
-    primary5: '#D646B4',
+    primary5: '#998566', // '#D646B4',
     primary6: '#261823',
 
     // color text

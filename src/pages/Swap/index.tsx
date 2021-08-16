@@ -362,6 +362,7 @@ export default function Swap() {
                   </LinkStyledButton>
                 ) : null}
               </AutoRow>
+            
             </AutoColumn>
             <CurrencyInputPanel
               value={formattedAmounts[Field.OUTPUT]}
