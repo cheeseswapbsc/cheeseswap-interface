@@ -41,6 +41,14 @@
 
     },
     {
+      "name": "Puppy Token",
+      "symbol": "PUP",
+      "address": "0x74E39070a40ce9eD64dC60CE51127b9394711EE2",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
       "name": "PastaBar",
       "symbol": "PASTA",
       "address": "0x4375eA687330A95D42383Ef18AD3ea8C4Db7224d",
