@@ -5,8 +5,8 @@ export default {
   colors: {
     ...base.colors,
     shadow1: 'rgb(19, 10, 12)',  // 'rgba(12, 9, 12, 0.70)',
-    text1: '#FFFFFF',
-    text2: '#cceeff',  // '#D646B4',
+    text1: '#929292',
+    text2: '#B65C4C',  // '#D646B4',
     text3: '#888D9B',  // '#888D9B',
     text4: '#fff',
 
