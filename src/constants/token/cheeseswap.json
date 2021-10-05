@@ -57,6 +57,14 @@
 
     },
     {
+      "name": "Litherium Token",
+      "symbol": "LITH",
+      "address": "0x5b180109332b079c44447F52A8aDad5B1Cd9dcfd",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
       "name": "PastaBar",
       "symbol": "PASTA",
       "address": "0x4375eA687330A95D42383Ef18AD3ea8C4Db7224d",
