@@ -13,9 +13,6 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="/">
         <TranslatedText translationId={2}>Swap</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://bscindex.com/#exchange" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>Exchange</TranslatedText>
-      </StyledAbsoluteLink>
       <StyledAbsoluteLink>
         <FarmMenu />
       </StyledAbsoluteLink>
@@ -27,6 +24,12 @@ const Nav: React.FC = () => {
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://ogeeswap.com" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>HECO</TranslatedText>
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://cnft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>cNFT&nbsp;🤡</TranslatedText>
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://nft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>NFT&nbsp;🧚🏻‍♀️</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart&nbsp;📈</TranslatedText>
