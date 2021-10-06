@@ -17,7 +17,7 @@ const StyledMenu = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  border: none;
+  border: 2px;
   text-align: left;
 `
 
@@ -82,7 +82,7 @@ export default function FarmMenu() {
           <MenuItem id="link" href="https://pizzafinance.app/">
             Pizza Farm
           </MenuItem>
-          <MenuItem id="link" href="https://farm.cheeseswap.app/">
+          <MenuItem id="link" href="https://hotdog.cafe/">
             Hots Farm
           </MenuItem>
           <MenuItem id="link" href="https://cnft.cheeseswap.app/">

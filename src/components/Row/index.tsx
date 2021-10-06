@@ -4,7 +4,7 @@ import { Box } from 'rebass/styled-components'
 const Row = styled(Box)<{ align?: string; padding?: string; border?: string; borderRadius?: string }>`
   width: 100%;
   display: flex;
-  padding: 0;
+  padding: 1;
   align-items: ${({ align }) => (align ? align : 'center')};
   padding: ${({ padding }) => padding};
   border: ${({ border }) => border};
