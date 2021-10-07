@@ -49,9 +49,17 @@
 
     },
     {
-      "name": "Cheese NFT",
+      "name": "Cheese NFT OLD",
       "symbol": "cNFT",
       "address": "0xe0E1CEa27B751656Bd197E410Ef4dD9CD09ea2C8",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
+      "name": "Cheese NFT",
+      "symbol": "CNFT",
+      "address": "0xc6D866628B5A1C63E196557C1BA189211b779F64",
       "chainId": 56,
       "decimals": 18
 
