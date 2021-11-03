@@ -102,7 +102,7 @@ export default function Menu() {
           <MenuItem id="link" href="https://qsr.cheeseswap.app">
             Quasar
            </MenuItem>
-          <MenuItem id="link" href="https://farm.cheeseswap.app/">
+          <MenuItem id="link" href="https://cheesemaker.farm/">
             <Sunrise size={14} />
             Farm
           </MenuItem>

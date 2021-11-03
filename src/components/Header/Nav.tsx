@@ -19,17 +19,17 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Keeper</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://pizzafinance.app/#/ido" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>IDO</TranslatedText>
-      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://ogeeswap.com" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>HECO</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://cnft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>cNFT&nbsp;🤡</TranslatedText>
+      <StyledAbsoluteLink href="https://cheesemaker.farm" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>CNFT Farm&nbsp;🤡</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://nft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>NFT&nbsp;🧚🏻‍♀️</TranslatedText>
+      <StyledAbsoluteLink href="https://www.cheesecake.best" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>Cheese Cake (NFT)&nbsp;🧚🏻‍♀️</TranslatedText>
+      </StyledAbsoluteLink>
+       <StyledAbsoluteLink href="https://ipfs.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>IPFS Upload</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart&nbsp;📈</TranslatedText>

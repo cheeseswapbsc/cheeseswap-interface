@@ -85,7 +85,7 @@ export default function FarmMenu() {
           <MenuItem id="link" href="https://hotdog.cafe/">
             Hots Farm
           </MenuItem>
-          <MenuItem id="link" href="https://cnft.cheeseswap.app/">
+          <MenuItem id="link" href="https://cheesemaker.farm/">
             cNFT Farm
           </MenuItem>
         </MenuFlyout>
