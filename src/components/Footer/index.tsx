@@ -24,12 +24,12 @@ import Oneinch from '../../assets/partners/oneinch.png'
 const FooterSection = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
   box-sizing: border-box;
-  z-index: 1;
+  z-index: inherit;
   margin: 0px;
   min-width: 0px;
   width: 100vw;
   display: flex;
-  padding: 1rem;
+  padding: 3rem;
   bottom: 0px;
   align-items: flex-start;
   justify-content: space-evenly;

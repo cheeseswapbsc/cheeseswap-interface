@@ -17,10 +17,7 @@ const Nav: React.FC = () => {
         <FarmMenu />
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>Keeper</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://ogeeswap.com" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>HECO</TranslatedText>
+        <TranslatedText translationId={10}>Keep3rb</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cheesemaker.farm" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>CNFT Farm&nbsp;🤡</TranslatedText>
@@ -28,8 +25,8 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://www.cheesecake.best" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Cheese Cake (NFT)&nbsp;🧚🏻‍♀️</TranslatedText>
       </StyledAbsoluteLink>
-       <StyledAbsoluteLink href="https://ipfs.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>IPFS Upload</TranslatedText>
+       <StyledAbsoluteLink href="https://clp.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>Launchpad&nbsp;🚀</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Chart&nbsp;📈</TranslatedText>
