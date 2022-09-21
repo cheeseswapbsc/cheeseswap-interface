@@ -11,7 +11,9 @@ import DeployIPFS from '../../assets/svg/ipfs.svg'
 import Kp3rb from '../../assets/partners/KP3RB.png'
 import Pizza from '../../assets/partners/PIZZA.png'
 import Kiwi from '../../assets/partners/KIWI.png'
-import Bscid from '../../assets/partners/BSCID.png'
+import Bldoge from '../../assets/partners/BLDOGE.png'
+import Mshib from '../../assets/partners/MSHIB.png'
+ //import Bscid from '../../assets/partners/BSCID.png'
 import Cmc from '../../assets/png/cmc.png'
 import Cg from '../../assets/png/cg.png'
 import DappRadar from '../../assets/png/dappradar.png'
@@ -71,7 +73,7 @@ const StyledAbsoluteLink = styled.a`
 `
 const StyledAbsoluteImg = styled.a`
   color: ${({ theme }) => theme.colors.text1};
-  margin: 6px;
+  margin: 4px;
   text-decoration: none;
   &:hover {
     color: ${({ theme }) => theme.colors.text2};
@@ -88,11 +90,11 @@ const LogoTitle = styled.img`
   height: 54px;
 `
 const SocialSection = styled.div`
-  margin: 12px;
+  margin: 6px;
 `
 const IconLink = styled.a`
   height: 12px;
-  margin-left: 8px;
+  margin-left: 4px;
 `
 const Icon = styled.img`
   height: 24px;
@@ -125,30 +127,31 @@ export default function Footer() {
       <Title>
       Products
       </Title>
-        <StyledAbsoluteLink href="#/swap" target="_blank">
+      <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
+        Analytics
+      </StyledAbsoluteLink>
+        <StyledAbsoluteLink href="#/swap" target="_blank" rel="nofollow noopener noreferrer">
           Swap
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="#/pool" target="_blank">
-          Pool
+        <StyledAbsoluteLink href="#/pool" target="_blank" rel="nofollow noopener noreferrer">
+          Liquidity Pool
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank">
-          Keeper
+        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank" rel="nofollow noopener noreferrer">
+          Keeper Earn
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank">
-          Analytics
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="http://pizzafinance.app/#/ido" target="_blank">
-          IDO
+
+        <StyledAbsoluteLink href="http://pizzaswap.network/" target="_blank" rel="nofollow noopener noreferrer">
+          PIZZA
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
       <Title>
       Useful Links
       </Title>
-        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank">
+        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank" rel="nofollow noopener noreferrer">
           Docs
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank">
+        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
           API
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
@@ -179,12 +182,14 @@ export default function Footer() {
         Partner Exchanges
         </Title>
         <SocialSection>
-          <IconLink href="https://www.digifinex.com/en-ww/trade/USDT/CHS" target="_blank" rel="noopener noreferrer">
+       <IconLink href="https://www.digifinex.com/en-ww/trade/USDT/CHS" target="_blank" rel="noopener noreferrer">
             <Icon src={Digifinex} alt="Digifinex Bitcoin Exchange" />
           </IconLink>
-          <IconLink href="https://www.lbank.info/exchange/chs/usdt" target="_blank" rel="noopener noreferrer">
+
+         <IconLink href="https://www.lbank.info/exchange/chs/usdt" target="_blank" rel="noopener noreferrer">
             <Icon src={Lbank} alt="Lbank Bitcoin Exchange" />
           </IconLink>
+
           <IconLink href="https://www.hotbit.io/exchange?symbol=CHS_USDT" target="_blank" rel="noopener noreferrer">
             <Icon src={Hotbit} alt="Hotbit Crypto currency Exchange" />
           </IconLink>
@@ -209,19 +214,28 @@ export default function Footer() {
                 <Icon src={Dapp} alt="Dapp" />
               </IconLink>
             </SocialSection>
+            <Title>
+            NEXT 100x Gems
+            </Title>
+            <SocialSection>
+              <IconLink href="https://blackdoge.app/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Bldoge} alt="Black Doge" />
+              </IconLink>
+              <IconLink href="https://metashibainu.info/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Mshib} alt="Meta Shiba Inu" />
+              </IconLink>
+              </SocialSection>
         </FooterWrapper>
       <FooterWrapper>
       <Title>
-      Partners
+      Potential Products
       </Title>
       <FooterWrapper>
-        <StyledAbsoluteImg href="https://bscindex.com/" target="_blank" rel="noopener noreferrer">
-          <img src={Bscid} alt="BSC Index" height="32" />
-        </StyledAbsoluteImg>
-        <StyledAbsoluteImg href="https://kiwiswap.finance" target="_blank" rel="noopener noreferrer">
+
+        <StyledAbsoluteImg href="https://kiwifinance.co/" target="_blank" rel="noopener noreferrer">
           <img src={Kiwi} alt="Kiwi Finance" height="32"/>
         </StyledAbsoluteImg>
-        <StyledAbsoluteImg href="https://pizzafinance.app" target="_blank" rel="noopener noreferrer">
+        <StyledAbsoluteImg href="https://pizzaswap.network" target="_blank" rel="noopener noreferrer">
           <img src={Pizza} alt="Pizza Finance" height="32"/>
         </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">

@@ -89,6 +89,22 @@
 
     },
     {
+      "name": "Meta Shiba Inu",
+      "symbol": "MSHIB",
+      "address": "0x6fDfA944478Fd4D87B16902147062CcDC985f2eF",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
+      "name": "Black Doge",
+      "symbol": "BLDOGE",
+      "address": "0xbdfF32474E3B2fDe9Ff306B9a8BEffbc3c3DC0Fd",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
       "name": "CheeseSwap Secondary Index",
       "symbol": "CSI",
       "address": "0x2061A33ffc1aBAA10204Ab97771809340d5fE942",
