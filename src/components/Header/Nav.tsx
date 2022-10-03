@@ -25,7 +25,7 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://www.cheesecake.best" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Cheese Cake (NFT)&nbsp;🧚🏻‍♀️</TranslatedText>
       </StyledAbsoluteLink>
-       <StyledAbsoluteLink href="https://clp.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+       <StyledAbsoluteLink href="#soon" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Launchpad&nbsp;🚀</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
