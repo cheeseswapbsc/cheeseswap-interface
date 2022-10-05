@@ -240,7 +240,7 @@ export default function Footer() {
           <img src={Pizza} alt="Pizza Finance" height="32"/>
         </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
-          <img src={Kp3rb} alt="HOTS Farm" height="32"/>
+          <img src={Hots} alt="HOTS Farm" height="32"/>
         </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
           <img src={Kp3rb} alt="Keep3r BSC Network" height="32"/>
