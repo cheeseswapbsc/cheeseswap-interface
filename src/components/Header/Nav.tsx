@@ -16,6 +16,9 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink>
         <FarmMenu />
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>HOTS Farm🌭</TranslatedText>
+      </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Keep3rb</TranslatedText>
       </StyledAbsoluteLink>

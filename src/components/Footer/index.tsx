@@ -13,7 +13,8 @@ import Pizza from '../../assets/partners/PIZZA.png'
 import Kiwi from '../../assets/partners/KIWI.png'
 import Bldoge from '../../assets/partners/BLDOGE.png'
 import Mshib from '../../assets/partners/MSHIB.png'
- //import Bscid from '../../assets/partners/BSCID.png'
+
+import Hots from '../../assets/partners/HOTS.png'
 import Cmc from '../../assets/png/cmc.png'
 import Cg from '../../assets/png/cg.png'
 import DappRadar from '../../assets/png/dappradar.png'
@@ -237,6 +238,9 @@ export default function Footer() {
         </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://pizzaswap.network" target="_blank" rel="noopener noreferrer">
           <img src={Pizza} alt="Pizza Finance" height="32"/>
+        </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
+          <img src={Kp3rb} alt="HOTS Farm" height="32"/>
         </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
           <img src={Kp3rb} alt="Keep3r BSC Network" height="32"/>
