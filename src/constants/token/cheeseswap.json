@@ -57,6 +57,14 @@
 
     },
     {
+      "name": "Kitty Shiba",
+      "symbol": "KSHIB",
+      "address": "0xc978BA9309f3c3bE3a79302251A2bB041bAa7118",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
       "name": "Cheese NFT",
       "symbol": "CNFT",
       "address": "0xc6D866628B5A1C63E196557C1BA189211b779F64",

@@ -57,6 +57,14 @@
 
     },
     {
+      "name": "Kitty Shiba",
+      "symbol": "KSHIB",
+      "address": "0xc978BA9309f3c3bE3a79302251A2bB041bAa7118",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
       "name": "Cheese NFT",
       "symbol": "CNFT",
       "address": "0xc6D866628B5A1C63E196557C1BA189211b779F64",
@@ -84,6 +92,22 @@
       "name": "CheeseSwap Index",
       "symbol": "CID",
       "address": "0x93f44521A0b6dDE17E8C4BB8e85E8c215d2EEf0e",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
+      "name": "Meta Shiba Inu",
+      "symbol": "MSHIB",
+      "address": "0x6fDfA944478Fd4D87B16902147062CcDC985f2eF",
+      "chainId": 56,
+      "decimals": 18
+
+    },
+    {
+      "name": "Black Doge",
+      "symbol": "BLDOGE",
+      "address": "0xbdfF32474E3B2fDe9Ff306B9a8BEffbc3c3DC0Fd",
       "chainId": 56,
       "decimals": 18
 
