@@ -70,20 +70,11 @@ export default function FarmMenu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://cid.bscindex.com/">
-            CID Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://pid.bscindex.com/">
-            PKID Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://kiwiswap.finance/">
+        <MenuItem id="link" href="https://pizza.cheeseswap.app/">
+          Pizza Farm
+        </MenuItem>
+          <MenuItem id="link" href="https://kiwi.cheeseswap.app/">
             Kiwi Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://pizzafinance.app/">
-            Pizza Farm
-          </MenuItem>
-          <MenuItem id="link" href="https://hotdog.cafe/">
-            Hots Farm
           </MenuItem>
           <MenuItem id="link" href="https://cheesemaker.farm/">
             cNFT Farm

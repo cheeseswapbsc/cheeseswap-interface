@@ -8,20 +8,20 @@ import Mail from '../../assets/svg/email.svg'
 import BuiltBSC from '../../assets/svg/built-on-bsc.svg'
 import AuditCertik from '../../assets/svg/certik.svg'
 import DeployIPFS from '../../assets/svg/ipfs.svg'
-import Kp3rb from '../../assets/partners/KP3RB.png'
+// import Kp3rb from '../../assets/partners/KP3RB.png'
 import Pizza from '../../assets/partners/PIZZA.png'
 import Kiwi from '../../assets/partners/KIWI.png'
-import Bldoge from '../../assets/partners/BLDOGE.png'
-import Mshib from '../../assets/partners/MSHIB.png'
+// import Bldoge from '../../assets/partners/BLDOGE.png'
+// import Mshib from '../../assets/partners/MSHIB.png'
 
-import Hots from '../../assets/partners/HOTS.png'
+// import Hots from '../../assets/partners/HOTS.png'
 import Cmc from '../../assets/png/cmc.png'
 import Cg from '../../assets/png/cg.png'
 import DappRadar from '../../assets/png/dappradar.png'
 import Dapp from '../../assets/png/dapp.png'
 import Digifinex from '../../assets/partners/digifinex.png'
 import Lbank from '../../assets/partners/lbank.png'
-import Hotbit from '../../assets/partners/hotbit.png'
+// import Hotbit from '../../assets/partners/hotbit.png'
 import Oneinch from '../../assets/partners/oneinch.png'
 
 const FooterSection = styled.div`
@@ -112,10 +112,7 @@ export default function Footer() {
         <Title2>
           © 2020 Ǒmega Protocol Ltd.
         </Title2>
-        <Title2>
-          Registered No: 12855720
-        </Title2>
-          <FooterWrapper>
+        <FooterWrapper>
             <StyledAbsoluteImg href="https://ipfs.io/" target="_blank" rel="noopener noreferrer">
               <img src={DeployIPFS} alt="IPFS" height="36" />
             </StyledAbsoluteImg>
@@ -136,13 +133,6 @@ export default function Footer() {
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="#/pool" target="_blank" rel="nofollow noopener noreferrer">
           Liquidity Pool
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://keep3rb.network/" target="_blank" rel="nofollow noopener noreferrer">
-          Keeper Earn
-        </StyledAbsoluteLink>
-
-        <StyledAbsoluteLink href="http://pizzaswap.network/" target="_blank" rel="nofollow noopener noreferrer">
-          PIZZA
         </StyledAbsoluteLink>
       </FooterWrapper>
       <FooterWrapper>
@@ -190,10 +180,6 @@ export default function Footer() {
          <IconLink href="https://www.lbank.info/exchange/chs/usdt" target="_blank" rel="noopener noreferrer">
             <Icon src={Lbank} alt="Lbank Bitcoin Exchange" />
           </IconLink>
-
-          <IconLink href="https://www.hotbit.io/exchange?symbol=CHS_USDT" target="_blank" rel="noopener noreferrer">
-            <Icon src={Hotbit} alt="Hotbit Crypto currency Exchange" />
-          </IconLink>
           <IconLink href="https://1inch.exchange/#/BNB/CHS?network=56" target="_blank" rel="noopener noreferrer">
             <Icon src={Oneinch} alt="1inch leading Swap platform" />
           </IconLink>
@@ -219,11 +205,11 @@ export default function Footer() {
             NEXT 100x Gems
             </Title>
             <SocialSection>
-              <IconLink href="https://blackdoge.app/" target="_blank" rel="noopener noreferrer">
-                <Icon src={Bldoge} alt="Black Doge" />
+              <IconLink href="https://pizza.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Pizza} alt="Pizza" />
               </IconLink>
-              <IconLink href="https://metashibainu.info/" target="_blank" rel="noopener noreferrer">
-                <Icon src={Mshib} alt="Meta Shiba Inu" />
+              <IconLink href="https://kiwi.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Kiwi} alt="Kiwi" />
               </IconLink>
               </SocialSection>
         </FooterWrapper>
@@ -232,20 +218,13 @@ export default function Footer() {
       Potential Products
       </Title>
       <FooterWrapper>
-
-        <StyledAbsoluteImg href="https://kiwifinance.co/" target="_blank" rel="noopener noreferrer">
+      <StyledAbsoluteImg href="https://pizza.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <img src={Pizza} alt="Pizza Finance" height="32"/>
+      </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://kiwi.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
           <img src={Kiwi} alt="Kiwi Finance" height="32"/>
         </StyledAbsoluteImg>
-        <StyledAbsoluteImg href="https://pizzaswap.network" target="_blank" rel="noopener noreferrer">
-          <img src={Pizza} alt="Pizza Finance" height="32"/>
-        </StyledAbsoluteImg>
-        <StyledAbsoluteImg href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
-          <img src={Hots} alt="HOTS Farm" height="32"/>
-        </StyledAbsoluteImg>
-        <StyledAbsoluteImg href="https://keep3rb.network" target="_blank" rel="noopener noreferrer">
-          <img src={Kp3rb} alt="Keep3r BSC Network" height="32"/>
-        </StyledAbsoluteImg>
-      </FooterWrapper>
+        </FooterWrapper>
       <Title>
       Built on
       </Title>
