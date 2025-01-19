@@ -3,24 +3,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import TranslatedText from '../TranslatedText'
-import FarmMenu from '../FarmMenu'
-//import Pool from '../../pages/Pool'
-//import { Route } from 'react-router-dom'
+// import FarmMenu from '../FarmMenu'
+// import Pool from '../../pages/Pool'
+// import { Route } from 'react-router-dom'
 
 const Nav: React.FC = () => {
   return (
     <StyledNav>
-      <StyledAbsoluteLink href="/">
-        <TranslatedText translationId={2}>Swap</TranslatedText>
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink>
-        <FarmMenu />
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://pizza.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <StyledAbsoluteLink href="https://pizza.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Pizza Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://kiwi.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>Kiwi Farm&nbsp;</TranslatedText>
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://mango.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={14}>Mango Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>HOTS Farm</TranslatedText>
@@ -28,10 +25,7 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://cnft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>CNFT Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={14}>Chart&nbsp;</TranslatedText>
-      </StyledAbsoluteLink>
-    </StyledNav>
+      </StyledNav>
   )
 }
 

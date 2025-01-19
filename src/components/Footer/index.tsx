@@ -11,6 +11,7 @@ import DeployIPFS from '../../assets/svg/ipfs.svg'
 // import Kp3rb from '../../assets/partners/KP3RB.png'
 import Pizza from '../../assets/partners/PIZZA.png'
 import Kiwi from '../../assets/partners/KIWI.png'
+import Mango from '../../assets/partners/MANGO.png'
 // import Bldoge from '../../assets/partners/BLDOGE.png'
 // import Mshib from '../../assets/partners/MSHIB.png'
 
@@ -139,7 +140,7 @@ export default function Footer() {
       <Title>
       Useful Links
       </Title>
-        <StyledAbsoluteLink href="https://docs.cheesemaker.farm" target="_blank" rel="nofollow noopener noreferrer">
+        <StyledAbsoluteLink href="https://docs.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
           Docs
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
@@ -211,6 +212,9 @@ export default function Footer() {
               <IconLink href="https://kiwi.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
                 <Icon src={Kiwi} alt="Kiwi" />
               </IconLink>
+              <IconLink href="https://mango.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
+                <Icon src={Mango} alt="Mango" />
+              </IconLink>
               </SocialSection>
         </FooterWrapper>
       <FooterWrapper>
@@ -223,6 +227,9 @@ export default function Footer() {
       </StyledAbsoluteImg>
         <StyledAbsoluteImg href="https://kiwi.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
           <img src={Kiwi} alt="Kiwi Finance" height="32"/>
+        </StyledAbsoluteImg>
+        <StyledAbsoluteImg href="https://mango.cheeseswap.app/" target="_blank" rel="noopener noreferrer">
+          <img src={Mango} alt="Mango Finance" height="32"/>
         </StyledAbsoluteImg>
         </FooterWrapper>
       <Title>
