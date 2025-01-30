@@ -19,8 +19,8 @@ const Nav: React.FC = () => {
       <StyledAbsoluteLink href="https://mango.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={14}>Mango Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="https://hotswap.link" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>HOTS Farm</TranslatedText>
+      <StyledAbsoluteLink href="https://hots.cheeseswap.app" target="_blank" rel="noopener noreferrer">
+        <TranslatedText translationId={10}>HOTS Farm&nbsp</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cnft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>CNFT Farm&nbsp;</TranslatedText>
