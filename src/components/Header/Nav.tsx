@@ -20,7 +20,7 @@ const Nav: React.FC = () => {
         <TranslatedText translationId={14}>Mango Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://hots.cheeseswap.app" target="_blank" rel="noopener noreferrer">
-        <TranslatedText translationId={10}>HOTS Farm&nbsp</TranslatedText>
+        <TranslatedText translationId={10}>HOTS Farm&nbsp;</TranslatedText>
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://cnft.cheeseswap.app" target="_blank" rel="noopener noreferrer">
         <TranslatedText translationId={10}>CNFT Farm&nbsp;</TranslatedText>
