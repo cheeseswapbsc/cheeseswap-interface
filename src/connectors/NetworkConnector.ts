@@ -28,7 +28,7 @@ interface BatchItem {
   reject: (error: Error) => void
 }
 
-class MiniRpcProvider implements AsyncSendable {
+ class MiniRpcProvider implements AsyncSendable {
   public readonly isMetaMask: false = false
 
   public readonly chainId: number
@@ -185,5 +185,5 @@ export class NetworkConnector extends AbstractConnector {
     return null
   }
 }
-
+export { MiniRpcProvider }
 export default NetworkConnector
