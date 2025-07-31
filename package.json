@@ -79,8 +79,8 @@
     "@walletconnect/web3-provider": "1.1.1-alpha.0"
   },
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && rm -rf ./build && CI= GENERATE_SOURCEMAP=false && react-scripts build --production",
+    "start": "react-scripts start",
+    "build": "rm -rf ./build && react-scripts build --production",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
