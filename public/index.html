@@ -22,7 +22,7 @@
 
      gtag('config', 'G-SJBC5SKP7Q');
    </script>
-   
+
     <link rel="shortcut icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/images/192x192_App_Icon.png" />
     <link rel="apple-touch-icon" sizes="512x512" href="%PUBLIC_URL%/images/512x512_App_Icon.png" />
@@ -53,6 +53,13 @@
       history.replaceState(null, null, redirect);
     }
     })();
+</script>
+<script>
+const redirect = sessionStorage.redirect;
+delete sessionStorage.redirect;
+if (redirect && redirect != location.pathname) {
+  history.replaceState(null, null, redirect);
+  }
 </script>
   </body>
 </html>
