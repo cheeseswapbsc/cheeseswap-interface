@@ -13,7 +13,10 @@ const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 const NETWORK_URLS = [
   process.env.REACT_APP_NETWORK_URL_1,
   process.env.REACT_APP_NETWORK_URL_2,
-  process.env.REACT_APP_NETWORK_URL_3
+  process.env.REACT_APP_NETWORK_URL_3,
+  process.env.REACT_APP_NETWORK_URL_4,
+  process.env.REACT_APP_NETWORK_URL_5,
+  process.env.REACT_APP_NETWORK_URL_6
 ].filter(url => typeof url === 'string') as string[]
 
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '56')
