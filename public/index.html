@@ -46,20 +46,15 @@
     </audio>
     <div id="root" style="min-height: 100vh;"></div>
     <script>
+    const redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.pathname) {
     (function(){
     const query = new URLSearchParams(location.search);
     const redirect = query.get('redirect') || sessionStorage.redirect;
     if (redirect && redirect !== location.pathname) {
       history.replaceState(null, null, redirect);
-    }
-    })();
-</script>
-<script>
-const redirect = sessionStorage.redirect;
-delete sessionStorage.redirect;
-if (redirect && redirect != location.pathname) {
-  history.replaceState(null, null, redirect);
-  }
-</script>
+      }
+    </script>
   </body>
 </html>
