@@ -1,4 +1,4 @@
-import { Trade, TradeType } from '@cheeseswap/cheeseswap-sdk'
+import { Trade, TradeType } from '@cheeseswapv2/sdk'
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'

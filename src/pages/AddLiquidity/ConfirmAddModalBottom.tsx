@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, CurrencyAmount, Fraction, Percent } from '@cheeseswapv2/sdk'
 import React from 'react'
 import { Text } from 'rebass'
 import { ButtonPrimary } from '../../components/Button'

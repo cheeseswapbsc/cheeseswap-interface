@@ -4,21 +4,19 @@ import { animated, useTransition } from 'react-spring'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import { isMobile } from 'react-device-detect'
 import '@reach/dialog/styles.css'
-import { transparentize } from 'polished'
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
   &[data-reach-dialog-overlay] {
     z-index: 2;
-    background-color: transparent;
     overflow: hidden;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: ${({ theme }) => theme.colors.modalBG};
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 `
 
@@ -32,16 +30,18 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
 })`
   &[data-reach-dialog-content] {
     margin: 0 0 2rem 0;
-    border: 2px solid ${({ theme }) => theme.colors.bg1};
-    background-color: ${({ theme }) => theme.colors.bg1};
-    box-shadow: -2 4px 8px -1 ${({ theme }) => transparentize(0.95, theme.colors.shadow1)};
+    border: 1px solid ${({ theme }) => theme.colors.bg3};
+    background: ${({ theme }) => theme.colors.bg1};
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    box-shadow: 
+      0 20px 60px -12px rgba(0, 0, 0, 0.25),
+      0 8px 32px -8px rgba(0, 0, 0, 0.3);
     padding: 0px;
     width: 50vw;
     overflow: hidden;
-
     align-self: ${({ mobile }) => (mobile ? 'flex-end' : 'center')};
-
-    max-width: 420px;
+    max-width: 480px;
     ${({ maxHeight }) =>
       maxHeight &&
       css`
@@ -53,17 +53,19 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
         min-height: ${minHeight}vh;
       `}
     display: flex;
-    border-radius: 20px;
+    border-radius: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
     ${({ theme }) => theme.mediaWidth.upToMedium`
       width: 65vw;
       margin: 0;
     `}
     ${({ theme, mobile }) => theme.mediaWidth.upToSmall`
-      width:  85vw;
+      width: 85vw;
+      border-radius: 24px;
       ${mobile &&
         css`
           width: 100vw;
-          border-radius: 20px;
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
         `}

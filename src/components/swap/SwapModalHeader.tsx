@@ -1,4 +1,4 @@
-import { Trade, TradeType } from '@cheeseswap/cheeseswap-sdk'
+import { Trade, TradeType } from '@cheeseswapv2/sdk'
 import React, { useContext, useMemo } from 'react'
 import { ArrowDown, AlertTriangle } from 'react-feather'
 import { Text } from 'rebass'

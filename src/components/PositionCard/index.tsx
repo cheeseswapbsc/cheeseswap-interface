@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent } from '@cheeseswap/cheeseswap-sdk'
+import { JSBI, Pair, Percent } from '@cheeseswapv2/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'

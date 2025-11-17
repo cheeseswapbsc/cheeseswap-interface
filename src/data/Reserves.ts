@@ -1,13 +1,13 @@
-import { TokenAmount, Pair, Currency } from '@cheeseswap/cheeseswap-sdk'
+import { TokenAmount, Pair, Currency } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
-import { abi as IUniswapV2PairABI } from '@cheeseswap/cheeseswap-core/build/ICheeseSwapPair.json'
+import { abi as ICheeseSwapPairABI } from '@cheeseswapv2/core/build/ICheeseSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useActiveWeb3React } from '../hooks'
 
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 
-const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
+const PAIR_INTERFACE = new Interface(ICheeseSwapPairABI)
 
 export enum PairState {
   LOADING,

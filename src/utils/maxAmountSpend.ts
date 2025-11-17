@@ -1,4 +1,4 @@
-import { CurrencyAmount, ETHER, JSBI } from '@cheeseswap/cheeseswap-sdk'
+import { CurrencyAmount, ETHER, JSBI } from '@cheeseswapv2/sdk'
 import { MIN_ETH } from '../constants'
 
 /**

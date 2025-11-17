@@ -17,7 +17,7 @@ import {
 } from './actions'
 
 // chunk calls so we do not exceed the gas limit
-const CALL_CHUNK_SIZE = 500
+const CALL_CHUNK_SIZE = 600
 
 /**
  * Fetches a chunk of calls, enforcing a minimum block number constraint
@@ -161,8 +161,8 @@ export default function Updater(): null {
       cancellations: chunkedCalls.map((chunk, index) => {
         const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber), {
           n: Infinity,
-          minWait: 2500,
-          maxWait: 3500
+          minWait: 1000,
+          maxWait: 1500
         })
         promise
           .then(({ results: returnData, blockNumber: fetchBlockNumber }) => {

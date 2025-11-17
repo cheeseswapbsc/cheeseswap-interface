@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from '@cheeseswap/cheeseswap-sdk'
+import { currencyEquals, Trade } from '@cheeseswapv2/sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

@@ -1,6 +1,6 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Trade, TokenAmount, CurrencyAmount, ETHER } from '@cheeseswap/cheeseswap-sdk'
+import { Trade, TokenAmount, CurrencyAmount, ETHER } from '@cheeseswapv2/sdk'
 import { useCallback, useMemo } from 'react'
 import { ROUTER_ADDRESS } from '../constants'
 import { useTokenAllowance } from '../data/Allowances'
@@ -42,7 +42,7 @@ export function useApproveCallback(
       ? pendingApproval
         ? ApprovalState.PENDING
         : ApprovalState.NOT_APPROVED
-      : ApprovalState.APPROVED
+        : ApprovalState.APPROVED
   }, [amountToApprove, currentAllowance, pendingApproval, spender])
 
   const tokenContract = useTokenContract(token?.address)
@@ -50,26 +50,26 @@ export function useApproveCallback(
 
   const approve = useCallback(async (): Promise<void> => {
     if (approvalState !== ApprovalState.NOT_APPROVED) {
-      console.error('approve was called unnecessarily')
+      console.error('Approve was called unnecessarily')
       return
     }
     if (!token) {
-      console.error('no token')
+      console.error('No token')
       return
     }
 
     if (!tokenContract) {
-      console.error('tokenContract is null')
+      console.error('TokenContract is null')
       return
     }
 
     if (!amountToApprove) {
-      console.error('missing amount to approve')
+      console.error('Missing amount to approve')
       return
     }
 
     if (!spender) {
-      console.error('no spender')
+      console.error('No spender')
       return
     }
 

@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, ETHER, Token, currencyEquals } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, ETHER, Token, currencyEquals } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -18,14 +18,11 @@ export function useAllTokens(): { [address: string]: Token } {
     if (!chainId) return {}
     return (
       userAddedTokens
-        // reduce into all ALL_TOKENS filtered by the current chain
         .reduce<{ [address: string]: Token }>(
           (tokenMap, token) => {
             tokenMap[token.address] = token
             return tokenMap
           },
-          // must make a copy because reduce modifies the map, and we do not
-          // want to make a copy in every iteration
           { ...allTokens[chainId] }
         )
     )
@@ -48,9 +45,7 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
     : defaultValue
 }
 
-// undefined if invalid or does not exist
-// null if loading
-// otherwise returns the token
+
 export function useToken(tokenAddress?: string): Token | undefined | null {
   const { chainId } = useActiveWeb3React()
   const tokens = useAllTokens()

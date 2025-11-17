@@ -1,5 +1,5 @@
 import React from 'react'
-import { Price } from '@cheeseswap/cheeseswap-sdk'
+import { Price } from '@cheeseswapv2/sdk'
 import { useContext } from 'react'
 import { Repeat } from 'react-feather'
 import { Text } from 'rebass'

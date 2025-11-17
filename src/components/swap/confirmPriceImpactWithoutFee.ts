@@ -1,4 +1,4 @@
-import { Percent } from '@cheeseswap/cheeseswap-sdk'
+import { Percent } from '@cheeseswapv2/sdk'
 import { ALLOWED_PRICE_IMPACT_HIGH, PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN } from '../../constants'
 
 /**

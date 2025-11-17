@@ -1,4 +1,4 @@
-import { Percent } from '@cheeseswap/cheeseswap-sdk'
+import { Percent } from '@cheeseswapv2/sdk'
 import React from 'react'
 import { ONE_BIPS } from '../../constants'
 import { warningSeverity } from '../../utils/prices'

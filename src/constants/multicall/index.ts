@@ -1,4 +1,4 @@
-import { ChainId } from '@cheeseswap/cheeseswap-sdk'
+import { ChainId } from '@cheeseswapv2/sdk'
 import MULTICALL_ABI from './abi.json'
 
 const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {

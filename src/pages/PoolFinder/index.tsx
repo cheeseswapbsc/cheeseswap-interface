@@ -1,4 +1,4 @@
-import { Currency, ETHER, JSBI, TokenAmount } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, ETHER, JSBI, TokenAmount } from '@cheeseswapv2/sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'

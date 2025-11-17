@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@cheeseswapv2/sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'

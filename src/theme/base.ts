@@ -1,4 +1,4 @@
-import { white, black, green, red, yellow } from './colors'
+import { white, black, green, red, yellow, purple, blue, gradients } from './colors'
 import { css } from 'styled-components'
 
 const MEDIA_WIDTHS = {
@@ -21,13 +21,35 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
 ) as any
 
 export default {
-  colors: { white, black, ...green, ...red, ...yellow },
+  colors: { white, black, ...green, ...red, ...yellow, ...purple, ...blue },
+  gradients,
   grids: {
     sm: 8,
     md: 12,
     lg: 24
   },
-  gradient: '#2a2228',
+  gradient: gradients.primary,
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '48px'
+  },
+  borderRadius: {
+    sm: '8px',
+    md: '12px',
+    lg: '16px',
+    xl: '24px',
+    round: '50%'
+  },
+  shadows: {
+    sm: '0 2px 8px rgba(0, 0, 0, 0.08)',
+    md: '0 4px 16px rgba(0, 0, 0, 0.12)',
+    lg: '0 8px 32px rgba(0, 0, 0, 0.16)',
+    xl: '0 16px 48px rgba(0, 0, 0, 0.20)'
+  },
   mediaWidth: mediaWidthTemplates,
   // css snippets
   flexColumnNoWrap: css`

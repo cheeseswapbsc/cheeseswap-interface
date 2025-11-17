@@ -1,4 +1,4 @@
-import { Currency } from '@cheeseswap/cheeseswap-sdk'
+import { Currency } from '@cheeseswapv2/sdk'
 import React from 'react'
 import styled from 'styled-components'
 import CurrencyLogo from '../CurrencyLogo'

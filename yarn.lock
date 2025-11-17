@@ -1311,27 +1311,51 @@
     "@web3-react/types" "^6.0.7"
     tiny-warning "^1.0.3"
 
-"@cheeseswap/cheeseswap-core@0.2.1", "@cheeseswap/cheeseswap-core@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@cheeseswap/cheeseswap-core/-/cheeseswap-core-0.2.1.tgz#1a37785687e6f16fca98376b5ed9ee6e33f81671"
-  integrity sha512-WxcoYpbdIlFn7ivnYYCrJGyxcYb6kuvj+D5p9BtXb6zBsO/pa6Ls8l/afhz9HkbwZeTRA6KAODEG5v/zFU9pRw==
+"@cheeseswapv2/core@2.0.1", "@cheeseswapv2/core@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@cheeseswapv2/core/-/core-2.0.1.tgz#35ec5fa9b7b09173cf133dba1ddafb6145f20156"
+  integrity sha512-cRdbJrG9I+xMRDsS0HIQJu1HgqxFWd0yXX4htQdB0krByIkIZKLsfq3+0MYC+W12ovB8uDbz+xNRYLf987rGBw==
   dependencies:
     "@truffle/hdwallet-provider" "^1.1.1"
     truffle "^5.1.41"
     truffle-flattener "^1.4.4"
 
-"@cheeseswap/cheeseswap-sdk@^2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@cheeseswap/cheeseswap-sdk/-/cheeseswap-sdk-2.1.3.tgz#b801267b881520decc3c49cdb92e9f1b9fd872a0"
-  integrity sha512-q6D+Sv4H+wiEf0SmLd9Q3q+Q5thZm824ymzf6ZLsqspNOlxypP+MV7XG99q+c/H5cA2jdef029j7CXNlE5JX0Q==
+"@cheeseswapv2/lib@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@cheeseswapv2/lib/-/lib-2.0.2.tgz#7ddba40995144b2c2702ad891d4a3ed84eeb3d95"
+  integrity sha512-Nn17t1X8efQpvevMghozE2D3mknsPSju9k9zyNUfxgBNTsYa3ecKdY3I6740dL8qetAMXeHwt4vjYGyQudJwGw==
+
+"@cheeseswapv2/periphery@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@cheeseswapv2/periphery/-/periphery-2.0.1.tgz#fab6d4c675a9556773137c132e1a0214efba5bf5"
+  integrity sha512-oxqAt+YjM7tjhZl/zQJVNMl4UnCgdiQ58JlVDGKRkZFF7zTe6uvjsyeVbblWevLCBgZccZwGyoIAkz33tje0iw==
   dependencies:
-    "@cheeseswap/cheeseswap-core" "0.2.1"
+    "@cheeseswapv2/core" "2.0.1"
+    "@cheeseswapv2/lib" "2.0.2"
+
+"@cheeseswapv2/sdk@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@cheeseswapv2/sdk/-/sdk-2.2.1.tgz#9a5d01b6cab271cc077f9ec65ded5b1603c41135"
+  integrity sha512-TG5LOWTQ/ZUWoNWmN4c679ObBXwKwKHHsh4Cp+ALMRJYov9fJQ/YZAXlXgXtJyocU57jab8FlvNNRiL2n+T0Cw==
+  dependencies:
+    "@cheeseswapv2/core" "2.0.1"
     big.js "^5.2.2"
     decimal.js-light "^2.5.0"
     jsbi "^3.1.1"
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
+
+"@cheeseswapv2/ui-sdk@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@cheeseswapv2/ui-sdk/-/ui-sdk-2.2.4.tgz#c0622445c44bbcd04300a056b837f2614a0ed5f9"
+  integrity sha512-MBqo137kftDttqg5T3nRjagh0gT2uVmqkTWWdi8OuGkMZ4mqMtx4LWZt5tSgr/PNkjcIWFSMJHCJzR1FquaPXQ==
+  dependencies:
+    "@types/lodash" "^4.14.162"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    react-transition-group "^4.4.1"
+    styled-system "^5.1.5"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -3924,10 +3948,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.36.tgz#5bd54d2383e714fc4d2c258107ee70c5bad86d0c"
   integrity sha512-+5haRZ9uzI7rYqzDznXgkuacqb6LJhAti8mzZKWxIXn/WEtvB+GHVJ7AuMwcN1HMvXOSJcrvA6PPoYHYOYYebA==
 
-"@types/node@^13.13.5":
-  version "13.13.52"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.52.tgz#03c13be70b9031baaed79481c0c0cfb0045e53f7"
-  integrity sha512-s3nugnZumCC//n4moGGe6tkNMyYEdaDBitVjwPxXmR5lnMG5dHePinH2EdxkG3Rh1ghFHHixAG4NJhpJW1rthQ==
+"@types/node@^17.0.21":
+  version "17.0.45"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.45.tgz#2c0fafd78705e7a18b7906b5201a522719dc5190"
+  integrity sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -4248,28 +4272,10 @@
   resolved "https://registry.yarnpkg.com/@uniswap/default-token-list/-/default-token-list-1.5.0.tgz#daa07575e2ae6bf92441e64af32122e3847ffcb7"
   integrity sha512-TF5U+9ED6N+qrJKfoocci2vJ0u/57cxeUrnoDazqzLnGcoAp9FVMyi+n0ebz6Ka1AqFCIXkHGwQy+8GVQFTQdw==
 
-"@uniswap/lib@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@uniswap/lib/-/lib-1.1.1.tgz#0afd29601846c16e5d082866cbb24a9e0758e6bc"
-  integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
-
 "@uniswap/token-lists@^1.0.0-beta.16":
   version "1.0.0-beta.27"
   resolved "https://registry.yarnpkg.com/@uniswap/token-lists/-/token-lists-1.0.0-beta.27.tgz#8b02a979b0b0024cc96f60e694a3f6db6b2ccab2"
   integrity sha512-x5hmIniQ9TGqOBCRqfWcmZi/U5kB0qrHMDQ9igs3nMbK0wwmYLraL4owbIwXFGR/co6/lJYJC4K/Gjn4wZY5mQ==
-
-"@uniswap/v2-core@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@uniswap/v2-core/-/v2-core-1.0.0.tgz#e0fab91a7d53e8cafb5326ae4ca18351116b0844"
-  integrity sha512-BJiXrBGnN8mti7saW49MXwxDBRFiWemGetE58q8zgfnPPzQKq55ADltEILqOt6VFZ22kVeVKbF8gVd8aY3l7pA==
-
-"@uniswap/v2-periphery@^1.1.0-beta.0":
-  version "1.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@uniswap/v2-periphery/-/v2-periphery-1.1.0-beta.0.tgz#20a4ccfca22f1a45402303aedb5717b6918ebe6d"
-  integrity sha512-6dkwAMKza8nzqYiXEr2D86dgW3TTavUvCR0w2Tu33bAbM8Ah43LKAzH7oKKPRT5VJQaMi1jtkGs1E8JPor1n5g==
-  dependencies:
-    "@uniswap/lib" "1.1.1"
-    "@uniswap/v2-core" "1.0.0"
 
 "@walletconnect/browser-utils@^1.6.6":
   version "1.6.6"
@@ -4534,17 +4540,6 @@
     "@web3-react/abstract-connector" "^6.0.7"
     "@web3-react/types" "^6.0.7"
     walletlink "^2.2.6"
-
-"@web3react/ui-sdk@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@web3react/ui-sdk/-/ui-sdk-2.2.3.tgz#8ce024798b13766dc07f24d7f3dc3806eb0082a1"
-  integrity sha512-tMa6eODmo2i2MWwTSLqhyBiA38XK+xhhBh42CssZQ7eBFMd40yDykO8wM2g2vpJbWEFRoGvUs8alLJt2IWQ6IA==
-  dependencies:
-    "@types/lodash" "^4.14.162"
-    "@types/styled-system" "^5.1.10"
-    lodash "^4.17.20"
-    react-transition-group "^4.4.1"
-    styled-system "^5.1.5"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"

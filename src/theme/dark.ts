@@ -4,36 +4,40 @@ export default {
   ...base,
   colors: {
     ...base.colors,
-    shadow1: 'rgb(19, 10, 12)',  // 'rgba(12, 9, 12, 0.70)',
-    text1: '#929292',
-    text2: '#B65C4C',  // '#D646B4',
-    text3: '#888D9B',  // '#888D9B',
-    text4: '#fff',
+    shadow1: 'rgba(0, 0, 0, 0.5)',
+    text1: '#F3F4F6',
+    text2: '#9CA3AF',
+    text3: '#6B7280',
+    text4: '#4B5563',
 
-    // backgrounds / greys
-    bg0: '#181820',  // '#141114',
-    bg1: 'rgb(19, 10, 12)', // 'rgba(12, 9, 12, 0.70)', // '#0D090D',
-    bg2: '#fff',
-    bg3: '#2a2228',   // '#382E35',
-    bg4: '#998566',  // '#D646B4',
-    bg5: 'rgb(19, 10, 12)',  // 'rgba(12, 9, 12, 0.70)',
-    bg6: 'linear-gradient(to bottom, #0c090c 36%, #000066 100%)',    // 'linear-gradient(193.68deg,#2a1926 0.68%,#1f121c 100.48%)',
+    // backgrounds / greys with modern glassmorphism
+    bg0: '#0A0E1A',
+    bg1: 'rgba(17, 24, 39, 0.85)',
+    bg2: 'rgba(31, 41, 55, 0.7)',
+    bg3: 'rgba(55, 65, 81, 0.6)',
+    bg4: 'rgba(75, 85, 99, 0.5)',
+    bg5: 'rgba(107, 114, 128, 0.4)',
+    bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
 
     //specialty colors
-    modalBG: 'hsla(288, 7%, 4%, 0.94)',
-    advancedBG: 'rgba(31, 7, 26, 0.90)',
+    modalBG: 'rgba(0, 0, 0, 0.85)',
+    advancedBG: 'rgba(17, 24, 39, 0.7)',
 
     //primary colors
-    primary1: '#998566',
-    primary4: '#903079',
-    primary5: '#998566', // '#D646B4',
-    primary6: '#261823',
+    primary1: '#667eea',
+    primary2: '#764ba2',
+    primary3: '#8B5CF6',
+    primary4: '#A78BFA',
+    primary5: '#C4B5FD',
+    primary6: 'rgba(102, 126, 234, 0.1)',
 
     // color text
     primaryText1: '#FFFFFF',
-    buttonText: '#ffffff',
+    buttonText: '#FFFFFF',
 
     // secondary colors
-    secondary1: '#fff'
+    secondary1: '#10B981',
+    secondary2: '#34D399',
+    secondary3: '#6EE7B7'
   }
 }

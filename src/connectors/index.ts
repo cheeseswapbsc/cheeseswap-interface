@@ -1,4 +1,4 @@
-// import { ConnectorNames } from '@web3react/ui-sdk'
+// import { ConnectorNames } from '@cheeseswapv2/ui-sdk'
 import { Web3Provider } from '@ethersproject/providers'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -39,11 +39,11 @@ export const injected = new InjectedConnector({
 })
 
 export const trustConnector = new InjectedConnector({
-  supportedChainIds: [56, 97]
+  supportedChainIds: [56]
 })
 
 export const okxConnector = new InjectedConnector({
-  supportedChainIds: [56, 97]
+  supportedChainIds: [56]
 })
 
 export const bsc = new BscConnector({ supportedChainIds: [56] })

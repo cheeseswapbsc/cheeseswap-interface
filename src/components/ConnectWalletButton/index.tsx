@@ -1,6 +1,6 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Button, ButtonProps, ConnectorId, useWalletModal } from '@web3react/ui-sdk'
+import { Button, ButtonProps, ConnectorId, useWalletModal } from '@cheeseswapv2/ui-sdk'
 import { injected, walletconnect } from '../../connectors'
 import useI18n from '../../hooks/useI18n'
 

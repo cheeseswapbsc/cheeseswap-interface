@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
 import ERC20_INTERFACE from '../../constants/abis/erc20'
 import { useAllTokens } from '../../hooks/Tokens'

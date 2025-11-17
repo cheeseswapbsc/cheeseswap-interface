@@ -6,10 +6,21 @@ export const BodyWrapper = styled.div`
   max-width: 540px;
   width: 100%;
   background: ${({ theme }) => theme.colors.bg1};
-  border: 2px solid ${({ theme }) => theme.colors.primary6};
-  box-shadow: 2px 6px 10px rgba(0,0,0,0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 0 0 1px ${({ theme }) => theme.colors.primary6};
   border-radius: 24px;
-  padding: 0.75rem;
+  padding: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    box-shadow: 
+      0 12px 48px rgba(0, 0, 0, 0.16),
+      0 0 0 1px ${({ theme }) => theme.colors.primary5};
+  }
 `
 
 /**

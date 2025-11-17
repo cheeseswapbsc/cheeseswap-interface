@@ -1,4 +1,4 @@
-import { Currency, ETHER, Token } from '@cheeseswap/cheeseswap-sdk'
+import { Currency, ETHER, Token } from '@cheeseswapv2/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useSelector } from 'react-redux'

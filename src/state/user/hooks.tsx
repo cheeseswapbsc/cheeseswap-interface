@@ -1,4 +1,4 @@
-import { ChainId, Pair, Token } from '@cheeseswap/cheeseswap-sdk'
+import { ChainId, Pair, Token } from '@cheeseswapv2/sdk'
 import flatMap from 'lodash.flatmap'
 import { useCallback, useMemo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'

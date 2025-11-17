@@ -1,4 +1,4 @@
-import { ChainId, Token } from '@cheeseswap/cheeseswap-sdk'
+import { ChainId, Token } from '@cheeseswapv2/sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
