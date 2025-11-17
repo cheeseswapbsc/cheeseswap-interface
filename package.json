@@ -81,7 +81,7 @@
   },
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-    "build": "rm -rf ./build && sourcemap=false && react-scripts build --production",
+    "build": "cd . && export NODE_OPTIONS=--openssl-legacy-provider && rm -rf ./build && sourcemap=false && react-scripts build --production",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
