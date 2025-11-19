@@ -64,7 +64,7 @@ export default function CurrencySearchModal({
   const noListSelected = !selectedListUrl
 
   return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90} minHeight={listView ? 40 : noListSelected ? 0 : 80}>
+    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={99} minHeight={listView ? 52 : noListSelected ? 0 : 92}>
       {listView ? (
         <ListSelect onDismiss={onDismiss} onBack={handleClickBack} />
       ) : noListSelected ? (
@@ -75,7 +75,7 @@ export default function CurrencySearchModal({
           onChangeList={handleClickChangeList}
           selectedCurrency={selectedCurrency}
           otherSelectedCurrency={otherSelectedCurrency}
-          showCommonBases={false}
+          showCommonBases={true}
         />
       ) : (
         <CurrencySearch
@@ -85,7 +85,7 @@ export default function CurrencySearchModal({
           onChangeList={handleClickChangeList}
           selectedCurrency={selectedCurrency}
           otherSelectedCurrency={otherSelectedCurrency}
-          showCommonBases={false}
+          showCommonBases={true}
         />
       )}
     </Modal>

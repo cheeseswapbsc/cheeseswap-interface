@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI, Token, Trade } from '@cheeseswapv2/sdk'
+import { CurrencyAmount, JSBI, Token, Trade, ETHER } from '@cheeseswapv2/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -21,7 +21,7 @@ import TokenWarningModal from '../../components/TokenWarningModal'
 import SyrupWarningModal from '../../components/SyrupWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
 
-import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
+import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE, USDT, USDC, DAI, CHS, PIZZA } from '../../constants'
 import { getTradeVersion, isTradeBetter } from '../../data/V1'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
@@ -276,11 +276,21 @@ export default function Swap() {
     inputCurrency => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
+      
+      // Auto-pair pinned tokens with BNB
+      const pinnedTokens = [USDT, USDC, DAI, CHS, PIZZA]
+      const isPinnedToken = inputCurrency instanceof Token && 
+        pinnedTokens.some(token => token.address.toLowerCase() === inputCurrency.address.toLowerCase())
+      
+      if (isPinnedToken && !currencies[Field.OUTPUT]) {
+        onCurrencySelection(Field.OUTPUT, ETHER)
+      }
+      
       if (inputCurrency.symbol.toLowerCase() === 'pasta') {
         checkForSyrup(inputCurrency.symbol.toLowerCase(), 'Selling')
       }
     },
-    [onCurrencySelection, checkForSyrup]
+    [onCurrencySelection, checkForSyrup, currencies]
   )
 
   const handleMaxInput = useCallback(() => {
@@ -290,11 +300,21 @@ export default function Swap() {
   const handleOutputSelect = useCallback(
     outputCurrency => {
       onCurrencySelection(Field.OUTPUT, outputCurrency)
+      
+      // Auto-pair pinned tokens with BNB
+      const pinnedTokens = [USDT, USDC, DAI, CHS, PIZZA]
+      const isPinnedToken = outputCurrency instanceof Token && 
+        pinnedTokens.some(token => token.address.toLowerCase() === outputCurrency.address.toLowerCase())
+      
+      if (isPinnedToken && !currencies[Field.INPUT]) {
+        onCurrencySelection(Field.INPUT, ETHER)
+      }
+      
       if (outputCurrency.symbol.toLowerCase() === 'syrup') {
         checkForSyrup(outputCurrency.symbol.toLowerCase(), 'Buying')
       }
     },
-    [onCurrencySelection, checkForSyrup]
+    [onCurrencySelection, checkForSyrup, currencies]
   )
 
   return (

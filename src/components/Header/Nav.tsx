@@ -32,14 +32,23 @@ const Nav: React.FC = () => {
 const StyledNav = styled.nav`
   align-items: center;
   display: flex;
-  font-size: 18px;
-  padding-left: 5%;
+  font-size: 16px;
+  padding-left: 2%;
   line-height: 45px;
   font-weight: 800;
-  font-size: 16px;
+  gap: 0.25rem;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  
+  @media (max-width: 1280px) {
+    font-size: 14px;
+    padding-left: 1%;
+    gap: 0;
+  }
+  
   @media (max-width: 960px) {
     display: none;
-   }
+  }
 `
 
 const StyledAbsoluteLink = styled.a`
@@ -48,15 +57,27 @@ const StyledAbsoluteLink = styled.a`
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  
   &:hover {
     color: ${({ theme }) => theme.colors.text2};
   }
+  
   &.active {
     color: ${({ theme }) => theme.colors.text2};
   }
-  @media (max-width: 960px) {
-    padding-left: 10px;
-    padding-right: 10px;
+  
+  @media (max-width: 1280px) {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 0.9em;
+  }
+  
+  @media (max-width: 1100px) {
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 0.85em;
   }
 `
 

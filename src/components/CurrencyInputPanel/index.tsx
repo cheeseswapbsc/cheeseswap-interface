@@ -33,7 +33,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   outline: none;
   cursor: pointer;
   user-select: none;
-  border: none;
+  border: 2px;
   padding: 0 0.5rem;
 
   :focus,
@@ -51,7 +51,7 @@ const LabelRow = styled.div`
   padding: 0.5rem 1rem 0 1rem;
   span:hover {
     cursor: pointer;
-    color: ${({ theme }) => darken(0.2, theme.colors.text2)};
+    color: ${({ theme }) => darken(0.4, theme.colors.text2)};
   }
 `
 
@@ -62,7 +62,7 @@ const Aligner = styled.span`
 `
 
 const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
-  margin: 0 0.25rem 0 0.5rem;
+  margin: 0rem 0.25rem 0 0.5rem;
   height: 35%;
 
   path {
@@ -103,7 +103,7 @@ const StyledBalanceMax = styled.button`
   margin-right: 0.5rem;
   color: ${({ theme }) => theme.colors.primaryText1};
   :hover {
-    border: 2px solid ${({ theme }) => theme.colors.primary1};
+    border: 4px solid ${({ theme }) => theme.colors.primary1};
   }
   :focus {
     border: 2px solid ${({ theme }) => theme.colors.primary1};

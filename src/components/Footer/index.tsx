@@ -33,13 +33,14 @@ const FooterSection = styled.div`
   min-width: 0px;
   width: 100vw;
   display: flex;
-  padding: 3rem;
+  padding: 2rem 3rem 1.5rem 3rem;
   bottom: 0px;
   align-items: flex-start;
   justify-content: space-evenly;
   @media (max-width: 480px) {
     flex-direction: column;
     justify-content: flex-start;
+    padding: 1.5rem 1rem 1rem 1rem;
   }
 `
 const FooterWrapper = styled.div`

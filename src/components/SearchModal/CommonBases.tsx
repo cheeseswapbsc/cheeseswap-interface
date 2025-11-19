@@ -9,11 +9,22 @@ import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
 
+const TokenGrid = styled(AutoRow)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    gap: 2px;
+  `}
+`
+
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 2px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.colors.bg3)};
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
-  padding: 6px;
+  padding: 3px 5px;
+  flex-shrink: 0;
 
   align-items: center;
   :hover {
@@ -23,6 +34,39 @@ const BaseWrapper = styled.div<{ disable?: boolean }>`
 
   background-color: ${({ theme, disable }) => disable && theme.colors.bg3};
   opacity: ${({ disable }) => disable && '0.4'};
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    padding: 3px 5px;
+    border-radius: 6px;
+  `}
+`
+
+const LogoWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  flex-shrink: 0;
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+  `}
+  
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`
+
+const TokenText = styled(Text)`
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    font-size: 11px;
+  `}
 `
 
 export default function CommonBases({
@@ -42,7 +86,7 @@ export default function CommonBases({
         </Text>
         <QuestionHelper text="These tokens are commonly paired with other tokens." />
       </AutoRow>
-      <AutoRow gap="4px">
+      <TokenGrid>
         <BaseWrapper
           onClick={() => {
             if (!selectedCurrency || !currencyEquals(selectedCurrency, ETHER)) {
@@ -51,23 +95,27 @@ export default function CommonBases({
           }}
           disable={selectedCurrency === ETHER}
         >
-          <CurrencyLogo currency={ETHER} style={{ marginRight: 8 }} />
-          <Text fontWeight={700} fontSize={14}>
+          <LogoWrapper>
+            <CurrencyLogo currency={ETHER} />
+          </LogoWrapper>
+          <TokenText>
             BNB
-          </Text>
+          </TokenText>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>
-              <CurrencyLogo currency={token} style={{ marginRight: 8 }} />
-              <Text fontWeight={700} fontSize={14}>
+              <LogoWrapper>
+                <CurrencyLogo currency={token} />
+              </LogoWrapper>
+              <TokenText>
                 {token.symbol}
-              </Text>
+              </TokenText>
             </BaseWrapper>
           )
         })}
-      </AutoRow>
+      </TokenGrid>
     </AutoColumn>
   )
 }

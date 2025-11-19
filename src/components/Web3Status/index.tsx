@@ -46,6 +46,16 @@ const Web3StatusGeneric = styled(ButtonSecondary)`
   :focus {
     outline: none;
   }
+  
+  @media (max-width: 600px) {
+    padding: 0.4rem;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 400px) {
+    padding: 0.3rem;
+    border-radius: 8px;
+  }
 `
 const Web3StatusError = styled(Web3StatusGeneric)`
   background-color: ${({ theme }) => theme.colors.red1};
@@ -111,6 +121,16 @@ const Text = styled.p`
   font-size: 1rem;
   width: fit-content;
   font-weight: 700;
+  
+  @media (max-width: 600px) {
+    font-size: 0.875rem;
+    margin: 0 0.25rem 0 0.15rem;
+  }
+  
+  @media (max-width: 400px) {
+    font-size: 0.75rem;
+    margin: 0 0.15rem 0 0.1rem;
+  }
 `
 
 const NetworkIcon = styled(Activity)`

@@ -55,8 +55,15 @@ const HeaderFrame = styled.div`
 const HeaderElement = styled.div`
   display: flex;
   align-items: center;
-  @media (max-width: 320px) {
-    width: 20%;
+  gap: 0.5rem;
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    gap: 0.25rem;
+  `};
+  
+  @media (max-width: 400px) {
+    flex-shrink: 1;
+    min-width: 0;
   }
 `
 
@@ -100,6 +107,11 @@ const AccountElement = styled.div<{ active: boolean }>`
     outline: 2px solid ${({ theme }) => theme.colors.primary1};
     outline-offset: 2px;
   }
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    padding: 2px;
+    border-radius: 8px;
+  `};
 `
 
 const TestnetWrapper = styled.div`
@@ -118,6 +130,7 @@ const NetworkCard = styled(YellowCard)`
 
 const CheeseIcon = styled.div`
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
   
   :hover {
     transform: scale(1.05) rotate(-3deg);
@@ -128,9 +141,21 @@ const CheeseIcon = styled.div`
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
   }
   
-  ${({ theme }) => theme.mediaWidth.upToSmall`
+  ${({ theme }) => theme.mediaWidth.upToMedium`
     img {
       height: 3rem;
+    }
+  `};
+  
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    img {
+      height: 2.5rem;
+    }
+  `};
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    img {
+      height: 2rem;
     }
   `};
 `
@@ -139,10 +164,18 @@ const HeaderControls = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 1;
+  min-width: 0;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex-direction: column;
     align-items: flex-end;
+    gap: 0.5rem;
+  `};
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    gap: 0.25rem;
   `};
 `
 
