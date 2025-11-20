@@ -15,8 +15,9 @@ const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
     align-items: center;
     justify-content: center;
     background-color: ${({ theme }) => theme.colors.modalBG};
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: backdrop-filter 0.3s ease;
   }
 `
 
@@ -30,13 +31,13 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
 })`
   &[data-reach-dialog-content] {
     margin: 6rem 0 2rem 0;
-    border: 1px solid ${({ theme }) => theme.colors.bg3};
+    border: 1px solid ${({ theme }) => theme.colors.bg3}40;
     background: ${({ theme }) => theme.colors.bg1};
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     box-shadow: 
-      0 20px 60px -12px rgba(0, 0, 0, 0.25),
-      0 8px 32px -8px rgba(0, 0, 0, 0.3);
+      0 10px 40px -8px rgba(0, 0, 0, 0.2),
+      0 4px 16px -4px rgba(0, 0, 0, 0.25);
     padding: 0px;
     width: 50vw;
     overflow: hidden;
@@ -53,8 +54,8 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
         min-height: ${mobile ? `calc(${minHeight}vh - 5rem)` : `calc(${minHeight}vh - 8rem)`};
       `}
     display: flex;
-    border-radius: 24px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     
     ${({ theme }) => theme.mediaWidth.upToMedium`
       width: 65vw;
@@ -63,7 +64,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
     ${({ theme, mobile }) => theme.mediaWidth.upToSmall`
       width: 85vw;
       margin: 4.5rem 0.5rem 1rem 0.5rem;
-      border-radius: 24px;
+      border-radius: 20px;
       ${mobile &&
         css`
           width: 100vw;
@@ -96,10 +97,10 @@ export default function Modal({
   children
 }: ModalProps) {
   const fadeTransition = useTransition(isOpen, null, {
-    config: { duration: 200 },
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    config: { duration: 250, tension: 280, friction: 28 },
+    from: { opacity: 0, transform: 'scale(0.96)' },
+    enter: { opacity: 1, transform: 'scale(1)' },
+    leave: { opacity: 0, transform: 'scale(0.96)' }
   })
 
   return (

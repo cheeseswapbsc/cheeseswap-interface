@@ -18,40 +18,62 @@ import { TranslateString } from '../../utils/translateTextHelpers'
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
-  padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.25rem 0.25rem 0.25rem 0.5rem')};
+  padding: 1.1rem 1.5rem;
+  gap: 1rem;
+
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  `}
 `
 
 const CurrencySelect = styled.button<{ selected: boolean }>`
+  display: flex;
   align-items: center;
-  height: 2.2rem;
-  font-size: 18px;
-  font-weight: 700;
-  background-color: ${({ selected, theme }) => (selected ? theme.colors.bg0 : theme.colors.primary1)};
-  color: ${({ selected, theme }) => (selected ? theme.colors.text1 : theme.colors.white)};
-  border-radius: 8px;
-  box-shadow: ${({ selected }) => (selected ? 'none' : '0px 6px 10px rgba(0, 0, 0, 0.075)')};
+  height: 2.75rem;
+  font-size: 16px;
+  font-weight: 600;
+  background: ${({ selected, theme }) => (selected ? 'rgba(102, 126, 234, 0.2)' : 'rgba(102, 126, 234, 0.25)')};
+  color: #FFFFFF;
+  border-radius: 12px;
   outline: none;
   cursor: pointer;
   user-select: none;
-  border: 2px;
-  padding: 0 0.5rem;
+  border: 1px solid rgba(102, 126, 234, 0.45);
+  padding: 0 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 
   :focus,
   :hover {
-    background-color: ${({ selected, theme }) => (selected ? theme.colors.bg0 : darken(0.05, theme.colors.primary1))};
+    border-color: rgba(102, 126, 234, 0.65);
+    background: rgba(102, 126, 234, 0.35);
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+    transform: translateY(-1px);
   }
+
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    font-size: 15px;
+  `}
 `
 
 const LabelRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
-  color: ${({ theme }) => theme.colors.text1};
-  font-size: 0.75rem;
+  color: ${({ theme }) => theme.colors.text3};
+  font-size: 0.8rem;
   line-height: 1rem;
-  padding: 0.5rem 1rem 0 1rem;
+  padding: 0 0.25rem;
+  margin-bottom: 0.65rem;
+  letter-spacing: 0.01em;
+
   span:hover {
     cursor: pointer;
-    color: ${({ theme }) => darken(0.4, theme.colors.text2)};
+    color: ${({ theme }) => darken(0.15, theme.colors.text1)};
   }
 `
 
@@ -66,52 +88,64 @@ const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
   height: 35%;
 
   path {
-    stroke: ${({ selected, theme }) => (selected ? theme.colors.text1 : theme.colors.white)};
-    stroke-width: 1.5px;
+    stroke: #FFFFFF;
+    stroke-width: 1.4px;
   }
 `
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
   ${({ theme }) => theme.flexColumnNoWrap}
   position: relative;
-  border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  background-color: ${({ theme }) => theme.colors.bg0};
+  border-radius: ${({ hideInput }) => (hideInput ? '10px' : '18px')};
   z-index: 1;
 `
 
 const Container = styled.div<{ hideInput: boolean }>`
-  border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
-  border: 2px solid ${({ theme }) => theme.colors.bg1};
-  background-color: ${({ theme }) => theme.colors.bg1};
+  border-radius: ${({ hideInput }) => (hideInput ? '10px' : '18px')};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  background: ${({ theme }) => theme.colors.bg1};
+  box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.1);
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
-  ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.5rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
-  font-size:  ${({ active }) => (active ? '18px' : '16px')};
-
+  ${({ active }) => (active ? '  margin: 0 0.5rem 0 0.5rem;' : '  margin: 0 0.35rem 0 0.35rem;')}
+  font-size:  ${({ active }) => (active ? '17px' : '15px')};
+  font-weight: 600;
+  color: #FFFFFF;
 `
 
 const StyledBalanceMax = styled.button`
   height: 36px;
-  background-color: ${({ theme }) => theme.colors.primary5};
-  border: 2px solid ${({ theme }) => theme.colors.primary5};
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-
+  background: linear-gradient(135deg, #b38cff 0%, #7f5cf6 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  margin-right: 0.5rem;
-  color: ${({ theme }) => theme.colors.primaryText1};
+  margin-left: 0.5rem;
+  padding: 0 1.1rem;
+  color: #f4f4fb;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+
   :hover {
-    border: 4px solid ${({ theme }) => theme.colors.primary1};
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(127, 92, 246, 0.35);
   }
+
   :focus {
-    border: 2px solid ${({ theme }) => theme.colors.primary1};
     outline: none;
   }
 
+  :active {
+    transform: translateY(0);
+  }
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0 0.9rem;
+    height: 32px;
   `};
 `
 
@@ -159,30 +193,30 @@ export default function CurrencyInputPanel({
 
   return (
     <InputPanel id={id}>
-      <Container hideInput={hideInput}>
-        {!hideInput && (
-          <LabelRow>
-            <RowBetween>
-              <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={14}>
-                {label}
+      {!hideInput && (
+        <LabelRow>
+          <RowBetween>
+            <TYPE.body color={theme.colors.text2} fontWeight={700} fontSize={13}>
+              {label}
+            </TYPE.body>
+            {account && (
+              <TYPE.body
+                onClick={onMax}
+                color={theme.colors.text2}
+                fontWeight={700}
+                fontSize={13}
+                style={{ display: 'inline', cursor: 'pointer' }}
+              >
+                {!hideBalance && !!currency && selectedCurrencyBalance
+                  ? 'Balance: ' + selectedCurrencyBalance?.toSignificant(6)
+                  : ' -'}
               </TYPE.body>
-              {account && (
-                <TYPE.body
-                  onClick={onMax}
-                  color={theme.colors.text2}
-                  fontWeight={700}
-                  fontSize={14}
-                  style={{ display: 'inline', cursor: 'pointer' }}
-                >
-                  {!hideBalance && !!currency && selectedCurrencyBalance
-                    ? 'Balance: ' + selectedCurrencyBalance?.toSignificant(6)
-                    : ' -'}
-                </TYPE.body>
-              )}
-            </RowBetween>
-          </LabelRow>
-        )}
-        <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={disableCurrencySelect}>
+            )}
+          </RowBetween>
+        </LabelRow>
+      )}
+      <Container hideInput={hideInput}>
+        <InputRow style={hideInput ? { padding: '0', borderRadius: '10px' } : {}} selected={disableCurrencySelect}>
           {!hideInput && (
             <>
               <NumericalInput
@@ -192,7 +226,7 @@ export default function CurrencyInputPanel({
                   onUserInput(val)
                 }}
               />
-              {account && currency && showMaxButton && label !== 'To' && (
+              {account && currency && showMaxButton && (
                 <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>
               )}
             </>
@@ -208,9 +242,9 @@ export default function CurrencyInputPanel({
           >
             <Aligner>
               {pair ? (
-                <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={24} margin={true} />
+                <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={26} margin={true} />
               ) : currency ? (
-                <CurrencyLogo currency={currency} size={'24px'} />
+                <CurrencyLogo currency={currency} size={'26px'} />
               ) : null}
               {pair ? (
                 <StyledTokenName className="pair-name-container">

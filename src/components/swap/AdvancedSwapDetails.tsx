@@ -14,13 +14,25 @@ import SwapRoute from './SwapRoute'
 
 const InfoLink = styled(ExternalLink)`
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
-  padding: 6px 6px;
-  border-radius: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
   text-align: center;
-  font-size: 16px;
-  background: ${({ theme }) => theme.colors.primary1};
-  color: ${({ theme }) => theme.colors.buttonText};
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, #5f6fff 0%, #4b5aff 100%);
+  color: #f8f9ff;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(79, 93, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  &:hover {
+    background: linear-gradient(135deg, #6a78ff 0%, #5765ff 100%);
+  }
 `
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
@@ -31,7 +43,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 
   return (
     <>
-      <AutoColumn style={{ padding: '0 20px' }}>
+      <AutoColumn style={{ padding: '0 24px' }}>
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>

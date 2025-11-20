@@ -1,18 +1,52 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { ExternalLink } from '../Shared'
 
-const InfoCard = styled.button<{ active?: boolean }>`
-  background-color: ${({ theme, active }) => (active ? theme.colors.bg3 : theme.colors.bg2)};
-  padding: 1rem;
-  outline: none;
-  border: 2px solid;
-  border-radius: 12px;
-  width: 100% !important;
-  &:focus {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.primary1};
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  border-color: ${({ theme, active }) => (active ? 'transparent' : theme.colors.bg3)};
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const InfoCard = styled.button<{ active?: boolean }>`
+  background: ${({ theme, active }) => 
+    active 
+      ? `linear-gradient(135deg, ${theme.colors.primary1}12 0%, ${theme.colors.primary1}05 100%)`
+      : theme.colors.bg2};
+  padding: 0.65rem;
+  outline: none;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 100%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: ${slideIn} 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, ${({ theme }) => theme.colors.primary1}05 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary1}30;
+    border-color: ${({ theme }) => theme.colors.primary1};
+  }
+  
+  border-color: ${({ theme, active }) => 
+    active ? theme.colors.primary1 : theme.colors.bg3}40;
 `
 
 const OptionCard = styled(InfoCard as any)`
@@ -20,8 +54,12 @@ const OptionCard = styled(InfoCard as any)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
-  padding: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.55rem;
+  
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const OptionCardLeft = styled.div`
@@ -32,11 +70,38 @@ const OptionCardLeft = styled.div`
 
 const OptionCardClickable = styled(OptionCard as any)<{ clickable?: boolean }>`
   margin-top: 0;
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
   &:hover {
-    cursor: ${({ clickable }) => (clickable ? 'pointer' : '')};
-    border: ${({ clickable, theme }) => (clickable ? `1px solid ${theme.colors.primary1}` : ``)};
+    ${({ clickable, theme }) => clickable && `
+      border-color: ${theme.colors.primary1}80;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      
+      &::before {
+        opacity: 1;
+      }
+    `}
   }
+  
+  &:active {
+    ${({ clickable }) => clickable && `
+      transform: translateY(0);
+    `}
+  }
+  
   opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+`
+
+const pulse = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 `
 
 const GreenCircle = styled.div`
@@ -45,11 +110,13 @@ const GreenCircle = styled.div`
   align-items: center;
 
   &:first-child {
-    height: 8px;
-    width: 8px;
-    margin-right: 8px;
+    height: 6.5px;
+    width: 6.5px;
+    margin-right: 6px;
     background-color: ${({ theme }) => theme.colors.green1};
     border-radius: 50%;
+    box-shadow: 0 0 5px ${({ theme }) => theme.colors.green1}60;
+    animation: ${pulse} 2s ease-in-out infinite;
   }
 `
 
@@ -62,29 +129,47 @@ const CircleWrapper = styled.div`
 
 const HeaderText = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
+  align-items: center;
   color: ${props =>
     props.color === 'blue' ? ({ theme }) => theme.colors.primary1 : ({ theme }) => theme.colors.text1};
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 `
 
 const SubHeader = styled.div`
-  color: ${({ theme }) => theme.colors.text1};
-  margin-top: 10px;
-  font-size: 12px;
+  color: ${({ theme }) => theme.colors.text3};
+  margin-top: 0.25rem;
+  font-size: 0.6375rem;
+  line-height: 1.4;
+  font-weight: 400;
 `
 
 const IconWrapper = styled.div<{ size?: number | null }>`
   ${({ theme }) => theme.flexColumnNoWrap};
   align-items: center;
   justify-content: center;
+  background: ${({ theme }) => theme.colors.bg1};
+  border-radius: 8px;
+  padding: 0.25rem;
+  transition: all 0.2s ease;
+  
   & > img,
   span {
     height: ${({ size }) => (size ? size + 'px' : '24px')};
     width: ${({ size }) => (size ? size + 'px' : '24px')};
+    object-fit: contain;
   }
+  
   ${({ theme }) => theme.mediaWidth.upToMedium`
-    align-items: flex-end;
+    align-items: center;
+    padding: 0.2rem;
+    
+    & > img,
+    span {
+      height: 20px;
+      width: 20px;
+    }
   `};
 `
 

@@ -54,11 +54,6 @@ export function CurrencySearch({
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [invertSearchOrder, setInvertSearchOrder] = useState<boolean>(false)
   const allTokens = useAllTokens()
-  
-  // Debug logging
-  console.log('CurrencySearch - chainId:', chainId)
-  console.log('CurrencySearch - allTokens keys:', Object.keys(allTokens))
-  console.log('CurrencySearch - allTokens count:', Object.keys(allTokens).length)
 
   // if they input an address, use it
   const isAddressSearch = isAddress(searchQuery)

@@ -1,12 +1,13 @@
 import { CurrencyAmount, JSBI, Token, Trade, ETHER } from '@cheeseswapv2/sdk'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { ArrowDown } from 'react-feather'
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { ArrowDown, TrendingUp } from 'react-feather'
 import ReactGA from 'react-ga'
 import { Text } from 'rebass'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
+import TradingViewChart from '../../components/TradingViewChart'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
-import Card, { GreyCard } from '../../components/Card'
+import { GreyCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
@@ -16,12 +17,11 @@ import AdvancedSwapDetailsDropdown from '../../components/swap/AdvancedSwapDetai
 import BetterTradeLink from '../../components/swap/BetterTradeLink'
 import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
 import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../components/swap/styleds'
-import TradePrice from '../../components/swap/TradePrice'
 import TokenWarningModal from '../../components/TokenWarningModal'
 import SyrupWarningModal from '../../components/SyrupWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
 
-import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE, USDT, USDC, DAI, CHS, PIZZA } from '../../constants'
+import { BETTER_TRADE_LINK_THRESHOLD, USDT, USDC, DAI, CHS, PIZZA } from '../../constants'
 import { getTradeVersion, isTradeBetter } from '../../data/V1'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
@@ -30,7 +30,7 @@ import useENSAddress from '../../hooks/useENSAddress'
 import { useSwapCallback } from '../../hooks/useSwapCallback'
 import useToggledVersion, { Version } from '../../hooks/useToggledVersion'
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback'
-import { useToggleSettingsMenu, useWalletModalToggle } from '../../state/application/hooks'
+import { useWalletModalToggle } from '../../state/application/hooks'
 import { Field } from '../../state/swap/actions'
 import {
   useDefaultsFromURLSearch,
@@ -43,9 +43,95 @@ import { LinkStyledButton, TYPE } from '../../components/Shared'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
-import { ClickableText } from '../Pool/styleds'
+
 import Loader from '../../components/Loader'
 import { TranslateString } from '../../utils/translateTextHelpers'
+
+const PageContainer = styled.div<{ showChart: boolean }>`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  max-width: ${({ showChart }) => showChart ? '1320px' : '540px'};
+  margin: 0 auto;
+  justify-content: ${({ showChart }) => showChart ? 'flex-start' : 'center'};
+  transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    flex-direction: column;
+    max-width: 100%;
+  `}
+`
+
+const SwapContainer = styled.div`
+  width: 100%;
+  max-width: 540px;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    max-width: 100%;
+  `}
+`
+
+const ChartContainer = styled.div<{ isVisible: boolean; targetHeight?: number }>`
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : '100%')};
+  min-height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : '420px')};
+  max-height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : 'none')};
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  transform: translateX(${({ isVisible }) => (isVisible ? '0' : '-20px')});
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    height: auto;
+    min-height: 420px;
+    max-height: none;
+  `}
+`
+
+const ChartToggleButton = styled.button<{ active: boolean }>`
+  background: ${({ theme, active }) => active ? theme.colors.bg3 : 'transparent'};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  color: ${({ theme, active }) => active ? theme.colors.primary1 : theme.colors.text1};
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  transition: all 0.2s;
+  font-weight: 600;
+  font-size: 14px;
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.bg3};
+    color: ${({ theme }) => theme.colors.primary1};
+  }
+  
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    padding: 0.5rem;
+    span {
+      display: none;
+    }
+  `}
+`
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 1rem;
+`
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -58,6 +144,9 @@ export default function Swap() {
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const [isSyrup, setIsSyrup] = useState<boolean>(false)
   const [syrupTransactionType, setSyrupTransactionType] = useState<string>('')
+  const [showChart, setShowChart] = useState<boolean>(false)
+  const swapPanelRef = useRef<HTMLDivElement>(null)
+  const [swapPanelHeight, setSwapPanelHeight] = useState<number | null>(null)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c instanceof Token) ?? [],
     [loadedInputCurrency, loadedOutputCurrency]
@@ -78,7 +167,6 @@ export default function Swap() {
   const toggleWalletModal = useWalletModalToggle()
 
   // for expert mode
-  const toggleSettings = useToggleSettingsMenu()
   const [isExpertMode] = useExpertModeManager()
 
   // get custom setting values for user
@@ -130,6 +218,30 @@ export default function Swap() {
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
+
+  useEffect(() => {
+    const node = swapPanelRef.current
+    if (!node) return
+
+    const updateHeight = () => setSwapPanelHeight(node.offsetHeight)
+
+    updateHeight()
+
+    if (typeof window !== 'undefined') {
+      const ResizeObserverCtor = (window as any).ResizeObserver
+
+      if (ResizeObserverCtor) {
+        const observer = new ResizeObserverCtor(() => updateHeight())
+        observer.observe(node)
+        return () => observer.disconnect()
+      }
+
+      window.addEventListener('resize', updateHeight)
+      return () => window.removeEventListener('resize', updateHeight)
+    }
+  }, [showChart])
+
+  const chartTargetHeight = showChart && swapPanelHeight ? swapPanelHeight : undefined
 
   const handleTypeInput = useCallback(
     (value: string) => {
@@ -236,9 +348,6 @@ export default function Swap() {
       })
   }, [tradeToConfirm, account, priceImpactWithoutFee, recipient, recipientAddress, showConfirm, swapCallback, trade])
 
-  // errors
-  const [showInverted, setShowInverted] = useState<boolean>(false)
-
   // warnings on slippage
   const priceImpactSeverity = warningSeverity(priceImpactWithoutFee)
 
@@ -329,8 +438,21 @@ export default function Swap() {
         transactionType={syrupTransactionType}
         onConfirm={handleConfirmSyrupWarning}
       />
-      <AppBody>
-        <SwapPoolTabs active={'swap'} />
+      <PageContainer showChart={showChart}>
+        {showChart && (
+          <ChartContainer isVisible={showChart} targetHeight={chartTargetHeight}>
+            <TradingViewChart symbol="BINANCE:BNBUSDT" height={chartTargetHeight} />
+          </ChartContainer>
+        )}
+        <SwapContainer ref={swapPanelRef}>
+          <AppBody>
+        <HeaderWrapper>
+          <SwapPoolTabs active={'swap'} />
+          <ChartToggleButton active={showChart} onClick={() => setShowChart(!showChart)} title={showChart ? 'Hide Chart' : 'Show Chart'}>
+            <TrendingUp />
+            <span>{showChart ? 'Hide Chart' : 'Chart'}</span>
+          </ChartToggleButton>
+        </HeaderWrapper>
         <Wrapper id="swap-page">
           <ConfirmSwapModal
             isOpen={showConfirm}
@@ -399,9 +521,9 @@ export default function Swap() {
 
             {recipient !== null && !showWrap ? (
               <>
-                <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
+                <AutoRow justify="space-between" style={{ padding: '0 1.5rem' }}>
                   <ArrowWrapper clickable={false}>
-                    <ArrowDown size="16" color={theme.colors.text2} />
+                    <ArrowDown size="16" color="#7C8CFF" />
                   </ArrowWrapper>
                   <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
                     - Remove send
@@ -411,38 +533,18 @@ export default function Swap() {
               </>
             ) : null}
 
-            {showWrap ? null : (
-              <Card padding={'.25rem .75rem 0 .75rem'} borderRadius={'20px'}>
-                <AutoColumn gap="4px">
-                  {Boolean(trade) && (
-                    <RowBetween align="center">
-                      <Text fontWeight={700} fontSize={16} color={theme.colors.text2}>
-                        Price
-                      </Text>
-                      <TradePrice
-                        price={trade?.executionPrice}
-                        showInverted={showInverted}
-                        setShowInverted={setShowInverted}
-                      />
-                    </RowBetween>
-                  )}
-                  {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
-                    <RowBetween align="center">
-                      <ClickableText fontWeight={700} fontSize={16} color={theme.colors.text2} onClick={toggleSettings}>
-                        Slippage Tolerance
-                      </ClickableText>
-                      <ClickableText fontWeight={700} fontSize={16} color={theme.colors.text2} onClick={toggleSettings}>
-                        {allowedSlippage / 100}%
-                      </ClickableText>
-                    </RowBetween>
-                  )}
-                </AutoColumn>
-              </Card>
-            )}
+
           </AutoColumn>
           <BottomGrouping>
             {!account ? (
-              <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              <ButtonLight onClick={toggleWalletModal}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem' }}>
+                  <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                  <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+                  <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
+                </svg>
+                Connect Wallet
+              </ButtonLight>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                 {wrapInputError ??
@@ -532,8 +634,10 @@ export default function Swap() {
             {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
           </BottomGrouping>
         </Wrapper>
-      </AppBody>
-      <AdvancedSwapDetailsDropdown trade={trade} />
+          </AppBody>
+          <AdvancedSwapDetailsDropdown trade={trade} />
+        </SwapContainer>
+      </PageContainer>
     </>
   )
 }

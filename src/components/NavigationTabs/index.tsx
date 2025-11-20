@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { darken } from 'polished'
 import { NavLink, Link as HistoryLink } from 'react-router-dom'
 
 import { ArrowLeft } from 'react-feather'
@@ -13,6 +12,12 @@ const Tabs = styled.div`
   align-items: center;
   border-radius: 3rem;
   justify-content: space-evenly;
+  gap: 1rem;
+  flex: 1;
+  
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    gap: 0.5rem;
+  `}
 `
 
 const activeClassName = 'ACTIVE'
@@ -21,22 +26,37 @@ const StyledAbsoluteLink = styled.a`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   justify-content: center;
-  height: 3rem;
-  border-radius: 3rem;
+  height: 2.5rem;
+  border-radius: 12px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.text3};
-  font-size: 20px;
+  color: ${({ theme }) => theme.colors.text1};
+  font-size: 16px;
+  padding: 0 0.75rem;
+  background: ${({ theme }) => theme.colors.bg3};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
   &.${activeClassName} {
-    border-radius: 12px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.text1};
+    background: ${({ theme }) => theme.colors.bg3};
+    color: ${({ theme }) => theme.colors.primary1};
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
   }
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.colors.text1)};
+
+  :hover {
+    background: ${({ theme }) => theme.colors.bg3};
+    color: ${({ theme }) => theme.colors.primary1};
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
+  
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    font-size: 14px;
+    padding: 0 0.5rem;
+  `}
 `
 const StyledNavLink = styled(NavLink).attrs({
   activeClassName
@@ -44,24 +64,38 @@ const StyledNavLink = styled(NavLink).attrs({
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   justify-content: center;
-  height: 3rem;
-  border-radius: 3rem;
+  height: 2.5rem;
+  border-radius: 12px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.text3};
-  font-size: 20px;
+  color: ${({ theme }) => theme.colors.text1};
+  font-size: 16px;
+  padding: 0 0.75rem;
+  background: ${({ theme }) => theme.colors.bg3};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  transition: all 0.2s;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &.${activeClassName} {
-    border-radius: 12px;
+    background: ${({ theme }) => theme.colors.bg3};
+    color: ${({ theme }) => theme.colors.primary1};
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.text1};
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
   }
 
   :hover,
   :focus {
-    color: ${({ theme }) => darken(0.1, theme.colors.text1)};
+    background: ${({ theme }) => theme.colors.bg3};
+    color: ${({ theme }) => theme.colors.primary1};
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
+  
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    font-size: 14px;
+    padding: 0 0.5rem;
+  `}
 `
 
 const ActiveText = styled.div`

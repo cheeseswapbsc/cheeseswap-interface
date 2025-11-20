@@ -82,6 +82,8 @@ export const ButtonLight = styled(Base)`
   font-size: 16px;
   font-weight: 600;
   border: 2px solid transparent;
+  pointer-events: auto;
+  user-select: none;
   
   &:hover:not(:disabled) {
     background: ${({ theme }) => theme.colors.primary5};
@@ -101,6 +103,7 @@ export const ButtonLight = styled(Base)`
     opacity: 0.4;
     background: ${({ theme }) => theme.colors.bg3};
     color: ${({ theme }) => theme.colors.text4};
+    cursor: not-allowed;
   }
 `
 

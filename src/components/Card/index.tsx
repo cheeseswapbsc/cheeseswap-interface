@@ -3,18 +3,18 @@ import styled from 'styled-components'
 import { CardProps, Text } from 'rebass'
 import { Box } from 'rebass/styled-components'
 
-const Card = styled(Box)<{ padding?: string; border?: string; borderRadius?: string }>`
+const Card = styled(Box)<{ padding?: string; border?: string; borderRadius?: string; flat?: boolean }>`
   width: 100%;
   border-radius: ${({ borderRadius }) => borderRadius || '16px'};
   padding: ${({ padding }) => padding || '20px'};
   border: ${({ border }) => border || 'none'};
   backdrop-filter: blur(20px);
   background: ${({ theme }) => theme.colors.bg1};
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: ${({ flat }) => (flat ? 'none' : '0 4px 24px rgba(0, 0, 0, 0.08)')};
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: ${({ flat }) => (flat ? 'none' : '0 8px 32px rgba(0, 0, 0, 0.12)')};
   }
 `
 export default Card

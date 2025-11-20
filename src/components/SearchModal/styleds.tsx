@@ -19,7 +19,6 @@ export const FadedSpan = styled(RowFixed)`
 
 export const PaddedColumn = styled(AutoColumn)`
   padding: 20px;
-  padding-bottom: 12px;
 `
 
 export const MenuItem = styled(RowBetween)`
@@ -31,7 +30,7 @@ export const MenuItem = styled(RowBetween)`
   cursor: ${({ disabled }) => !disabled && 'pointer'};
   pointer-events: ${({ disabled }) => disabled && 'none'};
   :hover {
-    background-color: ${({ theme, disabled }) => !disabled && theme.colors.bg4};
+    background-color: ${({ theme, disabled }) => !disabled && theme.colors.bg2};
   }
   opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
 `
@@ -39,27 +38,27 @@ export const MenuItem = styled(RowBetween)`
 export const SearchInput = styled.input`
   position: relative;
   display: flex;
-  padding: 8px;
+  padding: 16px;
   align-items: center;
   width: 100%;
   white-space: nowrap;
   background: none;
   border: none;
   outline: none;
-  border-radius: 6px;
+  border-radius: 20px;
   color: ${({ theme }) => theme.colors.text1};
   border-style: solid;
-  border: 2px solid ${({ theme }) => theme.colors.bg3};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
   -webkit-appearance: none;
 
-  font-size: 16px;
+  font-size: 18px;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.text3};
   }
   transition: border 100ms;
   :focus {
-    border: 2px solid ${({ theme }) => theme.colors.primary1};
+    border: 1px solid ${({ theme }) => theme.colors.primary1};
     outline: none;
   }
 `

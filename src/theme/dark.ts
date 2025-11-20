@@ -20,7 +20,7 @@ export default {
     bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
 
     //specialty colors
-    modalBG: 'rgba(0, 0, 0, 0.85)',
+    modalBG: 'rgba(0, 0, 0, 0.5)',
     advancedBG: 'rgba(17, 24, 39, 0.7)',
 
     //primary colors
