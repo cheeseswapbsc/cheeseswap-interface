@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from '@cheeseswapv2/sdk'
+import { currencyEquals, Trade, ETHER } from '@cheeseswapv2/sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
@@ -6,6 +6,7 @@ import TransactionConfirmationModal, {
 } from '../TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
+import { USDT } from '../../constants'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it
@@ -96,6 +97,32 @@ export default function ConfirmSwapModal({
     [onDismiss, modalBottom, modalHeader, swapErrorMessage]
   )
 
+  // Determine which token to add to Metamask
+  // Use INPUT token by default, but use OUTPUT token if INPUT is USDT or BNB
+  const currencyToAdd = useMemo(() => {
+    if (!trade) return undefined
+    
+    const inputCurrency = trade.inputAmount.currency
+    
+    // Check if input is BNB (ETHER)
+    if (inputCurrency === ETHER) {
+      return trade.outputAmount.currency
+    }
+    
+    // Check if input is USDT
+    if (inputCurrency instanceof Object && 'address' in inputCurrency) {
+      const inputAddress = (inputCurrency as any).address?.toLowerCase()
+      const usdtAddress = USDT?.address?.toLowerCase()
+      
+      if (inputAddress && usdtAddress && inputAddress === usdtAddress) {
+        return trade.outputAmount.currency
+      }
+    }
+    
+    // Default: use input token
+    return trade.inputAmount.currency
+  }, [trade])
+
   return (
     <TransactionConfirmationModal
       isOpen={isOpen}
@@ -104,7 +131,7 @@ export default function ConfirmSwapModal({
       hash={txHash}
       content={confirmationContent}
       pendingText={pendingText}
-      currencyToAdd={trade?.outputAmount?.currency}
+      currencyToAdd={currencyToAdd}
     />
   )
 }
