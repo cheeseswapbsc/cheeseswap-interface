@@ -14,21 +14,17 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 import { AutoRow, RowBetween } from '../../components/Row'
 import AdvancedSwapDetailsDropdown from '../../components/swap/AdvancedSwapDetailsDropdown'
-import BetterTradeLink from '../../components/swap/BetterTradeLink'
 import confirmPriceImpactWithoutFee from '../../components/swap/confirmPriceImpactWithoutFee'
 import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../components/swap/styleds'
 import TokenWarningModal from '../../components/TokenWarningModal'
-import SyrupWarningModal from '../../components/SyrupWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
 
-import { BETTER_TRADE_LINK_THRESHOLD, USDT, USDC, DAI, CHS, PIZZA } from '../../constants'
-import { getTradeVersion, isTradeBetter } from '../../data/V1'
+import { USDT, USDC, DAI, CHS, PIZZA } from '../../constants'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback'
 import useENSAddress from '../../hooks/useENSAddress'
 import { useSwapCallback } from '../../hooks/useSwapCallback'
-import useToggledVersion, { Version } from '../../hooks/useToggledVersion'
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { Field } from '../../state/swap/actions'
@@ -142,8 +138,6 @@ export default function Swap() {
     useCurrency(loadedUrlParams?.outputCurrencyId)
   ]
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
-  const [isSyrup, setIsSyrup] = useState<boolean>(false)
-  const [syrupTransactionType, setSyrupTransactionType] = useState<string>('')
   const [showChart, setShowChart] = useState<boolean>(false)
   const swapPanelRef = useRef<HTMLDivElement>(null)
   const [swapPanelHeight, setSwapPanelHeight] = useState<number | null>(null)
@@ -153,11 +147,6 @@ export default function Swap() {
   )
   const handleConfirmTokenWarning = useCallback(() => {
     setDismissTokenWarning(true)
-  }, [])
-
-  const handleConfirmSyrupWarning = useCallback(() => {
-    setIsSyrup(false)
-    setSyrupTransactionType('')
   }, [])
 
   const { account } = useActiveWeb3React()
@@ -176,7 +165,6 @@ export default function Swap() {
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
   const {
-    v1Trade,
     v2Trade,
     currencyBalances,
     parsedAmount,
@@ -190,20 +178,7 @@ export default function Swap() {
   )
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
-  const toggledVersion = useToggledVersion()
-  const trade = showWrap
-    ? undefined
-    : {
-        [Version.v1]: v1Trade,
-        [Version.v2]: v2Trade
-      }[toggledVersion]
-
-  const betterTradeLinkVersion: Version | undefined =
-    toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
-      ? Version.v1
-      : toggledVersion === Version.v1 && isTradeBetter(v1Trade, v2Trade)
-      ? Version.v2
-      : undefined
+  const trade = showWrap ? undefined : v2Trade
 
   const parsedAmounts = showWrap
     ? {
@@ -333,7 +308,7 @@ export default function Swap() {
           label: [
             trade?.inputAmount?.currency?.symbol,
             trade?.outputAmount?.currency?.symbol,
-            getTradeVersion(trade)
+            'V2'
           ].join('/')
         })
       })
@@ -372,15 +347,6 @@ export default function Swap() {
     setSwapState({ tradeToConfirm: trade, swapErrorMessage, txHash, attemptingTxn, showConfirm })
   }, [attemptingTxn, showConfirm, swapErrorMessage, trade, txHash])
 
-  // This will check to see if the user has selected Syrup to either buy or sell.
-  // If so, they will be alerted with a warning message.
-  const checkForSyrup = useCallback((selected: string, purchaseType: string) => {
-    if (selected === 'syrup') {
-      setIsSyrup(true)
-      setSyrupTransactionType(purchaseType)
-    }
-  }, [])
-
   const handleInputSelect = useCallback(
     inputCurrency => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
@@ -394,12 +360,8 @@ export default function Swap() {
       if (isPinnedToken && !currencies[Field.OUTPUT]) {
         onCurrencySelection(Field.OUTPUT, ETHER)
       }
-      
-      if (inputCurrency.symbol.toLowerCase() === 'pasta') {
-        checkForSyrup(inputCurrency.symbol.toLowerCase(), 'Selling')
-      }
     },
-    [onCurrencySelection, checkForSyrup, currencies]
+    [onCurrencySelection, currencies]
   )
 
   const handleMaxInput = useCallback(() => {
@@ -418,12 +380,8 @@ export default function Swap() {
       if (isPinnedToken && !currencies[Field.INPUT]) {
         onCurrencySelection(Field.INPUT, ETHER)
       }
-      
-      if (outputCurrency.symbol.toLowerCase() === 'syrup') {
-        checkForSyrup(outputCurrency.symbol.toLowerCase(), 'Buying')
-      }
     },
-    [onCurrencySelection, checkForSyrup, currencies]
+    [onCurrencySelection, currencies]
   )
 
   return (
@@ -432,11 +390,6 @@ export default function Swap() {
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
         tokens={urlLoadedTokens}
         onConfirm={handleConfirmTokenWarning}
-      />
-      <SyrupWarningModal
-        isOpen={isSyrup}
-        transactionType={syrupTransactionType}
-        onConfirm={handleConfirmSyrupWarning}
       />
       <PageContainer showChart={showChart}>
         {showChart && (
@@ -631,7 +584,6 @@ export default function Swap() {
             )}
             {showApproveFlow && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
             {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-            {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
           </BottomGrouping>
         </Wrapper>
           </AppBody>
