@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = function override(config) {
-  // Add polyfills
+  // Add polyfills for node core modules
   config.resolve.alias = {
     ...config.resolve.alias,
     crypto: require.resolve('crypto-browserify'),
@@ -30,7 +30,7 @@ module.exports = function override(config) {
     if (babelRule) {
       babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
-      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|superstruct)\/).*/;
+      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|superstruct)\/).*/;
       if (babelRule.options && babelRule.options.plugins) {
         babelRule.options.plugins.push(
           require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
@@ -39,6 +39,14 @@ module.exports = function override(config) {
       }
     }
   }
+
+  // Add a rule to handle .mjs files properly - must set type to 'javascript/auto'
+  // to prevent webpack from treating them as ES modules
+  config.module.rules.push({
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  });
 
   // Suppress all source map warnings
   const moduleRules = config.module.rules.find(rule => Array.isArray(rule.oneOf));
@@ -49,6 +57,11 @@ module.exports = function override(config) {
       loader: require.resolve('source-map-loader'),
       exclude: /node_modules/
     });
+  }
+
+  // Disable devtool in production to avoid source map issues
+  if (config.mode === 'production') {
+    config.devtool = false;
   }
 
   return config;

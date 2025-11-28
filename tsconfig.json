@@ -15,8 +15,9 @@
     "jsx": "preserve",
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["react-spring"]
+    "types": ["react-spring"],
+    "baseUrl": "src"
   },
-  "exclude": ["node_modules", "cypress"],
+  "exclude": ["node_modules", "cypress", "build"],
   "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
 }
