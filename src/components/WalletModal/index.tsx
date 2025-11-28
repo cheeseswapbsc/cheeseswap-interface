@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import ReactGA from 'react-ga'
 import styled, { keyframes } from 'styled-components'
 import { isMobile } from 'react-device-detect'
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import usePrevious from '../../hooks/usePrevious'
 import { useWalletModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 
@@ -12,11 +11,9 @@ import PendingView from './PendingView'
 import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { ExternalLink } from '../Shared'
-import MetamaskIcon from '../../assets/images/metamask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected } from '../../connectors'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { AbstractConnector } from '@web3-react/abstract-connector'
+import { useWeb3 } from '../../providers/Web3Provider'
+import { WalletType } from '../../connectors/utils'
 
 const fadeIn = keyframes`
   from {
@@ -241,12 +238,12 @@ export default function WalletModal({
   confirmedTransactions: string[] // hashes of confirmed
   ENSName?: string
 }) {
-  // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  // Use new Web3 context
+  const { account, connect, isConnected, error, walletType } = useWeb3()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
-  const [pendingWallet, setPendingWallet] = useState<AbstractConnector | undefined>()
+  const [pendingWallet, setPendingWallet] = useState<WalletType | undefined>()
 
   const [pendingError, setPendingError] = useState<boolean>()
 
@@ -271,64 +268,52 @@ export default function WalletModal({
   }, [walletModalOpen])
 
   // close modal when a connection is successful
-  const activePrevious = usePrevious(active)
-  const connectorPrevious = usePrevious(connector)
+  const activePrevious = usePrevious(isConnected)
+  const walletTypePrevious = usePrevious(walletType)
   useEffect(() => {
-    if (walletModalOpen && ((active && !activePrevious) || (connector && connector !== connectorPrevious && !error))) {
+    if (walletModalOpen && ((isConnected && !activePrevious) || (walletType && walletType !== walletTypePrevious && !error))) {
       setWalletView(WALLET_VIEWS.ACCOUNT)
     }
-  }, [setWalletView, active, error, connector, walletModalOpen, activePrevious, connectorPrevious])
+  }, [setWalletView, isConnected, error, walletType, walletModalOpen, activePrevious, walletTypePrevious])
 
-  const tryActivation = async (connector: AbstractConnector | undefined) => {
-    let name = ''
-    Object.keys(SUPPORTED_WALLETS).map(key => {
-      if (connector === SUPPORTED_WALLETS[key].connector) {
-        return (name = SUPPORTED_WALLETS[key].name)
-      }
-      return true
-    })
+  const tryActivation = async (walletTypeToConnect: WalletType) => {
+    const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.walletType === walletTypeToConnect)
+    const name = wallet?.name || 'Unknown'
+
     // log selected wallet
     ReactGA.event({
       category: 'Wallet',
       action: 'Change Wallet',
       label: name
     })
-    setPendingWallet(connector) // set wallet for pending view
+
+    setPendingWallet(walletTypeToConnect)
     setWalletView(WALLET_VIEWS.PENDING)
 
-    // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
-    if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
-      connector.walletConnectProvider = undefined
+    try {
+      await connect(walletTypeToConnect)
+    } catch (err) {
+      console.error('Connection error:', err)
+      setPendingError(true)
     }
-
-    connector &&
-      activate(connector, undefined, true).catch(error => {
-        if (error instanceof UnsupportedChainIdError) {
-          activate(connector) // a little janky...can't use setError because the connector isn't set
-        } else {
-          setPendingError(true)
-        }
-      })
   }
-
-
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
-    const isMetamask = window.ethereum && window.ethereum.isMetaMask
     return Object.keys(SUPPORTED_WALLETS).map(key => {
       const option = SUPPORTED_WALLETS[key]
+
       // check for mobile options
       if (isMobile) {
-          if (!window.web3 && !window.ethereum && option.mobile) {
+        if (!window.web3 && !window.ethereum && (option.walletType === 'WALLETCONNECT' || option.walletType === 'COINBASE')) {
           return (
             <Option
               onClick={() => {
-                option.connector !== connector && !option.href && tryActivation(option.connector)
+                tryActivation(option.walletType)
               }}
               id={`connect-${key}`}
               key={key}
-              active={option.connector && option.connector === connector}
+              active={option.walletType === walletType}
               color={option.color}
               link={option.href}
               header={option.name}
@@ -340,57 +325,27 @@ export default function WalletModal({
         return null
       }
 
-      // overwrite injected when needed
-      if (option.connector === injected) {
-        // don't show injected if there's no injected provider
-        if (!(window.web3 || window.ethereum)) {
-          if (option.name === 'MetaMask') {
-            return (
-              <Option
-                id={`connect-${key}`}
-                key={key}
-                color={'#E8831D'}
-                header={'Install Metamask'}
-                subheader={null}
-                link={'https://metamask.io/'}
-                icon={MetamaskIcon}
-              />
-            )
-          } else {
-            return null //dont want to return install twice
-          }
-        }
-        // don't return metamask if injected provider isn't metamask
-        else if (option.name === 'MetaMask' && !isMetamask) {
-          return null
-        }
-        // likewise for generic
-        else if (option.name === 'Injected' && isMetamask) {
-          return null
-        }
-      }
-
-      // return rest of options
-      return (
-        !isMobile &&
-        !option.mobileOnly && (
+      // Desktop: show all wallets
+      if (!isMobile && !option.mobileOnly) {
+        return (
           <Option
             id={`connect-${key}`}
-            onClick={() => {
-              option.connector === connector
-                ? setWalletView(WALLET_VIEWS.ACCOUNT)
-                : !option.href && tryActivation(option.connector)
-            }}
             key={key}
-            active={option.connector === connector}
+            onClick={() => {
+              option.walletType === walletType
+                ? setWalletView(WALLET_VIEWS.ACCOUNT)
+                : !option.href && tryActivation(option.walletType)
+            }}
+            active={option.walletType === walletType}
             color={option.color}
             link={option.href}
             header={option.name}
-            subheader={null} //use option.descriptio to bring back multi-line
+            subheader={null}
             icon={require('../../assets/images/' + option.iconName)}
           />
         )
-      )
+      }
+      return null
     })
   }
 
@@ -401,22 +356,18 @@ export default function WalletModal({
           <CloseIcon onClick={toggleWalletModal}>
             <CloseColor />
           </CloseIcon>
-          <HeaderRow>{error instanceof UnsupportedChainIdError ? '⚠️ Wrong Network' : '⚠️ Connection Error'}</HeaderRow>
+          <HeaderRow><span role="img" aria-label="warning">⚠️</span> Connection Error</HeaderRow>
           <ContentWrapper>
-            {error instanceof UnsupportedChainIdError ? (
-              <ErrorMessage>
-                <h5>
-                  Please connect to the Binance Smart Chain network.
-                  <a href="https://docs.binance.org/smart-chain/wallet/metamask.html" target="_blank" rel="noopener noreferrer">
-                    Learn how
-                  </a>
-                </h5>
-              </ErrorMessage>
-            ) : (
-              <ErrorMessage>
-                Unable to connect to your wallet. Please try refreshing the page or check your wallet extension.
-              </ErrorMessage>
-            )}
+            <ErrorMessage>
+              <h5>
+                {error.includes('chain') || error.includes('network') 
+                  ? 'Please connect to the BSC Mainnet network.'
+                  : 'Unable to connect to your wallet. Please try refreshing the page or check your wallet extension.'}
+              </h5>
+              <a href="https://docs.bnbchain.org/docs/wallets/wallet-tutorial-overview" target="_blank" rel="noopener noreferrer">
+                Learn how to connect
+              </a>
+            </ErrorMessage>
           </ContentWrapper>
         </UpperSection>
       )
@@ -456,7 +407,7 @@ export default function WalletModal({
         <ContentWrapper>
           {walletView === WALLET_VIEWS.PENDING ? (
             <PendingView
-              connector={pendingWallet}
+              walletType={pendingWallet}
               error={pendingError}
               setPendingError={setPendingError}
               tryActivation={tryActivation}

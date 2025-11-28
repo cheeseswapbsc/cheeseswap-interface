@@ -4,13 +4,23 @@ declare module 'jazzicon' {
   export default function(diameter: number, seed: number): HTMLElement
 }
 
-declare module 'fortmatic'
-
 interface Window {
   ethereum?: {
-    isMetaMask?: true
-    on?: (...args: any[]) => void
-    removeListener?: (...args: any[]) => void
+    isMetaMask?: boolean
+    isTrust?: boolean
+    isFTM?: boolean
+    isTokenPocket?: boolean
+    request: (args: { method: string; params?: any[] }) => Promise<any>
+    on?: (event: string, handler: (...args: any[]) => void) => void
+    removeListener?: (event: string, handler: (...args: any[]) => void) => void
+    selectedAddress?: string
+    chainId?: string
+  }
+  okxwallet?: {
+    isOkxWallet?: boolean
+    request: (args: { method: string; params?: any[] }) => Promise<any>
+    on?: (event: string, handler: (...args: any[]) => void) => void
+    removeListener?: (event: string, handler: (...args: any[]) => void) => void
   }
   web3?: any
   BinanceChain?: BinanceChain

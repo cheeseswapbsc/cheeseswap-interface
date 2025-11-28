@@ -10,15 +10,16 @@ import Copy from './Copy'
 import Transaction from './Transaction'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, walletconnect, walletlink, bsc, trustConnector, okxConnector } from '../../connectors'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
-import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg' 
+import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
+import MetaMaskIcon from '../../assets/images/metamask.png'
 import TrustWalletIcon from '../../assets/images/trustWallet.png'
 import OkxWalletIcon from '../../assets/images/okxWallet.png'
-import Identicon from '../Identicon'
+import FantomWalletIcon from '../../assets/images/fantomWallet.png'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../Shared'
+import { useWeb3 } from '../../providers/Web3Provider'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -224,52 +225,52 @@ export default function AccountDetails({
   ENSName,
   openOptions
 }: AccountDetailsProps) {
-  const { chainId, account, connector } = useActiveWeb3React()
+  const { chainId, account } = useActiveWeb3React()
+  const { walletType, disconnect } = useWeb3()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
 
   function formatConnectorName() {
-    const { ethereum } = window
-    const isMetaMask = !!(ethereum && ethereum.isMetaMask)
-    const name = Object.keys(SUPPORTED_WALLETS)
-      .filter(
-        k =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
-      )
-      .map(k => SUPPORTED_WALLETS[k].name)[0]
+    const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.walletType === walletType)
+    const name = wallet?.name || 'Unknown'
     return <WalletName>Connected with {name}</WalletName>
   }
 
   function getStatusIcon() {
-    if (connector === injected) {
+    if (walletType === 'METAMASK') {
       return (
         <IconWrapper size={16}>
-          <Identicon />
+          <img src={MetaMaskIcon} alt={'MetaMask logo'} />
         </IconWrapper>
       )
-    } else if (connector === walletconnect) {
+    } else if (walletType === 'TRUST_WALLET') {
       return (
         <IconWrapper size={16}>
-          <img src={WalletConnectIcon} alt={'wallet connect logo'} />
+          <img src={TrustWalletIcon} alt={'Trust Wallet logo'} />
         </IconWrapper>
       )
-    } else if (connector === walletlink) {
+    } else if (walletType === 'OKX_WALLET') {
       return (
         <IconWrapper size={16}>
-          <img src={CoinbaseWalletIcon} alt={'coinbase wallet logo'} />
+          <img src={OkxWalletIcon} alt={'OKX Wallet logo'} />
         </IconWrapper>
       )
-    } else if (connector === trustConnector) {
+    } else if (walletType === 'FANTOM_WALLET') {
       return (
         <IconWrapper size={16}>
-          <img src={TrustWalletIcon} alt={'trust wallet logo'} />
+          <img src={FantomWalletIcon} alt={'Fantom Wallet logo'} />
         </IconWrapper>
       )
-    }
-    else if (connector === okxConnector) {
+    } else if (walletType === 'WALLETCONNECT') {
       return (
         <IconWrapper size={16}>
-          <img src={OkxWalletIcon} alt={'okx wallet logo'} />
+          <img src={WalletConnectIcon} alt={'WalletConnect logo'} />
+        </IconWrapper>
+      )
+    } else if (walletType === 'COINBASE') {
+      return (
+        <IconWrapper size={16}>
+          <img src={CoinbaseWalletIcon} alt={'Coinbase Wallet logo'} />
         </IconWrapper>
       )
     }
@@ -293,11 +294,11 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {connector !== injected && connector !== walletlink && connector !== bsc && connector !== trustConnector && connector !== okxConnector && (
+                  {walletType === 'WALLETCONNECT' && (
                     <WalletAction
                       style={{ fontSize: '.825rem', fontWeight: 600, marginRight: '8px' }}
                       onClick={() => {
-                        ;(connector as any).close()
+                        disconnect()
                       }}
                     >
                       Disconnect

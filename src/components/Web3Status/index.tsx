@@ -1,15 +1,14 @@
-import { AbstractConnector } from '@web3-react/abstract-connector'
-import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
-import { darken, lighten } from 'polished'
 import React, { useMemo } from 'react'
-import { Activity } from 'react-feather'
+import { Activity, LogOut } from 'react-feather'
 import styled, { css } from 'styled-components'
+import { darken, lighten } from 'polished'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
-// import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
-// import PortisIcon from '../../assets/images/portisIcon.png'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
-import { injected, walletconnect, walletlink, bsc } from '../../connectors'
-import { NetworkContextName } from '../../constants'
+import MetaMaskIcon from '../../assets/images/metamask.png'
+import TrustWalletIcon from '../../assets/images/trustWallet.png'
+import OkxWalletIcon from '../../assets/images/okxWallet.png'
+import FantomWalletIcon from '../../assets/images/fantomWallet.png'
+import { CHAIN_ID } from '../../connectors'
 import useENSName from '../../hooks/useENSName'
 import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useWalletModalToggle } from '../../state/application/hooks'
@@ -17,21 +16,55 @@ import { isTransactionRecent, useAllTransactions } from '../../state/transaction
 import { TransactionDetails } from '../../state/transactions/reducer'
 import { shortenAddress } from '../../utils'
 import { ButtonSecondary } from '../Button'
-
-import Identicon from '../Identicon'
 import Loader from '../Loader'
-
 import { RowBetween } from '../Row'
 import WalletModal from '../WalletModal'
+import { useWeb3 } from '../../providers/Web3Provider'
 
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
   align-items: center;
   justify-content: center;
   & > * {
-    height: ${({ size }) => (size ? size + 'px' : '32px')};
-    width: ${({ size }) => (size ? size + 'px' : '32px')};
+    height: ${({ size }) => (size ? `${size}px` : '32px')};
+    width: ${({ size }) => (size ? `${size}px` : '32px')};
   }
+`
+
+const LogoutButton = styled.div`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.text1};
+  transition: color 0.2s ease-in-out;
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.red1};
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    margin-left: 6px;
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  `};
+`
+
+const WalletWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0;
 `
 
 const Web3StatusGeneric = styled(ButtonSecondary)`
@@ -151,27 +184,49 @@ const SOCK = (
 )
 
 // eslint-disable-next-line react/prop-types
-function StatusIcon({ connector }: { connector: AbstractConnector }) {
-  if (connector === injected || connector === bsc) {
-    return <Identicon />
-  } else if (connector === walletconnect) {
+function StatusIcon({ walletType }: { walletType: string | null }) {
+  if (walletType === 'METAMASK') {
     return (
       <IconWrapper size={16}>
-        <img src={WalletConnectIcon} alt={''} />
+        <img src={MetaMaskIcon} alt={'MetaMask logo'} />
       </IconWrapper>
     )
-  } else if (connector === walletlink) {
+  } else if (walletType === 'TRUST_WALLET') {
     return (
       <IconWrapper size={16}>
-        <img src={CoinbaseWalletIcon} alt={''} />
+        <img src={TrustWalletIcon} alt={'Trust Wallet logo'} />
       </IconWrapper>
     )
-  } 
+  } else if (walletType === 'OKX_WALLET') {
+    return (
+      <IconWrapper size={16}>
+        <img src={OkxWalletIcon} alt={'OKX Wallet logo'} />
+      </IconWrapper>
+    )
+  } else if (walletType === 'FANTOM_WALLET') {
+    return (
+      <IconWrapper size={16}>
+        <img src={FantomWalletIcon} alt={'Fantom Wallet logo'} />
+      </IconWrapper>
+    )
+  } else if (walletType === 'WALLETCONNECT') {
+    return (
+      <IconWrapper size={16}>
+        <img src={WalletConnectIcon} alt={'WalletConnect logo'} />
+      </IconWrapper>
+    )
+  } else if (walletType === 'COINBASE') {
+    return (
+      <IconWrapper size={16}>
+        <img src={CoinbaseWalletIcon} alt={'Coinbase Wallet logo'} />
+      </IconWrapper>
+    )
+  }
   return null
 }
 
 function Web3StatusInner() {
-  const { account, connector, error } = useWeb3React()
+  const { account, walletType, error, chainId, disconnect } = useWeb3()
 
   const { ENSName } = useENSName(account ?? undefined)
 
@@ -188,27 +243,40 @@ function Web3StatusInner() {
   const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
 
+  // Check if wrong network
+  const isWrongNetwork = chainId && chainId !== CHAIN_ID
+
+  const handleDisconnect = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    disconnect()
+  }
+
   if (account) {
     return (
-      <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
-        {hasPendingTransactions ? (
-          <RowBetween>
-            <Text>{pending?.length} Pending</Text> <Loader stroke="white" />
-          </RowBetween>
-        ) : (
-          <>
-            {hasSocks ? SOCK : null}
-            <Text>{ENSName || shortenAddress(account)}</Text>
-          </>
-        )}
-        {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
-      </Web3StatusConnected>
+      <WalletWrapper>
+        <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
+          {hasPendingTransactions ? (
+            <RowBetween>
+              <Text>{pending?.length} Pending</Text> <Loader stroke="white" />
+            </RowBetween>
+          ) : (
+            <>
+              {hasSocks ? SOCK : null}
+              <Text>{ENSName || shortenAddress(account)}</Text>
+            </>
+          )}
+          {!hasPendingTransactions && walletType && <StatusIcon walletType={walletType} />}
+        </Web3StatusConnected>
+        <LogoutButton onClick={handleDisconnect} title="Disconnect Wallet">
+          <LogOut />
+        </LogoutButton>
+      </WalletWrapper>
     )
-  } else if (error) {
+  } else if (error || isWrongNetwork) {
     return (
       <Web3StatusError onClick={toggleWalletModal}>
         <NetworkIcon />
-        <Text>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error'}</Text>
+        <Text>{isWrongNetwork ? 'Wrong Network' : 'Error'}</Text>
       </Web3StatusError>
     )
   } else {
@@ -226,8 +294,7 @@ function Web3StatusInner() {
 }
 
 export default function Web3Status() {
-  const { active, account } = useWeb3React()
-  const contextNetwork = useWeb3React(NetworkContextName)
+  const { account } = useWeb3()
 
   const { ENSName } = useENSName(account ?? undefined)
 
@@ -240,10 +307,6 @@ export default function Web3Status() {
 
   const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
   const confirmed = sortedRecentTransactions.filter(tx => tx.receipt).map(tx => tx.hash)
-
-  if (!contextNetwork.active && !active) {
-    return null
-  }
 
   return (
     <>

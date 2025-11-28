@@ -1,25 +1,23 @@
-import { Contract } from '@ethersproject/contracts'
-import { getAddress } from '@ethersproject/address'
-import { AddressZero } from '@ethersproject/constants'
-import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
-import { BigNumber } from '@ethersproject/bignumber'
+import { Contract, ethers } from 'ethers'
 import { abi as ICheeseSwapRouterABI } from '@cheeseswapv2/periphery/build/ICheeseSwapRouter.json'
 import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@cheeseswapv2/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 
+type Web3Provider = ethers.providers.Web3Provider
+
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
   try {
-    return getAddress(value)
+    return ethers.utils.getAddress(value)
   } catch {
     return false
   }
 }
 
 const BSCSCAN_PREFIXES: { [chainId in ChainId]: string } = {
-  56: 'MAINNET',
-  97: 'BSCTESTNET'
+  56: '',
+  97: 'testnet.'
 }
 
 export function getBscscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
@@ -49,8 +47,8 @@ export function shortenAddress(address: string, chars = 4): string {
 }
 
 // add 10%
-export function calculateGasMargin(value: BigNumber): BigNumber {
-  return value.mul(BigNumber.from(10000).add(BigNumber.from(1000))).div(BigNumber.from(10000))
+export function calculateGasMargin(value: ethers.BigNumber): ethers.BigNumber {
+  return value.mul(ethers.BigNumber.from(10000).add(ethers.BigNumber.from(1000))).div(ethers.BigNumber.from(10000))
 }
 
 // converts a basis points value to a sdk percent
@@ -69,18 +67,18 @@ export function calculateSlippageAmount(value: CurrencyAmount, slippage: number)
 }
 
 // account is not optional
-export function getSigner(library: Web3Provider, account: string): JsonRpcSigner {
+export function getSigner(library: ethers.providers.Web3Provider, account: string): ethers.Signer {
   return library.getSigner(account).connectUnchecked()
 }
 
 // account is optional
-export function getProviderOrSigner(library: Web3Provider, account?: string): Web3Provider | JsonRpcSigner {
+export function getProviderOrSigner(library: ethers.providers.Web3Provider, account?: string): ethers.providers.Web3Provider | ethers.Signer {
   return account ? getSigner(library, account) : library
 }
 
 // account is optional
-export function getContract(address: string, ABI: any, library: Web3Provider, account?: string): Contract {
-  if (!isAddress(address) || address === AddressZero) {
+export function getContract(address: string, ABI: any, library: ethers.providers.Web3Provider, account?: string): Contract {
+  if (!isAddress(address) || address === ethers.constants.AddressZero) {
     throw Error(`Invalid 'address' parameter '${address}'.`)
   }
 

@@ -1,16 +1,19 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@cheeseswapv2/sdk'
-import { AbstractConnector } from '@web3-react/abstract-connector'
+import { WalletType, isWalletInstalled } from '../connectors/utils'
 
-// import { bsc, fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
-import { injected, bsc, walletconnect, walletlink, trustConnector, okxConnector } from '../connectors'
-// TODO
 export const ROUTER_ADDRESS = '0x3047799262d8D2EF41eD2a222205968bC9B0d895'
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+
+// Chain configuration - BSC Mainnet only
+export const SUPPORTED_CHAIN_ID = ChainId.MAINNET
+export const CHAIN_ID = 56
+export const CHAIN_ID_HEX = '0x38'
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
+
 export const WBNB = new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
 export const CHS = new Token(ChainId.MAINNET, '0xaDD8A06fd58761A5047426e160B2B88AD3B9D464', 18, 'CHS', 'Cheesemaker.farm')
 export const PIZZA = new Token(ChainId.MAINNET, '0x2cc26dd730F548dc4ac291ae7D84a0C96980d2cB', 18, 'PIZZA', 'PizzaSwap')
@@ -18,11 +21,9 @@ export const DAI = new Token(ChainId.MAINNET, '0x1AF3F329e8BE154074D8769D1FFa4eE
 export const USDC = new Token(ChainId.MAINNET, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 18, 'USDC', 'Binance-Peg USD Coin')
 export const USDT = new Token(ChainId.MAINNET, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD')
 
-
-
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.BSCTESTNET]: [WETH[ChainId.BSCTESTNET]]
+  [ChainId.BSCTESTNET]: []
 }
 
 // used to construct intermediary pairs for trading
@@ -30,7 +31,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
 }
-
 
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
@@ -55,89 +55,78 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [
       new Token(ChainId.MAINNET, '0xaDD8A06fd58761A5047426e160B2B88AD3B9D464', 18, 'CHS', 'Cheesemaker.farm'),
       new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB')
-  //    new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
-  //    new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
     ],
     [CHS, WBNB]
-    ]
+  ]
 }
 
 export interface WalletInfo {
-  connector?: AbstractConnector
   name: string
   iconName: string
   description: string
   href: string | null
   color: string
-  primary?: true
-  mobile?: true
-  mobileOnly?: true
+  walletType: WalletType
+  checkInstalled: () => boolean
+  mobileOnly?: boolean
+  desktopOnly?: boolean
 }
 
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
-  BSC: {
-    connector: bsc,
-    name: 'Binance Chain Wallet',
-    iconName: 'binance.svg',
-    description: 'Easy-to-use browser extension.',
-    href: null,
-    color: '#E8831D'
-  },
-  INJECTED: {
-    connector: injected,
-    name: 'Injected',
-    iconName: 'arrow-right.svg',
-    description: 'Injected web3 provider.',
-    href: null,
-    color: '#cebb13ff',
-    primary: true
-  },
   METAMASK: {
-    connector: injected,
     name: 'MetaMask',
     iconName: 'metamask.png',
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D',
-    mobile: true,
-    primary: true
+    walletType: 'METAMASK',
+    checkInstalled: () => isWalletInstalled('METAMASK')
   },
   TRUST_WALLET: {
-    connector: trustConnector,
     name: 'Trust Wallet',
     iconName: 'trustWallet.png',
-    description: 'Best Crypto Wallet for Web3, NFTs and DeFi | Trust Wallet.',
+    description: 'Best Crypto Wallet for Web3, NFTs and DeFi.',
     href: null,
     color: '#0828dfff',
-    mobile: true
+    walletType: 'TRUST_WALLET',
+    checkInstalled: () => isWalletInstalled('TRUST_WALLET')
   },
   OKX_WALLET: {
-    connector: okxConnector,
     name: 'OKX Wallet',
     iconName: 'okxWallet.png',
-    description: 'OKX Wallet is a secure crypto wallet available on multiple platforms.',
+    description: 'OKX Wallet is a secure crypto wallet.',
     href: null,
     color: '#080a16ff',
-    mobile: true
+    walletType: 'OKX_WALLET',
+    checkInstalled: () => isWalletInstalled('OKX_WALLET')
+  },
+  FANTOM_WALLET: {
+    name: 'Fantom Wallet',
+    iconName: 'fantomWallet.png',
+    description: 'Fantom browser extension wallet.',
+    href: null,
+    color: '#1969FF',
+    walletType: 'FANTOM_WALLET',
+    checkInstalled: () => isWalletInstalled('FANTOM_WALLET')
   },
   WALLET_CONNECT: {
-    connector: walletconnect,
     name: 'WalletConnect',
     iconName: 'walletConnectIcon.svg',
     description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
     href: null,
     color: '#4196FC',
-    mobile: true
-      },
-   WALLET_LINK: {
-    connector: walletlink,
+    walletType: 'WALLETCONNECT',
+    checkInstalled: () => true
+  },
+  COINBASE_WALLET: {
     name: 'Coinbase Wallet',
     iconName: 'coinbaseWalletIcon.svg',
     description: 'Use Coinbase Wallet app on mobile device',
     href: null,
-    color: '#315CF5'
-   },
-
+    color: '#315CF5',
+    walletType: 'COINBASE',
+    checkInstalled: () => true
+  }
 }
 
 export const NetworkContextName = 'NETWORK'

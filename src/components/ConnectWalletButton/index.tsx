@@ -1,21 +1,22 @@
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
 import { Button, ButtonProps, ConnectorId, useWalletModal } from '@cheeseswapv2/ui-sdk'
-import { injected, walletconnect } from '../../connectors'
+import { connectWallet } from '../../connectors'
+import { useWeb3 } from '../../providers/Web3Provider'
 import useI18n from '../../hooks/useI18n'
 
 const UnlockButton: React.FC<ButtonProps> = props => {
   const TranslateString = useI18n()
-  const { account, activate, deactivate } = useWeb3React()
+  const { account, disconnect } = useWeb3()
 
-  const handleLogin = (connectorId: ConnectorId) => {
+  const handleLogin = async (connectorId: ConnectorId) => {
     if (connectorId === 'walletconnect') {
-      return activate(walletconnect)
+      await connectWallet('WALLETCONNECT')
+    } else {
+      await connectWallet('METAMASK')
     }
-    return activate(injected)
   }
 
-  const { onPresentConnectModal } = useWalletModal(handleLogin, deactivate, account as string)
+  const { onPresentConnectModal } = useWalletModal(handleLogin, disconnect, account as string)
 
   return (
     <Button onClick={onPresentConnectModal} {...props}>

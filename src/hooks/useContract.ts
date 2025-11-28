@@ -1,4 +1,4 @@
-import { Contract } from '@ethersproject/contracts'
+import { Contract } from 'ethers'
 import { ChainId, WETH } from '@cheeseswapv2/sdk'
 import { abi as ICheeseSwapPairABI } from '@cheeseswapv2/core/build/ICheeseSwapPair.json'
 import { useMemo } from 'react'

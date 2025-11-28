@@ -1,4 +1,3 @@
-import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import 'inter-ui'
 import React, { StrictMode } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -6,7 +5,6 @@ import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { NetworkContextName } from './constants'
 import './i18n'
 import App from './pages/App'
 import store from './state'
@@ -18,9 +16,7 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import { lightTheme, darkTheme } from './theme'
 import { FixedGlobalStyle, ThemedGlobalStyle } from './components/Shared'
-import getLibrary from './utils/getLibrary'
-
-const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
+import { Web3Provider } from './providers/Web3Provider'
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
@@ -62,17 +58,15 @@ function ThemeProvider({ children }: { children?: React.ReactNode }) {
 ReactDOM.render(
   <StrictMode>
     <FixedGlobalStyle />
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Web3ProviderNetwork getLibrary={getLibrary}>
-        <Provider store={store}>
-          <Updaters />
-          <ThemeProvider>
-            <ThemedGlobalStyle />
-            <App />
-          </ThemeProvider>
-        </Provider>
-      </Web3ProviderNetwork>
-    </Web3ReactProvider>
+    <Web3Provider>
+      <Provider store={store}>
+        <Updaters />
+        <ThemeProvider>
+          <ThemedGlobalStyle />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </Web3Provider>
   </StrictMode>,
   document.getElementById('root')
 )

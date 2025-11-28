@@ -1,4 +1,4 @@
-import { ChainId } from '@cheeseswapv2/sdk'
+
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Text } from 'rebass'
@@ -11,7 +11,6 @@ import Logob from '../../assets/images/cheeseswap-logo.png'
 import { useActiveWeb3React } from '../../hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
 
-import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
 import Nav from './Nav'
@@ -114,20 +113,6 @@ const AccountElement = styled.div<{ active: boolean }>`
   `};
 `
 
-const TestnetWrapper = styled.div`
-  white-space: nowrap;
-  width: fit-content;
-  margin-left: 10px;
-  pointer-events: auto;
-`
-
-const NetworkCard = styled(YellowCard)`
-  width: fit-content;
-  margin-right: 10px;
-  border-radius: 12px;
-  padding: 8px 12px;
-`
-
 const CheeseIcon = styled.div`
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
@@ -185,14 +170,9 @@ const BalanceText = styled(Text)`
   `};
 `
 
-const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
-  [ChainId.MAINNET]: null,
-  [ChainId.BSCTESTNET]: 'Bsc-testnet'
-}
-
 export default function Header() {
   const isDark = useIsDarkMode()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   return (
     <HeaderFrame>
@@ -213,9 +193,6 @@ export default function Header() {
         <HeaderControls>
           {!isMobile && <ThemeSwitch />}
           <HeaderElement>
-            <TestnetWrapper>
-              {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
-            </TestnetWrapper>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={700}>

@@ -1,12 +1,12 @@
-// import { ConnectorNames } from '@cheeseswapv2/ui-sdk'
-import { Web3Provider } from '@ethersproject/providers'
-import { InjectedConnector } from '@web3-react/injected-connector'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import { BscConnector } from '@binance-chain/bsc-connector'
-// import { NetworkConnector } from './NetworkConnector'
-import { RoundRobinNetworkConnector } from './RoundRobinNetworkConnector'
+import { ethers } from 'ethers'
+import { injectedConnector } from './InjectedConnector'
+import { walletConnectConnector } from './WalletConnectProvider'
+import { coinbaseWalletConnector } from './CoinbaseWalletProvider'
+import { WalletType } from './utils'
 
+export const CHAIN_ID = 56 as const
+export const CHAIN_ID_HEX = '0x38' as const
+export const NETWORK_NAME = 'BSC Mainnet'
 
 const NETWORK_URLS = [
   process.env.REACT_APP_NETWORK_URL_1,
@@ -17,59 +17,96 @@ const NETWORK_URLS = [
   process.env.REACT_APP_NETWORK_URL_6
 ].filter(url => typeof url === 'string') as string[]
 
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '56')
-
 if (NETWORK_URLS.length === 0) {
-  throw new Error(`At least one RPC URL must be defined in environment variables`)
+  throw new Error('At least one RPC URL must be defined in environment variables')
 }
 
-export const network = new RoundRobinNetworkConnector({
-  urls: NETWORK_URLS,
-  chainId: NETWORK_CHAIN_ID,
-  batchWaitTimeMs: 500
-})
-
-let networkLibrary: Web3Provider | undefined
-export function getNetworkLibrary(): Web3Provider {
-  return (networkLibrary = networkLibrary ?? new Web3Provider(network.provider as any))
-}
-
-export const injected = new InjectedConnector({
-  supportedChainIds: [56, 97]
-})
-
-export const trustConnector = new InjectedConnector({
-  supportedChainIds: [56]
-})
-
-export const okxConnector = new InjectedConnector({
-  supportedChainIds: [56]
-})
-
-export const bsc = new BscConnector({ supportedChainIds: [56] })
-
-
-export const walletconnect = new WalletConnectConnector({
-  rpc: { 56: NETWORK_URLS[0] },
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
-
+/**
+ * Create a read-only JSON-RPC provider for network calls
+ */
+export function getNetworkProvider(): ethers.providers.JsonRpcProvider {
+  // Use first RPC URL for read-only operations
+  return new ethers.providers.JsonRpcProvider(NETWORK_URLS[0], {
+    name: NETWORK_NAME,
+    chainId: CHAIN_ID
   })
-
-
-export const walletlink = new WalletLinkConnector({
-  url: NETWORK_URLS[0], // Use the first URL from the array
-  appName: 'Cheeseswap',
-  appLogoUrl:
-    'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg'
-})
-
-/*
-export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
-  [ConnectorNames.Injected]: injected,
-  [ConnectorNames.WalletConnect]: walletconnect,
-  [ConnectorNames.BSC]: bsc,
-  [ConnectorNames.WalletLink]: walletlink,
-  [ConnectorNames.Network]: network
 }
-  */
+
+/**
+ * Get fallback provider with multiple RPCs for redundancy
+ */
+export function getFallbackProvider(): ethers.providers.FallbackProvider {
+  const providers = NETWORK_URLS.map((url, index) => ({
+    provider: new ethers.providers.JsonRpcProvider(url, {
+      name: NETWORK_NAME,
+      chainId: CHAIN_ID
+    }),
+    priority: index,
+    stallTimeout: 2000,
+    weight: 1
+  }))
+
+  return new ethers.providers.FallbackProvider(providers)
+}
+
+/**
+ * Connect to wallet based on wallet type
+ */
+export async function connectWallet(walletType: WalletType): Promise<ethers.providers.Web3Provider> {
+  switch (walletType) {
+    case 'METAMASK':
+    case 'TRUST_WALLET':
+    case 'OKX_WALLET':
+    case 'FANTOM_WALLET':
+      return await injectedConnector.connect(walletType)
+
+    case 'WALLETCONNECT':
+      return await walletConnectConnector.connect()
+
+    case 'COINBASE':
+      return await coinbaseWalletConnector.connect()
+
+    default:
+      throw new Error(`Unsupported wallet type: ${walletType}`)
+  }
+}
+
+/**
+ * Disconnect from wallet
+ */
+export async function disconnectWallet(walletType: WalletType | null): Promise<void> {
+  if (!walletType) return
+
+  switch (walletType) {
+    case 'METAMASK':
+    case 'TRUST_WALLET':
+    case 'OKX_WALLET':
+    case 'FANTOM_WALLET':
+      await injectedConnector.disconnect()
+      break
+
+    case 'WALLETCONNECT':
+      await walletConnectConnector.disconnect()
+      break
+
+    case 'COINBASE':
+      await coinbaseWalletConnector.disconnect()
+      break
+  }
+}
+
+// Export connectors
+export { injectedConnector, walletConnectConnector, coinbaseWalletConnector }
+
+// Export utilities
+export * from './utils'
+
+// Network provider singleton
+let networkProvider: ethers.providers.JsonRpcProvider | null = null
+
+export function getNetworkLibrary(): ethers.providers.JsonRpcProvider {
+  if (!networkProvider) {
+    networkProvider = getNetworkProvider()
+  }
+  return networkProvider
+}

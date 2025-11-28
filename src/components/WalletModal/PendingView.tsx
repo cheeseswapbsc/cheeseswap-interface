@@ -1,11 +1,10 @@
-import { AbstractConnector } from '@web3-react/abstract-connector'
 import React from 'react'
 import styled from 'styled-components'
 import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
-import { injected } from '../../connectors'
 import { darken } from 'polished'
 import Loader from '../Loader'
+import { WalletType } from '../../global.d'
 
 const PendingSection = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -64,15 +63,15 @@ const LoadingWrapper = styled.div`
 `
 
 export default function PendingView({
-  connector,
+  walletType,
   error = false,
   setPendingError,
   tryActivation
 }: {
-  connector?: AbstractConnector
+  walletType?: WalletType
   error?: boolean
   setPendingError: (error: boolean) => void
-  tryActivation: (connector: AbstractConnector) => void
+  tryActivation: (walletType: WalletType) => void
 }) {
   const isMetamask = window?.ethereum?.isMetaMask
 
@@ -86,7 +85,7 @@ export default function PendingView({
               <ErrorButton
                 onClick={() => {
                   setPendingError(false)
-                  connector && tryActivation(connector)
+                  walletType && tryActivation(walletType)
                 }}
               >
                 Try Again
@@ -102,8 +101,8 @@ export default function PendingView({
       </LoadingMessage>
       {Object.keys(SUPPORTED_WALLETS).map(key => {
         const option = SUPPORTED_WALLETS[key]
-        if (option.connector === connector) {
-          if (option.connector === injected) {
+        if (option.walletType === walletType) {
+          if (walletType === 'METAMASK' || walletType === 'TRUST_WALLET' || walletType === 'OKX_WALLET' || walletType === 'FANTOM_WALLET') {
             if (isMetamask && option.name !== 'MetaMask') {
               return null
             }
