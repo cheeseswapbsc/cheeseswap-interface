@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-export type WalletType = 'METAMASK' | 'TRUST_WALLET' | 'OKX_WALLET' | 'FANTOM_WALLET' | 'WALLETCONNECT' | 'COINBASE'
+export type WalletType = 'METAMASK' | 'TRUST_WALLET' | 'OKX_WALLET' | 'FANTOM_WALLET' | 'WALLETCONNECT' | 'COINBASE' | 'INJECTED'
 
 export interface DetectedWallet {
   type: WalletType

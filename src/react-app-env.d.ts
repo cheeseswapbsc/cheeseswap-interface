@@ -8,8 +8,14 @@ interface Window {
   ethereum?: {
     isMetaMask?: boolean
     isTrust?: boolean
+    isTrustWallet?: boolean
+    isBinance?: boolean
     isFTM?: boolean
     isTokenPocket?: boolean
+    isOKXWallet?: boolean
+    isCoinbaseWallet?: boolean
+    isBraveWallet?: boolean
+    isRabby?: boolean
     request: (args: { method: string; params?: any[] }) => Promise<any>
     on?: (event: string, handler: (...args: any[]) => void) => void
     removeListener?: (event: string, handler: (...args: any[]) => void) => void

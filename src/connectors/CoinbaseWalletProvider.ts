@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
+import { BaseWalletConnector } from './BaseConnector'
 import { ensureBSCMainnet } from './utils'
 
 const NETWORK_URLS = [
@@ -14,16 +15,28 @@ const NETWORK_URLS = [
 /**
  * Coinbase Wallet connector
  */
-export class CheeseSwapCoinbaseWallet {
+export class CheeseSwapCoinbaseWallet extends BaseWalletConnector {
   private sdk: CoinbaseWalletSDK | null = null
   private cbProvider: any = null
-  private provider: ethers.providers.Web3Provider | null = null
+
+  constructor() {
+    super('Coinbase Wallet')
+  }
+
+  /**
+   * Coinbase Wallet is always available (via SDK)
+   */
+  isAvailable(): boolean {
+    return true
+  }
 
   /**
    * Connect to Coinbase Wallet
    */
   async connect(): Promise<ethers.providers.Web3Provider> {
     try {
+      console.log('[CoinbaseWallet] Initializing Coinbase Wallet SDK...')
+
       // Initialize Coinbase Wallet SDK
       this.sdk = new CoinbaseWalletSDK({
         appName: 'CheeseSwap',
@@ -37,6 +50,8 @@ export class CheeseSwapCoinbaseWallet {
         56
       )
 
+      console.log('[CoinbaseWallet] Requesting accounts...')
+
       // Request accounts
       await this.cbProvider.request({
         method: 'eth_requestAccounts'
@@ -48,9 +63,11 @@ export class CheeseSwapCoinbaseWallet {
       // Ensure we're on BSC Mainnet
       await ensureBSCMainnet(this.provider)
 
+      console.log('[CoinbaseWallet] Successfully connected')
+
       return this.provider
     } catch (error) {
-      console.error('Coinbase Wallet connection error:', error)
+      console.error('[CoinbaseWallet] Connection error:', error)
       await this.disconnect()
       throw error
     }
@@ -64,20 +81,13 @@ export class CheeseSwapCoinbaseWallet {
       try {
         await this.cbProvider.close()
       } catch (error) {
-        console.error('Error disconnecting Coinbase Wallet:', error)
+        console.error('[CoinbaseWallet] Error disconnecting:', error)
       }
     }
 
     this.sdk = null
     this.cbProvider = null
     this.provider = null
-  }
-
-  /**
-   * Get current provider
-   */
-  getProvider(): ethers.providers.Web3Provider | null {
-    return this.provider
   }
 
   /**

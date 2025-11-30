@@ -5,6 +5,7 @@ import { escapeRegExp } from '../../utils'
 const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string }>`
   color: ${({ error, theme }) => (error ? theme.colors.red1 : theme.colors.text1)};
   width: 0;
+  min-width: 0;
   position: relative;
   font-weight: 600;
   outline: none;
@@ -20,6 +21,12 @@ const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: s
   border-radius: 6px;
   margin-right: 6px;
   -webkit-appearance: textfield;
+
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    font-size: 18px;
+    padding: 8px;
+    margin-right: 4px;
+  `}
 
   ::-webkit-search-decoration {
     -webkit-appearance: none;

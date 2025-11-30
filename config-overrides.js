@@ -14,6 +14,8 @@ module.exports = function override(config) {
     buffer: require.resolve('buffer'),
   };
 
+
+
   config.plugins = (config.plugins || []).concat([
     new webpack.ProvidePlugin({
       process: 'process/browser',
@@ -30,13 +32,24 @@ module.exports = function override(config) {
     if (babelRule) {
       babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
-      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|superstruct)\/).*/;
-      if (babelRule.options && babelRule.options.plugins) {
-        babelRule.options.plugins.push(
-          require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
-          require.resolve('@babel/plugin-proposal-optional-chaining')
-        );
+      // Include problematic node_modules packages that need transpilation
+      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr)\/).*/;
+      
+      // Ensure babel options exist
+      if (!babelRule.options) {
+        babelRule.options = { plugins: [] };
       }
+      if (!babelRule.options.plugins) {
+        babelRule.options.plugins = [];
+      }
+      
+      // Add necessary babel plugins
+      babelRule.options.plugins.push(
+        require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
+        require.resolve('@babel/plugin-proposal-optional-chaining'),
+        // Transform CommonJS to ES modules
+        [require.resolve('@babel/plugin-transform-modules-commonjs'), { loose: true }]
+      );
     }
   }
 
@@ -66,3 +79,4 @@ module.exports = function override(config) {
 
   return config;
 };
+

@@ -1,7 +1,7 @@
 import { Currency, Pair } from '@cheeseswapv2/sdk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { darken } from 'polished'
+import { darken, rgba } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../CurrencyLogo'
@@ -30,6 +30,8 @@ const InputRow = styled.div<{ selected: boolean }>`
 const CurrencySelect = styled.button<{ selected: boolean }>`
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
+  min-width: 90px;
   height: 2.75rem;
   font-size: 16px;
   font-weight: 600;
@@ -56,8 +58,9 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     height: 2.5rem;
-    padding: 0 0.75rem;
-    font-size: 15px;
+    padding: 0 0.6rem;
+    font-size: 14px;
+    min-width: 70px;
   `}
 `
 
@@ -112,26 +115,36 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
   font-size:  ${({ active }) => (active ? '17px' : '15px')};
   font-weight: 600;
   color: #FFFFFF;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    max-width: 90px;
+    font-size: 14px;
+  `}
 `
 
 const StyledBalanceMax = styled.button`
-  height: 36px;
-  background: linear-gradient(135deg, #b38cff 0%, #7f5cf6 100%);
+  /* 25% smaller from previous defaults */
+  height: 27px;
+  background: ${({ theme }) => `linear-gradient(135deg, ${theme.colors.primary5} 0%, ${theme.colors.primary3} 100%)`};
   border: none;
-  border-radius: 12px;
-  font-size: 0.75rem;
+  border-radius: 9px;
+  font-size: 0.56rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
-  margin-left: 0.5rem;
-  padding: 0 1.1rem;
-  color: #f4f4fb;
+  margin-left: 0.375rem;
+  padding: 0 0.825rem;
+  color: ${({ theme }) => theme.colors.buttonText || '#f4f4fb'};
   transition: transform 0.2s, box-shadow 0.2s;
   white-space: nowrap;
 
   :hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(127, 92, 246, 0.35);
+    box-shadow: ${({ theme }) => `0 6px 14px ${rgba(theme.colors.primary3, 0.35)}`};
   }
 
   :focus {
@@ -143,9 +156,9 @@ const StyledBalanceMax = styled.button`
   }
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-left: 0.5rem;
-    padding: 0 0.9rem;
-    height: 32px;
+    margin-left: 0.375rem;
+    padding: 0 0.675rem;
+    height: 24px;
   `};
 `
 

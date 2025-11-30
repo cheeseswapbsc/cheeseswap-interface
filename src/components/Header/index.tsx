@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { isMobile } from 'react-device-detect'
+// import { isMobile } from 'react-device-detect' (removed unused import)
 import { Text } from 'rebass'
 
 import styled from 'styled-components'
@@ -191,7 +191,6 @@ export default function Header() {
 
         <Nav />
         <HeaderControls>
-          {!isMobile && <ThemeSwitch />}
           <HeaderElement>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
@@ -202,8 +201,9 @@ export default function Header() {
               <Web3Status />
             </AccountElement>
           </HeaderElement>
+
           <HeaderElementWrap>
-            {isMobile && <ThemeSwitch />}
+            <ThemeSwitch />
             <Settings />
             <Menu />
           </HeaderElementWrap>

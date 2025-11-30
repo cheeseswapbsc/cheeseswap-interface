@@ -222,6 +222,29 @@ const ErrorMessage = styled.div`
   margin-bottom: 0.75rem;
 `
 
+const RefreshButton = styled.button`
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background-color: ${({ theme }) => theme.colors.primary1};
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary2};
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`
+
 const WALLET_VIEWS = {
   OPTIONS: 'options',
   OPTIONS_SECONDARY: 'options_secondary',
@@ -298,6 +321,16 @@ export default function WalletModal({
     }
   }
 
+  const handleRefresh = async () => {
+    // Try to reconnect with the injected connector as fallback
+    try {
+      await connect('INJECTED')
+    } catch (err) {
+      console.error('Refresh connection error:', err)
+      // Error will be shown again through the context
+    }
+  }
+
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     return Object.keys(SUPPORTED_WALLETS).map(key => {
@@ -368,6 +401,9 @@ export default function WalletModal({
                 Learn how to connect
               </a>
             </ErrorMessage>
+            <RefreshButton onClick={handleRefresh}>
+              <span role="img" aria-label="refresh">🔄</span> Try Again
+            </RefreshButton>
           </ContentWrapper>
         </UpperSection>
       )
