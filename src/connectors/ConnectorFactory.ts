@@ -4,19 +4,19 @@ import { binanceWalletConnector } from './wallets/BinanceWalletConnector'
 import { trustWalletConnector } from './wallets/TrustWalletConnector'
 import { okxWalletConnector } from './wallets/OKXWalletConnector'
 import { fantomWalletConnector } from './wallets/FantomWalletConnector'
-import { injectedConnector } from './InjectedConnector'
+import { injectedConnector } from './wallets/InjectedConnector'
 import { walletConnectConnector } from './WalletConnectProvider'
 import { coinbaseWalletConnector } from './CoinbaseWalletProvider'
 import { IWalletConnector } from './BaseConnector'
 import { WalletNotAvailableError } from './errors'
 
 export type ConnectorId = 
+  | 'injected'  // Generic fallback for any window.ethereum wallet
   | 'metamask'
   | 'binance'
   | 'trustwallet'
   | 'okxwallet'
   | 'fantomwallet'
-  | 'injected'  // Generic fallback for any window.ethereum wallet
   | 'walletconnect'
   | 'coinbasewallet'
 
@@ -76,34 +76,42 @@ export class ConnectorFactory {
     provider: ethers.providers.Web3Provider
     connectorId: ConnectorId
   }> {
-    // Priority order
+    // Priority order (INJECTED > METAMASK > BINANCE > TRUST > OKX > FANTOM > WALLETCONNECT > COINBASEWALLET)
     const priorityOrder: ConnectorId[] = [
+      'injected',
       'metamask',
       'binance',
       'trustwallet',
       'okxwallet',
       'fantomwallet',
-      'injected',  // Try generic injected after specific wallets
-    ]
+      'coinbasewallet',
+    ];
 
     for (const id of priorityOrder) {
-      const connector = this.getConnector(id)
+      const connector = this.getConnector(id);
       if (connector.isAvailable()) {
         try {
-          console.log(`[AutoConnect] Trying ${id}...`)
-          const provider = await connector.connect()
-          return { provider, connectorId: id }
+          console.log(`[AutoConnect] Trying ${id}...`);
+          const provider = await connector.connect();
+          return { provider, connectorId: id };
         } catch (error) {
-          console.error(`[AutoConnect] ${id} failed:`, error)
-          continue
+          console.error(`[AutoConnect] ${id} failed:`, error);
+          continue;
         }
       }
     }
-
-    // If no injected wallet, use WalletConnect
-    console.log('[AutoConnect] No injected wallet found, using WalletConnect')
-    const provider = await walletConnectConnector.connect()
-    return { provider, connectorId: 'walletconnect' }
+    // Fallback to WalletConnect if all else fails
+    const walletConnect = this.getConnector('walletconnect');
+    if (walletConnect.isAvailable()) {
+      try {
+        console.log('[AutoConnect] Fallback to WalletConnect...');
+        const provider = await walletConnect.connect();
+        return { provider, connectorId: 'walletconnect' };
+      } catch (error) {
+        console.error('[AutoConnect] WalletConnect failed:', error);
+      }
+    }
+    throw new Error('No wallet connector available');
   }
 
   /**
@@ -134,12 +142,13 @@ export class ConnectorFactory {
    */
   private static isInjectedWallet(connectorId: ConnectorId): boolean {
     return [
+      'injected',
       'metamask',
       'binance',
       'trustwallet',
       'okxwallet',
       'fantomwallet',
-      'injected'
+      'coinbasewallet'
     ].includes(connectorId)
   }
 
@@ -149,22 +158,23 @@ export class ConnectorFactory {
   static getRecommendedMobileConnector(): ConnectorId {
     // Check if any specific wallet is available on mobile
     const mobileOrder: ConnectorId[] = [
-      'trustwallet',
+      'injected',
       'metamask',
       'binance',
+      'trustwallet',
       'okxwallet',
-      'injected'
+      'fantomwallet',
+      'walletconnect',
+      'coinbasewallet',
     ]
-
     for (const id of mobileOrder) {
       const connector = this.getConnector(id)
       if (connector.isAvailable()) {
         return id
       }
     }
-
-    // Default to WalletConnect for mobile
-    return 'walletconnect'
+    // If no wallet found, throw error
+    throw new Error('No wallet connector available for mobile')
   }
 
   /**

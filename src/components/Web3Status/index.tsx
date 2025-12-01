@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Activity, LogOut } from 'react-feather'
+import { Activity, LogOut, Copy } from 'react-feather'
 import styled, { css } from 'styled-components'
 import { darken, lighten } from 'polished'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
@@ -8,7 +8,8 @@ import MetaMaskIcon from '../../assets/images/metamask.png'
 import TrustWalletIcon from '../../assets/images/trustWallet.png'
 import OkxWalletIcon from '../../assets/images/okxWallet.png'
 import FantomWalletIcon from '../../assets/images/fantomWallet.png'
-import { CHAIN_ID } from '../../connectors'
+import { CHAIN_ID, NETWORK_NAME } from '../../connectors'
+import { useState } from 'react'
 import useENSName from '../../hooks/useENSName'
 import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useWalletModalToggle } from '../../state/application/hooks'
@@ -227,34 +228,38 @@ function StatusIcon({ walletType }: { walletType: string | null }) {
 
 function Web3StatusInner() {
   const { account, walletType, error, chainId, disconnect } = useWeb3()
-
   const { ENSName } = useENSName(account ?? undefined)
-
   const allTransactions = useAllTransactions()
-
   const sortedRecentTransactions = useMemo(() => {
     const txs = Object.values(allTransactions)
     return txs.filter(isTransactionRecent).sort(newTransactionsFirst)
   }, [allTransactions])
-
   const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
-
   const hasPendingTransactions = !!pending.length
   const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
-
+  const [copied, setCopied] = useState(false)
   // Check if wrong network
   const isWrongNetwork = chainId && chainId !== CHAIN_ID
 
-  const handleDisconnect = (e: React.MouseEvent) => {
+  const handleDisconnect = async (e: React.MouseEvent) => {
     e.stopPropagation()
-    disconnect()
+    await disconnect()
+  }
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (account) {
+      navigator.clipboard.writeText(account)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1200)
+    }
   }
 
   if (account) {
     return (
       <WalletWrapper>
-        <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
+        <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions} style={{ transition: 'background 0.3s, color 0.3s' }}>
           {hasPendingTransactions ? (
             <RowBetween>
               <Text>{pending?.length} Pending</Text> <Loader stroke="white" />
@@ -263,6 +268,13 @@ function Web3StatusInner() {
             <>
               {hasSocks ? SOCK : null}
               <Text>{ENSName || shortenAddress(account)}</Text>
+              <span style={{ marginLeft: 8, cursor: 'pointer' }} title={copied ? 'Copied!' : 'Copy Address'} onClick={handleCopy}>
+                <Copy size={16} color={copied ? '#4caf50' : '#888'} />
+              </span>
+              <span style={{ marginLeft: 12, fontSize: '0.9em', color: '#888', display: 'flex', alignItems: 'center' }}>
+                <Activity size={14} style={{ marginRight: 4 }} />
+                {chainId === CHAIN_ID ? NETWORK_NAME : `Unknown Network (${chainId})`}
+              </span>
             </>
           )}
           {!hasPendingTransactions && walletType && <StatusIcon walletType={walletType} />}
@@ -274,14 +286,19 @@ function Web3StatusInner() {
     )
   } else if (error || isWrongNetwork) {
     return (
-      <Web3StatusError onClick={toggleWalletModal}>
+      <Web3StatusError onClick={toggleWalletModal} style={{ animation: 'fadein 0.3s' }}>
         <NetworkIcon />
         <Text>{isWrongNetwork ? 'Wrong Network' : 'Error'}</Text>
+        {isWrongNetwork && (
+          <span style={{ marginLeft: 8, color: '#e53935', fontWeight: 500 }}>
+            Please connect to {NETWORK_NAME}
+          </span>
+        )}
       </Web3StatusError>
     )
   } else {
     return (
-      <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account}>
+      <Web3StatusConnect id="connect-wallet" onClick={toggleWalletModal} faded={!account} style={{ animation: 'fadein 0.3s' }}>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '0.5rem' }}>
           <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
           <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>

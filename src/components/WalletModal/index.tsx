@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ReactGA from 'react-ga'
 import styled, { keyframes } from 'styled-components'
-import { isMobile } from 'react-device-detect'
 import usePrevious from '../../hooks/usePrevious'
 import { useWalletModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 
@@ -9,11 +8,10 @@ import Modal from '../Modal'
 import AccountDetails from '../AccountDetails'
 import PendingView from './PendingView'
 import Option from './Option'
-import { SUPPORTED_WALLETS } from '../../constants'
+import { SUPPORTED_WALLETS, detectInstalledWallets, WalletType } from '../../connectors/utils'
 import { ExternalLink } from '../Shared'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { useWeb3 } from '../../providers/Web3Provider'
-import { WalletType } from '../../connectors/utils'
 
 const fadeIn = keyframes`
   from {
@@ -300,7 +298,7 @@ export default function WalletModal({
   }, [setWalletView, isConnected, error, walletType, walletModalOpen, activePrevious, walletTypePrevious])
 
   const tryActivation = async (walletTypeToConnect: WalletType) => {
-    const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.walletType === walletTypeToConnect)
+    const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.type === walletTypeToConnect)
     const name = wallet?.name || 'Unknown'
 
     // log selected wallet
@@ -333,53 +331,63 @@ export default function WalletModal({
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
-    return Object.keys(SUPPORTED_WALLETS).map(key => {
-      const option = SUPPORTED_WALLETS[key]
-
-      // check for mobile options
-      if (isMobile) {
-        if (!window.web3 && !window.ethereum && (option.walletType === 'WALLETCONNECT' || option.walletType === 'COINBASE')) {
-          return (
-            <Option
-              onClick={() => {
-                tryActivation(option.walletType)
-              }}
-              id={`connect-${key}`}
-              key={key}
-              active={option.walletType === walletType}
-              color={option.color}
-              link={option.href}
-              header={option.name}
-              subheader={null}
-              icon={require('../../assets/images/' + option.iconName)}
-            />
-          )
-        }
-        return null
+    const detectedWallets = detectInstalledWallets();
+    const statusAndTooltip = {
+      METAMASK: {
+        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
+        tooltip: 'Best for Chrome/Firefox. Install MetaMask extension from metamask.io.'
+      },
+      TRUST_WALLET: {
+        status: () => 'Mobile Only',
+        tooltip: 'Use Trust Wallet app on mobile devices.'
+      },
+      BINANCE: {
+        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
+        tooltip: 'Binance Chain Wallet for BSC. Install from binance.org.'
+      },
+      OKX_WALLET: {
+        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
+        tooltip: 'OKX Wallet browser extension or app.'
+      },
+      FANTOM_WALLET: {
+        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
+        tooltip: 'Fantom Wallet extension for Fantom and BSC.'
+      },
+      WALLETCONNECT: {
+        status: () => 'Available',
+        tooltip: 'Connect any mobile wallet via QR code.'
+      },
+      COINBASE: {
+        status: () => 'Available',
+        tooltip: 'Connect with Coinbase Wallet app.'
+      },
+      INJECTED: {
+        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
+        tooltip: 'Any browser-injected wallet (MetaMask, Trust, etc.).'
       }
-
-      // Desktop: show all wallets
-      if (!isMobile && !option.mobileOnly) {
-        return (
-          <Option
-            id={`connect-${key}`}
-            key={key}
-            onClick={() => {
-              option.walletType === walletType
-                ? setWalletView(WALLET_VIEWS.ACCOUNT)
-                : !option.href && tryActivation(option.walletType)
-            }}
-            active={option.walletType === walletType}
-            color={option.color}
-            link={option.href}
-            header={option.name}
-            subheader={null}
-            icon={require('../../assets/images/' + option.iconName)}
-          />
-        )
-      }
-      return null
-    })
+    };
+    return detectedWallets.map(wallet => {
+      const info = SUPPORTED_WALLETS[wallet.type];
+      if (!info) return null;
+      const statusObj = statusAndTooltip[wallet.type] || statusAndTooltip.INJECTED;
+      const statusLabel = statusObj.status(wallet.installed);
+      const tooltip = statusObj.tooltip;
+      return (
+        <Option
+          key={wallet.type}
+          id={`connect-${wallet.type}`}
+          onClick={() => tryActivation(wallet.type)}
+          active={wallet.type === walletType}
+          color={info.color}
+          header={info.name}
+          subheader={null}
+          icon={require('../../assets/images/' + info.iconName)}
+          clickable={wallet.installed && wallet.type !== walletType}
+          statusLabel={statusLabel}
+          tooltip={tooltip}
+        />
+      );
+    });
   }
 
   function getModalContent() {

@@ -1,277 +1,277 @@
-import { ethers } from 'ethers'
+// ...existing code...
+import type { WalletType } from '../global';
+export type { WalletType } from '../global';
 
-export type WalletType = 'METAMASK' | 'TRUST_WALLET' | 'OKX_WALLET' | 'FANTOM_WALLET' | 'WALLETCONNECT' | 'COINBASE' | 'INJECTED'
-
-export interface DetectedWallet {
-  type: WalletType
-  name: string
-  installed: boolean
+export interface WalletInfo {
+  type: WalletType;
+  name: string;
+  iconName: string;
+  description: string;
+  color: string;
+  connectorId: string;
+  primary?: boolean;
+  mobile?: boolean;
+  mobileOnly?: boolean;
 }
 
-/**
- * Detect installed wallets in browser
- */
-export function detectInstalledWallets(): DetectedWallet[] {
-  const wallets: DetectedWallet[] = []
-
-  // MetaMask - check it's MetaMask and not other wallets
-  wallets.push({
+export const SUPPORTED_WALLETS: { [key in WalletType | 'BINANCE']?: WalletInfo } = {
+  INJECTED: {
+    type: 'INJECTED',
+    name: 'Injected',
+    iconName: 'injected.png',
+    description: 'Any browser-injected wallet',
+    color: '#666',
+    connectorId: 'injected',
+    primary: true,
+    mobile: true,
+  },
+  METAMASK: {
     type: 'METAMASK',
     name: 'MetaMask',
-    installed: !!(
-      window.ethereum?.isMetaMask && 
-      !window.ethereum?.isTrust && 
-      !window.ethereum?.isFTM &&
-      !(window.ethereum as any)?.isTokenPocket
-    )
-  })
-
-  // Trust Wallet - check for isTrust flag or trustwallet object
-  wallets.push({
+    iconName: 'metamask.png',
+    description: 'MetaMask browser extension and mobile app',
+    color: '#f6851b',
+    connectorId: 'metamask',
+    primary: true,
+    mobile: true,
+  },
+  BINANCE: {
+    type: 'BINANCE',
+    name: 'Binance Wallet',
+    iconName: 'binance.svg',
+    description: 'Binance Chain Wallet extension',
+    color: '#f3ba2f',
+    connectorId: 'binance',
+    mobile: true,
+  },
+  TRUST_WALLET: {
     type: 'TRUST_WALLET',
     name: 'Trust Wallet',
-    installed: !!(window.ethereum?.isTrust || (window as any).trustwallet)
-  })
-
-  // OKX Wallet - check for okxwallet object
-  wallets.push({
+    iconName: 'trustWallet.png',
+    description: 'Trust Wallet browser and app',
+    color: '#3375bb',
+    connectorId: 'trustwallet',
+    mobile: true,
+  },
+  OKX_WALLET: {
     type: 'OKX_WALLET',
     name: 'OKX Wallet',
-    installed: !!(window.okxwallet || (window as any).okxwallet)
-  })
-
-  // Fantom Wallet - check for ftmwallet or isFTM
-  wallets.push({
+    iconName: 'okxWallet.png',
+    description: 'OKX Wallet extension and app',
+    color: '#000',
+    connectorId: 'okxwallet',
+    mobile: true,
+  },
+  FANTOM_WALLET: {
     type: 'FANTOM_WALLET',
     name: 'Fantom Wallet',
-    installed: !!((window as any).ftmwallet || window.ethereum?.isFTM)
-  })
-
-  // WalletConnect (always available)
-  wallets.push({
+    iconName: 'fantomWallet.png',
+    description: 'Fantom Wallet extension',
+    color: '#1969ff',
+    connectorId: 'fantomwallet',
+  },
+  WALLETCONNECT: {
     type: 'WALLETCONNECT',
     name: 'WalletConnect',
-    installed: true
-  })
-
-  // Coinbase Wallet (always available via SDK)
-  wallets.push({
+    iconName: 'walletConnectIcon.svg',
+    description: 'WalletConnect QR and mobile',
+    color: '#4196fc',
+    connectorId: 'walletconnect',
+    mobile: true,
+  },
+  COINBASE: {
     type: 'COINBASE',
     name: 'Coinbase Wallet',
-    installed: true
-  })
+    iconName: 'coinbaseWalletIcon.svg',
+    description: 'Coinbase Wallet app',
+    color: '#1652f0',
+    connectorId: 'coinbasewallet',
+    mobile: true,
+  },
+};
 
-  return wallets
+
+
+export interface DetectedWallet {
+  type: WalletType;
+  name: string;
+  installed: boolean;
 }
 
-/**
- * Get wallet provider from window object
- */
+export function detectInstalledWallets(): DetectedWallet[] {
+  const eth = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
+  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const detected: DetectedWallet[] = [];
+  for (const key of Object.keys(SUPPORTED_WALLETS) as WalletType[]) {
+    let installed = false;
+    switch (key) {
+      case 'INJECTED':
+        installed = !!eth;
+        break;
+      case 'METAMASK':
+        installed = !!(eth?.isMetaMask && !eth?.isTrust && !eth?.isFTM && !eth?.isTokenPocket && !(eth as any)?.isBinance && !(eth as any)?.isOKXWallet);
+        break;
+      case 'BINANCE':
+        installed = !!(eth?.isBinance || (window as any).BinanceChain);
+        break;
+      case 'TRUST_WALLET':
+        installed = !!(eth?.isTrust || eth?.isTrustWallet || (window as any).trustwallet || (isMobile && eth && eth.isMetaMask === undefined && eth.isTrust === undefined && eth.isTokenPocket === undefined && eth.isBinance === undefined && eth.isOKXWallet === undefined));
+        break;
+      case 'OKX_WALLET':
+        installed = !!((window as any).okxwallet || eth?.isOKXWallet);
+        break;
+      case 'FANTOM_WALLET':
+        installed = !!((window as any).ftmwallet || eth?.isFTM);
+        break;
+      case 'WALLETCONNECT':
+      case 'COINBASE':
+        installed = true;
+        break;
+    }
+    detected.push({
+      type: key as WalletType,
+      name: SUPPORTED_WALLETS[key]?.name || key,
+      installed,
+    });
+  }
+  return detected;
+}
+
+// Ensures the provider is connected to BSC Mainnet (chainId 56)
+export async function ensureBSCMainnet(provider: any): Promise<void> {
+  const BSC_CHAIN_ID = 56;
+  const BSC_CHAIN_ID_HEX = '0x38';
+  const BSC_PARAMS = {
+    chainId: BSC_CHAIN_ID_HEX,
+    chainName: 'BNB Smart Chain Mainnet',
+    nativeCurrency: {
+      name: 'BNB',
+      symbol: 'BNB',
+      decimals: 18
+    },
+    rpcUrls: [
+      'https://bsc-dataseed.binance.org/',
+      'https://bsc-dataseed2.binance.org/',
+      'https://bsc-dataseed3.binance.org/',
+      'https://bsc-dataseed1.bnbchain.org/',
+      'https://bsc-dataseed.defibit.io/',
+      'https://bsc-dataseed.ninicoin.io'
+    ],
+    blockExplorerUrls: ['https://bscscan.com']
+  };
+
+  let currentChainId: string | number | undefined;
+  if (provider && provider.send) {
+    // ethers v5 provider
+    currentChainId = (await provider.send('eth_chainId', [])) || (await provider.getNetwork()).chainId;
+  } else if (provider && provider.request) {
+    // EIP-1193 provider
+    currentChainId = await provider.request({ method: 'eth_chainId' });
+  }
+  if (typeof currentChainId === 'string') {
+    if (currentChainId.startsWith('0x')) {
+      currentChainId = parseInt(currentChainId, 16);
+    } else {
+      currentChainId = parseInt(currentChainId, 10);
+    }
+  }
+  if (currentChainId !== BSC_CHAIN_ID) {
+    try {
+      await provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: BSC_CHAIN_ID_HEX }]
+      });
+    } catch (switchError) {
+      // 4902 = chain not added
+      if (switchError.code === 4902 || (switchError.data && switchError.data.originalError && switchError.data.originalError.code === 4902)) {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [BSC_PARAMS]
+        });
+      } else {
+        throw switchError;
+      }
+    }
+  }
+}
+
 export function getWalletProvider(walletType: WalletType): any {
-  console.log(`[getWalletProvider] Looking for ${walletType}`)
-  console.log('[getWalletProvider] window.ethereum:', window.ethereum)
-  console.log('[getWalletProvider] window.okxwallet:', window.okxwallet)
-  
+  if (typeof window === 'undefined') return null;
   switch (walletType) {
     case 'METAMASK':
-      // Return MetaMask if it's detected and not other wallets
-      if (
-        window.ethereum?.isMetaMask && 
-        !window.ethereum?.isTrust && 
-        !window.ethereum?.isFTM &&
-        !(window.ethereum as any)?.isTokenPocket
-      ) {
-        console.log('[getWalletProvider] Found MetaMask')
-        return window.ethereum
-      }
-      console.log('[getWalletProvider] MetaMask not found')
-      return null
-
+      // MetaMask injects window.ethereum and sets isMetaMask
+      if (window.ethereum && window.ethereum.isMetaMask) return window.ethereum;
+      return null;
     case 'TRUST_WALLET':
-      // Trust Wallet - prefer window.ethereum.isTrust
-      if (window.ethereum?.isTrust) {
-        console.log('[getWalletProvider] Found Trust Wallet via window.ethereum.isTrust')
-        return window.ethereum
-      }
-      // Fallback to window.trustwallet if exists
-      if ((window as any).trustwallet) {
-        console.log('[getWalletProvider] Found Trust Wallet via window.trustwallet')
-        return (window as any).trustwallet
-      }
-      // Fallback to window.ethereum if available (compatible mode)
-      if (window.ethereum) {
-        console.log('[getWalletProvider] Trust Wallet not detected, falling back to window.ethereum')
-        return window.ethereum
-      }
-      console.log('[getWalletProvider] Trust Wallet not found')
-      return null
-
+      // Trust Wallet injects window.ethereum and sets isTrust
+      if (window.ethereum && window.ethereum.isTrust) return window.ethereum;
+      return null;
     case 'OKX_WALLET':
-      // OKX Wallet - window.okxwallet is the primary provider
-      const okxProvider = window.okxwallet || (window as any).okxwallet
-      if (okxProvider) {
-        console.log('[getWalletProvider] Found OKX Wallet')
-        return okxProvider
-      }
-      // Fallback to window.ethereum if available (compatible mode)
-      if (window.ethereum) {
-        console.log('[getWalletProvider] OKX Wallet not detected, falling back to window.ethereum')
-        return window.ethereum
-      }
-      console.log('[getWalletProvider] OKX Wallet not found')
-      return null
-
+      // OKX Wallet injects window.okxwallet or window.ethereum with isOkxWallet
+      if ((window as any).okxwallet) return (window as any).okxwallet;
+      if (window.ethereum && (window.ethereum as any).isOkxWallet) return window.ethereum;
+      return null;
     case 'FANTOM_WALLET':
-      // Fantom wallet detection - check multiple possibilities
-      console.log('[getWalletProvider] Checking for Fantom Wallet')
-      console.log('[getWalletProvider] window.ethereum?.isFTM:', window.ethereum?.isFTM)
-      console.log('[getWalletProvider] (window as any).ftmwallet:', (window as any).ftmwallet)
-      
-      // Check if Fantom uses window.ethereum like other injected wallets
-      if (window.ethereum?.isFTM) {
-        console.log('[getWalletProvider] Found Fantom Wallet via window.ethereum.isFTM')
-        return window.ethereum
-      }
-      
-      // Check for dedicated ftmwallet object
-      if ((window as any).ftmwallet) {
-        console.log('[getWalletProvider] Found Fantom Wallet via window.ftmwallet')
-        return (window as any).ftmwallet
-      }
-      
-      // Fallback to window.ethereum if available (compatible mode)
-      if (window.ethereum) {
-        console.log('[getWalletProvider] Fantom Wallet not detected, falling back to window.ethereum (MetaMask-compatible mode)')
-        return window.ethereum
-      }
-      
-      console.log('[getWalletProvider] Fantom Wallet not found')
-      return null
-
+      // Fantom Wallet injects window.ftmwallet or window.ethereum with isFantom
+      if ((window as any).ftmwallet) return (window as any).ftmwallet;
+      if (window.ethereum && (window.ethereum as any).isFantom) return window.ethereum;
+      return null;
+    case 'BINANCE':
+      // Binance Wallet injects window.BinanceChain or window.ethereum with isBinanceChain
+      if ((window as any).BinanceChain) return (window as any).BinanceChain;
+      if (window.ethereum && (window.ethereum as any).isBinanceChain) return window.ethereum;
+      return null;
+    case 'INJECTED':
+      // Fallback: any injected provider
+      if (window.ethereum) return window.ethereum;
+      return null;
     default:
-      return null
+      return null;
   }
 }
 
-/**
- * Check if a specific wallet is installed
- */
+// Returns true if the given wallet type is installed in the browser
 export function isWalletInstalled(walletType: WalletType): boolean {
-  // WalletConnect and Coinbase are always available (via SDK)
-  if (walletType === 'WALLETCONNECT' || walletType === 'COINBASE') {
-    return true
-  }
-  
-  // For injected wallets, check if provider exists
-  const provider = getWalletProvider(walletType)
-  return provider !== null
-}
-
-/**
- * Request accounts from wallet
- */
-export async function requestAccounts(provider: any): Promise<string[]> {
-  try {
-    const accounts = await provider.request({
-      method: 'eth_requestAccounts'
-    })
-    return accounts
-  } catch (error) {
-    console.error('Error requesting accounts:', error)
-    throw error
+  const eth = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
+  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  switch (walletType) {
+    case 'INJECTED':
+      return !!eth;
+    case 'METAMASK':
+      return !!(eth?.isMetaMask && !eth?.isTrust && !eth?.isFTM && !eth?.isTokenPocket && !(eth as any)?.isBinance && !(eth as any)?.isOKXWallet);
+    case 'BINANCE':
+      return !!(eth?.isBinance || (window as any).BinanceChain);
+    case 'TRUST_WALLET':
+      return !!(eth?.isTrust || eth?.isTrustWallet || (window as any).trustwallet || (isMobile && eth && eth.isMetaMask === undefined && eth.isTrust === undefined && eth.isTokenPocket === undefined && eth.isBinance === undefined && eth.isOKXWallet === undefined));
+    case 'OKX_WALLET':
+      return !!((window as any).okxwallet || eth?.isOKXWallet);
+    case 'FANTOM_WALLET':
+      return !!((window as any).ftmwallet || eth?.isFTM);
+    case 'WALLETCONNECT':
+    case 'COINBASE':
+      return true;
+    default:
+      return false;
   }
 }
 
-/**
- * Switch to BSC Mainnet
- */
-export async function switchToBSCMainnet(provider: ethers.providers.Web3Provider): Promise<void> {
-  const CHAIN_ID_HEX = '0x38' // 56 in hex
-  
-  try {
-    await provider.send('wallet_switchEthereumChain', [
-      { chainId: CHAIN_ID_HEX }
-    ])
-  } catch (switchError) {
-    // This error code indicates that the chain has not been added to the wallet
-    if ((switchError as any).code === 4902) {
-      await addBSCMainnet(provider)
-    } else {
-      throw switchError
-    }
-  }
-}
-
-/**
- * Add BSC Mainnet to wallet
- */
-export async function addBSCMainnet(provider: ethers.providers.Web3Provider): Promise<void> {
-  await provider.send('wallet_addEthereumChain', [
-    {
-      chainId: '0x38',
-      chainName: 'BNB Smart Chain Mainnet',
-      nativeCurrency: {
-        name: 'BNB',
-        symbol: 'BNB',
-        decimals: 18
-      },
-      rpcUrls: [
-        'https://bsc-dataseed1.binance.org',
-        'https://bsc-dataseed2.binance.org',
-        'https://bsc-dataseed3.binance.org',
-        'https://bsc-dataseed4.binance.org'
-      ],
-      blockExplorerUrls: ['https://bscscan.com']
-    }
-  ])
-}
-
-/**
- * Ensure user is on BSC Mainnet
- */
-export async function ensureBSCMainnet(provider: ethers.providers.Web3Provider): Promise<void> {
-  const network = await provider.getNetwork()
-  
-  if (network.chainId !== 56) {
-    await switchToBSCMainnet(provider)
-  }
-}
-
-/**
- * Setup event listeners for wallet
- */
+// Attaches wallet event listeners and returns a cleanup function
 export function setupWalletListeners(
   provider: any,
-  onAccountsChanged: (accounts: string[]) => void,
-  onChainChanged: (chainId: string) => void,
-  onDisconnect: () => void
+  onAccountsChanged?: (accounts: string[]) => void,
+  onChainChanged?: (chainId: string) => void,
+  onDisconnect?: (error?: any) => void
 ): () => void {
-  if (!provider || !provider.on) {
-    return () => {}
-  }
+  if (!provider || typeof provider.on !== 'function') return () => { };
 
-  const handleAccountsChanged = (accounts: string[]) => {
-    onAccountsChanged(accounts)
-  }
+  if (onAccountsChanged) provider.on('accountsChanged', onAccountsChanged);
+  if (onChainChanged) provider.on('chainChanged', onChainChanged);
+  if (onDisconnect) provider.on('disconnect', onDisconnect);
 
-  const handleChainChanged = (chainId: string) => {
-    onChainChanged(chainId)
-  }
-
-  const handleDisconnect = () => {
-    onDisconnect()
-  }
-
-  provider.on('accountsChanged', handleAccountsChanged)
-  provider.on('chainChanged', handleChainChanged)
-  provider.on('disconnect', handleDisconnect)
-
-  // Return cleanup function
+  // Cleanup function to remove listeners
   return () => {
-    if (provider.removeListener) {
-      provider.removeListener('accountsChanged', handleAccountsChanged)
-      provider.removeListener('chainChanged', handleChainChanged)
-      provider.removeListener('disconnect', handleDisconnect)
-    }
-  }
+    if (onAccountsChanged) provider.removeListener('accountsChanged', onAccountsChanged);
+    if (onChainChanged) provider.removeListener('chainChanged', onChainChanged);
+    if (onDisconnect) provider.removeListener('disconnect', onDisconnect);
+  };
 }

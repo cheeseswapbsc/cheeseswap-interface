@@ -1,6 +1,11 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { ExternalLink } from '../Shared'
+
+import React from 'react';
+import { AiOutlineInfoCircle as AiOutlineInfoCircleRaw } from 'react-icons/ai';
+import type { IconBaseProps } from 'react-icons/lib';
+import styled, { keyframes } from 'styled-components';
+import { ExternalLink } from '../Shared';
+
+const AiOutlineInfoCircle = AiOutlineInfoCircleRaw as React.ComponentType<IconBaseProps>;
 
 const slideIn = keyframes`
   from {
@@ -41,7 +46,7 @@ const InfoCard = styled.button<{ active?: boolean }>`
   }
   
   &:focus {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary1}30;
+    box-shadow: none !important;
     border-color: ${({ theme }) => theme.colors.primary1};
   }
   
@@ -77,7 +82,7 @@ const OptionCardClickable = styled(OptionCard as any)<{ clickable?: boolean }>`
     ${({ clickable, theme }) => clickable && `
       border-color: ${theme.colors.primary1}80;
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: none !important;
       
       &::before {
         opacity: 1;
@@ -115,7 +120,7 @@ const GreenCircle = styled.div`
     margin-right: 6px;
     background-color: ${({ theme }) => theme.colors.green1};
     border-radius: 50%;
-    box-shadow: 0 0 5px ${({ theme }) => theme.colors.green1}60;
+    box-shadow: none !important;
     animation: ${pulse} 2s ease-in-out infinite;
   }
 `
@@ -173,18 +178,7 @@ const IconWrapper = styled.div<{ size?: number | null }>`
   `};
 `
 
-export default function Option({
-  link = null,
-  clickable = true,
-  size,
-  onClick = null,
-  color,
-  header,
-  subheader = null,
-  icon,
-  active = false,
-  id
-}: {
+type OptionProps = {
   link?: string | null
   clickable?: boolean
   size?: number | null
@@ -195,9 +189,41 @@ export default function Option({
   icon: string
   active?: boolean
   id: string
-}) {
+  statusLabel?: string
+  tooltip?: string
+}
+
+export default function Option({
+  link = null,
+  clickable = true,
+  size,
+  onClick = null,
+  color,
+  header,
+  subheader = null,
+  icon,
+  active = false,
+  id,
+  statusLabel = '',
+  tooltip = ''
+}: OptionProps) {
   const content = (
-    <OptionCardClickable id={id} onClick={onClick} clickable={clickable && !active} active={active}>
+    <OptionCardClickable
+      id={id}
+      onClick={onClick}
+      clickable={clickable && !active}
+      active={active}
+      role="button"
+      aria-pressed={active}
+      aria-label={typeof header === 'string' ? header : undefined}
+      tabIndex={0}
+      onKeyDown={e => {
+        if ((e.key === 'Enter' || e.key === ' ') && onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       <OptionCardLeft>
         <HeaderText color={color}>
           {active ? (
@@ -210,11 +236,19 @@ export default function Option({
             ''
           )}
           {header}
+          {tooltip && (
+            <span style={{ marginLeft: 6, cursor: 'pointer' }} title={tooltip} aria-label={tooltip}>
+              <AiOutlineInfoCircle size={16} />
+            </span>
+          )}
         </HeaderText>
         {subheader && <SubHeader>{subheader}</SubHeader>}
+        {statusLabel && (
+          <div style={{ fontSize: '0.7em', color: '#888', marginTop: 2 }}>{statusLabel}</div>
+        )}
       </OptionCardLeft>
       <IconWrapper size={size}>
-        <img src={icon} alt={'Icon'} />
+        <img src={icon} alt={typeof header === 'string' ? `${header} icon` : 'Wallet icon'} />
       </IconWrapper>
     </OptionCardClickable>
   )

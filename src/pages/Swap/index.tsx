@@ -47,9 +47,9 @@ const PageContainer = styled.div<{ showChart: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  gap: 1rem;
+  gap: 0.85rem;
   width: 100%;
-  max-width: ${({ showChart }) => showChart ? '1320px' : '540px'};
+  max-width: ${({ showChart }) => showChart ? '1120px' : '460px'};
   margin: 0 auto;
   justify-content: ${({ showChart }) => showChart ? 'flex-start' : 'center'};
   transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,7 +62,7 @@ const PageContainer = styled.div<{ showChart: boolean }>`
 
 const SwapContainer = styled.div`
   width: 100%;
-  max-width: 540px;
+  max-width: 460px;
   flex-shrink: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
@@ -75,16 +75,16 @@ const ChartContainer = styled.div<{ isVisible: boolean; targetHeight?: number }>
   flex: 1;
   min-width: 0;
   display: flex;
-  height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : '100%')};
-  min-height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : '420px')};
-  max-height: ${({ targetHeight }) => (targetHeight ? `${targetHeight}px` : 'none')};
+  height: ${({ targetHeight }) => (targetHeight ? `${Math.round(Number(targetHeight) * 0.85)}px` : '85%')};
+  min-height: ${({ targetHeight }) => (targetHeight ? `${Math.round(Number(targetHeight) * 0.85)}px` : '357px')};
+  max-height: ${({ targetHeight }) => (targetHeight ? `${Math.round(Number(targetHeight) * 0.85)}px` : 'none')};
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transform: translateX(${({ isVisible }) => (isVisible ? '0' : '-20px')});
+  transform: translateX(${({ isVisible }) => (isVisible ? '0' : '-17px')});
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
   ${({ theme }) => theme.mediaWidth.upToMedium`
     height: auto;
-    min-height: 420px;
+    min-height: 357px;
     max-height: none;
   `}
 `
@@ -94,14 +94,14 @@ const ChartToggleButton = styled.button<{ active: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.bg3};
   color: ${({ theme, active }) => active ? theme.colors.primary1 : theme.colors.text1};
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
+  padding: 0.425rem 0.64rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  border-radius: 12px;
+  gap: 0.425rem;
+  border-radius: 10px;
   transition: all 0.2s;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   
   &:hover {
     background: ${({ theme }) => theme.colors.bg3};
@@ -109,12 +109,12 @@ const ChartToggleButton = styled.button<{ active: boolean }>`
   }
   
   svg {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
   }
   
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 0.5rem;
+    padding: 0.425rem;
     span {
       display: none;
     }
@@ -125,8 +125,8 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  gap: 1rem;
+  margin-bottom: 8px;
+  gap: 0.85rem;
 `
 
 export default function Swap() {

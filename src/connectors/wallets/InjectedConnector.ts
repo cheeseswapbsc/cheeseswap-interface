@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
-import { BaseWalletConnector } from './BaseConnector'
-import { getWalletProvider, ensureBSCMainnet, WalletType } from './utils'
+import { BaseWalletConnector } from '../BaseConnector'
+import { getWalletProvider, ensureBSCMainnet, WalletType } from '../utils'
 
 /**
  * Generic Injected Connector

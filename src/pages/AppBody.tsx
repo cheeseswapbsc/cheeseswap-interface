@@ -9,17 +9,13 @@ export const BodyWrapper = styled.div`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid ${({ theme }) => theme.colors.bg3};
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    0 0 0 1px ${({ theme }) => theme.colors.primary6};
+  box-shadow: none !important;
   border-radius: 24px;
   padding: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    box-shadow: 
-      0 12px 48px rgba(0, 0, 0, 0.16),
-      0 0 0 1px ${({ theme }) => theme.colors.primary5};
+    box-shadow: none !important;
   }
 `
 

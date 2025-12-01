@@ -6,6 +6,7 @@ export const CHAIN_ID = 56 as const
 export const CHAIN_ID_HEX = '0x38' as const
 export const NETWORK_NAME = 'BSC Mainnet'
 
+
 const NETWORK_URLS = [
   process.env.REACT_APP_NETWORK_URL_1,
   process.env.REACT_APP_NETWORK_URL_2,
@@ -13,38 +14,26 @@ const NETWORK_URLS = [
   process.env.REACT_APP_NETWORK_URL_4,
   process.env.REACT_APP_NETWORK_URL_5,
   process.env.REACT_APP_NETWORK_URL_6
-].filter(url => typeof url === 'string') as string[]
+].filter(url => typeof url === 'string') as string[];
 
 if (NETWORK_URLS.length === 0) {
-  throw new Error('At least one RPC URL must be defined in environment variables')
+  throw new Error('At least one RPC URL must be defined in environment variables');
 }
 
 /**
- * Create a read-only JSON-RPC provider for network calls
+ * Modern fallback provider using ethers.js FallbackProvider for round-robin/fallback
  */
-export function getNetworkProvider(): ethers.providers.JsonRpcProvider {
-  // Use first RPC URL for read-only operations
-  return new ethers.providers.JsonRpcProvider(NETWORK_URLS[0], {
-    name: NETWORK_NAME,
-    chainId: CHAIN_ID
-  })
-}
-
-/**
- * Get fallback provider with multiple RPCs for redundancy
- */
-export function getFallbackProvider(): ethers.providers.FallbackProvider {
+export function getNetworkProvider(): ethers.providers.FallbackProvider {
   const providers = NETWORK_URLS.map((url, index) => ({
     provider: new ethers.providers.JsonRpcProvider(url, {
       name: NETWORK_NAME,
       chainId: CHAIN_ID
     }),
     priority: index,
-    stallTimeout: 2000,
+    stallTimeout: 500,
     weight: 1
-  }))
-
-  return new ethers.providers.FallbackProvider(providers)
+  }));
+  return new ethers.providers.FallbackProvider(providers);
 }
 
 /**
@@ -122,7 +111,7 @@ let networkProvider: ethers.providers.JsonRpcProvider | null = null
 
 export function getNetworkLibrary(): ethers.providers.JsonRpcProvider {
   if (!networkProvider) {
-    networkProvider = getNetworkProvider()
+    networkProvider = getNetworkProvider() as any // FallbackProvider, cast for compatibility
   }
   return networkProvider
 }
@@ -133,6 +122,10 @@ export * from './errors'
 // Legacy support - map old WalletType to new ConnectorId
 export function walletTypeToConnectorId(walletType: WalletType): ConnectorId {
   switch (walletType) {
+    case 'INJECTED':
+      return 'injected'
+    default:
+      return 'injected'
     case 'METAMASK':
       return 'metamask'
     case 'TRUST_WALLET':
@@ -145,9 +138,5 @@ export function walletTypeToConnectorId(walletType: WalletType): ConnectorId {
       return 'walletconnect'
     case 'COINBASE':
       return 'coinbasewallet'
-    case 'INJECTED':
-      return 'injected'
-    default:
-      return 'injected'
-  }
+      }
 }

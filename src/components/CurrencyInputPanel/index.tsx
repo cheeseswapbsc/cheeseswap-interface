@@ -1,7 +1,7 @@
 import { Currency, Pair } from '@cheeseswapv2/sdk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { darken, rgba } from 'polished'
+import { darken } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../CurrencyLogo'
@@ -16,43 +16,35 @@ import TranslatedText from '../../components/TranslatedText'
 import { TranslateString } from '../../utils/translateTextHelpers'
 
 const InputRow = styled.div<{ selected: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
+  ${({ theme }) => theme.flexRowNoWrap};
   align-items: center;
-  padding: 1.1rem 1.5rem;
-  gap: 1rem;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 1rem 1.25rem;
-    gap: 0.75rem;
-  `}
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
 `
 
 const CurrencySelect = styled.button<{ selected: boolean }>`
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  min-width: 90px;
-  height: 2.75rem;
-  font-size: 16px;
+  min-width: 76px;
+  height: 2.34rem;
+  font-size: 13.6px;
   font-weight: 600;
   background: ${({ selected, theme }) => (selected ? 'rgba(102, 126, 234, 0.2)' : 'rgba(102, 126, 234, 0.25)')};
   color: #FFFFFF;
-  border-radius: 12px;
+  border-radius: 10.2px;
   outline: none;
   cursor: pointer;
   user-select: none;
   border: 1px solid rgba(102, 126, 234, 0.45);
-  padding: 0 0.85rem;
+  padding: 0 0.72rem;
   transition: all 0.2s;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+  box-shadow: none !important;
 
-  :focus,
   :hover {
     border-color: rgba(102, 126, 234, 0.65);
     background: rgba(102, 126, 234, 0.35);
-    color: #FFFFFF;
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
     transform: translateY(-1px);
   }
 
@@ -68,13 +60,13 @@ const LabelRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: center;
   color: ${({ theme }) => theme.colors.text3};
-  font-size: 0.8rem;
-  line-height: 1rem;
-  padding: 0 0.25rem;
-  margin-bottom: 0.65rem;
+    font-size: 0.68rem;
+    line-height: 0.85rem;
+  font-size: 0.68rem;
+  line-height: 0.85rem;
+  padding: 0 0.21rem;
+  margin-bottom: 0.55rem;
   letter-spacing: 0.01em;
-
-  span:hover {
     cursor: pointer;
     color: ${({ theme }) => darken(0.15, theme.colors.text1)};
   }
@@ -97,54 +89,44 @@ const StyledDropDown = styled(DropDown)<{ selected: boolean }>`
 `
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
-  ${({ theme }) => theme.flexColumnNoWrap}
+  ${({ theme }) => theme.flexColumnNoWrap};
   position: relative;
-  border-radius: ${({ hideInput }) => (hideInput ? '10px' : '18px')};
+  border-radius: ${({ hideInput }) => (hideInput ? '8.5px' : '15.3px')};
   z-index: 1;
 `
 
 const Container = styled.div<{ hideInput: boolean }>`
-  border-radius: ${({ hideInput }) => (hideInput ? '10px' : '18px')};
   border: 1px solid ${({ theme }) => theme.colors.bg3};
   background: ${({ theme }) => theme.colors.bg1};
-  box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.1);
+  border-radius: ${({ hideInput }) => (hideInput ? '8.5px' : '15.3px')};
+  box-shadow: none !important;
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
-  ${({ active }) => (active ? '  margin: 0 0.5rem 0 0.5rem;' : '  margin: 0 0.35rem 0 0.35rem;')}
-  font-size:  ${({ active }) => (active ? '17px' : '15px')};
+  margin: ${({ active }) => (active ? '0 0.43rem' : '0 0.3rem')};
+  font-size: ${({ active }) => (active ? '14.45px' : '12.75px')};
   font-weight: 600;
   color: #FFFFFF;
-  max-width: 140px;
+  max-width: 119px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    max-width: 90px;
-    font-size: 14px;
-  `}
 `
 
 const StyledBalanceMax = styled.button`
-  /* 25% smaller from previous defaults */
-  height: 27px;
+  height: 22.95px;
   background: ${({ theme }) => `linear-gradient(135deg, ${theme.colors.primary5} 0%, ${theme.colors.primary3} 100%)`};
   border: none;
-  border-radius: 9px;
-  font-size: 0.56rem;
+  border-radius: 7.65px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 0.48rem;
   cursor: pointer;
-  margin-left: 0.375rem;
-  padding: 0 0.825rem;
-  color: ${({ theme }) => theme.colors.buttonText || '#f4f4fb'};
-  transition: transform 0.2s, box-shadow 0.2s;
+  margin-left: 0.32rem;
+  padding: 0 0.7rem;
   white-space: nowrap;
 
   :hover {
     transform: translateY(-1px);
-    box-shadow: ${({ theme }) => `0 6px 14px ${rgba(theme.colors.primary3, 0.35)}`};
   }
 
   :focus {
@@ -156,10 +138,10 @@ const StyledBalanceMax = styled.button`
   }
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    margin-left: 0.375rem;
-    padding: 0 0.675rem;
-    height: 24px;
-  `};
+    margin-left: 0.32rem;
+    padding: 0 0.57rem;
+    height: 20.4px;
+  `}
 `
 
 interface CurrencyInputPanelProps {

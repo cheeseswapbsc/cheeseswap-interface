@@ -8,13 +8,13 @@ const Card = styled(Box)<{ padding?: string; border?: string; borderRadius?: str
   border-radius: ${({ borderRadius }) => borderRadius || '16px'};
   padding: ${({ padding }) => padding || '20px'};
   border: ${({ border }) => border || 'none'};
-  backdrop-filter: blur(20px);
-  background: ${({ theme }) => theme.colors.bg1};
-  box-shadow: ${({ flat }) => (flat ? 'none' : '0 4px 24px rgba(0, 0, 0, 0.08)')};
+    backdrop-filter: none;
+    background: ${({ theme }) => theme.colors.bg1};
+    box-shadow: none !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    box-shadow: ${({ flat }) => (flat ? 'none' : '0 8px 32px rgba(0, 0, 0, 0.12)')};
+    box-shadow: none !important;
   }
 `
 export default Card
@@ -22,7 +22,7 @@ export default Card
 export const LightCard = styled(Card)`
   border: 1px solid ${({ theme }) => theme.colors.bg3};
   background: ${({ theme }) => theme.colors.bg1};
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: none !important;
 `
 
 export const GreyCard = styled(Card)`
@@ -33,7 +33,7 @@ export const GreyCard = styled(Card)`
 export const OutlineCard = styled(Card)`
   border: 2px solid ${({ theme }) => theme.colors.primary1};
   background: ${({ theme }) => theme.colors.bg1};
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.primary6};
+  box-shadow: none !important;
 `
 
 export const YellowCard = styled(Card)`
@@ -41,7 +41,7 @@ export const YellowCard = styled(Card)`
   border: 1px solid rgba(245, 158, 11, 0.3);
   color: ${({ theme }) => theme.colors.yellow2};
   font-weight: 600;
-  backdrop-filter: blur(10px);
+    backdrop-filter: none;
 `
 
 export const PinkCard = styled(Card)`
@@ -49,16 +49,16 @@ export const PinkCard = styled(Card)`
   border: 1px solid rgba(236, 72, 153, 0.3);
   color: ${({ theme }) => theme.colors.primary1};
   font-weight: 600;
-  backdrop-filter: blur(10px);
+    backdrop-filter: none;
 `
 
 const BlueCardStyled = styled(Card)`
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
   border: 1px solid rgba(59, 130, 246, 0.3);
   color: ${({ theme }) => theme.colors.primary1};
-  border-radius: 16px;
+    border-radius: 13.6px;
   width: fit-content;
-  backdrop-filter: blur(10px);
+    backdrop-filter: none;
 `
 
 export const BlueCard = ({ children, ...rest }: CardProps) => {
