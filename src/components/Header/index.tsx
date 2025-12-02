@@ -91,10 +91,11 @@ const AccountElement = styled.div<{ active: boolean }>`
   align-items: center;
   background: ${({ theme, active }) => (!active ? theme.colors.bg2 : theme.colors.bg3)};
   border: 1px solid ${({ theme, active }) => (!active ? 'transparent' : theme.colors.primary1)};
-  border-radius: 12px;
+  border-radius: 9.6px; /* 20% smaller than 12px */
   white-space: nowrap;
   width: 100%;
-  padding: 4px;
+  padding: 3.2px; /* 20% smaller than 4px */
+  font-size: 0.8em; /* reduce font size for contained text */
   transition: all 0.2s ease;
 
   &:hover {
@@ -108,8 +109,9 @@ const AccountElement = styled.div<{ active: boolean }>`
   }
   
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    padding: 2px;
-    border-radius: 8px;
+    padding: 1.6px;
+    border-radius: 6.4px;
+    font-size: 0.7em;
   `};
 `
 
@@ -165,8 +167,10 @@ const HeaderControls = styled.div`
 `
 
 const BalanceText = styled(Text)`
+  font-size: 0.8em;
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
+    font-size: 0.7em;
   `};
 `
 

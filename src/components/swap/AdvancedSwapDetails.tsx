@@ -24,7 +24,7 @@ const InfoLink = styled(ExternalLink)`
   background: linear-gradient(135deg, #5f6fff 0%, #4b5aff 100%);
   color: #f8f9ff;
   text-decoration: none;
-  box-shadow: 0 14px 30px rgba(79, 93, 255, 0.35);
+  box-shadow: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;

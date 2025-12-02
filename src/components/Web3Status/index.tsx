@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { Activity, LogOut, Copy } from 'react-feather'
+import BinanceNetworkIcon from '../../assets/images/binance.svg'
 import styled, { css } from 'styled-components'
 import { darken, lighten } from 'polished'
 import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
@@ -11,7 +12,6 @@ import FantomWalletIcon from '../../assets/images/fantomWallet.png'
 import { CHAIN_ID, NETWORK_NAME } from '../../connectors'
 import { useState } from 'react'
 import useENSName from '../../hooks/useENSName'
-import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks'
 import { TransactionDetails } from '../../state/transactions/reducer'
@@ -178,11 +178,6 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
 
-const SOCK = (
-  <span role="img" aria-label="has socks emoji" style={{ marginTop: -4, marginBottom: -4 }}>
-    🧦
-  </span>
-)
 
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ walletType }: { walletType: string | null }) {
@@ -227,6 +222,7 @@ function StatusIcon({ walletType }: { walletType: string | null }) {
 }
 
 function Web3StatusInner() {
+  // Always call hooks at the top
   const { account, walletType, error, chainId, disconnect } = useWeb3()
   const { ENSName } = useENSName(account ?? undefined)
   const allTransactions = useAllTransactions()
@@ -236,11 +232,10 @@ function Web3StatusInner() {
   }, [allTransactions])
   const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
   const hasPendingTransactions = !!pending.length
-  const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
   const [copied, setCopied] = useState(false)
-  // Check if wrong network
   const isWrongNetwork = chainId && chainId !== CHAIN_ID
+  // Get native balance
 
   const handleDisconnect = async (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -257,6 +252,7 @@ function Web3StatusInner() {
   }
 
   if (account) {
+    // Show balance, address, wallet icon, copy, network image
     return (
       <WalletWrapper>
         <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions} style={{ transition: 'background 0.3s, color 0.3s' }}>
@@ -266,18 +262,21 @@ function Web3StatusInner() {
             </RowBetween>
           ) : (
             <>
-              {hasSocks ? SOCK : null}
-              <Text>{ENSName || shortenAddress(account)}</Text>
-              <span style={{ marginLeft: 8, cursor: 'pointer' }} title={copied ? 'Copied!' : 'Copy Address'} onClick={handleCopy}>
+              {/* Native balance display removed as requested */}
+              {/* 2. Wallet address (short) */}
+              <Text style={{ marginRight: 8 }}>{ENSName || shortenAddress(account)}</Text>
+              {/* 3. Wallet icon */}
+              {walletType && <span style={{ marginRight: 8 }}><StatusIcon walletType={walletType} /></span>}
+              {/* 4. Copy address */}
+              <span style={{ marginRight: 8, cursor: 'pointer' }} title={copied ? 'Copied!' : 'Copy Address'} onClick={handleCopy}>
                 <Copy size={16} color={copied ? '#4caf50' : '#888'} />
               </span>
-              <span style={{ marginLeft: 12, fontSize: '0.9em', color: '#888', display: 'flex', alignItems: 'center' }}>
-                <Activity size={14} style={{ marginRight: 4 }} />
-                {chainId === CHAIN_ID ? NETWORK_NAME : `Unknown Network (${chainId})`}
+              {/* 5. Network image */}
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={BinanceNetworkIcon} alt="BSC Network" style={{ height: 18, width: 'auto', marginLeft: 4 }} />
               </span>
             </>
           )}
-          {!hasPendingTransactions && walletType && <StatusIcon walletType={walletType} />}
         </Web3StatusConnected>
         <LogoutButton onClick={handleDisconnect} title="Disconnect Wallet">
           <LogOut />
