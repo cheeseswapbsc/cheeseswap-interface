@@ -16,6 +16,8 @@ import useAddTokenToMetamask from '../../hooks/useAddTokenToMetamask'
 
 const Wrapper = styled.div`
   width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
   overflow-y: auto;
 `
 const Section = styled(AutoColumn)`
@@ -108,7 +110,13 @@ function TransactionSubmittedContent({
             </ExternalLink>
           )}
           {currencyToAdd && library?.provider?.isMetaMask && (
-            <ButtonLight mt="12px" padding="6px 12px" width="fit-content" onClick={addToken}>
+            <ButtonLight
+              mt="12px"
+              padding="6px 12px"
+              width="fit-content"
+              onClick={addToken}
+              style={{ padding: '4.8px 9.6px', fontSize: '12.8px' }}
+            >
               {!success ? (
                 <RowFixed>
                   Add {currencyToAdd.symbol} to Metamask <StyledLogo src={MetaMaskLogo} />
@@ -121,8 +129,8 @@ function TransactionSubmittedContent({
               )}
             </ButtonLight>
           )}
-          <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0' }}>
-            <Text fontWeight={700} fontSize={18}>
+          <ButtonPrimary onClick={onDismiss} style={{ margin: '20px 0 0 0', padding: '11.2px 16px', fontSize: '12.8px' }}>
+            <Text fontWeight={700} fontSize={12.8}>
               Close
             </Text>
           </ButtonPrimary>
@@ -178,8 +186,10 @@ export function TransactionErrorContent({ message, onDismiss }: { message: strin
         </AutoColumn>
       </Section>
       <BottomSection gap="12px">
-        <ButtonPrimary onClick={onDismiss}>Dismiss</ButtonPrimary>
-      </BottomSection>
+            <ButtonPrimary onClick={onDismiss} style={{ padding: '11.2px 16px', fontSize: '12.8px' }}>
+              Dismiss
+            </ButtonPrimary>
+          </BottomSection>
     </Wrapper>
   )
 }

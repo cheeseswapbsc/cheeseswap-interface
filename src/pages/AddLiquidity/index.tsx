@@ -2,6 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@cheeseswapv2/sdk'
 import React, { useCallback, useContext, useState } from 'react'
+import styled from 'styled-components'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
@@ -304,152 +305,183 @@ export default function AddLiquidity({
     }
     setTxHash('')
   }, [onFieldAInput, txHash])
+  const PageContainer = styled.div<{ showChart?: boolean }>`
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: ${({ showChart }) => (showChart ? '1120px' : '460px')};
+    margin: 0 auto;
+    justify-content: ${({ showChart }) => (showChart ? 'flex-start' : 'center')};
+    transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    ${({ theme }) => theme.mediaWidth.upToMedium`
+      flex-direction: column;
+      max-width: 100%;
+    `}
+  `
+
+  const AddLiquidityContainer = styled.div`
+    width: 100%;
+    max-width: 460px;
+    flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    ${({ theme }) => theme.mediaWidth.upToMedium`
+      max-width: 100%;
+    `}
+  `
 
   return (
     <>
-      <AppBody>
-        <AddRemoveTabs adding={true} />
-        <Wrapper>
-          <TransactionConfirmationModal
-            isOpen={showConfirm}
-            onDismiss={handleDismissConfirmation}
-            attemptingTxn={attemptingTxn}
-            hash={txHash}
-            content={() => (
-              <ConfirmationModalContent
-                title={noLiquidity ? 'You are creating a pool' : 'You will receive'}
+      <PageContainer showChart={false}>
+        <AddLiquidityContainer>
+          <AppBody>
+            <AddRemoveTabs adding={true} />
+            <Wrapper>
+              <TransactionConfirmationModal
+                isOpen={showConfirm}
                 onDismiss={handleDismissConfirmation}
-                topContent={modalHeader}
-                bottomContent={modalBottom}
+                attemptingTxn={attemptingTxn}
+                hash={txHash}
+                content={() => (
+                  <ConfirmationModalContent
+                    title={noLiquidity ? 'You are creating a pool' : 'You will receive'}
+                    onDismiss={handleDismissConfirmation}
+                    topContent={modalHeader}
+                    bottomContent={modalBottom}
+                  />
+                )}
+                pendingText={pendingText}
               />
-            )}
-            pendingText={pendingText}
-          />
-          <AutoColumn gap="20px">
-            {noLiquidity && (
-              <ColumnCenter>
-                <BlueCard>
-                  <AutoColumn gap="10px">
-                    <TYPE.link fontWeight={600} color={'primaryText1'}>
-                      You are the first liquidity provider.
-                    </TYPE.link>
-                    <TYPE.link fontWeight={600} color={'primaryText1'}>
-                      The ratio of tokens you add will set the price of this pool.
-                    </TYPE.link>
-                    <TYPE.link fontWeight={600} color={'primaryText1'}>
-                      Once you are happy with the rate click supply to review.
-                    </TYPE.link>
-                  </AutoColumn>
-                </BlueCard>
-              </ColumnCenter>
-            )}
-            <CurrencyInputPanel
-              value={formattedAmounts[Field.CURRENCY_A]}
-              onUserInput={onFieldAInput}
-              onMax={() => {
-                onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-              }}
-              onCurrencySelect={handleCurrencyASelect}
-              showMaxButton={!atMaxAmounts[Field.CURRENCY_A]}
-              currency={currencies[Field.CURRENCY_A]}
-              id="add-liquidity-input-tokena"
-              showCommonBases={false}
-            />
-            <ColumnCenter>
-              <Plus size="16" color={theme.colors.text2} />
-            </ColumnCenter>
-            <CurrencyInputPanel
-              value={formattedAmounts[Field.CURRENCY_B]}
-              onUserInput={onFieldBInput}
-              onCurrencySelect={handleCurrencyBSelect}
-              onMax={() => {
-                onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-              }}
-              showMaxButton={!atMaxAmounts[Field.CURRENCY_B]}
-              currency={currencies[Field.CURRENCY_B]}
-              id="add-liquidity-input-tokenb"
-              showCommonBases={false}
-            />
-            {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
-              <>
-                <GreyCard padding="0px" borderRadius={'20px'}>
-                  <RowBetween padding="1rem">
-                    <TYPE.subHeader fontWeight={700} fontSize={16}>
-                      {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
-                    </TYPE.subHeader>
-                  </RowBetween>{' '}
-                  <LightCard padding="1rem" borderRadius={'20px'}>
-                    <PoolPriceBar
-                      currencies={currencies}
-                      poolTokenPercentage={poolTokenPercentage}
-                      noLiquidity={noLiquidity}
-                      price={price}
-                    />
-                  </LightCard>
-                </GreyCard>
-              </>
-            )}
-
-            {!account ? (
-              <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
-            ) : (
-              <AutoColumn gap={'md'}>
-                {(approvalA === ApprovalState.NOT_APPROVED ||
-                  approvalA === ApprovalState.PENDING ||
-                  approvalB === ApprovalState.NOT_APPROVED ||
-                  approvalB === ApprovalState.PENDING) &&
-                  isValid && (
-                    <RowBetween>
-                      {approvalA !== ApprovalState.APPROVED && (
-                        <ButtonPrimary
-                          onClick={approveACallback}
-                          disabled={approvalA === ApprovalState.PENDING}
-                          width={approvalB !== ApprovalState.APPROVED ? '48%' : '100%'}
-                        >
-                          {approvalA === ApprovalState.PENDING ? (
-                            <Dots>Approving {currencies[Field.CURRENCY_A]?.symbol}</Dots>
-                          ) : (
-                            'Approve ' + currencies[Field.CURRENCY_A]?.symbol
-                          )}
-                        </ButtonPrimary>
-                      )}
-                      {approvalB !== ApprovalState.APPROVED && (
-                        <ButtonPrimary
-                          onClick={approveBCallback}
-                          disabled={approvalB === ApprovalState.PENDING}
-                          width={approvalA !== ApprovalState.APPROVED ? '48%' : '100%'}
-                        >
-                          {approvalB === ApprovalState.PENDING ? (
-                            <Dots>Approving {currencies[Field.CURRENCY_B]?.symbol}</Dots>
-                          ) : (
-                            'Approve ' + currencies[Field.CURRENCY_B]?.symbol
-                          )}
-                        </ButtonPrimary>
-                      )}
-                    </RowBetween>
-                  )}
-                <ButtonError
-                  onClick={() => {
-                    expertMode ? onAdd() : setShowConfirm(true)
+              <AutoColumn gap="20px">
+                {noLiquidity && (
+                  <ColumnCenter>
+                    <BlueCard>
+                      <AutoColumn gap="10px">
+                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                          You are the first liquidity provider.
+                        </TYPE.link>
+                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                          The ratio of tokens you add will set the price of this pool.
+                        </TYPE.link>
+                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                          Once you are happy with the rate click supply to review.
+                        </TYPE.link>
+                      </AutoColumn>
+                    </BlueCard>
+                  </ColumnCenter>
+                )}
+                <CurrencyInputPanel
+                  value={formattedAmounts[Field.CURRENCY_A]}
+                  onUserInput={onFieldAInput}
+                  onMax={() => {
+                    onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
                   }}
-                  disabled={!isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED}
-                  error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
-                >
-                  <Text fontSize={20} fontWeight={700}>
-                    {error ?? 'Supply'}
-                  </Text>
-                </ButtonError>
-              </AutoColumn>
-            )}
-          </AutoColumn>
-        </Wrapper>
-      </AppBody>
+                  onCurrencySelect={handleCurrencyASelect}
+                  showMaxButton={!atMaxAmounts[Field.CURRENCY_A]}
+                  currency={currencies[Field.CURRENCY_A]}
+                  id="add-liquidity-input-tokena"
+                  showCommonBases={false}
+                />
+                <ColumnCenter>
+                  <Plus size="16" color={theme.colors.text2} />
+                </ColumnCenter>
+                <CurrencyInputPanel
+                  value={formattedAmounts[Field.CURRENCY_B]}
+                  onUserInput={onFieldBInput}
+                  onCurrencySelect={handleCurrencyBSelect}
+                  onMax={() => {
+                    onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
+                  }}
+                  showMaxButton={!atMaxAmounts[Field.CURRENCY_B]}
+                  currency={currencies[Field.CURRENCY_B]}
+                  id="add-liquidity-input-tokenb"
+                  showCommonBases={false}
+                />
+                {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+                  <>
+                    <GreyCard padding="0px" borderRadius={'20px'}>
+                      <RowBetween padding="1rem">
+                        <TYPE.subHeader fontWeight={700} fontSize={16}>
+                          {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
+                        </TYPE.subHeader>
+                      </RowBetween>{' '}
+                      <LightCard padding="1rem" borderRadius={'20px'}>
+                        <PoolPriceBar
+                          currencies={currencies}
+                          poolTokenPercentage={poolTokenPercentage}
+                          noLiquidity={noLiquidity}
+                          price={price}
+                        />
+                      </LightCard>
+                    </GreyCard>
+                  </>
+                )}
 
-      {pair && !noLiquidity && pairState !== PairState.INVALID ? (
-        <AutoColumn style={{ minWidth: '27rem', marginTop: '1rem' }}>
-          <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
-        </AutoColumn>
-      ) : null}
+                {!account ? (
+                  <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+                ) : (
+                  <AutoColumn gap={'md'}>
+                    {(approvalA === ApprovalState.NOT_APPROVED ||
+                      approvalA === ApprovalState.PENDING ||
+                      approvalB === ApprovalState.NOT_APPROVED ||
+                      approvalB === ApprovalState.PENDING) &&
+                      isValid && (
+                        <RowBetween>
+                          {approvalA !== ApprovalState.APPROVED && (
+                            <ButtonPrimary
+                              onClick={approveACallback}
+                              disabled={approvalA === ApprovalState.PENDING}
+                              width={approvalB !== ApprovalState.APPROVED ? '48%' : '100%'}
+                            >
+                              {approvalA === ApprovalState.PENDING ? (
+                                <Dots>Approving {currencies[Field.CURRENCY_A]?.symbol}</Dots>
+                              ) : (
+                                'Approve ' + currencies[Field.CURRENCY_A]?.symbol
+                              )}
+                            </ButtonPrimary>
+                          )}
+                          {approvalB !== ApprovalState.APPROVED && (
+                            <ButtonPrimary
+                              onClick={approveBCallback}
+                              disabled={approvalB === ApprovalState.PENDING}
+                              width={approvalA !== ApprovalState.APPROVED ? '48%' : '100%'}
+                            >
+                              {approvalB === ApprovalState.PENDING ? (
+                                <Dots>Approving {currencies[Field.CURRENCY_B]?.symbol}</Dots>
+                              ) : (
+                                'Approve ' + currencies[Field.CURRENCY_B]?.symbol
+                              )}
+                            </ButtonPrimary>
+                          )}
+                        </RowBetween>
+                      )}
+                    <ButtonError
+                      onClick={() => {
+                        expertMode ? onAdd() : setShowConfirm(true)
+                      }}
+                      disabled={!isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED}
+                      error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
+                    >
+                      <Text fontSize={20} fontWeight={700}>
+                        {error ?? 'Supply'}
+                      </Text>
+                    </ButtonError>
+                  </AutoColumn>
+                )}
+              </AutoColumn>
+            </Wrapper>
+          </AppBody>
+        </AddLiquidityContainer>
+
+        {pair && !noLiquidity && pairState !== PairState.INVALID ? (
+          <AutoColumn style={{ minWidth: '27rem', marginTop: '1rem' }}>
+            <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+          </AutoColumn>
+        ) : null}
+      </PageContainer>
     </>
   )
 }

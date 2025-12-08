@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { Pair } from '@cheeseswapv2/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
@@ -21,6 +21,34 @@ import AppBody from '../AppBody'
 import { Dots } from '../../components/swap/styleds'
 import TranslatedText from '../../components/TranslatedText'
 import { TranslateString } from '../../utils/translateTextHelpers'
+
+const PageContainer = styled.div<{ showChart?: boolean }>`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: ${({ showChart }) => (showChart ? '1120px' : '460px')};
+  margin: 0 auto;
+  justify-content: ${({ showChart }) => (showChart ? 'flex-start' : 'center')};
+  transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    flex-direction: column;
+    max-width: 100%;
+  `}
+`
+
+const PoolContainer = styled.div`
+  width: 100%;
+  max-width: 460px;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    max-width: 100%;
+  `}
+`
 
 export default function Pool() {
   const theme = useContext(ThemeContext)
@@ -57,16 +85,18 @@ export default function Pool() {
 
   return (
     <>
-      <AppBody>
-        <SwapPoolTabs active={'pool'} />
-        <AutoColumn gap="lg" justify="center">
-          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 12 }} to="/add/ETH">
-            <Text fontWeight={700} fontSize={20}>
-              <TranslatedText translationId={100}>Add Liquidity</TranslatedText>
-            </Text>
-          </ButtonPrimary>
+      <PageContainer showChart={false}>
+        <PoolContainer>
+          <AppBody>
+            <SwapPoolTabs active={'pool'} />
+              <AutoColumn gap="lg" justify="center" style={{ marginTop: '1.5rem' }}>
+                <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 10 }} to="/add/ETH">
+                <Text fontWeight={700} fontSize={16}>
+                  <TranslatedText translationId={100}>Add Liquidity</TranslatedText>
+                </Text>
+              </ButtonPrimary>
 
-          <AutoColumn gap="12px" style={{ width: '100%' }}>
+              <AutoColumn gap="12px" style={{ width: '100%' }}>
             <RowBetween padding={'0 8px'}>
               <Text color={theme.colors.text1} fontWeight={700}>
                 <TranslatedText translationId={102}>Major Liquidity</TranslatedText>
@@ -115,7 +145,9 @@ export default function Pool() {
             </div>
           </AutoColumn>
         </AutoColumn>
-      </AppBody>
+          </AppBody>
+        </PoolContainer>
+      </PageContainer>
     </>
   )
 }
