@@ -90,7 +90,7 @@ const StyledAbsoluteImg = styled.a`
 `
 
 const LogoTitle = styled.img`
-  height: 54px;
+  height: 40.5px;
 `
 const SocialSection = styled.div`
   margin: 6px;

@@ -150,9 +150,9 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
     <AutoColumn gap="md">
       <AutoColumn gap="sm">
         <RowFixed>
-          <TYPE.black fontWeight={600} fontSize={14} color={theme.colors.text2}>
+          <TYPE.Black fontWeight={600} fontSize={14} color={theme.colors.text2}>
             <TranslatedText translationId={88}>Slippage tolerance</TranslatedText>
-          </TYPE.black>
+          </TYPE.Black>
           <QuestionHelper text="Your transaction will revert if the price changes unfavorably by more than this percentage." />
         </RowFixed>
         <RowBetween>
@@ -227,9 +227,9 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
 
       <AutoColumn gap="sm">
         <RowFixed>
-          <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+          <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
             <TranslatedText translationId={90}>Transaction deadline</TranslatedText>
-          </TYPE.black>
+          </TYPE.Black>
           <QuestionHelper text="Your transaction will revert if it is pending for more than this long." />
         </RowFixed>
         <RowFixed>
@@ -244,9 +244,9 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
               onChange={e => parseCustomDeadline(e.target.value)}
             />
           </OptionCustom>
-          <TYPE.body style={{ paddingLeft: '8px' }} fontSize={14}>
+          <TYPE.Body style={{ paddingLeft: '8px' }} fontSize={14}>
             <TranslatedText translationId={92}>minutes</TranslatedText>
-          </TYPE.body>
+          </TYPE.Body>
         </RowFixed>
       </AutoColumn>
     </AutoColumn>

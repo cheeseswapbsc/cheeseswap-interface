@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Code, PieChart, MessageCircle, Sunrise } from 'react-feather'
+import { Code, PieChart, MessageCircle, Award, ArrowDown } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -48,7 +48,7 @@ const StyledMenu = styled.div`
 `
 
 const MenuFlyout = styled.span`
-  min-width: 8.125rem;
+  min-width: 12.125rem;
   background-color: ${({ theme }) => theme.colors.bg1};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
@@ -96,27 +96,89 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://ogee.exchange/#/swap">
-            HECO
+          <MenuItem id="link" href="#">
+          <ArrowDown size={14} />
+            FARMS
           </MenuItem>
-          <MenuItem id="link" href="https://qsr.cheeseswap.app">
-            Quasar
+          <MenuItem
+          id="link"
+          href="https://pizza.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+          <Award size={14} />
+            Pizza
            </MenuItem>
-          <MenuItem id="link" href="https://cheesemaker.farm/">
-            <Sunrise size={14} />
-            Farm
+          <MenuItem
+          id="link"
+          href="https://mango.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Award size={14} />
+            Mango
           </MenuItem>
-          <MenuItem id="link" href="https://info.cheeseswap.app/">
+          <MenuItem
+          id="link"
+          href="https://kiwi.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Award size={14} />
+            Kiwi
+          </MenuItem>
+          <MenuItem
+          id="link"
+          href="https://hots.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Award size={14} />
+            Hots
+          </MenuItem>
+          <MenuItem
+          id="link"
+          href="https://cnft.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Award size={14} />
+            CNFT
+          </MenuItem>
+          <MenuItem
+          id="link"
+          href="https://cnft.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Award size={14} />
+            CNFT
+          </MenuItem>
+          <MenuItem
+          id="link"
+          href="https://info.cheeseswap.app/"
+          target="_blank"
+          rel="noopener noreferrer">
             <PieChart size={14} />
-            Chart
+            Analytics
           </MenuItem>
-          <MenuItem id="link" href="https://t.me/cheesemakerfarm">
+          <MenuItem
+          id="link"
+          href="https://discord.gg/KeFQnRmyW8"
+          target="_blank"
+          rel="noopener noreferrer">
             <MessageCircle size={14} />
-            Telegram
+            Discord
           </MenuItem>
-          <MenuItem id="link" href={CODE_LINK}>
+          <MenuItem
+          id="link"
+          href={CODE_LINK}
+          target="_blank"
+          rel="noopener noreferrer">
             <Code size={14} />
-            Code
+            Github
+          </MenuItem>
+          <MenuItem
+          id="link"
+          href="https://skynet.certik.com/projects/cheeseswap"
+          target="_blank"
+          rel="noopener noreferrer">
+            <Code size={14} />
+            Certik
           </MenuItem>
         </MenuFlyout>
       )}

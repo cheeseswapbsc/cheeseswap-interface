@@ -66,6 +66,31 @@ const HeaderElement = styled.div`
   }
 `
 
+const LogoHeaderElement = styled(HeaderElement)`
+  flex-shrink: 0;
+`
+
+const LogoNavGroup = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 7%;
+  min-width: 0;
+
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    gap: 2.5%;
+  `};
+
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    gap: 0.75%;
+  `};
+
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    gap: 0;
+    width: 100%;
+  `};
+`
+
 const HeaderElementWrap = styled.div`
   display: flex;
   align-items: center;
@@ -124,25 +149,25 @@ const CheeseIcon = styled.div`
   }
   
   img {
-    height: 3.5rem;
+    height: 2.625rem;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
   }
   
   ${({ theme }) => theme.mediaWidth.upToMedium`
     img {
-      height: 3rem;
+      height: 2.25rem;
     }
   `};
   
   ${({ theme }) => theme.mediaWidth.upToSmall`
     img {
-      height: 2.5rem;
+      height: 1.875rem;
     }
   `};
   
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     img {
-      height: 2rem;
+      height: 1.5rem;
     }
   `};
 `
@@ -181,19 +206,21 @@ export default function Header() {
   return (
     <HeaderFrame>
       <RowBetween style={{ alignItems: 'flex-start' }}>
-        <HeaderElement>
-          <Title href="/">
-            <CheeseIcon>
-              { !isDark?
-                <img src={Logob} alt="logo" />
-                :
-                <img src={Logow} alt="logo" />
-              }
-            </CheeseIcon>
-          </Title>
-        </HeaderElement>
+        <LogoNavGroup>
+          <LogoHeaderElement>
+            <Title href="/">
+              <CheeseIcon>
+                { !isDark?
+                  <img src={Logob} alt="logo" />
+                  :
+                  <img src={Logow} alt="logo" />
+                }
+              </CheeseIcon>
+            </Title>
+          </LogoHeaderElement>
 
-        <Nav />
+          <Nav />
+        </LogoNavGroup>
         <HeaderControls>
           <HeaderElement>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>

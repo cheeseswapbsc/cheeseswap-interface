@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const BodyWrapper = styled.div`
   position: relative;
-  max-width: 540px;
+  max-width: 480px;
   width: 100%;
   background: ${({ theme }) => theme.colors.bg1};
   backdrop-filter: blur(20px);

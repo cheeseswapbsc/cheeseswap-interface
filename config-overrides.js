@@ -33,7 +33,7 @@ module.exports = function override(config) {
       babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
       // Include problematic node_modules packages that need transpilation
-      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr)\/).*/;
+      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr|graphql)\/).*/;
       
       // Ensure babel options exist
       if (!babelRule.options) {
@@ -47,6 +47,7 @@ module.exports = function override(config) {
       babelRule.options.plugins.push(
         require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
         require.resolve('@babel/plugin-proposal-optional-chaining'),
+        require.resolve('@babel/plugin-proposal-class-properties'),
         // Transform CommonJS to ES modules
         [require.resolve('@babel/plugin-transform-modules-commonjs'), { loose: true }]
       );

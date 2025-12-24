@@ -14,7 +14,7 @@ const Tabs = styled.div`
   justify-content: space-evenly;
   gap: 1rem;
   flex: 1;
-  
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     gap: 0.5rem;
   `}
@@ -52,7 +52,7 @@ const StyledAbsoluteLink = styled.a`
     color: ${({ theme }) => theme.colors.primary1};
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 14px;
     padding: 0 0.5rem;
@@ -91,7 +91,7 @@ const StyledNavLink = styled(NavLink).attrs({
     color: ${({ theme }) => theme.colors.primary1};
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 14px;
     padding: 0 0.5rem;
@@ -116,8 +116,8 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
         <TranslatedText translationId={74}>Pool</TranslatedText>
       </StyledNavLink>
-      <StyledAbsoluteLink id={`pool-nav-link`} target="_blank" href={'https://www.binance.org/en/bridge?utm_source=CheeseSwap'}>
-          ERC20 Bridge
+      <StyledAbsoluteLink id={`bridge-nav-link`} target="_blank" rel="noopener noreferrer" href={'#/bridge'}>
+        Cross Chain Swap
       </StyledAbsoluteLink>
     </Tabs>
   )

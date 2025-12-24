@@ -217,7 +217,7 @@ export function CurrencySearch({
                       alt={`${selectedListInfo.current.name} list logo`}
                     />
                   ) : null}
-                  <TYPE.main id="currency-search-selected-list-name">{selectedListInfo.current.name}</TYPE.main>
+                  <TYPE.Main id="currency-search-selected-list-name">{selectedListInfo.current.name}</TYPE.Main>
                 </Row>
               ) : null}
               <LinkStyledButton

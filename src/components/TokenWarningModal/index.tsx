@@ -67,14 +67,14 @@ function TokenWarningCard({ token }: TokenWarningCardProps) {
           <div> </div>
         </AutoColumn>
         <AutoColumn gap="10px" justify="flex-start">
-          <TYPE.main>
+          <TYPE.Main>
             {token && token.name && token.symbol && token.name !== token.symbol
               ? `${token.name} (${token.symbol})`
               : token.name || token.symbol}{' '}
-          </TYPE.main>
+          </TYPE.Main>
           {chainId && (
             <ExternalLink style={{ fontWeight: 600 }} href={getBscscanLink(chainId, token.address, 'token')}>
-              <TYPE.blue title={token.address}>{shortenAddress(token.address)} (View on BscScan)</TYPE.blue>
+              <TYPE.Blue title={token.address}>{shortenAddress(token.address)} (View on BscScan)</TYPE.Blue>
             </ExternalLink>
           )}
         </AutoColumn>
@@ -102,19 +102,19 @@ export default function TokenWarningModal({
         <AutoColumn gap="lg">
           <AutoRow gap="6px">
             <StyledWarningIcon />
-            <TYPE.main color={'#e82020'}>Token imported</TYPE.main>
+            <TYPE.Main color={'#e82020'}>Token imported</TYPE.Main>
           </AutoRow>
-          <TYPE.body color={'#e82020'}>
+          <TYPE.Body color={'#e82020'}>
             Anyone can create an BEP20 token on BSC with <em>any</em> name, including creating fake versions of
             existing tokens and tokens that claim to represent projects that do not have a token.
-          </TYPE.body>
-          <TYPE.body color={'#e82020'}>
+          </TYPE.Body>
+          <TYPE.Body color={'#e82020'}>
             This interface can load arbitrary tokens by token addresses. Please take extra caution and do your research
             when interacting with arbitrary BEP20 tokens.
-          </TYPE.body>
-          <TYPE.body color={'#e82020'}>
+          </TYPE.Body>
+          <TYPE.Body color={'#e82020'}>
             If you purchase an arbitrary token, <strong>you may be unable to sell it back.</strong>
-          </TYPE.body>
+          </TYPE.Body>
           {tokens.map(token => {
             return <TokenWarningCard key={token.address} token={token} />
           })}
@@ -143,7 +143,7 @@ export default function TokenWarningModal({
                 onConfirm()
               }}
             >
-              <TYPE.body color="white">Continue</TYPE.body>
+              <TYPE.Body color="white">Continue</TYPE.Body>
             </ButtonError>
           </RowBetween>
         </AutoColumn>

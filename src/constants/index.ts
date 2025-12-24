@@ -2,6 +2,7 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@cheeseswapv2/sdk'
 import { WalletType, isWalletInstalled } from '../connectors/utils'
 
 export const ROUTER_ADDRESS = '0x3047799262d8D2EF41eD2a222205968bC9B0d895'
+export const FACTORY_ADDRESS = '0xdd53b4765211489b4c74e26abf61b321ab0c9b53'
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 // Chain configuration - BSC Mainnet only

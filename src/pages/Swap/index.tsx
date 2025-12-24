@@ -49,7 +49,7 @@ const PageContainer = styled.div<{ showChart: boolean }>`
   align-items: stretch;
   gap: 0.85rem;
   width: 100%;
-  max-width: ${({ showChart }) => showChart ? '1120px' : '460px'};
+  max-width: ${({ showChart }) => (showChart ? '1120px' : '480px')};
   margin: 0 auto;
   justify-content: ${({ showChart }) => showChart ? 'flex-start' : 'center'};
   transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,7 +62,7 @@ const PageContainer = styled.div<{ showChart: boolean }>`
 
 const SwapContainer = styled.div`
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   flex-shrink: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
@@ -505,7 +505,7 @@ export default function Swap() {
               </ButtonPrimary>
             ) : noRoute && userHasSpecifiedInputOutput ? (
               <GreyCard style={{ textAlign: 'center' }}>
-                <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
+                <TYPE.Main mb="4px">Insufficient liquidity for this trade.</TYPE.Main>
               </GreyCard>
             ) : showApproveFlow ? (
               <RowBetween>

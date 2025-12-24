@@ -10,7 +10,7 @@ const ChartContainer = styled.div<{ chartHeight?: number }>`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid ${({ theme }) => theme.colors.bg3};
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.08),
     0 0 0 1px ${({ theme }) => theme.colors.primary6};
   border-radius: 24px;
@@ -21,14 +21,14 @@ const ChartContainer = styled.div<{ chartHeight?: number }>`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    box-shadow: 
+    box-shadow:
       0 8px 24px rgba(0, 0, 0, 0.12),
       0 0 0 1px ${({ theme }) => theme.colors.primary5};
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     height: auto;
-    min-height: 380px;
+    min-height: 360px;
     max-height: none;
   `}
 `

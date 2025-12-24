@@ -245,10 +245,10 @@ export default function AddLiquidity({
             {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol + ' Pool Tokens'}
           </Text>
         </Row>
-        <TYPE.italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
+        <TYPE.Italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
           {`Output is estimated. If the price changes by more than ${allowedSlippage /
             100}% your transaction will revert.`}
-        </TYPE.italic>
+        </TYPE.Italic>
       </AutoColumn>
     )
   }
@@ -360,15 +360,15 @@ export default function AddLiquidity({
                   <ColumnCenter>
                     <BlueCard>
                       <AutoColumn gap="10px">
-                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                        <TYPE.Link fontWeight={600} color={'primaryText1'}>
                           You are the first liquidity provider.
-                        </TYPE.link>
-                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                        </TYPE.Link>
+                        <TYPE.Link fontWeight={600} color={'primaryText1'}>
                           The ratio of tokens you add will set the price of this pool.
-                        </TYPE.link>
-                        <TYPE.link fontWeight={600} color={'primaryText1'}>
+                        </TYPE.Link>
+                        <TYPE.Link fontWeight={600} color={'primaryText1'}>
                           Once you are happy with the rate click supply to review.
-                        </TYPE.link>
+                        </TYPE.Link>
                       </AutoColumn>
                     </BlueCard>
                   </ColumnCenter>
@@ -404,9 +404,9 @@ export default function AddLiquidity({
                   <>
                     <GreyCard padding="0px" borderRadius={'20px'}>
                       <RowBetween padding="1rem">
-                        <TYPE.subHeader fontWeight={700} fontSize={16}>
+                        <TYPE.SubHeader fontWeight={700} fontSize={16}>
                           {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
-                        </TYPE.subHeader>
+                        </TYPE.SubHeader>
                       </RowBetween>{' '}
                       <LightCard padding="1rem" borderRadius={'20px'}>
                         <PoolPriceBar

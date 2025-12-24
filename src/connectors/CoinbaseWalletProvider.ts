@@ -3,14 +3,23 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import { BaseWalletConnector } from './BaseConnector'
 import { ensureBSCMainnet } from './utils'
 
-const NETWORK_URLS = [
-  process.env.REACT_APP_NETWORK_URL_1,
-  process.env.REACT_APP_NETWORK_URL_2,
-  process.env.REACT_APP_NETWORK_URL_3,
-  process.env.REACT_APP_NETWORK_URL_4,
-  process.env.REACT_APP_NETWORK_URL_5,
-  process.env.REACT_APP_NETWORK_URL_6
-].filter(url => typeof url === 'string') as string[]
+const NETWORK_URL_KEYS = [
+  'REACT_APP_NETWORK_URL_1',
+  'REACT_APP_NETWORK_URL_2',
+  'REACT_APP_NETWORK_URL_3',
+  'REACT_APP_NETWORK_URL_4',
+  'REACT_APP_NETWORK_URL_5',
+  'REACT_APP_NETWORK_URL_6',
+  'REACT_APP_NETWORK_URL_7',
+  'REACT_APP_NETWORK_URL_8',
+  'REACT_APP_NETWORK_URL_9',
+  'REACT_APP_NETWORK_URL_10',
+  'REACT_APP_NETWORK_URL_11',
+  'REACT_APP_NETWORK_URL_12',
+  'REACT_APP_NETWORK_URL_13'
+] as const
+
+const NETWORK_URLS = NETWORK_URL_KEYS.map(key => process.env[key]).filter((url): url is string => typeof url === 'string')
 
 /**
  * Coinbase Wallet connector

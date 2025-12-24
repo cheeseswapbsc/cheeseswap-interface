@@ -16,7 +16,7 @@ import useAddTokenToMetamask from '../../hooks/useAddTokenToMetamask'
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   margin: 0 auto;
   overflow-y: auto;
 `

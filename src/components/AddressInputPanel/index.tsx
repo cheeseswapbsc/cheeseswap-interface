@@ -98,9 +98,9 @@ export default function AddressInputPanel({
         <InputContainer>
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.black color={theme.colors.text2} fontWeight={700} fontSize={14}>
+              <TYPE.Black color={theme.colors.text2} fontWeight={700} fontSize={14}>
                 Recipient
-              </TYPE.black>
+              </TYPE.Black>
               {address && chainId && (
                 <ExternalLink href={getBscscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
                   (View on bscscan)

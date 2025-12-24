@@ -46,26 +46,26 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
       <AutoColumn style={{ padding: '0 24px' }}>
         <RowBetween>
           <RowFixed>
-            <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+            <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
               {isExactIn ? 'Minimum received' : 'Maximum sold'}
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="Your transaction will revert if there is a large, unfavorable price movement before it is confirmed." />
           </RowFixed>
           <RowFixed>
-            <TYPE.black color={theme.colors.text1} fontSize={14}>
+            <TYPE.Black color={theme.colors.text1} fontSize={14}>
               {isExactIn
                 ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${trade.outputAmount.currency.symbol}` ??
                   '-'
                 : `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${trade.inputAmount.currency.symbol}` ??
                   '-'}
-            </TYPE.black>
+            </TYPE.Black>
           </RowFixed>
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+            <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
               Price Impact
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="The difference between the market price and estimated price due to trade size." />
           </RowFixed>
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
@@ -73,14 +73,14 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 
         <RowBetween>
           <RowFixed>
-            <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+            <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
               Liquidity Provider Fee
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="For each trade a 0.2% fee is paid. 0.17% goes to liquidity providers and 0.03% goes to the CheeseSwap treasury." />
           </RowFixed>
-          <TYPE.black fontSize={14} color={theme.colors.text1}>
-            {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
-          </TYPE.black>
+          <TYPE.Black fontSize={14} color={theme.colors.text1}>
+            {realizedLPFee ? `${realizedLPFee.toSignificant(6)} ${trade.inputAmount.currency.symbol}` : '-'}
+          </TYPE.Black>
         </RowBetween>
       </AutoColumn>
     </>
@@ -108,9 +108,9 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
               <SectionBreak />
               <AutoColumn style={{ padding: '0 24px' }}>
                 <RowFixed>
-                  <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+                  <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
                     Route
-                  </TYPE.black>
+                  </TYPE.Black>
                   <QuestionHelper text="Routing through these tokens resulted in the best price for your trade." />
                 </RowFixed>
                 <SwapRoute trade={trade} />
@@ -119,7 +119,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
           )}
           <AutoColumn style={{ padding: '0 24px' }}>
             <InfoLink href={'https://info.cheeseswap.app/#/pair/' + trade.route.pairs[0].liquidityToken.address} target="_blank">
-              View Pair Analytics ↗
+              View Pair Analytics V2 ↗
             </InfoLink>
           </AutoColumn>
         </>

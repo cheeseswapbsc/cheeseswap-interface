@@ -120,7 +120,7 @@ export default function RemoveLiquidity({
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
     }
-    const Permit = [
+    const Permit2 = [
       { name: 'owner', type: 'address' },
       { name: 'spender', type: 'address' },
       { name: 'value', type: 'uint256' },
@@ -137,10 +137,10 @@ export default function RemoveLiquidity({
     const data = JSON.stringify({
       types: {
         EIP712Domain,
-        Permit
+        Permit2
       },
       domain,
-      primaryType: 'Permit',
+      primaryType: 'Permit2',
       message
     })
 
@@ -360,10 +360,10 @@ export default function RemoveLiquidity({
           </RowFixed>
         </RowBetween>
 
-        <TYPE.italic fontSize={12} color={theme.colors.text2} textAlign="left" padding={'12px 0 0 0'}>
+        <TYPE.Italic fontSize={12} color={theme.colors.text2} textAlign="left" padding={'12px 0 0 0'}>
           {`Output is estimated. If the price changes by more than ${allowedSlippage /
             100}% your transaction will revert.`}
-        </TYPE.italic>
+        </TYPE.Italic>
       </AutoColumn>
     )
   }

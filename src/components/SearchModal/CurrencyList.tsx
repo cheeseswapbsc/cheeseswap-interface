@@ -119,7 +119,7 @@ function CurrencyRow({
         </Text>
         <FadedSpan>
           {!isOnSelectedList && customAdded && !(currency instanceof WrappedTokenInfo) ? (
-            <TYPE.main fontWeight={700}>
+            <TYPE.Main fontWeight={700}>
               Added by user
               <LinkStyledButton
                 onClick={event => {
@@ -129,10 +129,10 @@ function CurrencyRow({
               >
                 (Remove)
               </LinkStyledButton>
-            </TYPE.main>
+            </TYPE.Main>
           ) : null}
           {!isOnSelectedList && !customAdded && !(currency instanceof WrappedTokenInfo) ? (
-            <TYPE.main fontWeight={700}>
+            <TYPE.Main fontWeight={700}>
               Found by address
               <LinkStyledButton
                 onClick={event => {
@@ -142,7 +142,7 @@ function CurrencyRow({
               >
                 (Add)
               </LinkStyledButton>
-            </TYPE.main>
+            </TYPE.Main>
           ) : null}
         </FadedSpan>
       </Column>

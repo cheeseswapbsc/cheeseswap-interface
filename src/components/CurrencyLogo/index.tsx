@@ -9,7 +9,7 @@ import Logo from '../Logo'
 import CoinLogo from '../../components/cheese/CoinLogo'
 
 export const getTokenLogoURL = (address: string) =>
-  `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/${address}/logo.png`
+  `https://raw.githubusercontent.com/cheeseswapbsc/assets/master/blockchains/smartchain/assets/${address}/logo.png`
 
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};

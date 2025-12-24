@@ -68,43 +68,43 @@ export default function SwapModalFooter({
 
         <RowBetween>
           <RowFixed>
-            <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+            <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
               {trade.tradeType === TradeType.EXACT_INPUT ? 'Minimum received' : 'Maximum sold'}
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="Your transaction will revert if there is a large, unfavorable price movement before it is confirmed." />
           </RowFixed>
           <RowFixed>
-            <TYPE.black fontSize={14}>
+            <TYPE.Black fontSize={14}>
               {trade.tradeType === TradeType.EXACT_INPUT
-                ? slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4) ?? '-'
-                : slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4) ?? '-'}
-            </TYPE.black>
-            <TYPE.black fontSize={14} marginLeft={'4px'}>
+                ? slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(6) ?? '-'
+                : slippageAdjustedAmounts[Field.INPUT]?.toSignificant(6) ?? '-'}
+            </TYPE.Black>
+            <TYPE.Black fontSize={14} marginLeft={'4px'}>
               {trade.tradeType === TradeType.EXACT_INPUT
                 ? trade.outputAmount.currency.symbol
                 : trade.inputAmount.currency.symbol}
-            </TYPE.black>
+            </TYPE.Black>
           </RowFixed>
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <TYPE.black color={theme.colors.text2} fontSize={14} fontWeight={600}>
+            <TYPE.Black color={theme.colors.text2} fontSize={14} fontWeight={600}>
               Price Impact
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="The difference between the market price and your price due to trade size." />
           </RowFixed>
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <TYPE.black fontSize={14} fontWeight={600} color={theme.colors.text2}>
+            <TYPE.Black fontSize={14} fontWeight={600} color={theme.colors.text2}>
               Liquidity Provider Fee
-            </TYPE.black>
+            </TYPE.Black>
             <QuestionHelper text="For each trade a 0.2% fee is paid. 0.17% goes to liquidity providers and 0.03% goes to the CheeseSwap treasury." />
           </RowFixed>
-          <TYPE.black fontSize={14}>
+          <TYPE.Black fontSize={14}>
             {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
-          </TYPE.black>
+          </TYPE.Black>
         </RowBetween>
       </AutoColumn>
 
@@ -112,12 +112,12 @@ export default function SwapModalFooter({
         <ButtonError
           onClick={onConfirm}
           disabled={disabledConfirm}
-          error={severity > 2}
+          error={severity > 3}
           style={{ margin: '10px 0 0 0', padding: '11.2px 16px', fontSize: '12.8px' }}
           id="confirm-swap-or-send"
         >
           <Text fontSize={14} fontWeight={700}>
-            {severity > 2 ? 'Swap Anyway' : 'Confirm Swap'}
+            {severity > 3 ? 'Swap Anyway' : 'Confirm Swap'}
           </Text>
         </ButtonError>
 

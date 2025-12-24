@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from '../../hooks'
 import { useAddPopup, useBlockNumber } from '../application/hooks'
@@ -34,7 +34,12 @@ export default function Updater(): null {
   const dispatch = useDispatch<AppDispatch>()
   const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
 
-  const transactions = chainId ? state[chainId] ?? {} : {}
+  const transactions = useMemo(() => {
+    if (!chainId) {
+      return {}
+    }
+    return state[chainId] ?? {}
+  }, [chainId, state])
 
   // show popup on confirm
   const addPopup = useAddPopup()

@@ -208,9 +208,9 @@ export default function SettingsTab() {
 
             <RowBetween>
               <RowFixed>
-                <TYPE.black fontWeight={600} fontSize={14} color={theme.colors.text2}>
+                <TYPE.Black fontWeight={600} fontSize={14} color={theme.colors.text2}>
                   <TranslatedText translationId={96}>Toggle Audio Mode</TranslatedText>
-                </TYPE.black>
+                </TYPE.Black>
               </RowFixed>
               <Toggle isActive={audioMode} toggle={toggleSetAudioMode} />
             </RowBetween>

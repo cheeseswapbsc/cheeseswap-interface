@@ -118,7 +118,7 @@ export default function Menu() {
   const handleLanguageSelect = (langObject: LanguageObject) => {
     setSelectedLanguage(langObject)
     toggle()
-    localStorage.setItem('pancakeSwapLanguage', langObject.code)
+    localStorage.setItem('cheeseSwapLanguage', langObject.code)
   }
 
   return (

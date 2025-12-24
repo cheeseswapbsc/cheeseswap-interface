@@ -387,7 +387,7 @@ export default function AccountDetails({
       {!!pendingTransactions.length || !!confirmedTransactions.length ? (
         <LowerSection>
           <AutoRow mb={'1rem'} style={{ justifyContent: 'space-between' }}>
-            <TYPE.body>Recent Transactions</TYPE.body>
+            <TYPE.Body>Recent Transactions</TYPE.Body>
             <LinkStyledButton onClick={clearAllTransactionsCallback}>(clear all)</LinkStyledButton>
           </AutoRow>
           {renderTransactions(pendingTransactions)}
@@ -395,7 +395,7 @@ export default function AccountDetails({
         </LowerSection>
       ) : (
         <LowerSection>
-          <TYPE.body color={theme.colors.text1}>Your transactions will appear here...</TYPE.body>
+          <TYPE.Body color={theme.colors.text1}>Your transactions will appear here...</TYPE.Body>
         </LowerSection>
       )}
     </>
