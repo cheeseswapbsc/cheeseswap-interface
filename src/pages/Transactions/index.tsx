@@ -243,7 +243,7 @@ const PageIndicator = styled.span`
 
 const ROWS_PER_PAGE = 20
 const MAX_CACHED_ROWS = 100
-const FETCH_INTERVAL_MS = 60_000
+const FETCH_INTERVAL_MS = 30_000
 const ROUTER_CACHE_STORAGE_KEY = 'cheeseswap:transactions:routerRows:v1'
 
 const TRANSACTION_SWAPS_QUERY = gql`

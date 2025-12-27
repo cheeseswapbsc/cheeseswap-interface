@@ -1,7 +1,7 @@
 import { Currency, Pair } from '@cheeseswapv2/sdk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { darken } from 'polished'
+import { darken, transparentize } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../CurrencyLogo'
@@ -104,6 +104,26 @@ const Container = styled.div<{ hideInput: boolean }>`
   border-radius: ${({ hideInput }) => (hideInput ? '8.5px' : '15.3px')};
   box-shadow: none !important;
   width: 100%;
+`
+
+const AmountInputWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  .token-amount-input {
+    flex: 1;
+    border: 1.5px solid ${({ theme }) => transparentize(0.1, theme.colors.bg3)};
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    background: ${({ theme }) => theme.colors.bg0};
+    color: ${({ theme }) => theme.colors.text1};
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-shadow: none;
+    transition: border-color 200ms ease;
+    outline: none;
+  }
 `
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
@@ -217,7 +237,7 @@ export default function CurrencyInputPanel({
       <Container hideInput={hideInput}>
         <InputRow style={hideInput ? { padding: '0', borderRadius: '10px' } : {}} selected={disableCurrencySelect}>
           {!hideInput && (
-            <>
+            <AmountInputWrapper>
               <NumericalInput
                 className="token-amount-input"
                 value={value}
@@ -228,7 +248,7 @@ export default function CurrencyInputPanel({
               {account && currency && showMaxButton && (
                 <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>
               )}
-            </>
+            </AmountInputWrapper>
           )}
           <CurrencySelect
             selected={!!currency}

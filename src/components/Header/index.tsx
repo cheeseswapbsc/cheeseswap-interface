@@ -1,5 +1,4 @@
-
-import React from 'react'
+import React, { useMemo } from 'react'
 // import { isMobile } from 'react-device-detect' (removed unused import)
 import { Text } from 'rebass'
 
@@ -38,11 +37,11 @@ const HeaderFrame = styled.div`
   z-index: 10;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   &:hover {
     box-shadow: 0 6px 32px rgba(0, 0, 0, 0.12);
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     padding: 0.75rem 1rem;
     width: calc(100%);
@@ -55,11 +54,11 @@ const HeaderElement = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     gap: 0.25rem;
   `};
-  
+
   @media (max-width: 400px) {
     flex-shrink: 1;
     min-width: 0;
@@ -132,7 +131,7 @@ const AccountElement = styled.div<{ active: boolean }>`
     outline: 2px solid ${({ theme }) => theme.colors.primary1};
     outline-offset: 2px;
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     padding: 1.6px;
     border-radius: 6.4px;
@@ -143,28 +142,28 @@ const AccountElement = styled.div<{ active: boolean }>`
 const CheeseIcon = styled.div`
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
-  
+
   :hover {
     transform: scale(1.05) rotate(-3deg);
   }
-  
+
   img {
     height: 2.625rem;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
   }
-  
+
   ${({ theme }) => theme.mediaWidth.upToMedium`
     img {
       height: 2.25rem;
     }
   `};
-  
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     img {
       height: 1.875rem;
     }
   `};
-  
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     img {
       height: 1.5rem;
@@ -185,7 +184,7 @@ const HeaderControls = styled.div`
     align-items: flex-end;
     gap: 0.5rem;
   `};
-  
+
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     gap: 0.25rem;
   `};
@@ -203,6 +202,16 @@ export default function Header() {
   const isDark = useIsDarkMode()
   const { account } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  const formattedBnbBalance = useMemo(() => {
+    if (!userEthBalance) return null
+    const numericBalance = parseFloat(userEthBalance.toSignificant(10))
+    if (Number.isNaN(numericBalance)) {
+      return null
+    }
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 6 }).format(
+      numericBalance
+    )
+  }, [userEthBalance])
   return (
     <HeaderFrame>
       <RowBetween style={{ alignItems: 'flex-start' }}>
@@ -224,9 +233,9 @@ export default function Header() {
         <HeaderControls>
           <HeaderElement>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
-              {account && userEthBalance ? (
+              {account && formattedBnbBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={700}>
-                  {userEthBalance?.toSignificant(4)} BNB
+                  {formattedBnbBalance} BNB
                 </BalanceText>
               ) : null}
               <Web3Status />

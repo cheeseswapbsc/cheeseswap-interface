@@ -2,7 +2,7 @@
   "name": "@cheeseswapv2/interface-v2",
   "description": "CheeseSwap Interface V2",
   "homepage": "./",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "license": "GPL-3.0-or-later",
   "private": true,
   "dependencies": {

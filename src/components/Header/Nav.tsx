@@ -7,6 +7,7 @@ type LinkItem = {
   label: string
   href?: string
   to?: string
+  icon?: React.ReactNode
 }
 
 const PRIMARY_LINKS: LinkItem[] = [
@@ -15,7 +16,7 @@ const PRIMARY_LINKS: LinkItem[] = [
 ]
 
 const FARMS_LINKS: LinkItem[] = [
-  { label: 'Pizza Farm', href: 'https://pizza.cheeseswap.app' },
+  { label: 'Pizza Farm', href: 'https://pizza.cheeseswap.app', icon: '🔥' },
   { label: 'Kiwi Farm', href: 'https://kiwi.cheeseswap.app' },
   { label: 'Mango Farm', href: 'https://mango.cheeseswap.app' },
   { label: 'HOTS Farm', href: 'https://hots.cheeseswap.app' },
@@ -23,17 +24,19 @@ const FARMS_LINKS: LinkItem[] = [
 ]
 
 const ANALYTICS_LINKS: LinkItem[] = [
-  { label: 'Dashboard', href: 'https://info.cheeseswap.app' },
-  { label: 'CoinMarketCap', href: 'https://coinmarketcap.com/exchanges/cheeseswap/' },
-  { label: 'CoinGecko', href: 'https://www.coingecko.com/en/coins/cheeseswap' }
+  { label: 'Overview', href: 'https://info.cheeseswap.app/#/home' },
+  { label: 'Tokens', href: 'https://info.cheeseswap.app/#/tokens' },
+  { label: 'Pairs', href: 'https://info.cheeseswap.app/#/pairs' },
+  { label: 'Accounts', href: 'https://info.cheeseswap.app/#/accounts' }
 ]
 
 const MORE_LINKS: LinkItem[] = [
+  { label: 'Audit (CertiK)', href: 'https://skynet.certik.com/projects/cheeseswap' },
+  { label: 'Cross-Chain', to: '/bridge' },
   { label: 'Transactions', to: '/transactions' },
   { label: 'Docs', href: 'https://docs.cheeseswap.app' },
   { label: 'API', href: 'https://api.cheeseswap.app' },
-  { label: 'Audit (CertiK)', href: 'https://certik.org/projects/cheeseswap/' },
-  { label: 'Telegram', href: 'https://t.me/cheesemakerfarm' },
+  { label: 'Discord', href: 'https://discord.gg/KeFQnRmyW8' },
   { label: 'Github', href: 'https://github.com/cheeseswapbsc/' }
 ]
 
@@ -158,6 +161,10 @@ const DropdownWrapper = styled.div`
 const dropdownItemStyles = css`
   border-radius: 0.4rem;
   color: ${({ theme }) => theme.colors.text1};
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.2rem;
   font-weight: 600;
   padding: 0.45rem 0.75rem;
   text-decoration: none;
@@ -178,6 +185,17 @@ const DropdownRouterLink = styled(NavLink).attrs({ activeClassName: 'active' })`
   ${dropdownItemStyles}
 `
 
+const DropdownItemLabel = styled.span`
+  flex: 0 1 auto;
+  min-width: 0;
+`
+
+const DropdownItemIcon = styled.span`
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  line-height: 1;
+`
+
 interface DropdownProps {
   label: string
   items: LinkItem[]
@@ -194,7 +212,10 @@ const Dropdown: React.FC<DropdownProps> = ({ label, items }) => {
         {items.map(item =>
           item.to ? (
             <DropdownRouterLink key={item.label} to={item.to} exact>
-              {item.label}
+              <DropdownItemLabel>{item.label}</DropdownItemLabel>
+              {item.icon ? (
+                <DropdownItemIcon aria-hidden="true">{item.icon}</DropdownItemIcon>
+              ) : null}
             </DropdownRouterLink>
           ) : (
             <DropdownExternalLink
@@ -203,7 +224,10 @@ const Dropdown: React.FC<DropdownProps> = ({ label, items }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {item.label}
+              <DropdownItemLabel>{item.label}</DropdownItemLabel>
+              {item.icon ? (
+                <DropdownItemIcon aria-hidden="true">{item.icon}</DropdownItemIcon>
+              ) : null}
             </DropdownExternalLink>
           )
         )}

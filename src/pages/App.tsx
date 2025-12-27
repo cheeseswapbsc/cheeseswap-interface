@@ -27,6 +27,8 @@ const PoolFinder = lazy(() => import('./PoolFinder'))
 const RemoveLiquidity = lazy(() => import('./RemoveLiquidity'))
 const Swap = lazy(() => import('./Swap'))
 const CrossChainBridge = lazy(() => import('./CrossChainBridge'))
+const PrivacyPolicy = lazy(() => import('./PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./TermsOfService'))
 
 const AppWrapper = styled.div`
   display: flex;
@@ -110,6 +112,8 @@ export default function App() {
                     <Route exact strict path="/pool" component={Pool} />
                     <Route exact strict path="/bridge" component={CrossChainBridge} />
                     <Route exact strict path="/transactions" component={TransactionsPage} />
+                    <Route exact strict path="/privacy-policy" component={PrivacyPolicy} />
+                    <Route exact strict path="/terms-of-service" component={TermsOfService} />
                     <Route exact strict path="/create" component={RedirectToAddLiquidity} />
                     <Route exact path="/add" component={AddLiquidity} />
                     <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
