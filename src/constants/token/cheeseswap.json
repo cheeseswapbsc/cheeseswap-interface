@@ -31,16 +31,6 @@
       "chainId": 56
     },
     {
-      "address": "0x0000000000000000000000000000000000000000",
-      "name": "BNB",
-      "symbol": "BNB",
-      "decimals": 18,
-      "type": "BEP20",
-      "status": "active",
-      "id": "0x0000000000000000000000000000000000000000",
-      "chainId": 56
-    },
-    {
       "address": "0xaDD8A06fd58761A5047426e160B2B88AD3B9D464",
       "name": "cheesemaker.farm",
       "website": "https://cheeseswap.app/",
