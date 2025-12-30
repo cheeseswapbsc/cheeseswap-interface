@@ -120,7 +120,7 @@ export default function RemoveLiquidity({
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
     }
-    const Permit2 = [
+    const Permit = [
       { name: 'owner', type: 'address' },
       { name: 'spender', type: 'address' },
       { name: 'value', type: 'uint256' },
@@ -137,10 +137,10 @@ export default function RemoveLiquidity({
     const data = JSON.stringify({
       types: {
         EIP712Domain,
-        Permit2
+        Permit
       },
       domain,
-      primaryType: 'Permit2',
+      primaryType: 'Permit',
       message
     })
 
