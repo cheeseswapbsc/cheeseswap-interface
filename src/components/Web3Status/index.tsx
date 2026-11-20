@@ -180,7 +180,15 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 
 
 // eslint-disable-next-line react/prop-types
-function StatusIcon({ walletType }: { walletType: string | null }) {
+function StatusIcon({ walletType, walletIcon }: { walletType: string | null; walletIcon?: string | null }) {
+  // Modern path: use the icon announced by the wallet itself via EIP-6963
+  if (walletIcon) {
+    return (
+      <IconWrapper size={16}>
+        <img src={walletIcon} alt={'Wallet logo'} />
+      </IconWrapper>
+    )
+  }
   if (walletType === 'METAMASK') {
     return (
       <IconWrapper size={16}>
@@ -223,7 +231,7 @@ function StatusIcon({ walletType }: { walletType: string | null }) {
 
 function Web3StatusInner() {
   // Always call hooks at the top
-  const { account, walletType, error, chainId, disconnect } = useWeb3()
+  const { account, walletType, walletMeta, error, chainId, disconnect } = useWeb3()
   const { ENSName } = useENSName(account ?? undefined)
   const allTransactions = useAllTransactions()
   const sortedRecentTransactions = useMemo(() => {
@@ -266,7 +274,7 @@ function Web3StatusInner() {
               {/* 2. Wallet address (short) */}
               <Text style={{ marginRight: 8 }}>{ENSName || shortenAddress(account)}</Text>
               {/* 3. Wallet icon */}
-              {walletType && <span style={{ marginRight: 8 }}><StatusIcon walletType={walletType} /></span>}
+              {walletType && <span style={{ marginRight: 8 }}><StatusIcon walletType={walletType} walletIcon={walletMeta?.icon} /></span>}
               {/* 4. Copy address */}
               <span style={{ marginRight: 8, cursor: 'pointer' }} title={copied ? 'Copied!' : 'Copy Address'} onClick={handleCopy}>
                 <Copy size={16} color={copied ? '#4caf50' : '#888'} />

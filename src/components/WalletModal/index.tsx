@@ -8,10 +8,10 @@ import Modal from '../Modal'
 import AccountDetails from '../AccountDetails'
 import PendingView from './PendingView'
 import Option from './Option'
-import { SUPPORTED_WALLETS, detectInstalledWallets, WalletType } from '../../connectors/utils'
+import { SUPPORTED_WALLETS, WalletType } from '../../connectors/utils'
 import { ExternalLink } from '../Shared'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { useWeb3 } from '../../providers/Web3Provider'
+import { useWeb3, rdnsToWalletType } from '../../providers/Web3Provider'
 
 const fadeIn = keyframes`
   from {
@@ -64,10 +64,13 @@ const Wrapper = styled.div`
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
-  padding: 1.25rem 1.25rem 0.875rem 1.25rem;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: -0.02em;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 3.25rem 0 1.25rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.025em;
   color: ${props => (props.color === 'blue' ? ({ theme }) => theme.colors.primary1 : ({ theme }) => theme.colors.text1)};
   border-bottom: 1px solid ${({ theme }) => theme.colors.bg3}40;
   
@@ -79,10 +82,10 @@ const HeaderRow = styled.div`
 
 const ContentWrapper = styled.div`
   background: ${({ theme }) => theme.colors.bg1};
-  padding: 1.25rem;
+  padding: 1rem 1.25rem 1.25rem;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  max-height: calc(68vh - 180px);
+  max-height: calc(68vh - 64px);
   overflow-y: auto;
   overflow-x: hidden;
   
@@ -175,12 +178,31 @@ const Blurb = styled.div`
 
 const OptionGrid = styled.div`
   display: grid;
-  grid-gap: 0.5rem;
-  grid-template-columns: 1fr;
+  grid-gap: 0.625rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    grid-gap: 0.5rem;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    grid-gap: 0.625rem;
   `};
+`
+
+const WalletIntro = styled.div`
+  margin: 0 0 0.875rem;
+  text-align: center;
+
+  strong {
+    display: block;
+    color: ${({ theme }) => theme.colors.text1};
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.25rem;
+    color: ${({ theme }) => theme.colors.text3};
+    font-size: 0.75rem;
+  }
 `
 
 const HoverText = styled.div`
@@ -260,11 +282,13 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // Use new Web3 context
-  const { account, connect, isConnected, error, walletType } = useWeb3()
+  const { account, connect, isConnected, error, walletType, walletMeta, discoveredWallets } = useWeb3()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
-  const [pendingWallet, setPendingWallet] = useState<WalletType | undefined>()
+  const [pendingWallet, setPendingWallet] = useState<
+    { walletType: WalletType; rdns?: string; name: string; icon?: string } | undefined
+  >()
 
   const [pendingError, setPendingError] = useState<boolean>()
 
@@ -297,22 +321,22 @@ export default function WalletModal({
     }
   }, [setWalletView, isConnected, error, walletType, walletModalOpen, activePrevious, walletTypePrevious])
 
-  const tryActivation = async (walletTypeToConnect: WalletType) => {
+  const tryActivation = async (walletTypeToConnect: WalletType, rdns?: string, name?: string, icon?: string) => {
     const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.type === walletTypeToConnect)
-    const name = wallet?.name || 'Unknown'
+    const displayName = name || wallet?.name || 'Unknown'
 
     // log selected wallet
     ReactGA.event({
       category: 'Wallet',
       action: 'Change Wallet',
-      label: name
+      label: displayName
     })
 
-    setPendingWallet(walletTypeToConnect)
+    setPendingWallet({ walletType: walletTypeToConnect, rdns, name: displayName, icon })
     setWalletView(WALLET_VIEWS.PENDING)
 
     try {
-      await connect(walletTypeToConnect)
+      await connect(walletTypeToConnect, rdns)
     } catch (err) {
       console.error('Connection error:', err)
       setPendingError(true)
@@ -329,65 +353,140 @@ export default function WalletModal({
     }
   }
 
-  // get wallets user can switch too, depending on device/browser
+  // get wallets user can switch to - EIP-6963 discovered wallets first, then fallbacks
   function getOptions() {
-    const detectedWallets = detectInstalledWallets();
-    const statusAndTooltip = {
-      METAMASK: {
-        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
-        tooltip: 'Best for Chrome/Firefox. Install MetaMask extension from metamask.io.'
-      },
-      TRUST_WALLET: {
-        status: () => 'Mobile Only',
-        tooltip: 'Use Trust Wallet app on mobile devices.'
-      },
-      BINANCE: {
-        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
-        tooltip: 'Binance Chain Wallet for BSC. Install from binance.org.'
-      },
-      OKX_WALLET: {
-        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
-        tooltip: 'OKX Wallet browser extension or app.'
-      },
-      FANTOM_WALLET: {
-        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
-        tooltip: 'Fantom Wallet extension for Fantom and BSC.'
-      },
-      WALLETCONNECT: {
-        status: () => 'Available',
-        tooltip: 'Connect any mobile wallet via QR code.'
-      },
-      COINBASE: {
-        status: () => 'Available',
-        tooltip: 'Connect with Coinbase Wallet app.'
-      },
-      INJECTED: {
-        status: (installed: boolean) => installed ? 'Installed' : 'Not Installed',
-        tooltip: 'Any browser-injected wallet (MetaMask, Trust, etc.).'
-      }
-    };
-    return detectedWallets.map(wallet => {
-      const info = SUPPORTED_WALLETS[wallet.type];
-      if (!info) return null;
-      const statusObj = statusAndTooltip[wallet.type] || statusAndTooltip.INJECTED;
-      const statusLabel = statusObj.status(wallet.installed);
-      const tooltip = statusObj.tooltip;
-      return (
+    const options: React.ReactNode[] = []
+    const discoveredRdns = new Set(discoveredWallets.map(w => w.info.rdns))
+
+    // 1. Modern path: wallets that announced themselves via EIP-6963
+    discoveredWallets.forEach(detail => {
+      const mappedType = rdnsToWalletType(detail.info.rdns)
+      const isActive = !!account && walletMeta?.rdns === detail.info.rdns
+      options.push(
         <Option
-          key={wallet.type}
-          id={`connect-${wallet.type}`}
-          onClick={() => tryActivation(wallet.type)}
-          active={wallet.type === walletType}
-          color={info.color}
-          header={info.name}
+          key={`eip6963-${detail.info.rdns}`}
+          id={`connect-${detail.info.rdns}`}
+          onClick={() => tryActivation(mappedType, detail.info.rdns, detail.info.name, detail.info.icon)}
+          active={isActive}
+          color={SUPPORTED_WALLETS[mappedType]?.color || '#666'}
+          header={detail.info.name}
           subheader={null}
-          icon={require('../../assets/images/' + info.iconName)}
-          clickable={wallet.installed && wallet.type !== walletType}
-          statusLabel={statusLabel}
-          tooltip={tooltip}
+          icon={detail.info.icon}
+          clickable={!isActive}
+          statusLabel="Detected"
+          tooltip={`Connect with the ${detail.info.name} extension (detected in this browser).`}
         />
-      );
-    });
+      )
+    })
+
+    // 2. Legacy injected fallback when nothing announced itself but window.ethereum exists
+    const hasLegacyInjected = typeof window !== 'undefined' && Boolean((window as any).ethereum)
+    if (discoveredWallets.length === 0 && hasLegacyInjected) {
+      const info = SUPPORTED_WALLETS.INJECTED
+      if (info) {
+        options.push(
+          <Option
+            key="INJECTED"
+            id="connect-INJECTED"
+            onClick={() => tryActivation('INJECTED')}
+            active={!!account && walletType === 'INJECTED' && !walletMeta?.rdns}
+            color={info.color}
+            header="Browser Wallet"
+            subheader={null}
+            icon={require('../../assets/images/' + info.iconName)}
+            clickable={true}
+            statusLabel="Detected"
+            tooltip="Connect with the wallet injected into this browser."
+          />
+        )
+      }
+    }
+
+    // 3. Binance Chain Wallet (legacy window.BinanceChain injection, no EIP-6963 support)
+    if (!discoveredRdns.has('com.binance.wallet') && typeof window !== 'undefined' && (window as any).BinanceChain) {
+      const info = SUPPORTED_WALLETS.BINANCE
+      if (info) {
+        options.push(
+          <Option
+            key="BINANCE"
+            id="connect-BINANCE"
+            onClick={() => tryActivation('BINANCE')}
+            active={!!account && walletType === 'BINANCE'}
+            color={info.color}
+            header={info.name}
+            subheader={null}
+            icon={require('../../assets/images/' + info.iconName)}
+            clickable={walletType !== 'BINANCE'}
+            statusLabel="Detected"
+            tooltip="Binance Chain Wallet extension."
+          />
+        )
+      }
+    }
+
+    // 4. WalletConnect - connects any mobile wallet by QR code / deep link
+    const wcInfo = SUPPORTED_WALLETS.WALLETCONNECT
+    if (wcInfo) {
+      options.push(
+        <Option
+          key="WALLETCONNECT"
+          id="connect-WALLETCONNECT"
+          onClick={() => tryActivation('WALLETCONNECT')}
+          active={!!account && walletType === 'WALLETCONNECT'}
+          color={wcInfo.color}
+          header={wcInfo.name}
+          subheader={null}
+          icon={require('../../assets/images/' + wcInfo.iconName)}
+          clickable={walletType !== 'WALLETCONNECT'}
+          statusLabel="QR code / mobile"
+          tooltip="Scan a QR code with any WalletConnect-compatible mobile wallet."
+        />
+      )
+    }
+
+    // 5. Coinbase Wallet SDK (when the extension didn't announce itself)
+    if (!discoveredRdns.has('com.coinbase.wallet')) {
+      const cbInfo = SUPPORTED_WALLETS.COINBASE
+      if (cbInfo) {
+        options.push(
+          <Option
+            key="COINBASE"
+            id="connect-COINBASE"
+            onClick={() => tryActivation('COINBASE')}
+            active={!!account && walletType === 'COINBASE'}
+            color={cbInfo.color}
+            header={cbInfo.name}
+            subheader={null}
+            icon={require('../../assets/images/' + cbInfo.iconName)}
+            clickable={walletType !== 'COINBASE'}
+            statusLabel="App / extension"
+            tooltip="Connect with the Coinbase Wallet app or extension."
+          />
+        )
+      }
+    }
+
+    // 6. Nothing installed at all: point the user to MetaMask
+    if (discoveredWallets.length === 0 && !hasLegacyInjected) {
+      const mmInfo = SUPPORTED_WALLETS.METAMASK
+      if (mmInfo) {
+        options.push(
+          <Option
+            key="install-metamask"
+            id="install-metamask"
+            link="https://metamask.io/download/"
+            color={mmInfo.color}
+            header="Install MetaMask"
+            subheader={null}
+            icon={require('../../assets/images/' + mmInfo.iconName)}
+            statusLabel="Not installed"
+            tooltip="No browser wallet detected. Install MetaMask to get started."
+          />
+        )
+      }
+    }
+
+    return options
   }
 
   function getModalContent() {
@@ -451,13 +550,24 @@ export default function WalletModal({
         <ContentWrapper>
           {walletView === WALLET_VIEWS.PENDING ? (
             <PendingView
-              walletType={pendingWallet}
+              walletType={pendingWallet?.walletType}
+              walletName={pendingWallet?.name}
+              walletIcon={pendingWallet?.icon}
               error={pendingError}
               setPendingError={setPendingError}
-              tryActivation={tryActivation}
+              tryActivation={() =>
+                pendingWallet &&
+                tryActivation(pendingWallet.walletType, pendingWallet.rdns, pendingWallet.name, pendingWallet.icon)
+              }
             />
           ) : (
-            <OptionGrid>{getOptions()}</OptionGrid>
+            <>
+              <WalletIntro>
+                <strong>Choose a wallet</strong>
+                <span>Connect securely to start using CheeseSwap</span>
+              </WalletIntro>
+              <OptionGrid>{getOptions()}</OptionGrid>
+            </>
           )}
           {walletView !== WALLET_VIEWS.PENDING && (
             <Blurb>

@@ -23,6 +23,13 @@ export class WalletConnectRejectedError extends WalletConnectionError {
   }
 }
 
+export class UserRejectedError extends WalletConnectionError {
+  constructor(walletName: string) {
+    super(`Connection request was rejected in ${walletName}`, walletName)
+    this.name = 'UserRejectedError'
+  }
+}
+
 export class WalletConnectTimeoutError extends WalletConnectionError {
   constructor(connectorId: string) {
     super(`Connection to ${connectorId} timed out`, connectorId)

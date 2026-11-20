@@ -56,11 +56,14 @@ const InfoCard = styled.button<{ active?: boolean }>`
 
 const OptionCard = styled(InfoCard as any)`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  padding: 0.65rem 0.55rem;
+  justify-content: center;
+  min-height: 104px;
+  margin-top: 0;
+  padding: 0.75rem 0.625rem;
+  text-align: center;
+  gap: 0.375rem;
   
   &:first-child {
     margin-top: 0;
@@ -69,6 +72,7 @@ const OptionCard = styled(InfoCard as any)`
 
 const OptionCardLeft = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap};
+  align-items: center;
   justify-content: center;
   height: 100%;
 `
@@ -77,6 +81,10 @@ const OptionCardClickable = styled(OptionCard as any)<{ clickable?: boolean }>`
   margin-top: 0;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: ${({ theme, active }) =>
+    active
+      ? `linear-gradient(135deg, ${theme.colors.primary1}18 0%, ${theme.colors.primary1}08 100%)`
+      : `linear-gradient(180deg, ${theme.colors.bg2} 0%, ${theme.colors.bg1} 100%)`};
   
   &:hover {
     ${({ clickable, theme }) => clickable && `
@@ -135,6 +143,7 @@ const CircleWrapper = styled.div`
 const HeaderText = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   align-items: center;
+  justify-content: center;
   color: ${props =>
     props.color === 'blue' ? ({ theme }) => theme.colors.primary1 : ({ theme }) => theme.colors.text1};
   font-size: 0.8rem;
@@ -152,17 +161,18 @@ const SubHeader = styled.div`
 
 const IconWrapper = styled.div<{ size?: number | null }>`
   ${({ theme }) => theme.flexColumnNoWrap};
+  order: -1;
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.colors.bg1};
-  border-radius: 8px;
-  padding: 0.25rem;
+  border-radius: 12px;
+  padding: 0.375rem;
   transition: all 0.2s ease;
   
   & > img,
   span {
-    height: ${({ size }) => (size ? size + 'px' : '24px')};
-    width: ${({ size }) => (size ? size + 'px' : '24px')};
+    height: ${({ size }) => (size ? size + 'px' : '36px')};
+    width: ${({ size }) => (size ? size + 'px' : '36px')};
     object-fit: contain;
   }
   

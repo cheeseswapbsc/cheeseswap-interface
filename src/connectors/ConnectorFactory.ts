@@ -5,6 +5,7 @@ import { trustWalletConnector } from './wallets/TrustWalletConnector'
 import { okxWalletConnector } from './wallets/OKXWalletConnector'
 import { fantomWalletConnector } from './wallets/FantomWalletConnector'
 import { injectedConnector } from './wallets/InjectedConnector'
+import { eip6963Connector } from './wallets/EIP6963Connector'
 import { walletConnectConnector } from './WalletConnectProvider'
 import { coinbaseWalletConnector } from './CoinbaseWalletProvider'
 import { IWalletConnector } from './BaseConnector'
@@ -12,6 +13,7 @@ import { WalletNotAvailableError } from './errors'
 
 export type ConnectorId = 
   | 'injected'  // Generic fallback for any window.ethereum wallet
+  | 'eip6963'   // Modern EIP-6963 discovered wallet (by rdns)
   | 'metamask'
   | 'binance'
   | 'trustwallet'
@@ -32,6 +34,7 @@ export class ConnectorFactory {
     okxwallet: okxWalletConnector,
     fantomwallet: fantomWalletConnector,
     injected: injectedConnector,  // Generic injected connector - the safety net
+    eip6963: eip6963Connector,    // Modern EIP-6963 discovery-based connector
     walletconnect: walletConnectConnector,
     coinbasewallet: coinbaseWalletConnector,
   }
@@ -76,8 +79,9 @@ export class ConnectorFactory {
     provider: ethers.providers.Web3Provider
     connectorId: ConnectorId
   }> {
-    // Priority order (INJECTED > METAMASK > BINANCE > TRUST > OKX > FANTOM > WALLETCONNECT > COINBASEWALLET)
+    // Priority order (EIP6963 > INJECTED > METAMASK > BINANCE > TRUST > OKX > FANTOM > WALLETCONNECT > COINBASEWALLET)
     const priorityOrder: ConnectorId[] = [
+      'eip6963',
       'injected',
       'metamask',
       'binance',
@@ -143,6 +147,7 @@ export class ConnectorFactory {
   private static isInjectedWallet(connectorId: ConnectorId): boolean {
     return [
       'injected',
+      'eip6963',
       'metamask',
       'binance',
       'trustwallet',
@@ -158,6 +163,7 @@ export class ConnectorFactory {
   static getRecommendedMobileConnector(): ConnectorId {
     // Check if any specific wallet is available on mobile
     const mobileOrder: ConnectorId[] = [
+      'eip6963',
       'injected',
       'metamask',
       'binance',

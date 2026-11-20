@@ -226,17 +226,29 @@ export default function AccountDetails({
   openOptions
 }: AccountDetailsProps) {
   const { chainId, account } = useActiveWeb3React()
-  const { walletType, disconnect } = useWeb3()
+  const { walletType, walletMeta, disconnect } = useWeb3()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
 
   function formatConnectorName() {
+    // Prefer the name announced by the wallet itself (EIP-6963)
+    if (walletMeta && walletMeta.name) {
+      return <WalletName>Connected with {walletMeta.name}</WalletName>
+    }
     const wallet = Object.values(SUPPORTED_WALLETS).find(w => w.walletType === walletType)
     const name = wallet?.name || 'Unknown'
     return <WalletName>Connected with {name}</WalletName>
   }
 
   function getStatusIcon() {
+    // Prefer the icon announced by the wallet itself (EIP-6963)
+    if (walletMeta && walletMeta.icon) {
+      return (
+        <IconWrapper size={16}>
+          <img src={walletMeta.icon} alt={`${walletMeta.name} logo`} />
+        </IconWrapper>
+      )
+    }
     if (walletType === 'METAMASK') {
       return (
         <IconWrapper size={16}>
@@ -294,16 +306,14 @@ export default function AccountDetails({
               <AccountGroupingRow>
                 {formatConnectorName()}
                 <div>
-                  {walletType === 'WALLETCONNECT' && (
-                    <WalletAction
-                      style={{ fontSize: '.825rem', fontWeight: 600, marginRight: '8px' }}
-                      onClick={() => {
-                        disconnect()
-                      }}
-                    >
-                      Disconnect
-                    </WalletAction>
-                  )}
+                  <WalletAction
+                    style={{ fontSize: '.825rem', fontWeight: 600, marginRight: '8px' }}
+                    onClick={() => {
+                      disconnect()
+                    }}
+                  >
+                    Disconnect
+                  </WalletAction>
                   <WalletAction
                     style={{ fontSize: '.825rem', fontWeight: 600 }}
                     onClick={() => {

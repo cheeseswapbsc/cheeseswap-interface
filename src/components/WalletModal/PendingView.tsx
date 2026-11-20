@@ -24,10 +24,14 @@ const LoadingMessage = styled.div<{ error?: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap};
   align-items: center;
   justify-content: flex-start;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  padding: 0.25rem;
   color: ${({ theme, error }) => (error ? theme.colors.red1 : 'inherit')};
-  border: 2px solid ${({ theme, error }) => (error ? theme.colors.red1 : theme.colors.text4)};
+  background: ${({ theme, error }) =>
+    error ? 'rgba(255, 82, 82, 0.08)' : `${theme.colors.primary1}10`};
+  border: 1px solid ${({ theme, error }) =>
+    error ? theme.colors.red1 : `${theme.colors.primary1}55`};
 
   & > * {
     padding: 1rem;
@@ -64,14 +68,18 @@ const LoadingWrapper = styled.div`
 
 export default function PendingView({
   walletType,
+  walletName,
+  walletIcon,
   error = false,
   setPendingError,
   tryActivation
 }: {
   walletType?: WalletType
+  walletName?: string
+  walletIcon?: string
   error?: boolean
   setPendingError: (error: boolean) => void
-  tryActivation: (walletType: WalletType) => void
+  tryActivation: (walletType?: WalletType) => void
 }) {
   const isMetamask = window?.ethereum?.isMetaMask
 
@@ -94,12 +102,28 @@ export default function PendingView({
           ) : (
             <>
               <StyledLoader />
-              Initializing...
+              <div>
+                <strong style={{ display: 'block' }}>Confirm in your wallet</strong>
+                <span style={{ display: 'block', opacity: 0.72, fontSize: '0.75rem', marginTop: 2 }}>
+                  Accept the connection request to continue
+                </span>
+              </div>
             </>
           )}
         </LoadingWrapper>
       </LoadingMessage>
-      {Object.keys(SUPPORTED_WALLETS).map(key => {
+      {walletIcon && walletName ? (
+        // Modern path: show the exact EIP-6963 wallet being connected
+        <Option
+          id={`connect-pending-${walletName}`}
+          clickable={false}
+          color={'#666'}
+          header={walletName}
+          subheader={'Waiting for wallet confirmation...'}
+          icon={walletIcon}
+        />
+      ) : (
+        Object.keys(SUPPORTED_WALLETS).map(key => {
         const option = SUPPORTED_WALLETS[key]
         if (option.walletType === walletType) {
           if (walletType === 'METAMASK' || walletType === 'TRUST_WALLET' || walletType === 'OKX_WALLET' || walletType === 'FANTOM_WALLET') {
@@ -122,8 +146,9 @@ export default function PendingView({
             />
           )
         }
-        return null
-      })}
+          return null
+        })
+      )}
     </PendingSection>
   )
 }

@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 
 import { useWeb3 } from '../../hooks'
 import { CHAIN_ID, NETWORK_NAME } from '../../connectors'
-import { useState } from 'react'
 
 const MessageWrapper = styled.div`
   display: flex;
@@ -17,67 +16,39 @@ const Message = styled.h2`
   color: ${({ theme }) => theme.colors.text2};
 `
 
+const ActionButton = styled.button`
+  margin-left: 16px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: #f7b500;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+`
+
+/**
+ * Modern connection manager:
+ * - The app always renders read-only (via the fallback RPC provider) when no
+ *   wallet is connected, so users without extensions can still browse and
+ *   connect through WalletConnect.
+ * - Connection errors are surfaced in the wallet modal, not as a full-page block.
+ * - Only a connected account on the wrong network blocks interaction, with a
+ *   one-click switch back to BSC.
+ */
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { t } = useTranslation()
-  const { error, chainId, account, connect, walletType } = useWeb3()
-  const [reconnecting, setReconnecting] = useState(false)
+  const { chainId, account, switchNetwork } = useWeb3()
 
-  // Retry connection handler
-  const handleRetry = async () => {
-    setReconnecting(true)
-    try {
-      if (walletType) {
-        await connect(walletType)
-      }
-    } catch (err) {
-      // error will be shown by context
-    } finally {
-      setReconnecting(false)
-    }
-  }
-
-  // Show error if wallet or network is wrong
-  if (error) {
-    return (
-      <MessageWrapper>
-        <Message>{t('unknownError')}</Message>
-        <button onClick={handleRetry} disabled={reconnecting} style={{ marginLeft: 16, padding: '8px 18px', borderRadius: 8, border: 'none', background: '#f7b500', color: '#222', fontWeight: 600, cursor: 'pointer' }}>{reconnecting ? 'Reconnecting...' : 'Retry'}</button>
-      </MessageWrapper>
-    )
-  }
-
-  // Show unsupported network message
+  // Show unsupported network message for connected accounts
   if (account && chainId && chainId !== CHAIN_ID) {
-    const handleSwitchNetwork = async () => {
-      if (window.ethereum) {
-        try {
-          await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x' + CHAIN_ID.toString(16) }]
-          })
-        } catch (err) {
-          // error will be shown by context
-        }
-      }
-    }
     return (
       <MessageWrapper>
         <Message>{t('wrongNetwork', `Please connect to the ${NETWORK_NAME} network.`)}</Message>
-        <button onClick={handleSwitchNetwork} style={{ marginLeft: 16, padding: '8px 18px', borderRadius: 8, border: 'none', background: '#f7b500', color: '#222', fontWeight: 600, cursor: 'pointer' }}>Switch Network</button>
+        <ActionButton onClick={() => switchNetwork()}>Switch Network</ActionButton>
       </MessageWrapper>
     )
   }
 
-  // Show missing provider message
-  if (!window.ethereum && !window.web3 && !account) {
-    return (
-      <MessageWrapper>
-        <Message>{t('missingProvider', 'No Ethereum provider detected. Please install MetaMask or another wallet extension.')}</Message>
-        <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: 16, color: '#f7b500', fontWeight: 600 }}>Get MetaMask</a>
-      </MessageWrapper>
-    )
-  }
-
-  // Only render children if wallet/network is valid
   return children
 }

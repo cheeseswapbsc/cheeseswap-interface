@@ -29,7 +29,7 @@ notes.txt
 .idea/
 
 .vscode/
-
+cheeseswap-.code-workspace
 package-lock.json
 
 cypress/videos

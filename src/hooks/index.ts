@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { ethers } from 'ethers'
 import { useWeb3 } from '../providers/Web3Provider'
+import { getNetworkLibrary, CHAIN_ID } from '../connectors'
 
 // Re-export useWeb3 hook
 export { useWeb3 }
@@ -7,12 +9,17 @@ export { useWeb3 }
 // Alias for backward compatibility
 export function useActiveWeb3React() {
   const web3Context = useWeb3()
-  
+
+  // Read-only fallback: browse the app without a connected wallet.
+  // Cast is safe: Web3Provider-only members are used only once connected.
+  const library = (web3Context.provider || getNetworkLibrary()) as ethers.providers.Web3Provider
+  const chainId = web3Context.chainId !== null ? web3Context.chainId : CHAIN_ID
+
   return {
-    library: web3Context.provider,
-    provider: web3Context.provider,
+    library,
+    provider: library,
     account: web3Context.account,
-    chainId: web3Context.chainId,
+    chainId,
     active: web3Context.isConnected,
     connector: null,
     activate: web3Context.connect,

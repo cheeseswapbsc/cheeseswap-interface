@@ -128,6 +128,9 @@ export function getNetworkLibrary(): ethers.providers.JsonRpcProvider {
 // Export error types
 export * from './errors'
 
+// Export modern EIP-6963 discovery
+export * from './eip6963'
+
 // Legacy support - map old WalletType to new ConnectorId
 export function walletTypeToConnectorId(walletType: WalletType): ConnectorId {
   switch (walletType) {
