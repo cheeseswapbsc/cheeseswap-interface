@@ -23,7 +23,7 @@ const FooterSection = styled.div`
   min-width: 0px;
   width: 100vw;
   display: flex;
-  padding: 2rem 3rem 1.5rem 3rem;
+  padding: 1.3rem 3rem 0.95rem 3rem;
   bottom: 0px;
   align-items: flex-start;
   justify-content: space-evenly;
@@ -31,11 +31,11 @@ const FooterSection = styled.div`
   @media (max-width: 600px) {
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 0.65rem 1rem;
   }
 `
 const FooterWrapper = styled.div`
-  padding: 18px;
+  padding: 11px;
 `
 const FooterWrapper2 = styled.div`
   padding: 2px;

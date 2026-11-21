@@ -282,7 +282,7 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // Use new Web3 context
-  const { account, connect, isConnected, error, walletType, walletMeta, discoveredWallets } = useWeb3()
+  const { account, connect, isConnected, error, clearError, walletType, walletMeta, discoveredWallets } = useWeb3()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -311,6 +311,17 @@ export default function WalletModal({
       setWalletView(WALLET_VIEWS.ACCOUNT)
     }
   }, [walletModalOpen])
+
+  // on connection error, briefly show it then auto fall back to the wallet list
+  useEffect(() => {
+    if (!error || !walletModalOpen) return
+    const timer = setTimeout(() => {
+      clearError()
+      setPendingError(false)
+      setWalletView(WALLET_VIEWS.ACCOUNT)
+    }, 3500)
+    return () => clearTimeout(timer)
+  }, [error, walletModalOpen, clearError])
 
   // close modal when a connection is successful
   const activePrevious = usePrevious(isConnected)

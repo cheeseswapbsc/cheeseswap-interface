@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { darken } from 'polished'
 import Loader from '../Loader'
 import { WalletType } from '../../global.d'
+import { walletConnectConnector } from '../../connectors/WalletConnectProvider'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const QRCode = require('qrcode')
 
 const PendingSection = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -66,6 +70,30 @@ const LoadingWrapper = styled.div`
   justify-content: center;
 `
 
+const QrWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 12px;
+  padding: 0.75rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  span {
+    color: #15161b;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+  }
+`
+
 export default function PendingView({
   walletType,
   walletName,
@@ -82,9 +110,32 @@ export default function PendingView({
   tryActivation: (walletType?: WalletType) => void
 }) {
   const isMetamask = window?.ethereum?.isMetaMask
+  const [wcUri, setWcUri] = useState<string | null>(null)
+  const [wcQr, setWcQr] = useState<string | null>(null)
+
+  // WalletConnect pairing URI -> in-app QR code (fallback when the
+  // built-in modal can't render, e.g. blocked domains or shadow-DOM issues)
+  useEffect(() => {
+    if (walletType !== 'WALLETCONNECT') return
+    const unsubscribe = walletConnectConnector.onDisplayUri(setWcUri)
+    return unsubscribe
+  }, [walletType])
+
+  useEffect(() => {
+    if (!wcUri) return
+    QRCode.toDataURL(wcUri, { width: 400, margin: 1 })
+      .then(setWcQr)
+      .catch(() => setWcQr(null))
+  }, [wcUri])
 
   return (
     <PendingSection>
+      {!error && walletType === 'WALLETCONNECT' && wcQr && (
+        <QrWrapper>
+          <img src={wcQr} alt="WalletConnect QR code" />
+          <span>Scan with a WalletConnect-compatible wallet</span>
+        </QrWrapper>
+      )}
       <LoadingMessage error={error}>
         <LoadingWrapper>
           {error ? (

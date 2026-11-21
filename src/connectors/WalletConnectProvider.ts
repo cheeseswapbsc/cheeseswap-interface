@@ -15,9 +15,19 @@ const PROJECT_ID = process.env.REACT_APP_WALLETCONNECT_PROJECT_ID || ''
 export class CheeseSwapWalletConnect extends BaseWalletConnector {
   private wcProvider: EthereumProviderType | null = null
   private initPromise: Promise<EthereumProviderType> | null = null
+  private displayUriListeners = new Set<(uri: string) => void>()
 
   constructor() {
     super('WalletConnect')
+  }
+
+  /**
+   * Subscribe to the WalletConnect pairing URI (for rendering a QR code).
+   * Returns an unsubscribe function.
+   */
+  onDisplayUri(listener: (uri: string) => void): () => void {
+    this.displayUriListeners.add(listener)
+    return () => this.displayUriListeners.delete(listener)
   }
 
   isAvailable(): boolean {
@@ -51,6 +61,9 @@ export class CheeseSwapWalletConnect extends BaseWalletConnector {
           }
         })
         this.wcProvider = provider
+        provider.on('display_uri', (uri: string) => {
+          this.displayUriListeners.forEach(listener => listener(uri))
+        })
         this.setupWalletConnectListeners()
         return provider
       })()

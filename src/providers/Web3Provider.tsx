@@ -38,6 +38,7 @@ interface Web3ContextType {
   walletMeta: ConnectedWalletMeta | null
   discoveredWallets: EIP6963ProviderDetail[]
   error: string | null
+  clearError: () => void
   isConnecting: boolean
 }
 
@@ -364,6 +365,8 @@ export function Web3Provider({ children }: Web3ProviderProps) {
     return cleanup
   }, [state.provider, disconnect])
 
+  const clearError = useCallback(() => setError(null), [])
+
   const value: Web3ContextType = {
     ...state,
     connect,
@@ -373,6 +376,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
     isWrongNetwork: state.chainId !== null && state.chainId !== CHAIN_ID,
     discoveredWallets,
     error,
+    clearError,
     isConnecting
   }
 

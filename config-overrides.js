@@ -84,7 +84,9 @@ module.exports = function override(config) {
     os: require.resolve('os-browserify'),
     url: require.resolve('url'),
     buffer: require.resolve('buffer'),
-    '@msgpack/msgpack': path.join(__dirname, 'node_modules/@msgpack/msgpack/dist.cjs/index.cjs'),
+    // Use the ESM build: babel transpiles it (it's in the include list), while
+    // the .cjs build ships untranspiled modern syntax webpack 4 can't parse.
+    '@msgpack/msgpack': path.join(__dirname, 'node_modules/@msgpack/msgpack/dist.esm/index.mjs'),
   };
 
 
@@ -113,7 +115,7 @@ module.exports = function override(config) {
       rule => rule.loader && rule.loader.includes('babel-loader')
     );
     if (babelRule) {
-      babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
+      babelRule.test = /\.(js|mjs|cjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
       // Include problematic node_modules packages that need transpilation
       // NOTE: @noble/@scure/@solana must be transpiled by this rule: the CRA
