@@ -116,7 +116,10 @@ module.exports = function override(config) {
       babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
       // Include problematic node_modules packages that need transpilation
-      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|@phosphor-icons|@msgpack|viem|ox|abitype|valtio|proxy-compare|lit|lit-element|lit-html|@lit|@lit-labs|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr|graphql)\/).*/;
+      // NOTE: @noble/@scure/@solana must be transpiled by this rule: the CRA
+      // "dependencies" babel rule only transforms optional chaining/nullish
+      // coalescing in production, so in dev webpack 4 fails to parse them.
+      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|@phosphor-icons|@msgpack|@noble|@scure|@solana|viem|ox|abitype|valtio|proxy-compare|lit|lit-element|lit-html|@lit|@lit-labs|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr|graphql)\/).*/;
       
       // Ensure babel options exist
       if (!babelRule.options) {
@@ -146,6 +149,31 @@ module.exports = function override(config) {
   // to prevent webpack from treating them as ES modules
   config.module.rules.push({
     test: /\.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  });
+
+  // CRA's file-loader doesn't exclude .cjs, so CommonJS deps like
+  // destr/lib/index.cjs or @msgpack/msgpack/dist.cjs get bundled as static
+  // asset URLs ("module.exports = <url>") instead of executable modules,
+  // which breaks WalletConnect ("_destr.default is not a function").
+  // Exclude .cjs from file-loader so webpack treats them as JS.
+  if (babelLoaderRule && babelLoaderRule.oneOf) {
+    const fileLoaderRule = babelLoaderRule.oneOf.find(
+      rule => rule.loader && rule.loader.includes('file-loader')
+    );
+    if (fileLoaderRule) {
+      if (Array.isArray(fileLoaderRule.exclude)) {
+        fileLoaderRule.exclude.push(/\.cjs$/);
+      } else if (fileLoaderRule.exclude) {
+        fileLoaderRule.exclude = [fileLoaderRule.exclude, /\.cjs$/];
+      } else {
+        fileLoaderRule.exclude = [/\.cjs$/];
+      }
+    }
+  }
+  config.module.rules.push({
+    test: /\.cjs$/,
     include: /node_modules/,
     type: 'javascript/auto',
   });

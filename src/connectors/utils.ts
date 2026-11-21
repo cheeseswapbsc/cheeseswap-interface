@@ -176,15 +176,23 @@ export async function ensureBSCMainnet(provider: any): Promise<void> {
     }
   }
   if (currentChainId !== BSC_CHAIN_ID) {
+    // ethers v5 Web3Provider has no .request(); unwrap the EIP-1193 provider
+    const eip1193 = provider.request
+      ? provider
+      : provider.provider && provider.provider.request
+        ? provider.provider
+        : provider;
     try {
-      await provider.request({
+      await eip1193.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: BSC_CHAIN_ID_HEX }]
       });
     } catch (switchError) {
-      // 4902 = chain not added
-      if (switchError.code === 4902 || (switchError.data && switchError.data.originalError && switchError.data.originalError.code === 4902)) {
-        await provider.request({
+      // 4902 = chain not added; -32601/4200 = switch method unsupported by wallet
+      const errorCode =
+        switchError.code || (switchError.data && switchError.data.originalError && switchError.data.originalError.code);
+      if (errorCode === 4902 || errorCode === -32601 || errorCode === 4200) {
+        await eip1193.request({
           method: 'wallet_addEthereumChain',
           params: [BSC_PARAMS]
         });

@@ -32,7 +32,7 @@ export const blue = {
 }
 
 export const gradients = {
-  primary: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  primary: 'linear-gradient(135deg, #7BFF69 0%, #5FCB87 100%)',
   success: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
   danger: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
   gold: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',

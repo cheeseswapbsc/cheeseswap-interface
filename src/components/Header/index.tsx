@@ -23,17 +23,15 @@ const HeaderFrame = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 16px;
   flex-direction: column;
-  width: 100%;
   background: ${({ theme }) => theme.colors.bg1};
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  width: calc(100% - 24px);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.bg3};
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   min-height: 68px;
   padding: 12px 16px;
   margin: 0;
@@ -42,15 +40,9 @@ const HeaderFrame = styled.div`
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:hover {
-    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.12);
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+  ${({ theme }) => theme.mediaWidth.upToSmall`
     padding: 0.75rem 1rem;
-    width: calc(100%);
     position: relative;
-    border-radius: 12px;
   `};
 `
 

@@ -5,34 +5,34 @@ export default {
   colors: {
     ...base.colors,
     shadow1: 'rgba(0, 0, 0, 0.1)',
-    text1: '#222222',
-    text2: '#6B7280',
+    text1: '#15161B',
+    text2: '#565B6B',
     text3: '#8B909A',
     text4: '#B4B7BE',
 
-    // backgrounds / greys with modern glassmorphism
-    bg0: '#FAFAFA',
+    // backgrounds / pump.fun style light surfaces
+    bg0: '#F5F7F6',
     bg1: '#FFFFFF',
-    bg2: '#F5F5F5',
-    bg3: '#EDEDED',
-    bg4: '#E2E2E2',
-    bg5: '#D6D6D6',
-    bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)',
-    
-    modalBG: 'rgba(0, 0, 0, 0.4)',
+    bg2: '#EFF3F0',
+    bg3: '#E3EAE5',
+    bg4: '#D5DED8',
+    bg5: '#C6D1C9',
+    bg6: 'linear-gradient(135deg, rgba(95, 203, 135, 0.06) 0%, rgba(123, 255, 105, 0.06) 100%)',
+
+    modalBG: 'rgba(21, 22, 27, 0.4)',
     advancedBG: 'rgba(255, 255, 255, 0.7)',
 
-    //primary colors
-    primary1: '#FC72FF',
-    primary2: '#FF99FF',
-    primary3: '#E85AE8',
-    primary4: '#FFD6FF',
-    primary5: '#FFE8FF',
-    primary6: 'rgba(252, 114, 255, 0.12)',
+    //primary colors (pump.fun green, saturated for light backgrounds)
+    primary1: '#31C36B',
+    primary2: '#5FCB87',
+    primary3: '#28A85A',
+    primary4: '#C9F0D8',
+    primary5: '#E8F8EE',
+    primary6: 'rgba(49, 195, 107, 0.12)',
 
     // color text
-    primaryText1: '#FFFFFF',
-    buttonText: '#FFFFFF',
+    primaryText1: '#157A3E',
+    buttonText: '#0E0E16',
 
     // secondary colors
     secondary1: '#10B981',

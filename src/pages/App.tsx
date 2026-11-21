@@ -35,6 +35,8 @@ const AppWrapper = styled.div`
   flex-flow: column;
   align-items: flex-start;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
 `
 
 const HeaderWrapper = styled.div`
@@ -46,23 +48,30 @@ const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 92px;
-  padding-bottom: 48px;
+  padding-top: 86px;
+  padding-bottom: 18px;
   align-items: center;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 10;
+  z-index: 1;
 
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-      padding: 16px;
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+      padding-left: 16px;
+      padding-right: 16px;
   `};
 
-  z-index: 1;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+      padding: 16px;
+  `};
 `
 
-const Marginer = styled.div`
-  margin-top: 5rem;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto 0;
 `
 
 export default function App() {
@@ -102,6 +111,7 @@ export default function App() {
               </HeaderWrapper>
               <BodyWrapper>
                <Popups />
+               <ContentWrapper>
                 <Web3ReactManager>
                   <Switch>
                     <Route exact strict path="/swap" component={Swap} />
@@ -123,7 +133,7 @@ export default function App() {
                     <Route component={RedirectPathToSwapOnly} />
                   </Switch>
                 </Web3ReactManager>
-                <Marginer />
+               </ContentWrapper>
               </BodyWrapper>
               <Footer />
         {/*   <BottomRightPopup /> */}

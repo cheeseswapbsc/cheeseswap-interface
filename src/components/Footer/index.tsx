@@ -28,7 +28,7 @@ const FooterSection = styled.div`
   align-items: flex-start;
   justify-content: space-evenly;
   position: relative;
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     justify-content: flex-start;
     padding: 1.5rem 1rem 1rem 1rem;
