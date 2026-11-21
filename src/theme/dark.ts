@@ -5,18 +5,18 @@ export default {
   colors: {
     ...base.colors,
     shadow1: 'rgba(0, 0, 0, 0.5)',
-    text1: '#F7F8FC',
-    text2: '#A7B0C2',
-    text3: '#7F899F',
-    text4: '#596276',
+    text1: '#F5F5F5',
+    text2: '#B3B3B3',
+    text3: '#858585',
+    text4: '#666666',
 
     // backgrounds / greys with modern glassmorphism
-    bg0: '#070910',
-    bg1: 'rgba(12, 16, 27, 0.96)',
-    bg2: 'rgba(18, 23, 36, 0.94)',
-    bg3: 'rgba(31, 38, 54, 0.86)',
-    bg4: 'rgba(44, 52, 70, 0.76)',
-    bg5: 'rgba(62, 71, 91, 0.64)',
+    bg0: '#131313',
+    bg1: '#1B1B1B',
+    bg2: '#242424',
+    bg3: '#303030',
+    bg4: '#3C3C3C',
+    bg5: '#484848',
     bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.07) 0%, rgba(118, 75, 162, 0.07) 100%)',
 
     //specialty colors
@@ -24,12 +24,12 @@ export default {
     advancedBG: 'rgba(12, 16, 27, 0.92)',
 
     //primary colors
-    primary1: '#667eea',
-    primary2: '#764ba2',
-    primary3: '#8B5CF6',
-    primary4: '#A78BFA',
-    primary5: '#C4B5FD',
-    primary6: 'rgba(102, 126, 234, 0.1)',
+    primary1: '#FC72FF',
+    primary2: '#FF99FF',
+    primary3: '#E85AE8',
+    primary4: '#B53BB7',
+    primary5: '#6E2F70',
+    primary6: 'rgba(252, 114, 255, 0.14)',
 
     // color text
     primaryText1: '#FFFFFF',

@@ -63,7 +63,7 @@ const StyledNav = styled.nav`
   font-weight: 700;
   gap: 0.5rem;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: nowrap;
 
   @media (max-width: 1280px) {

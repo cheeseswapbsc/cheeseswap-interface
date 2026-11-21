@@ -50,13 +50,13 @@ const Base = styled(RebassButton)<{
 `
 
 export const ButtonPrimary = styled(Base)`
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary1} 0%, ${({ theme }) => theme.colors.primary2} 100%);
-  color: ${({ theme }) => theme.colors.buttonText};
+  background: ${({ theme }) => theme.colors.primary1};
+  color: #111111;
   box-shadow: none !important;
   
   &:hover:not(:disabled) {
     box-shadow: none !important;
-    background: linear-gradient(135deg, ${({ theme }) => lighten(0.05, theme.colors.primary1)} 0%, ${({ theme }) => lighten(0.05, theme.colors.primary2)} 100%);
+    background: ${({ theme }) => lighten(0.05, theme.colors.primary1)};
   }
   
   &:focus {

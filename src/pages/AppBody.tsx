@@ -6,12 +6,10 @@ export const BodyWrapper = styled.div`
   max-width: 480px;
   width: 100%;
   background: ${({ theme }) => theme.colors.bg1};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid ${({ theme }) => `${theme.colors.bg3}CC`};
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
-  border-radius: 20px;
-  padding: 0.875rem;
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  padding: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {

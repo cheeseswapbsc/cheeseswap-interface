@@ -84,6 +84,7 @@ module.exports = function override(config) {
     os: require.resolve('os-browserify'),
     url: require.resolve('url'),
     buffer: require.resolve('buffer'),
+    '@msgpack/msgpack': path.join(__dirname, 'node_modules/@msgpack/msgpack/dist.cjs/index.cjs'),
   };
 
 
@@ -115,7 +116,7 @@ module.exports = function override(config) {
       babelRule.test = /\.(js|mjs|jsx|ts|tsx)$/;
       babelRule.include = undefined;
       // Include problematic node_modules packages that need transpilation
-      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|@phosphor-icons|viem|ox|abitype|valtio|proxy-compare|lit|lit-element|lit-html|@lit|@lit-labs|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr|graphql)\/).*/;
+      babelRule.exclude = /node_modules\/(?!(@walletconnect|@metamask|@coinbase|@reown|@phosphor-icons|@msgpack|viem|ox|abitype|valtio|proxy-compare|lit|lit-element|lit-html|@lit|@lit-labs|superstruct|eth-block-tracker|@ethereumjs|unstorage|destr|graphql)\/).*/;
       
       // Ensure babel options exist
       if (!babelRule.options) {

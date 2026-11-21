@@ -1,7 +1,7 @@
 import { Currency, Pair } from '@cheeseswapv2/sdk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { darken, transparentize } from 'polished'
+import { darken } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../CurrencyLogo'
@@ -32,21 +32,21 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   height: 2.34rem;
   font-size: 13.6px;
   font-weight: 600;
-  background: ${({ selected, theme }) => (selected ? 'rgba(102, 126, 234, 0.2)' : 'rgba(102, 126, 234, 0.25)')};
-  color: #FFFFFF;
+  background: ${({ theme }) => theme.colors.bg3};
+  color: ${({ theme }) => theme.colors.text1};
   border-radius: 14px;
   outline: none;
   cursor: pointer;
   user-select: none;
-  border: 1px solid rgba(102, 126, 234, 0.45);
+  border: 1px solid ${({ theme }) => theme.colors.bg4};
   padding: 0 0.72rem;
   transition: all 0.2s;
   white-space: nowrap;
   box-shadow: none !important;
 
   :hover {
-    border-color: rgba(102, 126, 234, 0.65);
-    background: rgba(102, 126, 234, 0.35);
+    border-color: ${({ theme }) => theme.colors.primary1};
+    background: ${({ theme }) => theme.colors.bg4};
     transform: translateY(-1px);
   }
 
@@ -99,7 +99,7 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
 `
 
 const Container = styled.div<{ hideInput: boolean }>`
-  border: 1px solid ${({ theme }) => `${theme.colors.bg3}CC`};
+  border: 1px solid ${({ theme }) => theme.colors.bg3};
   background: ${({ theme }) => theme.colors.bg2};
   border-radius: ${({ hideInput }) => (hideInput ? '12px' : '16px')};
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
@@ -113,7 +113,7 @@ const AmountInputWrapper = styled.div`
 
   .token-amount-input {
     flex: 1;
-    border: 1.5px solid ${({ theme }) => transparentize(0.1, theme.colors.bg3)};
+    border: 1px solid transparent;
     border-radius: 12px;
     padding: 0.8rem 1rem;
     background: ${({ theme }) => theme.colors.bg0};
@@ -130,7 +130,7 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
   margin: ${({ active }) => (active ? '0 0.43rem' : '0 0.3rem')};
   font-size: ${({ active }) => (active ? '14.45px' : '12.75px')};
   font-weight: 600;
-  color: #FFFFFF;
+  color: ${({ theme }) => theme.colors.text1};
   max-width: 119px;
   overflow: hidden;
   text-overflow: ellipsis;

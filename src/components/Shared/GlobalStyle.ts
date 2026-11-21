@@ -70,9 +70,8 @@ export const ThemedGlobalStyle = createGlobalStyle`
     html {
       color: ${({ theme }) => theme.colors.text1};
       background-color: ${({ theme }) => theme.colors.bg0};
-      background-image: 
-        radial-gradient(at 8% 0%, rgba(102, 126, 234, 0.08) 0px, transparent 34rem),
-        radial-gradient(at 92% 100%, rgba(118, 75, 162, 0.06) 0px, transparent 38rem);
+      background-image:
+        radial-gradient(circle at 50% -20%, ${({ theme }) => theme.colors.primary6} 0, transparent 42rem);
     }
 
     body {

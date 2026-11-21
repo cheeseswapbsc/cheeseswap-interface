@@ -27,7 +27,7 @@ const StyledAbsoluteLink = styled.a`
   align-items: center;
   justify-content: center;
   height: 2.5rem;
-  border-radius: 12px;
+  border-radius: 999px;
   outline: none;
   cursor: pointer;
   text-decoration: none;

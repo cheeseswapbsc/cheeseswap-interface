@@ -30,10 +30,14 @@ const HeaderFrame = styled.div`
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid ${({ theme }) => theme.colors.bg3};
-  top: 0;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 16px;
-  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  width: calc(100% - 24px);
+  min-height: 68px;
+  padding: 12px 16px;
+  margin: 0;
+  position: fixed;
   z-index: 10;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
