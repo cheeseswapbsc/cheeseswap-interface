@@ -34,7 +34,7 @@ const CurrencySelect = styled.button<{ selected: boolean }>`
   font-weight: 600;
   background: ${({ selected, theme }) => (selected ? 'rgba(102, 126, 234, 0.2)' : 'rgba(102, 126, 234, 0.25)')};
   color: #FFFFFF;
-  border-radius: 10.2px;
+  border-radius: 14px;
   outline: none;
   cursor: pointer;
   user-select: none;
@@ -99,10 +99,10 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
 `
 
 const Container = styled.div<{ hideInput: boolean }>`
-  border: 1px solid ${({ theme }) => theme.colors.bg3};
-  background: ${({ theme }) => theme.colors.bg1};
-  border-radius: ${({ hideInput }) => (hideInput ? '8.5px' : '15.3px')};
-  box-shadow: none !important;
+  border: 1px solid ${({ theme }) => `${theme.colors.bg3}CC`};
+  background: ${({ theme }) => theme.colors.bg2};
+  border-radius: ${({ hideInput }) => (hideInput ? '12px' : '16px')};
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
   width: 100%;
 `
 

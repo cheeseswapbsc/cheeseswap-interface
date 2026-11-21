@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
   padding: 4px;
   border-radius: 12px;
-  background: rgba(17, 24, 39, 0.85);
+  background: rgba(12, 16, 27, 0.96);
   border: 1px solid rgba(92, 116, 255, 0.45);
   display: flex;
   align-items: center;

@@ -71,10 +71,8 @@ export const ThemedGlobalStyle = createGlobalStyle`
       color: ${({ theme }) => theme.colors.text1};
       background-color: ${({ theme }) => theme.colors.bg0};
       background-image: 
-        radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(102, 126, 234, 0.1) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(118, 75, 162, 0.1) 0px, transparent 50%);
+        radial-gradient(at 8% 0%, rgba(102, 126, 234, 0.08) 0px, transparent 34rem),
+        radial-gradient(at 92% 100%, rgba(118, 75, 162, 0.06) 0px, transparent 38rem);
     }
 
     body {

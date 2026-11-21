@@ -5,23 +5,23 @@ export default {
   colors: {
     ...base.colors,
     shadow1: 'rgba(0, 0, 0, 0.5)',
-    text1: '#F3F4F6',
-    text2: '#9CA3AF',
-    text3: '#6B7280',
-    text4: '#4B5563',
+    text1: '#F7F8FC',
+    text2: '#A7B0C2',
+    text3: '#7F899F',
+    text4: '#596276',
 
     // backgrounds / greys with modern glassmorphism
-    bg0: '#0A0E1A',
-    bg1: 'rgba(17, 24, 39, 0.85)',
-    bg2: 'rgba(31, 41, 55, 0.7)',
-    bg3: 'rgba(55, 65, 81, 0.6)',
-    bg4: 'rgba(75, 85, 99, 0.5)',
-    bg5: 'rgba(107, 114, 128, 0.4)',
-    bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
+    bg0: '#070910',
+    bg1: 'rgba(12, 16, 27, 0.96)',
+    bg2: 'rgba(18, 23, 36, 0.94)',
+    bg3: 'rgba(31, 38, 54, 0.86)',
+    bg4: 'rgba(44, 52, 70, 0.76)',
+    bg5: 'rgba(62, 71, 91, 0.64)',
+    bg6: 'linear-gradient(135deg, rgba(102, 126, 234, 0.07) 0%, rgba(118, 75, 162, 0.07) 100%)',
 
     //specialty colors
-    modalBG: 'rgba(0, 0, 0, 0.5)',
-    advancedBG: 'rgba(17, 24, 39, 0.7)',
+    modalBG: 'rgba(2, 4, 10, 0.78)',
+    advancedBG: 'rgba(12, 16, 27, 0.92)',
 
     //primary colors
     primary1: '#667eea',
