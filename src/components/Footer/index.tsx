@@ -104,17 +104,9 @@ export default function Footer() {
           EVM Based Token Swap AMM Dex Platform
         </Title>
         <Title2>
-          © Copyright 2020-2025 Cheeseswap.
+          © Copyright 2020-2027 Cheeseswap.
         </Title2>
-        <FooterWrapper>
-            <StyledAbsoluteImg href="https://ipfs.io/" target="_blank" rel="noopener noreferrer">
-              <img src={DeployIPFS} alt="IPFS" height="36" />
-            </StyledAbsoluteImg>
-            <StyledAbsoluteImg href="https://skynet.certik.com/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
-              <img src={AuditCertik} alt="Certik" height="36" />
-            </StyledAbsoluteImg>
-          </FooterWrapper>
-      </FooterWrapper>
+         </FooterWrapper>
       <FooterWrapper>
       <Title>
       Products
@@ -125,48 +117,19 @@ export default function Footer() {
         <StyledAbsoluteLink href="#/pool" target="_blank" rel="nofollow noopener noreferrer">
           Liquidity Pool
         </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://bulksender.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
-          Bulk Sender
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://watcher.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
-          Farm Watcher
-        </StyledAbsoluteLink>
-      </FooterWrapper>
+        </FooterWrapper>
       <FooterWrapper>
       <Title>
       Useful Links
       </Title>
-      <StyledAbsoluteLink href="https://info.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
-        Analytics
-      </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://docs.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
+      <StyledAbsoluteLink href="https://docs.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
           Docs
-        </StyledAbsoluteLink>
-        <StyledAbsoluteLink href="https://api.cheeseswap.app" target="_blank" rel="nofollow noopener noreferrer">
-          API
         </StyledAbsoluteLink>
         <StyledAbsoluteLink href="https://certik.org/projects/cheeseswap/" target="_blank" rel="noopener noreferrer">
           Audit
         </StyledAbsoluteLink>
         </FooterWrapper>
       <FooterWrapper>
-        <Title>
-          Market Data
-          </Title>
-            <SocialSection>
-              <IconLink href="https://coinmarketcap.com/exchanges/cheeseswap/" target="_blank" rel="noopener noreferrer">
-                <Icon src={Cmc} alt="CoinMarketCap" />
-              </IconLink>
-              <IconLink href="https://www.coingecko.com/en/coins/cheeseswap" target="_blank" rel="noopener noreferrer">
-                <Icon src={Cg} alt="CoinGecko" />
-              </IconLink>
-              <IconLink href="https://dappradar.com/binance-smart-chain/exchanges/cheeseswap" target="_blank" rel="noopener noreferrer">
-                <Icon src={DappRadar} alt="DappRadar" />
-              </IconLink>
-              <IconLink href="https://www.dapp.com/app/cheeseswap" target="_blank" rel="noopener noreferrer">
-                <Icon src={Dapp} alt="Dapp" />
-              </IconLink>
-            </SocialSection>
             <FooterWrapper2>
               <Title>
               Social Media
@@ -188,20 +151,12 @@ export default function Footer() {
             </FooterWrapper2>
             </FooterWrapper>
       <FooterWrapper>
-      <Title>
-      Built on
-      </Title>
-      <FooterWrapper2>
-        <StyledAbsoluteImg href="https://www.binance.org/" target="_blank" rel="noopener noreferrer">
-          <img src={BuiltBSC} alt="Binance Smart Chain" height="44" />
-        </StyledAbsoluteImg>
-      </FooterWrapper2>
       <FooterWrapper2>
       <StyledAbsoluteLink href="#/terms-of-service" aria-label="Terms of Service" target="_blank" rel="noopener noreferrer">
         Terms of Service
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="#/privacy-policy" aria-label="Privacy Policy" target="_blank" rel="noopener noreferrer">
-         Privacy Policy
+        Privacy Policy
       </StyledAbsoluteLink>
       </FooterWrapper2>
       </FooterWrapper>
