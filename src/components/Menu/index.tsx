@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Code, PieChart, MessageCircle, Award, ArrowDown } from 'react-feather'
 import styled from 'styled-components'
-import MenuIcon from '../../assets/images/menu.svg?react'
+import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import useToggle from '../../hooks/useToggle'
 import { ExternalLink } from '../Shared'

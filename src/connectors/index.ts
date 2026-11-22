@@ -23,7 +23,7 @@ const NETWORK_URL_KEYS = [
   'REACT_APP_NETWORK_URL_13'
 ] as const;
 
-const NETWORK_URLS = NETWORK_URL_KEYS.map(key => import.meta.env[key]).filter((url): url is string => typeof url === 'string');
+const NETWORK_URLS = NETWORK_URL_KEYS.map(key => process.env[key]).filter((url): url is string => typeof url === 'string');
 
 if (NETWORK_URLS.length === 0) {
   throw new Error('At least one RPC URL must be defined in environment variables');

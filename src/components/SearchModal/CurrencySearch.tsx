@@ -203,8 +203,7 @@ export function CurrencySearch({
         </AutoSizer>
       </div>
 
-      {/* eslint-disable-next-line */}
-      {false && (
+      {null && (
         <>
           <Separator />
           <Card>

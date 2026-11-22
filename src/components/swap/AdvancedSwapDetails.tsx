@@ -54,12 +54,10 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
           <RowFixed>
             <TYPE.Black color={theme.colors.text1} fontSize={14}>
               {isExactIn
-                ? slippageAdjustedAmounts[Field.OUTPUT]
-                  ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${trade.outputAmount.currency.symbol}`
-                  : '-'
-                : slippageAdjustedAmounts[Field.INPUT]
-                  ? `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${trade.inputAmount.currency.symbol}`
-                  : '-'}
+                ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${trade.outputAmount.currency.symbol}` ??
+                  '-'
+                : `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${trade.inputAmount.currency.symbol}` ??
+                  '-'}
             </TYPE.Black>
           </RowFixed>
         </RowBetween>
