@@ -5,7 +5,7 @@ import { usePopper } from 'react-popper'
 import { useDispatch, useSelector } from 'react-redux'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
+import DropDown from '../../assets/images/dropdown.svg?react'
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 

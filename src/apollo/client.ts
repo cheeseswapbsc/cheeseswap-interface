@@ -2,7 +2,7 @@ import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@a
 
 let transactionsClient: ApolloClient<NormalizedCacheObject> | null = null
 
-const SUBGRAPH_URL = process.env.REACT_APP_TRANSACTIONS_SUBGRAPH_URL
+const SUBGRAPH_URL = import.meta.env.REACT_APP_TRANSACTIONS_SUBGRAPH_URL
 
 const defaultOptions = {
   watchQuery: {
@@ -17,7 +17,7 @@ const defaultOptions = {
 
 export function getTransactionsClient(): ApolloClient<NormalizedCacheObject> | null {
   if (!SUBGRAPH_URL) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!import.meta.env.PROD) {
       console.warn('[apollo] Missing REACT_APP_TRANSACTIONS_SUBGRAPH_URL env variable')
     }
     return null

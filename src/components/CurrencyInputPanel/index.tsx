@@ -9,7 +9,7 @@ import DoubleCurrencyLogo from '../DoubleLogo'
 import { RowBetween } from '../Row'
 import { TYPE } from '../Shared'
 import { Input as NumericalInput } from '../NumericalInput'
-import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
+import DropDown from '../../assets/images/dropdown.svg?react'
 
 import { useActiveWeb3React } from '../../hooks'
 import TranslatedText from '../../components/TranslatedText'

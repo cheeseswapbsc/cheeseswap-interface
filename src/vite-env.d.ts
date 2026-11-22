@@ -1,4 +1,5 @@
-/// <reference types="react-scripts" />
+/// <reference types="vite/client" />
+/// <reference types="vite-plugin-svgr/client" />
 
 declare module 'jazzicon' {
   export default function(diameter: number, seed: number): HTMLElement

@@ -10,8 +10,9 @@ import PendingView from './PendingView'
 import Option from './Option'
 import { SUPPORTED_WALLETS, WalletType } from '../../connectors/utils'
 import { ExternalLink } from '../Shared'
-import { ReactComponent as Close } from '../../assets/images/x.svg'
+import Close from '../../assets/images/x.svg?react'
 import { useWeb3, rdnsToWalletType } from '../../providers/Web3Provider'
+import { walletIcon } from '../../utils/walletIcon'
 
 const fadeIn = keyframes`
   from {
@@ -404,7 +405,7 @@ export default function WalletModal({
             color={info.color}
             header="Browser Wallet"
             subheader={null}
-            icon={require('../../assets/images/' + info.iconName)}
+            icon={walletIcon(info.iconName)}
             clickable={true}
             statusLabel="Detected"
             tooltip="Connect with the wallet injected into this browser."
@@ -426,7 +427,7 @@ export default function WalletModal({
             color={info.color}
             header={info.name}
             subheader={null}
-            icon={require('../../assets/images/' + info.iconName)}
+            icon={walletIcon(info.iconName)}
             clickable={walletType !== 'BINANCE'}
             statusLabel="Detected"
             tooltip="Binance Chain Wallet extension."
@@ -447,7 +448,7 @@ export default function WalletModal({
           color={wcInfo.color}
           header={wcInfo.name}
           subheader={null}
-          icon={require('../../assets/images/' + wcInfo.iconName)}
+          icon={walletIcon(wcInfo.iconName)}
           clickable={walletType !== 'WALLETCONNECT'}
           statusLabel="QR code / mobile"
           tooltip="Scan a QR code with any WalletConnect-compatible mobile wallet."
@@ -468,7 +469,7 @@ export default function WalletModal({
             color={cbInfo.color}
             header={cbInfo.name}
             subheader={null}
-            icon={require('../../assets/images/' + cbInfo.iconName)}
+            icon={walletIcon(cbInfo.iconName)}
             clickable={walletType !== 'COINBASE'}
             statusLabel="App / extension"
             tooltip="Connect with the Coinbase Wallet app or extension."
@@ -489,7 +490,7 @@ export default function WalletModal({
             color={mmInfo.color}
             header="Install MetaMask"
             subheader={null}
-            icon={require('../../assets/images/' + mmInfo.iconName)}
+            icon={walletIcon(mmInfo.iconName)}
             statusLabel="Not installed"
             tooltip="No browser wallet detected. Install MetaMask to get started."
           />
