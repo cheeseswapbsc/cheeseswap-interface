@@ -13,7 +13,6 @@ import {
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
-  updateUserDarkMode,
   updateMatchesDarkMode,
   updateUserDeadline,
   updateUserExpertMode,
@@ -71,9 +70,6 @@ export function useAudioModeManager(): [boolean, () => void] {
     audioPlay ? dispatch(muteAudio()) : dispatch(unmuteAudio())
     // dispatch(updateUserDarkMode({ userDarkMode: !darkMode }))
   }, [audioPlay, dispatch])
-
-  // TODO
-  dispatch(updateUserDarkMode({ userDarkMode: false }))
 
   return [audioPlay, toggleSetAudioMode]
 }

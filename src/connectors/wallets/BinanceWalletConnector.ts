@@ -12,7 +12,7 @@ export class BinanceWalletConnector extends BaseWalletConnector {
     return Boolean(window.ethereum?.isBinance || (window as any).BinanceChain)
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('Binance Wallet not detected. Please install Binance Wallet extension.')
     }
@@ -30,7 +30,8 @@ export class BinanceWalletConnector extends BaseWalletConnector {
         throw new Error('No accounts returned from Binance Wallet')
       }
 
-      this.provider = new ethers.providers.Web3Provider(provider, 'any')
+      this.eip1193 = provider
+      this.provider = new ethers.BrowserProvider(provider)
       await ensureBSCMainnet(this.provider)
 
       console.log('[BinanceWallet] Successfully connected')

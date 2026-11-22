@@ -1,4 +1,4 @@
-import { parseBytes32String } from '@ethersproject/strings'
+import { decodeBytes32String } from 'ethers'
 import { Currency, ETHER, Token, currencyEquals } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
@@ -41,7 +41,7 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
   return str && str.length > 0
     ? str
     : bytes32 && BYTES32_REGEX.test(bytes32)
-    ? parseBytes32String(bytes32)
+    ? decodeBytes32String(bytes32)
     : defaultValue
 }
 

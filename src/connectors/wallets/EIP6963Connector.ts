@@ -36,7 +36,7 @@ export class EIP6963Connector extends BaseWalletConnector {
   /**
    * Connect to a discovered wallet by rdns (prompts the user).
    */
-  async connect(rdns?: string): Promise<ethers.providers.Web3Provider> {
+  async connect(rdns?: string): Promise<ethers.BrowserProvider> {
     const detail = await this.resolveDetail(rdns)
 
     try {
@@ -50,7 +50,8 @@ export class EIP6963Connector extends BaseWalletConnector {
 
       this.detail = detail
       this.rdns = detail.info.rdns
-      this.provider = new ethers.providers.Web3Provider(detail.provider as any, 'any')
+      this.eip1193 = detail.provider as any
+      this.provider = new ethers.BrowserProvider(detail.provider as any)
 
       await ensureBSCMainnet(this.provider)
 
@@ -71,7 +72,7 @@ export class EIP6963Connector extends BaseWalletConnector {
    * Silent reconnect: only succeeds when the wallet already authorized
    * this site (uses eth_accounts, never triggers a popup).
    */
-  async eagerConnect(rdns: string): Promise<ethers.providers.Web3Provider | null> {
+  async eagerConnect(rdns: string): Promise<ethers.BrowserProvider | null> {
     const detail = await eip6963Store.waitForProvider(rdns)
     if (!detail) return null
 
@@ -81,7 +82,8 @@ export class EIP6963Connector extends BaseWalletConnector {
 
       this.detail = detail
       this.rdns = detail.info.rdns
-      this.provider = new ethers.providers.Web3Provider(detail.provider as any, 'any')
+      this.eip1193 = detail.provider as any
+      this.provider = new ethers.BrowserProvider(detail.provider as any)
       console.log(`[EIP6963] Eagerly reconnected to ${detail.info.name}`)
       return this.provider
     } catch (error) {

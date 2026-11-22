@@ -12,7 +12,7 @@ export class OKXWalletConnector extends BaseWalletConnector {
     return Boolean((window as any).okxwallet || window.ethereum?.isOKXWallet)
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('OKX Wallet not detected. Please install OKX Wallet extension.')
     }
@@ -30,7 +30,8 @@ export class OKXWalletConnector extends BaseWalletConnector {
         throw new Error('No accounts returned from OKX Wallet')
       }
 
-      this.provider = new ethers.providers.Web3Provider(provider, 'any')
+      this.eip1193 = provider
+      this.provider = new ethers.BrowserProvider(provider)
       await ensureBSCMainnet(this.provider)
 
       console.log('[OKXWallet] Successfully connected')

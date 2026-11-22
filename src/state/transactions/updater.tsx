@@ -65,8 +65,8 @@ export default function Updater(): null {
                     from: receipt.from,
                     status: receipt.status,
                     to: receipt.to,
-                    transactionHash: receipt.transactionHash,
-                    transactionIndex: receipt.transactionIndex
+                    transactionHash: receipt.hash,
+                    transactionIndex: receipt.index
                   }
                 })
               )

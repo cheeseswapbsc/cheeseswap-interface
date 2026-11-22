@@ -55,7 +55,7 @@ export class ConnectorFactory {
    * STRATEGY: Always try injected first if window.ethereum exists
    * This maintains backward compatibility with in-app browsers
    */
-  static async connect(connectorId: ConnectorId): Promise<ethers.providers.Web3Provider> {
+  static async connect(connectorId: ConnectorId): Promise<ethers.BrowserProvider> {
     console.log(`[ConnectorFactory] Connection requested for: ${connectorId}`)
 
     // Get the appropriate connector
@@ -76,7 +76,7 @@ export class ConnectorFactory {
    * Priority: Specific wallets → Generic injected → WalletConnect
    */
   static async autoConnect(): Promise<{
-    provider: ethers.providers.Web3Provider
+    provider: ethers.BrowserProvider
     connectorId: ConnectorId
   }> {
     // Priority order (EIP6963 > INJECTED > METAMASK > BINANCE > TRUST > OKX > FANTOM > WALLETCONNECT > COINBASEWALLET)

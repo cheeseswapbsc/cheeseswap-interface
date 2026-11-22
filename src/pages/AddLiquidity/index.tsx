@@ -1,5 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber'
-import { TransactionResponse } from '@ethersproject/providers'
+import { TransactionResponse } from 'ethers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@cheeseswapv2/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -141,10 +140,11 @@ export default function AddLiquidity({
     let estimate,
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
-      value: BigNumber | null
+      value: bigint | null
     if (currencyA === ETHER || currencyB === ETHER) {
       const tokenBIsETH = currencyB === ETHER
-      estimate = router.estimateGas.addLiquidityETH
+      // ethers v6: estimateGas is a per-method helper
+      estimate = router.addLiquidityETH.estimateGas
       method = router.addLiquidityETH
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
@@ -154,9 +154,9 @@ export default function AddLiquidity({
         account,
         deadlineFromNow
       ]
-      value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+      value = BigInt((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
     } else {
-      estimate = router.estimateGas.addLiquidity
+      estimate = router.addLiquidity.estimateGas
       method = router.addLiquidity
       args = [
         wrappedCurrency(currencyA, chainId)?.address ?? '',

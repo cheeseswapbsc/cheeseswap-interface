@@ -7,7 +7,7 @@ export interface IWalletConnector {
   /**
    * Connect to the wallet
    */
-  connect(): Promise<ethers.providers.Web3Provider>
+  connect(): Promise<ethers.BrowserProvider>
 
   /**
    * Disconnect from the wallet
@@ -22,7 +22,12 @@ export interface IWalletConnector {
   /**
    * Get the current provider instance
    */
-  getProvider(): ethers.providers.Web3Provider | null
+  getProvider(): ethers.BrowserProvider | null
+
+  /**
+   * Get the underlying EIP-1193 provider (BrowserProvider keeps it private in v6)
+   */
+  getEip1193Provider(): any
 
   /**
    * Get the name of the wallet
@@ -34,19 +39,24 @@ export interface IWalletConnector {
  * Base class for all wallet connectors
  */
 export abstract class BaseWalletConnector implements IWalletConnector {
-  protected provider: ethers.providers.Web3Provider | null = null
+  protected provider: ethers.BrowserProvider | null = null
+  protected eip1193: any = null
   protected walletName: string
 
   constructor(walletName: string) {
     this.walletName = walletName
   }
 
-  abstract connect(): Promise<ethers.providers.Web3Provider>
+  abstract connect(): Promise<ethers.BrowserProvider>
   abstract disconnect(): Promise<void>
   abstract isAvailable(): boolean
 
-  getProvider(): ethers.providers.Web3Provider | null {
+  getProvider(): ethers.BrowserProvider | null {
     return this.provider
+  }
+
+  getEip1193Provider(): any {
+    return this.eip1193
   }
 
   getName(): string {

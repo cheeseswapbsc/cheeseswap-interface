@@ -1,6 +1,4 @@
-import { splitSignature } from '@ethersproject/bytes'
-import { Contract } from '@ethersproject/contracts'
-import { TransactionResponse } from '@ethersproject/providers'
+import { Signature, Contract, TransactionResponse, JsonRpcApiProvider } from 'ethers'
 import { Currency, currencyEquals, ETHER, Percent, WETH } from '@cheeseswapv2/sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
@@ -40,7 +38,6 @@ import { useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks'
 import { Field } from '../../state/burn/actions'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useUserDeadline, useUserSlippageTolerance } from '../../state/user/hooks'
-import { BigNumber } from '@ethersproject/bignumber'
 
 export default function RemoveLiquidity({
   history,
@@ -127,11 +124,12 @@ export default function RemoveLiquidity({
       { name: 'nonce', type: 'uint256' },
       { name: 'deadline', type: 'uint256' }
     ]
+    // ethers v6: nonces() returns bigint
     const message = {
       owner: account,
       spender: ROUTER_ADDRESS,
       value: liquidityAmount.raw.toString(),
-      nonce: nonce.toHexString(),
+      nonce: '0x' + BigInt(nonce).toString(16),
       deadline: deadlineForSignature
     }
     const data = JSON.stringify({
@@ -144,9 +142,9 @@ export default function RemoveLiquidity({
       message
     })
 
-    library
+    ;(library as JsonRpcApiProvider)
       .send('eth_signTypedData_v4', [account, data])
-      .then(splitSignature)
+      .then((rawSignature: string) => Signature.from(rawSignature))
       .then(signature => {
         setSignatureData({
           v: signature.v,
@@ -274,9 +272,10 @@ export default function RemoveLiquidity({
     } else {
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
     }
-    const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
+    // ethers v6: estimateGas is a per-method helper; gas values are bigint
+    const safeGasEstimates: (bigint | undefined)[] = await Promise.all(
       methodNames.map((methodName, index) =>
-        router.estimateGas[methodName](...args)
+        router.getFunction(methodName).estimateGas(...args)
           .then(calculateGasMargin)
           .catch(error => {
             console.error(`estimateGas failed`, index, methodName, args, error)
@@ -285,8 +284,8 @@ export default function RemoveLiquidity({
       )
     )
 
-    const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(safeGasEstimate =>
-      BigNumber.isBigNumber(safeGasEstimate)
+    const indexOfSuccessfulEstimation = safeGasEstimates.findIndex(
+      safeGasEstimate => typeof safeGasEstimate === 'bigint'
     )
 
     // all estimations failed...

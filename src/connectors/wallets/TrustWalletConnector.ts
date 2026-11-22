@@ -20,7 +20,7 @@ export class TrustWalletConnector extends BaseWalletConnector {
     return false
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('Trust Wallet not detected. Please install Trust Wallet or use Trust Wallet browser.')
     }
@@ -53,7 +53,8 @@ export class TrustWalletConnector extends BaseWalletConnector {
         throw new Error('No accounts returned from Trust Wallet')
       }
 
-      this.provider = new ethers.providers.Web3Provider(provider, 'any')
+      this.eip1193 = provider
+      this.provider = new ethers.BrowserProvider(provider)
       await ensureBSCMainnet(this.provider)
 
       console.log('[TrustWallet] Successfully connected')

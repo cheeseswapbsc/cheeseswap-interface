@@ -1,8 +1,4 @@
-import { Contract } from 'ethers'
-import { ethers } from 'ethers'
-import { namehash } from 'ethers/lib/utils'
-
-type Provider = ethers.providers.Provider
+import { Contract, namehash, Provider } from 'ethers'
 
 const REGISTRAR_ABI = [
   {

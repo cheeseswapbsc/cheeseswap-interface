@@ -109,7 +109,7 @@ function TransactionSubmittedContent({
               </Text>
             </ExternalLink>
           )}
-          {currencyToAdd && library?.provider?.isMetaMask && (
+          {currencyToAdd && (library as any)?.provider?.isMetaMask && (
             <ButtonLight
               mt="12px"
               padding="6px 12px"

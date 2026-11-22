@@ -12,7 +12,7 @@ export class FantomWalletConnector extends BaseWalletConnector {
     return Boolean((window as any).ftmwallet || window.ethereum?.isFTM)
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('Fantom Wallet not detected. Please install Fantom Wallet extension.')
     }
@@ -30,7 +30,8 @@ export class FantomWalletConnector extends BaseWalletConnector {
         throw new Error('No accounts returned from Fantom Wallet')
       }
 
-      this.provider = new ethers.providers.Web3Provider(provider, 'any')
+      this.eip1193 = provider
+      this.provider = new ethers.BrowserProvider(provider)
       await ensureBSCMainnet(this.provider)
 
       console.log('[FantomWallet] Successfully connected')

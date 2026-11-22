@@ -1,7 +1,7 @@
 import { Currency, ETHER, Token } from '@cheeseswapv2/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { getAddress } from '@ethersproject/address'
+import { getAddress } from 'ethers'
 
 import EthereumLogo from '../../assets/images/binance-logo.png'
 import useHttpLocations from '../../hooks/useHttpLocations'

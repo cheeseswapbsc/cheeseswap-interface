@@ -1,7 +1,7 @@
 import { TokenAmount, Pair, Currency } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
 import { abi as ICheeseSwapPairABI } from '@cheeseswapv2/core/build/ICheeseSwapPair.json'
-import { Interface } from '@ethersproject/abi'
+import { Interface } from 'ethers'
 import { useActiveWeb3React } from '../hooks'
 
 import { useMultipleContractSingleData } from '../state/multicall/hooks'

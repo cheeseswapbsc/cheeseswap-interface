@@ -74,7 +74,7 @@ export class CheeseSwapWalletConnect extends BaseWalletConnector {
     return this.initPromise
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     try {
       console.log('[WalletConnect] Initializing WalletConnect v2...')
       const wcProvider = await this.getWcProvider()
@@ -86,7 +86,8 @@ export class CheeseSwapWalletConnect extends BaseWalletConnector {
         await wcProvider.enable()
       }
 
-      this.provider = new ethers.providers.Web3Provider(wcProvider as any, 'any')
+      this.eip1193 = wcProvider as any
+      this.provider = new ethers.BrowserProvider(wcProvider as any)
       console.log('[WalletConnect] Successfully connected')
       return this.provider
     } catch (error) {
@@ -103,14 +104,15 @@ export class CheeseSwapWalletConnect extends BaseWalletConnector {
   /**
    * Silent reconnect: restores a persisted v2 session without showing the modal.
    */
-  async eagerConnect(): Promise<ethers.providers.Web3Provider | null> {
+  async eagerConnect(): Promise<ethers.BrowserProvider | null> {
     if (!this.isAvailable()) return null
     try {
       const wcProvider = await this.getWcProvider()
       if (!wcProvider.session || !wcProvider.accounts || wcProvider.accounts.length === 0) {
         return null
       }
-      this.provider = new ethers.providers.Web3Provider(wcProvider as any, 'any')
+      this.eip1193 = wcProvider as any
+      this.provider = new ethers.BrowserProvider(wcProvider as any)
       console.log('[WalletConnect] Session restored')
       return this.provider
     } catch (error) {

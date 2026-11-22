@@ -26,9 +26,10 @@ export interface ConnectedWalletMeta {
 
 interface Web3ContextType {
   account: string | null
-  provider: ethers.providers.Web3Provider | null
+  provider: ethers.BrowserProvider | null
   signer: ethers.Signer | null
   chainId: number | null
+  eip1193: any | null
   connect: (walletType: WalletType, rdns?: string) => Promise<void>
   disconnect: () => Promise<void>
   switchNetwork: () => Promise<void>
@@ -114,9 +115,10 @@ interface Web3ProviderProps {
 
 interface WalletState {
   account: string | null
-  provider: ethers.providers.Web3Provider | null
+  provider: ethers.BrowserProvider | null
   signer: ethers.Signer | null
   chainId: number | null
+  eip1193: any | null
   walletType: WalletType | null
   walletMeta: ConnectedWalletMeta | null
 }
@@ -126,6 +128,7 @@ const EMPTY_STATE: WalletState = {
   provider: null,
   signer: null,
   chainId: null,
+  eip1193: null,
   walletType: null,
   walletMeta: null
 }
@@ -149,11 +152,13 @@ export function Web3Provider({ children }: Web3ProviderProps) {
 
   const applyProvider = useCallback(
     async (
-      provider: ethers.providers.Web3Provider,
+      provider: ethers.BrowserProvider,
       walletType: WalletType,
-      meta: ConnectedWalletMeta
+      meta: ConnectedWalletMeta,
+      eip1193?: any
     ): Promise<void> => {
-      const signer = provider.getSigner()
+      // ethers v6: getSigner() is async
+      const signer = await provider.getSigner()
       const account = await signer.getAddress()
       const network = await provider.getNetwork()
 
@@ -161,7 +166,8 @@ export function Web3Provider({ children }: Web3ProviderProps) {
         provider,
         signer,
         account,
-        chainId: network.chainId,
+        chainId: Number(network.chainId),
+        eip1193: eip1193 ?? null,
         walletType,
         walletMeta: meta
       })
@@ -177,8 +183,9 @@ export function Web3Provider({ children }: Web3ProviderProps) {
       setError(null)
 
       try {
-        let provider: ethers.providers.Web3Provider
+        let provider: ethers.BrowserProvider
         let meta: ConnectedWalletMeta
+        let eip1193: any = null
 
         // Resolve the modern EIP-6963 provider when possible
         let resolvedRdns = rdns
@@ -202,6 +209,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
         if (resolvedRdns && eip6963Store.getProvider(resolvedRdns)) {
           provider = await eip6963Connector.connect(resolvedRdns)
           const detail = eip6963Store.getProvider(resolvedRdns)
+          eip1193 = detail ? detail.provider : null
           meta = {
             name: detail ? detail.info.name : 'Browser Wallet',
             icon: detail ? detail.info.icon : null,
@@ -217,9 +225,10 @@ export function Web3Provider({ children }: Web3ProviderProps) {
             icon: null,
             rdns: null
           }
+          eip1193 = ConnectorFactory.getConnector(connectorId).getEip1193Provider()
         }
 
-        await applyProvider(provider, walletType, meta)
+        await applyProvider(provider, walletType, meta, eip1193)
         console.log('[Web3Provider] Connected:', meta.name)
       } catch (err) {
         console.error('[Web3Provider] Error connecting to wallet:', err)
@@ -250,10 +259,10 @@ export function Web3Provider({ children }: Web3ProviderProps) {
   }, [])
 
   const switchNetwork = useCallback(async () => {
-    const { provider } = stateRef.current
+    const { provider, eip1193 } = stateRef.current
     if (!provider) return
     try {
-      await ensureBSCMainnet((provider as any).provider || provider)
+      await ensureBSCMainnet(eip1193 || provider)
     } catch (err) {
       console.error('[Web3Provider] Failed to switch network:', err)
       setError((err as any).message || 'Failed to switch network')
@@ -276,7 +285,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
               name: 'WalletConnect',
               icon: null,
               rdns: null
-            })
+            }, walletConnectConnector.getEip1193Provider())
           }
           return
         }
@@ -301,7 +310,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
               name: detail ? detail.info.name : 'Browser Wallet',
               icon: detail ? detail.info.icon : null,
               rdns
-            })
+            }, detail ? detail.provider : null)
           }
           return
         }
@@ -311,12 +320,12 @@ export function Web3Provider({ children }: Web3ProviderProps) {
         if (injected && typeof injected.request === 'function') {
           const accounts: string[] = await injected.request({ method: 'eth_accounts' })
           if (accounts && accounts.length > 0 && !cancelled) {
-            const provider = new ethers.providers.Web3Provider(injected, 'any')
+            const provider = new ethers.BrowserProvider(injected)
             await applyProvider(provider, persisted.walletType, {
               name: 'Browser Wallet',
               icon: null,
               rdns: null
-            })
+            }, injected)
           }
         }
       } catch (err) {
@@ -334,7 +343,7 @@ export function Web3Provider({ children }: Web3ProviderProps) {
   useEffect(() => {
     if (!state.provider) return
 
-    const eip1193 = (state.provider as any).provider
+    const eip1193 = state.eip1193
 
     const cleanup = setupWalletListeners(
       eip1193,
@@ -343,10 +352,11 @@ export function Web3Provider({ children }: Web3ProviderProps) {
           disconnect()
         } else if (accounts[0] !== stateRef.current.account) {
           const provider = stateRef.current.provider
+          // ethers v6: getSigner() is async; construct the JsonRpcSigner synchronously instead
           setState(prev => ({
             ...prev,
             account: accounts[0],
-            signer: provider ? provider.getSigner() : prev.signer
+            signer: provider ? new ethers.JsonRpcSigner(provider, accounts[0]) : prev.signer
           }))
         }
       },

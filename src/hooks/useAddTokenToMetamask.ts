@@ -14,8 +14,8 @@ export default function useAddTokenToMetamask(
   const [success, setSuccess] = useState<boolean | undefined>()
 
   const addToken = useCallback(() => {
-    if (library && library.provider.isMetaMask && library.provider.request && token) {
-      library.provider
+    if (library && (library as any).provider?.isMetaMask && (library as any).provider?.request && token) {
+      ;(library as any).provider
         .request({
           method: 'wallet_watchAsset',
           params: {

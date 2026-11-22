@@ -11,8 +11,7 @@ export function useActiveWeb3React() {
   const web3Context = useWeb3()
 
   // Read-only fallback: browse the app without a connected wallet.
-  // Cast is safe: Web3Provider-only members are used only once connected.
-  const library = (web3Context.provider || getNetworkLibrary()) as ethers.providers.Web3Provider
+  const library: ethers.Provider = web3Context.provider || getNetworkLibrary()
   const chainId = web3Context.chainId !== null ? web3Context.chainId : CHAIN_ID
 
   return {

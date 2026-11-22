@@ -1,5 +1,4 @@
-import { Interface } from '@ethersproject/abi'
-import { BigNumber } from '@ethersproject/bignumber'
+import { Interface } from 'ethers'
 import { abi as ICheeseSwapPairABI } from '@cheeseswapv2/core/build/ICheeseSwapPair.json'
 import { useMemo } from 'react'
 import ERC20_ABI from '../constants/abis/erc20.json'
@@ -76,8 +75,9 @@ export function useTokenMetadataMap(
       const symbol = typeof symbolResultRaw === 'string' && symbolResultRaw.length ? symbolResultRaw : undefined
       const decimalsResultRaw = decimalsResults[index]?.result?.[0]
       let decimals: number | undefined
-      if (BigNumber.isBigNumber(decimalsResultRaw)) {
-        decimals = decimalsResultRaw.toNumber()
+      // ethers v6 returns bigint for uint8
+      if (typeof decimalsResultRaw === 'bigint') {
+        decimals = Number(decimalsResultRaw)
       } else if (typeof decimalsResultRaw === 'number' && Number.isFinite(decimalsResultRaw)) {
         decimals = decimalsResultRaw
       }

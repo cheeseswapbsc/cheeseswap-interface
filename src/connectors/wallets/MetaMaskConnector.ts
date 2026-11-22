@@ -20,7 +20,7 @@ export class MetaMaskConnector extends BaseWalletConnector {
     return Boolean(isMetaMask && !isTrust && !isBinance && !isOKX)
   }
 
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('MetaMask not detected. Please install MetaMask extension.')
     }
@@ -39,7 +39,8 @@ export class MetaMaskConnector extends BaseWalletConnector {
 
       console.log('[MetaMask] Accounts received:', accounts)
 
-      this.provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
+      this.eip1193 = window.ethereum
+      this.provider = new ethers.BrowserProvider(window.ethereum)
       
       console.log('[MetaMask] Checking network...')
       await ensureBSCMainnet(this.provider)

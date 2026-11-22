@@ -42,7 +42,7 @@ export class CheeseSwapCoinbaseWallet extends BaseWalletConnector {
   /**
    * Connect to Coinbase Wallet
    */
-  async connect(): Promise<ethers.providers.Web3Provider> {
+  async connect(): Promise<ethers.BrowserProvider> {
     try {
       console.log('[CoinbaseWallet] Initializing Coinbase Wallet SDK...')
 
@@ -67,7 +67,8 @@ export class CheeseSwapCoinbaseWallet extends BaseWalletConnector {
       })
 
       // Create ethers provider
-      this.provider = new ethers.providers.Web3Provider(this.cbProvider, 'any')
+      this.eip1193 = this.cbProvider
+      this.provider = new ethers.BrowserProvider(this.cbProvider)
 
       // Ensure we're on BSC Mainnet
       await ensureBSCMainnet(this.provider)

@@ -32,17 +32,17 @@ if (NETWORK_URLS.length === 0) {
 /**
  * Modern fallback provider using ethers.js FallbackProvider for round-robin/fallback
  */
-export function getNetworkProvider(): ethers.providers.FallbackProvider {
+export function getNetworkProvider(): ethers.FallbackProvider {
   const providers = NETWORK_URLS.map((url, index) => ({
-    provider: new ethers.providers.JsonRpcProvider(url, {
-      name: NETWORK_NAME,
-      chainId: CHAIN_ID
+    provider: new ethers.JsonRpcProvider(url, CHAIN_ID, {
+      staticNetwork: true,
+      pollingInterval: 5000
     }),
     priority: index,
     stallTimeout: 500,
     weight: 1
   }));
-  return new ethers.providers.FallbackProvider(providers);
+  return new ethers.FallbackProvider(providers, undefined, { quorum: 1, cacheTimeout: 5000 });
 }
 
 /**
@@ -51,7 +51,7 @@ export function getNetworkProvider(): ethers.providers.FallbackProvider {
  */
 export async function connectWallet(
   walletTypeOrConnectorId: WalletType | ConnectorId
-): Promise<ethers.providers.Web3Provider> {
+): Promise<ethers.BrowserProvider> {
   // Convert WalletType to ConnectorId if needed
   let connectorId: ConnectorId
   
@@ -71,7 +71,7 @@ export async function connectWallet(
  * Auto-detect and connect to best available wallet
  */
 export async function autoConnectWallet(): Promise<{
-  provider: ethers.providers.Web3Provider
+  provider: ethers.BrowserProvider
   connectorId: ConnectorId
 }> {
   return await ConnectorFactory.autoConnect()
@@ -116,11 +116,11 @@ export type { ConnectorId }
 export * from './utils'
 
 // Network provider singleton
-let networkProvider: ethers.providers.JsonRpcProvider | null = null
+let networkProvider: ethers.FallbackProvider | null = null
 
-export function getNetworkLibrary(): ethers.providers.JsonRpcProvider {
+export function getNetworkLibrary(): ethers.FallbackProvider {
   if (!networkProvider) {
-    networkProvider = getNetworkProvider() as any // FallbackProvider, cast for compatibility
+    networkProvider = getNetworkProvider()
   }
   return networkProvider
 }

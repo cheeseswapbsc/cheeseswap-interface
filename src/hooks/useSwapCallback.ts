@@ -1,5 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber'
-import { Contract } from '@ethersproject/contracts'
+import { Contract } from 'ethers'
 import { JSBI, Percent, Router, SwapParameters, Trade, TradeType } from '@cheeseswapv2/sdk'
 import { useMemo } from 'react'
 import { BIPS_BASE, DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from '../constants'
@@ -22,7 +21,7 @@ interface SwapCall {
 
 interface SuccessfulCall {
   call: SwapCall
-  gasEstimate: BigNumber
+  gasEstimate: bigint
 }
 
 interface FailedCall {
@@ -124,7 +123,10 @@ export function useSwapCallback(
             } = call
             const options = !value || isZero(value) ? {} : { value }
 
-            return contract.estimateGas[methodName](...args, options)
+            // ethers v6: estimateGas/staticCall are per-method helpers on the function
+            const swapFunction = contract.getFunction(methodName)
+
+            return swapFunction.estimateGas(...args, options)
               .then(gasEstimate => {
                 return {
                   call,
@@ -134,7 +136,7 @@ export function useSwapCallback(
               .catch(gasError => {
                 console.debug('Gas estimate failed, trying eth_call to extract error', call)
 
-                return contract.callStatic[methodName](...args, options)
+                return swapFunction.staticCall(...args, options)
                   .then(result => {
                     console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
                     return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }

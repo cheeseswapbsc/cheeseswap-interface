@@ -1,5 +1,4 @@
-import { MaxUint256 } from '@ethersproject/constants'
-import { TransactionResponse } from '@ethersproject/providers'
+import { MaxUint256, TransactionResponse } from 'ethers'
 import { Trade, TokenAmount, CurrencyAmount, ETHER } from '@cheeseswapv2/sdk'
 import { useCallback, useMemo } from 'react'
 import { ROUTER_ADDRESS } from '../constants'
@@ -72,10 +71,11 @@ export function useApproveCallback(
     }
 
     let useExact = false
-    const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
+    // ethers v6: estimateGas is a per-method helper, not a contract namespace
+    const estimatedGas = await tokenContract.approve.estimateGas(spender, MaxUint256).catch(() => {
       // general fallback for tokens who restrict approval amounts
       useExact = true
-      return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
+      return tokenContract.approve.estimateGas(spender, amountToApprove.raw.toString())
     })
 
     return tokenContract

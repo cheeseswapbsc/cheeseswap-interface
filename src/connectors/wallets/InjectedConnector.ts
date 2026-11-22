@@ -27,7 +27,7 @@ export class GenericInjectedConnector extends BaseWalletConnector {
    * Connect to any injected wallet provider
    * Works with in-app browsers, extensions, and any wallet with window.ethereum
    */
-  async connect(walletType?: WalletType): Promise<ethers.providers.Web3Provider> {
+  async connect(walletType?: WalletType): Promise<ethers.BrowserProvider> {
     if (!this.isAvailable()) {
       throw new Error('No injected wallet detected. Please install a Web3 wallet like MetaMask, Trust Wallet, or OKX Wallet.')
     }
@@ -69,7 +69,8 @@ export class GenericInjectedConnector extends BaseWalletConnector {
       }
 
       // Create ethers provider
-      this.provider = new ethers.providers.Web3Provider(injectedProvider, 'any')
+      this.eip1193 = injectedProvider
+      this.provider = new ethers.BrowserProvider(injectedProvider)
 
       console.log('[GenericInjected] Created Web3Provider, ensuring BSC Mainnet')
 
@@ -124,7 +125,7 @@ export class InjectedWalletConnector extends BaseWalletConnector {
    * Connect to specific injected wallet
    * Note: walletType should be passed when calling this method
    */
-  async connect(walletType: WalletType = 'METAMASK'): Promise<ethers.providers.Web3Provider> {
+  async connect(walletType: WalletType = 'METAMASK'): Promise<ethers.BrowserProvider> {
     if (walletType === 'WALLETCONNECT' || walletType === 'COINBASE') {
       throw new Error('Use WalletConnect or Coinbase connector instead')
     }
@@ -156,7 +157,8 @@ export class InjectedWalletConnector extends BaseWalletConnector {
       }
 
       // Create ethers provider
-      this.provider = new ethers.providers.Web3Provider(injectedProvider, 'any')
+      this.eip1193 = injectedProvider
+      this.provider = new ethers.BrowserProvider(injectedProvider)
       this.walletType = walletType
 
       console.log(`[InjectedConnector] Created Web3Provider, ensuring BSC Mainnet`)

@@ -55,7 +55,10 @@ function ThemeProvider({ children }: { children?: React.ReactNode }) {
   return <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
 }
 
-const root = createRoot(document.getElementById('root') as HTMLElement)
+// Reuse the root across HMR updates so React doesn't warn about double createRoot
+const container = document.getElementById('root') as HTMLElement & { __reactRoot?: ReturnType<typeof createRoot> }
+const root = container.__reactRoot ?? createRoot(container)
+container.__reactRoot = root
 root.render(
   <StrictMode>
     <FixedGlobalStyle />

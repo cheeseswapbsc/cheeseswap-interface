@@ -1,6 +1,4 @@
-import { Interface, FunctionFragment } from '@ethersproject/abi'
-import { BigNumber } from '@ethersproject/bignumber'
-import { Contract } from '@ethersproject/contracts'
+import { Interface, FunctionFragment, Contract } from 'ethers'
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from '../../hooks'
@@ -19,13 +17,13 @@ export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
 }
 
-type MethodArg = string | number | BigNumber
+type MethodArg = string | number | bigint
 type MethodArgs = Array<MethodArg | MethodArg[]>
 
 type OptionalMethodInputs = Array<MethodArg | MethodArg[] | undefined> | undefined
 
 function isMethodArg(x: unknown): x is MethodArg {
-  return ['string', 'number'].indexOf(typeof x) !== -1
+  return ['string', 'number', 'bigint'].indexOf(typeof x) !== -1
 }
 
 function isValidMethodArgs(x: unknown): x is MethodArgs | undefined {
@@ -171,7 +169,7 @@ export function useSingleContractMultipleData(
       contract && fragment && callInputs && callInputs.length > 0
         ? callInputs.map<Call>(inputs => {
             return {
-              address: contract.address,
+              address: contract.target as string,
               callData: contract.interface.encodeFunctionData(fragment, inputs)
             }
           })
@@ -240,7 +238,7 @@ export function useSingleCallResult(
     return contract && fragment && isValidMethodArgs(inputs)
       ? [
           {
-            address: contract.address,
+            address: contract.target as string,
             callData: contract.interface.encodeFunctionData(fragment, inputs)
           }
         ]

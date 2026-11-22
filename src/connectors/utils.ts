@@ -160,13 +160,21 @@ export async function ensureBSCMainnet(provider: any): Promise<void> {
     blockExplorerUrls: ['https://bscscan.com']
   };
 
+  // Send a wallet RPC request across provider flavors:
+  // raw EIP-1193 (.request) or ethers v5/v6 providers (.send)
+  const walletRequest = (target: any, method: string, params: any[]): Promise<any> => {
+    if (target && typeof target.request === 'function') {
+      return target.request({ method, params });
+    }
+    if (target && typeof target.send === 'function') {
+      return target.send(method, params);
+    }
+    throw new Error('Provider does not support wallet RPC requests');
+  };
+
   let currentChainId: string | number | undefined;
-  if (provider && provider.send) {
-    // ethers v5 provider
-    currentChainId = (await provider.send('eth_chainId', [])) || (await provider.getNetwork()).chainId;
-  } else if (provider && provider.request) {
-    // EIP-1193 provider
-    currentChainId = await provider.request({ method: 'eth_chainId' });
+  if (provider && (provider.request || provider.send)) {
+    currentChainId = await walletRequest(provider, 'eth_chainId', []);
   }
   if (typeof currentChainId === 'string') {
     if (currentChainId.startsWith('0x')) {
@@ -176,26 +184,14 @@ export async function ensureBSCMainnet(provider: any): Promise<void> {
     }
   }
   if (currentChainId !== BSC_CHAIN_ID) {
-    // ethers v5 Web3Provider has no .request(); unwrap the EIP-1193 provider
-    const eip1193 = provider.request
-      ? provider
-      : provider.provider && provider.provider.request
-        ? provider.provider
-        : provider;
     try {
-      await eip1193.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: BSC_CHAIN_ID_HEX }]
-      });
+      await walletRequest(provider, 'wallet_switchEthereumChain', [{ chainId: BSC_CHAIN_ID_HEX }]);
     } catch (switchError) {
       // 4902 = chain not added; -32601/4200 = switch method unsupported by wallet
       const errorCode =
         switchError.code || (switchError.data && switchError.data.originalError && switchError.data.originalError.code);
       if (errorCode === 4902 || errorCode === -32601 || errorCode === 4200) {
-        await eip1193.request({
-          method: 'wallet_addEthereumChain',
-          params: [BSC_PARAMS]
-        });
+        await walletRequest(provider, 'wallet_addEthereumChain', [BSC_PARAMS]);
       } else {
         throw switchError;
       }
