@@ -482,10 +482,9 @@ export default function Recover() {
           <Step>
             <StepNumber>3</StepNumber>
             <div>
-              <h3>100% Non-Custodial Execution</h3>
+              <h3>100% Win-Win Execution</h3>
               <p>
-                <strong>We never ask for your seed phrase or private keys.</strong> We guide you step-by-step
-                through executing the verified contract calls from your own wallet (MetaMask, Trust Wallet, Ledger,
+                 We guide you step-by-step guide through executing the verified contract calls from your own wallet (MetaMask, Trust Wallet, Ledger,
                 or Safe), or provide a pre-built transaction payload for you to review and sign safely.
               </p>
             </div>
