@@ -1,7 +1,7 @@
 import 'inter-ui'
 import React, { StrictMode } from 'react'
 import { isMobile } from 'react-device-detect'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
@@ -18,7 +18,7 @@ import { lightTheme, darkTheme } from './theme'
 import { FixedGlobalStyle, ThemedGlobalStyle } from './components/Shared'
 import { Web3Provider } from './providers/Web3Provider'
 
-const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
+const GOOGLE_ANALYTICS_ID: string | undefined = import.meta.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize(GOOGLE_ANALYTICS_ID)
   ReactGA.set({
@@ -55,7 +55,8 @@ function ThemeProvider({ children }: { children?: React.ReactNode }) {
   return <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
 }
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root') as HTMLElement)
+root.render(
   <StrictMode>
     <FixedGlobalStyle />
     <Web3Provider>
@@ -67,6 +68,5 @@ ReactDOM.render(
         </ThemeProvider>
       </Provider>
     </Web3Provider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )

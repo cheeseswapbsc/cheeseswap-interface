@@ -4,8 +4,8 @@ import { BaseWalletConnector } from './BaseConnector'
 import { UserRejectedError } from './errors'
 
 const BSC_CHAIN_ID = 56
-const BSC_RPC_URL = process.env.REACT_APP_NETWORK_URL_1 || 'https://bsc-dataseed1.bnbchain.org'
-const PROJECT_ID = process.env.REACT_APP_WALLETCONNECT_PROJECT_ID || ''
+const BSC_RPC_URL = import.meta.env.REACT_APP_NETWORK_URL_1 || 'https://bsc-dataseed1.bnbchain.org'
+const PROJECT_ID = import.meta.env.REACT_APP_WALLETCONNECT_PROJECT_ID || ''
 
 /**
  * WalletConnect v2 connector

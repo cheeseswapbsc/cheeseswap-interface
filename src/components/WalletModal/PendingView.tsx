@@ -6,9 +6,8 @@ import { darken } from 'polished'
 import Loader from '../Loader'
 import { WalletType } from '../../global.d'
 import { walletConnectConnector } from '../../connectors/WalletConnectProvider'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const QRCode = require('qrcode')
+import { walletIcon as getWalletIcon } from '../../utils/walletIcon'
+import QRCode from 'qrcode'
 
 const PendingSection = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -193,7 +192,7 @@ export default function PendingView({
               color={option.color}
               header={option.name}
               subheader={option.description}
-              icon={walletIcon(option.iconName)}
+              icon={getWalletIcon(option.iconName)}
             />
           )
         }
